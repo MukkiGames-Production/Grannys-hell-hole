@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://bsspxi0kmi1qg"]
+
+[node name="MenuBar" type="MenuBar" unique_id=1192271255]
+offset_right = 40.0
+offset_bottom = 40.0
