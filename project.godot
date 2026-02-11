@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="GrannysHellsHole"
+run/main_scene="uid://bw4p3rdmo33fl"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
+
+[debug]
+
+file_logging/enable_file_logging=true
 
 [physics]
 
@@ -21,3 +26,7 @@ config/icon="res://icon.svg"
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+
+[steam]
+
+initialization/embed_callbacks=true
