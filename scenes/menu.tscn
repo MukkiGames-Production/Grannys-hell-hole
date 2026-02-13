@@ -3,3 +3,9 @@
 [node name="MenuBar" type="MenuBar" unique_id=1192271255]
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="." unique_id=1242109451]
+layout_mode = 0
+offset_right = 145.0
+offset_bottom = 78.0
+text = "Lobby"
