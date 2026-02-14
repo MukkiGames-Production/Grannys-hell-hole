@@ -4,7 +4,7 @@ class_name InitSteam extends Node
 func _ready()->void:
 	init_steam()
 func _process(_delta: float) -> void:
-	Steam.run_callbacks()
+s	Steam.run_callbacks()
 func init_steam()->void:
 	var init_res:Dictionary = Steam.steamInitEx(480)
 	print("Steam init result: ", init_res)
