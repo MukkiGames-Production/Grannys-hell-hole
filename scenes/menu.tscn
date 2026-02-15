@@ -1,11 +1,18 @@
 [gd_scene format=3 uid="uid://bsspxi0kmi1qg"]
 
-[node name="MenuBar" type="MenuBar" unique_id=1192271255]
-offset_right = 40.0
-offset_bottom = 40.0
+[ext_resource type="Script" uid="uid://cdpmxxdlipmnh" path="res://scripts/Menubutton.gd" id="2_vjb58"]
+
+[node name="MenuBar" type="Control" unique_id=1592236911 node_paths=PackedStringArray("shortcut_context")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 151.0
+offset_bottom = 80.0
+shortcut_context = NodePath("Button")
 
 [node name="Button" type="Button" parent="." unique_id=1242109451]
 layout_mode = 0
+offset_top = 1.0
 offset_right = 145.0
-offset_bottom = 78.0
+offset_bottom = 79.0
 text = "Lobby"
+script = ExtResource("2_vjb58")

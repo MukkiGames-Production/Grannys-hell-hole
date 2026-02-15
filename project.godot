@@ -49,7 +49,3 @@ move_back={
 [rendering]
 
 rendering_device/driver.windows="d3d12"
-
-[steam]
-
-initialization/embed_callbacks=true

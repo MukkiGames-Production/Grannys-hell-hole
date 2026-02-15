@@ -29,7 +29,7 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
-	
+
 func _process(delta: float) -> void:
 	var space_state = get_world_3d().direct_space_state
 
@@ -49,18 +49,25 @@ func _process(delta: float) -> void:
 	if currently_sees != seesInteractable:
 		seesInteractable = currently_sees
 		emit_signal("look_at_interactable", seesInteractable)
-	
+
 func _unhandled_input(event):
-	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:	#NEEDS TO CHANGE TO PROPER MENU
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	if event is InputEventMouseButton and event.pressed and event.button_index  == MOUSE_BUTTON_LEFT: #click -> captures mouse, should later change to more robust menu/not menu handling
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	# Toggle menu with Escape
+	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
+		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+	# Ignore all mouse input when menu is open (mouse visible)
+	if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
+		return
+
 	if event is InputEventMouseMotion:
 		# Rotate player (yaw)
 		rotate_y(-event.relative.x * mouse_sensitivity)
 		# Rotate camera (pitch)
 		camera_pivot.rotate_x(-event.relative.y * mouse_sensitivity)
-		# Clamp vertical look so you can’t flip
+		# Clamp vertical look so you can't flip
 		camera_pivot.rotation.x = clamp(
 			camera_pivot.rotation.x,
 			deg_to_rad(-80),
@@ -68,7 +75,7 @@ func _unhandled_input(event):
 		)
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		try_interact()
-			
+
 func try_interact():
 	if not object_in_sight:
 		return
