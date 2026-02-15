@@ -6,7 +6,7 @@ func _ready()->void:
 func _process(_delta: float) -> void:
 	Steam.run_callbacks()
 func init_steam()->void:
-	var init_res:Dictionary = Steam.steamInitEx(480)
+	var init_res:Dictionary = Steam.steamInitEx(480, true)
 	print("Steam init result: ", init_res)
 	var app_installed_depots: Array = Steam.getInstalledDepots( 480 )
 	var app_languages: String = Steam.getAvailableGameLanguages()

@@ -1,6 +1,21 @@
 [gd_scene format=3 uid="uid://bw4p3rdmo33fl"]
 
 [ext_resource type="Script" uid="uid://ckix3hutnyvvu" path="res://world.gd" id="1_f3sb7"]
+[ext_resource type="PackedScene" uid="uid://ctcpaobx3sw3r" path="res://scenes/main.tscn" id="2_tlwt5"]
+[ext_resource type="PackedScene" uid="uid://bsspxi0kmi1qg" path="res://scenes/menu.tscn" id="3_aqk2v"]
 
 [node name="World" type="Node3D" unique_id=948386596]
 script = ExtResource("1_f3sb7")
+
+[node name="Node3D" parent="." unique_id=421424765 instance=ExtResource("2_tlwt5")]
+
+[node name="UILayer" type="CanvasLayer" parent="." unique_id=633623206]
+layer = 10
+follow_viewport_enabled = true
+
+[node name="MenuBar" parent="UILayer" unique_id=1192271255 instance=ExtResource("3_aqk2v")]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1091512600]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.9756215, 0)
+light_energy = 1.942
+light_indirect_energy = 0.775

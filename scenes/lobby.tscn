@@ -1,0 +1,167 @@
+[gd_scene format=3 uid="uid://dlj5x8k2mq3vh"]
+
+[ext_resource type="Script" uid="uid://c0xc4p84ca6o4" path="res://scripts/Networking/Lobby.gd" id="1_lobby"]
+
+[node name="Lobby" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lobby")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1, 0.1, 0.15, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "MULTIPLAYER LOBBY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerInfo" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PlayerLabel" type="Label" parent="MarginContainer/VBoxContainer/PlayerInfo"]
+layout_mode = 2
+text = "Playing as: "
+
+[node name="PlayerName" type="Label" parent="MarginContainer/VBoxContainer/PlayerInfo"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Loading..."
+
+[node name="ButtonRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 20
+
+[node name="CreateLobbyButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+text = "Create Lobby"
+
+[node name="RefreshButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+text = "Refresh Lobbies"
+
+[node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+text = "Back to Menu"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LobbiesLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Available Lobbies:"
+
+[node name="Lobbies" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Scroll" type="ScrollContainer" parent="MarginContainer/VBoxContainer/Lobbies"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="List" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Lobbies/Scroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="NoLobbiesLabel" type="Label" parent="MarginContainer/VBoxContainer/Lobbies/Scroll/List"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "No lobbies found. Click 'Refresh Lobbies' or create your own!"
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="CurrentLobbyPanel" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CurrentLobbyPanel"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="CurrentLobbyLabel" type="Label" parent="MarginContainer/VBoxContainer/CurrentLobbyPanel/VBoxContainer"]
+layout_mode = 2
+text = "Current Lobby"
+horizontal_alignment = 1
+
+[node name="LobbyName" type="Label" parent="MarginContainer/VBoxContainer/CurrentLobbyPanel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Lobby Name: ---"
+
+[node name="MembersLabel" type="Label" parent="MarginContainer/VBoxContainer/CurrentLobbyPanel/VBoxContainer"]
+layout_mode = 2
+text = "Members:"
+
+[node name="MembersList" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CurrentLobbyPanel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="LobbyButtonRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CurrentLobbyPanel/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 20
+
+[node name="StartGameButton" type="Button" parent="MarginContainer/VBoxContainer/CurrentLobbyPanel/VBoxContainer/LobbyButtonRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+text = "Start Game"
+
+[node name="LeaveLobbyButton" type="Button" parent="MarginContainer/VBoxContainer/CurrentLobbyPanel/VBoxContainer/LobbyButtonRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+text = "Leave Lobby"
+
+[node name="StatusLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Status: Not connected to any lobby"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonRow/CreateLobbyButton" to="." method="create_lobby"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonRow/RefreshButton" to="." method="_on_open_lobby_list_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonRow/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/CurrentLobbyPanel/VBoxContainer/LobbyButtonRow/StartGameButton" to="." method="start_game"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/CurrentLobbyPanel/VBoxContainer/LobbyButtonRow/LeaveLobbyButton" to="." method="leave_lobby"]
