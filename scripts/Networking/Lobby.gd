@@ -247,6 +247,119 @@ func update_lobby_ui() -> void:
 	if start_game_button:
 		start_game_button.visible = Steam.getLobbyOwner(lobby_id) == steam_id
 
+func invite_friend() -> void:
+	# Only allow inviting if we're in a lobby
+	if lobby_id == 0:
+		if status_label:
+			status_label.text = "Status: Create or join a lobby first!"
+		return
+
+	# Check if Steam overlay is enabled
+	var overlay_enabled: bool = Steam.isOverlayEnabled()
+	print("Steam overlay enabled: %s" % overlay_enabled)
+
+	if not overlay_enabled:
+		# Overlay not available, try inviting all online friends directly
+		if status_label:
+			status_label.text = "Status: Overlay disabled, showing friend list..."
+		print("Steam overlay not enabled, using direct invite method")
+		show_friends_list_for_invite()
+		return
+
+	# Open the Steam overlay with the friend invite dialog
+	# This lets the user pick a friend from their Steam friends list
+	print("Attempting to open Steam invite dialog for lobby: %s" % lobby_id)
+	Steam.activateGameOverlayInviteDialog(lobby_id)
+	print("Called activateGameOverlayInviteDialog")
+
+# Direct invite method when overlay is not available
+func show_friends_list_for_invite() -> void:
+	# Get the list of friends
+	var friend_count: int = Steam.getFriendCount(Steam.FRIEND_FLAG_IMMEDIATE)
+	print("Found %s Steam friends" % friend_count)
+
+	if friend_count == 0:
+		if status_label:
+			status_label.text = "Status: No Steam friends found"
+		return
+
+	# Create a popup to show friends
+	var popup = PopupPanel.new()
+	popup.name = "FriendInvitePopup"
+
+	var vbox = VBoxContainer.new()
+	vbox.custom_minimum_size = Vector2(300, 400)
+
+	var title_label = Label.new()
+	title_label.text = "Invite a Friend"
+	title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	vbox.add_child(title_label)
+
+	var scroll = ScrollContainer.new()
+	scroll.custom_minimum_size = Vector2(280, 300)
+	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+
+	var friend_list = VBoxContainer.new()
+	friend_list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+
+	var online_friends_count: int = 0
+	for i in range(friend_count):
+		var friend_id: int = Steam.getFriendByIndex(i, Steam.FRIEND_FLAG_IMMEDIATE)
+		var friend_name: String = Steam.getFriendPersonaName(friend_id)
+		var friend_state: int = Steam.getFriendPersonaState(friend_id)
+
+		# Only show online friends (state > 0 means not offline)
+		if friend_state > 0:
+			online_friends_count += 1
+			var friend_button = Button.new()
+			friend_button.text = friend_name
+			friend_button.custom_minimum_size = Vector2(0, 40)
+			friend_button.pressed.connect(_on_invite_friend_selected.bind(friend_id, popup))
+			friend_list.add_child(friend_button)
+
+	if online_friends_count == 0:
+		var no_friends_label = Label.new()
+		no_friends_label.text = "No online friends found"
+		no_friends_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		friend_list.add_child(no_friends_label)
+
+	scroll.add_child(friend_list)
+	vbox.add_child(scroll)
+
+	var close_button = Button.new()
+	close_button.text = "Close"
+	close_button.custom_minimum_size = Vector2(0, 40)
+	close_button.pressed.connect(popup.queue_free)
+	vbox.add_child(close_button)
+
+	popup.add_child(vbox)
+	add_child(popup)
+	popup.popup_centered()
+
+func _on_invite_friend_selected(friend_id: int, popup: PopupPanel) -> void:
+	invite_user_to_lobby(friend_id)
+	popup.queue_free()
+
+func invite_user_to_lobby(friend_steam_id: int) -> void:
+	if lobby_id == 0:
+		print("Cannot invite: not in a lobby")
+		return
+
+	var friend_name: String = Steam.getFriendPersonaName(friend_steam_id)
+	print("Inviting %s (ID: %s) to lobby %s" % [friend_name, friend_steam_id, lobby_id])
+
+	# Send the lobby invite
+	var success: bool = Steam.inviteUserToLobby(lobby_id, friend_steam_id)
+
+	if success:
+		if status_label:
+			status_label.text = "Status: Invite sent to %s!" % friend_name
+		print("Successfully sent invite to %s" % friend_name)
+	else:
+		if status_label:
+			status_label.text = "Status: Failed to invite %s" % friend_name
+		print("Failed to send invite to %s" % friend_name)
+
 func leave_lobby() -> void:
 	if lobby_id != 0:
 		# Close P2P sessions with all members
