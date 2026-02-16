@@ -1,11 +1,15 @@
 
 class_name InitSteam extends Node
 
+static var _steam_initialized: bool = false
+
 func _ready()->void:
 	init_steam()
-func _process(_delta: float) -> void:
-	Steam.run_callbacks()
+
 func init_steam()->void:
+	if _steam_initialized:
+		return
+	_steam_initialized = true
 	var init_res:Dictionary = Steam.steamInitEx(480, true)
 	print("Steam init result: ", init_res)
 	var app_installed_depots: Array = Steam.getInstalledDepots( 480 )

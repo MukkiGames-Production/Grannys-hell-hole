@@ -148,6 +148,12 @@ custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 text = "Start Game"
 
+[node name="InviteFriendButton" type="Button" parent="MarginContainer/VBoxContainer/CurrentLobbyPanel/VBoxContainer/LobbyButtonRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+text = "Invite Friend"
+
 [node name="LeaveLobbyButton" type="Button" parent="MarginContainer/VBoxContainer/CurrentLobbyPanel/VBoxContainer/LobbyButtonRow"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 50)
@@ -164,4 +170,5 @@ horizontal_alignment = 1
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonRow/RefreshButton" to="." method="_on_open_lobby_list_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonRow/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/CurrentLobbyPanel/VBoxContainer/LobbyButtonRow/StartGameButton" to="." method="start_game"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/CurrentLobbyPanel/VBoxContainer/LobbyButtonRow/InviteFriendButton" to="." method="invite_friend"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/CurrentLobbyPanel/VBoxContainer/LobbyButtonRow/LeaveLobbyButton" to="." method="leave_lobby"]
