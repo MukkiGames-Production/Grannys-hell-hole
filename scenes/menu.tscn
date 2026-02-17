@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bsspxi0kmi1qg"]
 
-[ext_resource type="Script" uid="uid://cdpmxxdlipmnh" path="res://scripts/Menubutton.gd" id="2_vjb58"]
+[ext_resource type="Script" uid="uid://cdpmxxdlipmnh" path="res://scripts/UI/MenuButton.gd" id="2_vjb58"]
 
 [node name="MenuBar" type="Control" unique_id=1592236911 node_paths=PackedStringArray("shortcut_context")]
 layout_mode = 3

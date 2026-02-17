@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://6de6v3rp0l3q"]
 
-[ext_resource type="Script" uid="uid://q8mv7vkrjmhx" path="res://scripts/objects/breakable_wall.gd" id="1_gfd1w"]
+[ext_resource type="Script" uid="uid://q8mv7vkrjmhx" path="res://scripts/objects/breakableWall.gd" id="1_gfd1w"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sqvaa"]
 size = Vector3(1.9196777, 1, 7.1102295)
