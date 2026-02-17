@@ -83,9 +83,21 @@ mesh = SubResource("BoxMesh_ig7tw")
 [node name="Player" type="CharacterBody3D" parent="." unique_id=1887340554 node_paths=PackedStringArray("camera_pivot", "camera", "wheel_visual")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3776362, 0)
 script = ExtResource("1_v0h62")
+speed = null
+accel_target = null
+brake = null
+mouse_sensitivity = null
 camera_pivot = NodePath("CameraPivot")
 camera = NodePath("CameraPivot/Camera3D")
+steer_max_deg = null
+steer_speed_deg_per_sec = null
+steer_center_deg_per_sec = null
+max_turn_rate_deg_per_sec = null
+rolling_resistance_target = null
+side_friction_target = null
 wheel_visual = NodePath("WheelchairDir")
+start_kick_speed = null
+kick_deadzone = null
 
 [node name="CameraPivot" type="Node3D" parent="Player" unique_id=1901293811]
 

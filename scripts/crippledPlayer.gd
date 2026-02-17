@@ -3,7 +3,7 @@ extends CharacterBody3D
 const JUMP_VELOCITY = 4.5
 
 
-@export var speed = 15.0
+@export var speed := 15.0
 @export var accel_target := 4.0
 @export var brake := 22.0
 @export var mouse_sensitivity := 0.002
@@ -18,6 +18,10 @@ const JUMP_VELOCITY = 4.5
 @export var side_friction_target := 12.5
 
 @export var wheel_visual: Node3D
+
+@export var start_kick_speed := 0.7 # boost at the start of inpout
+@export var kick_deadzone := 0.04  # treat tiny input as 0
+var _prev_throttle := 0.0
 
 var steer_deg := 0.0
 var accel := 0
@@ -42,27 +46,31 @@ func _ready():
 # Godot docs recommend keeping (almost) all movement/transform-driving logic in _physics_process() when using interpolation (we are).
 func _physics_process(delta: float) -> void:
 	# throttle: +1 forward, -1 back
-	var boost := 0.0
 	var throttle := Input.get_action_strength("move_forward") - Input.get_action_strength("move_back")
-	if (throttle > 0+error or throttle < 0-error):
-		boost = 0.5
-	var steer_in := -Input.get_action_strength("move_right") + Input.get_action_strength("move_left")
-	if (steer_in > 0+error or steer_in < 0-error):
+	var steer_in
+	if throttle >=0:
+		steer_in = -Input.get_action_strength("move_right") + Input.get_action_strength("move_left")
+	else:
+		steer_in = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+
+	if (steer_in > 0 + error or steer_in < 0 - error):
 		accel = 3.0
 		rolling_resistance = 12.5
 		side_friction = 3.5
 	else:
 		accel = accel_target
+		# NOTE: if you intended rolling_resistance/side_friction to only change while steering,
+		# you should also reset them here to your defaults/targets.
 
 	# wheel steer angle clamped to +-15 deg
-	var target_steer := steer_in * steer_max_deg
+	var target_steer = steer_in * steer_max_deg
 	var steer_rate := steer_speed_deg_per_sec if abs(steer_in) > 0.001 else steer_center_deg_per_sec
 	steer_deg = move_toward(steer_deg, target_steer, steer_rate * delta)
 
 	if wheel_visual != null:
 		wheel_visual.rotation.y = deg_to_rad(steer_deg)
 
-	# turn body (yaw)
+	# turn body (yaw) — keep turning while coasting (no * abs(throttle))
 	var planar_speed := Vector2(velocity.x, velocity.z).length()
 	var speed_factor = clamp(planar_speed / max(speed, 0.001), 0.0, 1.0)
 	var steer_factor = steer_deg / max(steer_max_deg, 0.001)
@@ -93,6 +101,19 @@ func _physics_process(delta: float) -> void:
 	var reversing = abs(throttle) > 0.001 and v_fwd.dot(target_fwd) < 0.0
 	var drive_rate = (brake if reversing else accel)
 
+	# -------- one-time “start kick” (instant velocity boost on press) --------
+	var throttle_active = abs(throttle) > kick_deadzone
+	var was_active = abs(_prev_throttle) > kick_deadzone
+	var starting_move = throttle_active and not was_active
+
+	if starting_move and not reversing:
+		var desired_fwd_speed = throttle * speed        # signed
+		var cur_fwd_speed := v.dot(fwd)                  # signed
+		var remaining = max(0.0, abs(desired_fwd_speed) - abs(cur_fwd_speed))
+		var kick = min(start_kick_speed, remaining)
+		v_fwd += fwd * sign(desired_fwd_speed) * kick
+	# -----------------------------------------------------------------------
+
 	if abs(throttle) > 0.001:
 		v_fwd = v_fwd.move_toward(target_fwd, drive_rate * delta)
 	else:
@@ -106,6 +127,7 @@ func _physics_process(delta: float) -> void:
 	velocity.x = v.x
 	velocity.z = v.z
 
+	_prev_throttle = throttle
 	move_and_slide()
 
 
