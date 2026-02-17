@@ -19,6 +19,13 @@ radius = 0.25
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_h2yge"]
 radius = 0.25
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3edph"]
+albedo_color = Color(0.09019608, 0.49019608, 0.105882354, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fieog"]
+material = SubResource("StandardMaterial3D_3edph")
+size = Vector3(1.385, 1, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v0h62"]
 albedo_color = Color(1, 0, 1, 1)
 
@@ -78,7 +85,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3776362, 0)
 script = ExtResource("1_v0h62")
 camera_pivot = NodePath("CameraPivot")
 camera = NodePath("CameraPivot/Camera3D")
-wheel_visual = NodePath("Wheelchair")
+wheel_visual = NodePath("WheelchairDir")
 
 [node name="CameraPivot" type="Node3D" parent="Player" unique_id=1901293811]
 
@@ -90,9 +97,15 @@ shape = SubResource("CapsuleShape3D_0xm2m")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=1576148901]
 mesh = SubResource("CapsuleMesh_h2yge")
 
-[node name="Wheelchair" type="Node3D" parent="Player" unique_id=398144833]
+[node name="Wheelchair" type="Node3D" parent="Player" unique_id=410492977]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/Wheelchair" unique_id=1380951021]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/Wheelchair" unique_id=35592465]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.90669346, -0.0075191855)
+mesh = SubResource("BoxMesh_fieog")
+
+[node name="WheelchairDir" type="Node3D" parent="Player" unique_id=398144833]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/WheelchairDir" unique_id=1380951021]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.0220556, -0.7983594)
 mesh = SubResource("BoxMesh_5qa2v")
 
