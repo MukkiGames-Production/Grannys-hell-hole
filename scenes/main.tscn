@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://ctcpaobx3sw3r"]
 
-[ext_resource type="Script" uid="uid://de64jyetu0c7k" path="res://scripts/player.gd" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://6de6v3rp0l3q" path="res://breakablewall.tscn" id="1_tipki"]
-[ext_resource type="Script" uid="uid://dlfa4844hulox" path="res://scripts/grabbableObject.gd" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://de64jyetu0c7k" path="res://scripts/Player/player.gd" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://6de6v3rp0l3q" path="res://scenes/BreakableWall.tscn" id="1_tipki"]
+[ext_resource type="Script" uid="uid://dlfa4844hulox" path="res://scripts/objects/grabbableObject.gd" id="2_0xm2m"]
 [ext_resource type="Shader" uid="uid://im65mxkv3lyh" path="res://scripts/shaders/highlight.gdshader" id="3_o6xl0"]
-[ext_resource type="Texture2D" uid="uid://cxsqe1ml8nmyh" path="res://reticleEmpty.tres" id="3_sugp2"]
-[ext_resource type="Script" uid="uid://mklkxcpb5cmv" path="res://scripts/pillar.gd" id="3_tefeu"]
-[ext_resource type="Script" uid="uid://d0co7xxx1604o" path="res://scripts/swapReticle.gd" id="4_tbgi4"]
-[ext_resource type="Texture2D" uid="uid://dhu4lf3trb2sp" path="res://reticleFull.tres" id="5_tefeu"]
+[ext_resource type="Texture2D" uid="uid://cxsqe1ml8nmyh" path="res://Assets/reticleEmpty.tres" id="3_sugp2"]
+[ext_resource type="Script" uid="uid://mklkxcpb5cmv" path="res://scripts/objects/pillar.gd" id="3_tefeu"]
+[ext_resource type="Script" uid="uid://d0co7xxx1604o" path="res://scripts/Player/swapReticle.gd" id="4_tbgi4"]
+[ext_resource type="Texture2D" uid="uid://dhu4lf3trb2sp" path="res://Assets/reticleFull.tres" id="5_tefeu"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7dm0k"]
 size = Vector3(10, 1, 10)
