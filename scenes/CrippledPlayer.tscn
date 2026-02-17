@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://b6xcgcjfs8ayq"]
+
+[ext_resource type="Script" uid="uid://bhc3e7m5huvid" path="res://scripts/crippledPlayer.gd" id="1_ykkfs"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0xm2m"]
+radius = 0.25
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_h2yge"]
+radius = 0.25
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3edph"]
+albedo_color = Color(0.09019608, 0.49019608, 0.105882354, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fieog"]
+material = SubResource("StandardMaterial3D_3edph")
+size = Vector3(1.385, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v0h62"]
+albedo_color = Color(1, 0, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5qa2v"]
+material = SubResource("StandardMaterial3D_v0h62")
+size = Vector3(0.25, 1, 1)
+
+[node name="Player" type="CharacterBody3D" unique_id=1527043079 node_paths=PackedStringArray("camera_pivot", "camera", "wheel_visual")]
+script = ExtResource("1_ykkfs")
+camera_pivot = NodePath("CameraPivot")
+camera = NodePath("CameraPivot/Camera3D")
+wheel_visual = NodePath("WheelchairDir")
+
+[node name="CameraPivot" type="Node3D" parent="." unique_id=199178872]
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=2140083357]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1023223876]
+shape = SubResource("CapsuleShape3D_0xm2m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1895882788]
+mesh = SubResource("CapsuleMesh_h2yge")
+
+[node name="Wheelchair" type="Node3D" parent="." unique_id=885083127]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wheelchair" unique_id=1840603701]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.90669346, -0.0075191855)
+mesh = SubResource("BoxMesh_fieog")
+
+[node name="WheelchairDir" type="Node3D" parent="." unique_id=1563664237]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WheelchairDir" unique_id=318934322]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.0220556, -0.7983594)
+mesh = SubResource("BoxMesh_5qa2v")
