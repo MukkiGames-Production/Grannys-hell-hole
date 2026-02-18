@@ -19,6 +19,8 @@ var steam_username: String = ""
 @onready var members_list: VBoxContainer = %MembersList
 @onready var status_label: Label = %StatusLabel
 @onready var start_game_button: Button = %StartGameButton
+@onready var record_voice_button: Button = %RecordVoiceButton
+@onready var voip: Node = $Voip
 
 func _ready() -> void:
 	# Get your Steam ID and username
@@ -45,6 +47,10 @@ func _ready() -> void:
 
 	# Check for command line arguments
 	check_command_line()
+
+	# Connect Voip signal for sending voice data over P2P
+	if voip:
+		voip.voice_data_ready.connect(_on_voice_data_ready)
 
 	# Initial lobby list request (deferred to ensure UI is ready)
 	call_deferred("_on_open_lobby_list_pressed")
@@ -374,6 +380,13 @@ func leave_lobby() -> void:
 		lobby_id = 0
 		lobby_members.clear()
 
+		# Reset voice recording state
+		if voip:
+			voip.stop_recording()
+		if record_voice_button:
+			record_voice_button.button_pressed = false
+			record_voice_button.text = "Record Voice"
+
 		# Update UI
 		if status_label:
 			status_label.text = "Status: Left the lobby"
@@ -425,6 +438,10 @@ func process_p2p_packet(sender_id: int, data: Dictionary) -> void:
 		"chat":
 			var chat_message: String = data.get("text", "")
 			print("Chat from %s: %s" % [sender_id, chat_message])
+		"voice_data":
+			var voice_buffer: PackedByteArray = data.get("buffer", PackedByteArray())
+			if voice_buffer.size() > 0 and voip:
+				voip.receive_voice_data(voice_buffer)
 		_:
 			print("Unknown message type: %s from %s" % [message_type, sender_id])
 
@@ -529,7 +546,7 @@ func _on_back_button_pressed() -> void:
 		leave_lobby()
 
 	# Go back to main menu
-	get_tree().change_scene_to_file("res://world.tscn")
+	get_tree().change_scene_to_file("res://main.tscn")
 
 func start_game() -> void:
 	# Only the host can start the game
@@ -539,3 +556,21 @@ func start_game() -> void:
 		send_p2p_packet(0, {"message": "start_game"})
 		# Load your game scene
 		get_tree().change_scene_to_file("res://scenes/main.tscn")
+func record_voice(is_recording: bool) -> void:
+	print("Voice recording toggled: %s" % is_recording)
+	if voip:
+		if is_recording:
+			voip.start_recording()
+			if record_voice_button:
+				record_voice_button.text = "Stop Recording"
+		else:
+			voip.stop_recording()
+			if record_voice_button:
+				record_voice_button.text = "Record Voice"
+	else:
+		print("WARNING: Voip node not found!")
+
+func _on_voice_data_ready(buffer: PackedByteArray) -> void:
+	# Send compressed voice data to all lobby members over P2P (unreliable for low latency)
+	if lobby_id > 0:
+		send_p2p_packet(0, {"message": "voice_data", "buffer": buffer}, Steam.P2P_SEND_UNRELIABLE_NO_DELAY)

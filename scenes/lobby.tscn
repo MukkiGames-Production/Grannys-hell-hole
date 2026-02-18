@@ -1,6 +1,13 @@
 [gd_scene format=3 uid="uid://dlj5x8k2mq3vh"]
 
 [ext_resource type="Script" uid="uid://c0xc4p84ca6o4" path="res://scripts/Networking/Lobby.gd" id="1_lobby"]
+[ext_resource type="Script" uid="uid://bbdk8cpwa1nnk" path="res://scripts/Networking/Voip.gd" id="2_voip"]
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_local"]
+buffer_length = 0.1
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_network"]
+buffer_length = 0.1
 
 [node name="Lobby" type="Control"]
 layout_mode = 3
@@ -160,6 +167,22 @@ custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 text = "Leave Lobby"
 
+[node name="RecordVoiceButton" type="Button" parent="MarginContainer/VBoxContainer/CurrentLobbyPanel/VBoxContainer/LobbyButtonRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+toggle_mode = true
+text = "Record Voice"
+
+[node name="Voip" type="Node" parent="."]
+script = ExtResource("2_voip")
+
+[node name="Local" type="AudioStreamPlayer" parent="Voip"]
+stream = SubResource("AudioStreamGenerator_local")
+
+[node name="Network" type="AudioStreamPlayer" parent="Voip"]
+stream = SubResource("AudioStreamGenerator_network")
+
 [node name="StatusLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -172,3 +195,4 @@ horizontal_alignment = 1
 [connection signal="pressed" from="MarginContainer/VBoxContainer/CurrentLobbyPanel/VBoxContainer/LobbyButtonRow/StartGameButton" to="." method="start_game"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/CurrentLobbyPanel/VBoxContainer/LobbyButtonRow/InviteFriendButton" to="." method="invite_friend"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/CurrentLobbyPanel/VBoxContainer/LobbyButtonRow/LeaveLobbyButton" to="." method="leave_lobby"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/CurrentLobbyPanel/VBoxContainer/LobbyButtonRow/RecordVoiceButton" to="." method="record_voice"]

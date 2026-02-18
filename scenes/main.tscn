@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://ctcpaobx3sw3r"]
 
+[ext_resource type="Script" uid="uid://bbdk8cpwa1nnk" path="res://scripts/Networking/Voip.gd" id="1_85g3d"]
 [ext_resource type="Script" uid="uid://de64jyetu0c7k" path="res://scripts/Player/player.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://6de6v3rp0l3q" path="res://scenes/BreakableWall.tscn" id="1_tipki"]
 [ext_resource type="Script" uid="uid://dlfa4844hulox" path="res://scripts/objects/grabbableObject.gd" id="2_0xm2m"]
@@ -66,7 +67,15 @@ size = Vector3(0.5, 0.5, 0.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_o6xl0"]
 
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_85g3d"]
+buffer_length = 0.1
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_choun"]
+buffer_length = 0.1
+
 [node name="Node3D" type="Node3D" unique_id=421424765]
+script = ExtResource("1_85g3d")
+auto_record = true
 
 [node name="breakablewall" parent="." unique_id=1113161578 instance=ExtResource("1_tipki")]
 transform = Transform3D(-0.99952555, 0.030797105, 0.00043326247, 0, -0.014066894, 0.99990106, 0.030800153, 0.99942666, 0.01406022, 0, 0.7378192, 3.8175683)
@@ -161,5 +170,14 @@ texture = ExtResource("3_sugp2")
 script = ExtResource("4_tbgi4")
 reticleWhenNotLooking = ExtResource("3_sugp2")
 reticleWhenLooking = ExtResource("5_tefeu")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1194049763]
+spawn_path = NodePath("../Player")
+
+[node name="Local" type="AudioStreamPlayer" parent="." unique_id=1109379672]
+stream = SubResource("AudioStreamGenerator_85g3d")
+
+[node name="Network" type="AudioStreamPlayer" parent="." unique_id=554416602]
+stream = SubResource("AudioStreamGenerator_choun")
 
 [connection signal="look_at_interactable" from="Player" to="UI/CenterContainer/Reticle" method="_on_player_look_at_interactable"]
