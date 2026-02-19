@@ -41,9 +41,8 @@ func _ready() -> void:
 	Steam.lobby_match_list.connect(_on_lobby_match_list)
 	Steam.lobby_message.connect(_on_lobby_message)
 
-	# Connect P2P signals
-	Steam.p2p_session_request.connect(_on_p2p_session_request)
-	Steam.p2p_session_connect_fail.connect(_on_p2p_session_connect_fail)
+	# Listen for P2P packets via the GameNetwork autoload (it handles reading & session callbacks)
+	GameNetwork.p2p_packet_received.connect(process_p2p_packet)
 
 	# Check for command line arguments
 	check_command_line()
@@ -56,9 +55,7 @@ func _ready() -> void:
 	call_deferred("_on_open_lobby_list_pressed")
 
 func _process(_delta: float) -> void:
-	# If connected to a lobby, read any incoming P2P packets
-	if lobby_id > 0:
-		read_all_p2p_packets()
+	pass
 
 func check_command_line() -> void:
 	var these_arguments: Array = OS.get_cmdline_args()
@@ -220,6 +217,11 @@ func get_lobby_members() -> void:
 			"steam_id": member_id,
 			"steam_name": member_name
 		})
+
+	# Keep the GameNetwork autoload in sync so it can accept P2P sessions
+	# and persist member data across scene changes
+	GameNetwork.lobby_id = lobby_id
+	GameNetwork.lobby_members = lobby_members.duplicate(true)
 
 func update_lobby_ui() -> void:
 	if not current_lobby_panel:
@@ -442,6 +444,10 @@ func process_p2p_packet(sender_id: int, data: Dictionary) -> void:
 			var voice_buffer: PackedByteArray = data.get("buffer", PackedByteArray())
 			if voice_buffer.size() > 0 and voip:
 				voip.receive_voice_data(voice_buffer)
+		"start_game":
+			print("Received start game signal from host!")
+			GameNetwork.set_lobby(lobby_id, lobby_members.duplicate(true), false)
+			get_tree().change_scene_to_file("res://scenes/world.tscn")
 		_:
 			print("Unknown message type: %s from %s" % [message_type, sender_id])
 
@@ -552,10 +558,13 @@ func start_game() -> void:
 	# Only the host can start the game
 	if Steam.getLobbyOwner(lobby_id) == steam_id:
 		print("Starting game...")
+		# Save lobby state to the persistent singleton before scene change
+		GameNetwork.set_lobby(lobby_id, lobby_members.duplicate(true), true)
+
 		# Send start game message to all players
 		send_p2p_packet(0, {"message": "start_game"})
 		# Load your game scene
-		get_tree().change_scene_to_file("res://scenes/main.tscn")
+		get_tree().change_scene_to_file("res://scenes/world.tscn")
 func record_voice(is_recording: bool) -> void:
 	print("Voice recording toggled: %s" % is_recording)
 	if voip:

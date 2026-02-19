@@ -7,7 +7,7 @@
 [node name="World" type="Node3D" unique_id=948386596]
 script = ExtResource("1_f3sb7")
 
-[node name="Node3D" parent="." unique_id=421424765 instance=ExtResource("2_tlwt5")]
+[node name="Main" parent="." unique_id=421424765 instance=ExtResource("2_tlwt5")]
 
 [node name="UILayer" type="CanvasLayer" parent="." unique_id=633623206]
 layer = 10

@@ -54,3 +54,5 @@ Mic={
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+[autoload]
+GameNetwork="*res://scripts/Networking/GameNetwork.gd"
