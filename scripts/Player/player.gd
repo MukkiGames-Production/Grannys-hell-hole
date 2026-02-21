@@ -77,10 +77,11 @@ func _unhandled_input(event):
 		try_interact()
 
 func try_interact():
+	var target
 	if not object_in_sight:
-		return
-
-	var target = object_in_sight.collider
+		target = null
+	else:
+		target = object_in_sight.collider
 
 	#case 1: holding item, use on point or drop item
 	if held_object:

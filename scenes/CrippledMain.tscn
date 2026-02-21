@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://citxfvs8ykfpp"]
 
 [ext_resource type="Script" uid="uid://bhc3e7m5huvid" path="res://scripts/crippledPlayer.gd" id="1_v0h62"]
-[ext_resource type="Script" uid="uid://dlfa4844hulox" path="res://scripts/grabbableObject.gd" id="2_3edph"]
-[ext_resource type="Script" uid="uid://mklkxcpb5cmv" path="res://scripts/pillar.gd" id="3_fieog"]
-[ext_resource type="Texture2D" uid="uid://cxsqe1ml8nmyh" path="res://reticleEmpty.tres" id="4_ny5j3"]
-[ext_resource type="Script" uid="uid://d0co7xxx1604o" path="res://scripts/swapReticle.gd" id="5_0f6vu"]
-[ext_resource type="Texture2D" uid="uid://dhu4lf3trb2sp" path="res://reticleFull.tres" id="6_jknxo"]
+[ext_resource type="Script" uid="uid://dlfa4844hulox" path="res://scripts/objects/grabbableObject.gd" id="2_3edph"]
+[ext_resource type="Script" uid="uid://mklkxcpb5cmv" path="res://scripts/objects/pillar.gd" id="3_fieog"]
+[ext_resource type="Texture2D" uid="uid://cxsqe1ml8nmyh" path="res://Assets/reticleEmpty.tres" id="4_ny5j3"]
+[ext_resource type="Script" uid="uid://d0co7xxx1604o" path="res://scripts/Player/swapReticle.gd" id="5_0f6vu"]
+[ext_resource type="Texture2D" uid="uid://dhu4lf3trb2sp" path="res://Assets/reticleFull.tres" id="6_jknxo"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7dm0k"]
 size = Vector3(10, 1, 10)
@@ -83,21 +83,9 @@ mesh = SubResource("BoxMesh_ig7tw")
 [node name="Player" type="CharacterBody3D" parent="." unique_id=1887340554 node_paths=PackedStringArray("camera_pivot", "camera", "wheel_visual")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3776362, 0)
 script = ExtResource("1_v0h62")
-speed = null
-accel_target = null
-brake = null
-mouse_sensitivity = null
 camera_pivot = NodePath("CameraPivot")
 camera = NodePath("CameraPivot/Camera3D")
-steer_max_deg = null
-steer_speed_deg_per_sec = null
-steer_center_deg_per_sec = null
-max_turn_rate_deg_per_sec = null
-rolling_resistance_target = null
-side_friction_target = null
 wheel_visual = NodePath("WheelchairDir")
-start_kick_speed = null
-kick_deadzone = null
 
 [node name="CameraPivot" type="Node3D" parent="Player" unique_id=1901293811]
 
