@@ -28,12 +28,22 @@ func grab(camera: Node3D):
 	is_held = true
 	holder = camera
 	freeze = true
+	GameNetwork.send_p2p_packet(0, {
+		"message": "player_action",
+		"action": "grab",
+		"item_id": item_id,
+	}, Steam.P2P_SEND_RELIABLE)
 
 func release():
 	is_held = false
 	holder = null
 	freeze = false
-	
+	GameNetwork.send_p2p_packet(0, {
+		"message": "player_action",
+		"action": "release",
+		"item_id": item_id,
+	}, Steam.P2P_SEND_RELIABLE)
+
 #move helper
 func move_to_position(target: Vector3, duration: float = 0.3):
 	# Stop physics motion

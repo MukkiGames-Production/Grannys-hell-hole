@@ -94,6 +94,14 @@ func _handle_player_action(sender_id: int, data: Dictionary) -> void:
 	var action: String = data.get("action", "")
 	print("[World] Player %s performed action: %s" % [sender_id, action])
 	# TODO: Handle remote player interactions (grab, drop, interact, etc.)
+	if action  == "interact":
+		var remote: Node3D = remote_players.get(sender_id, null)
+		if remote and is_instance_valid(remote):
+			GameNetwork.send_p2p_packet(0, {
+				"message": "player_action_response",
+				"action": "interact_response",
+				"result": "success",
+			}, Steam.P2P_SEND_RELIABLE)
 
 # ---- Remote player management ----
 

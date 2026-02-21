@@ -15,6 +15,10 @@ run/main_scene="uid://bw4p3rdmo33fl"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameNetwork="*res://scripts/Networking/GameNetwork.gd"
+
 [debug]
 
 file_logging/enable_file_logging=true
@@ -54,5 +58,3 @@ Mic={
 [rendering]
 
 rendering_device/driver.windows="d3d12"
-[autoload]
-GameNetwork="*res://scripts/Networking/GameNetwork.gd"
