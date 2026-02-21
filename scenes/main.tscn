@@ -176,8 +176,10 @@ spawn_path = NodePath("../Player")
 
 [node name="Local" type="AudioStreamPlayer" parent="." unique_id=1109379672]
 stream = SubResource("AudioStreamGenerator_85g3d")
+bus = &"Voice"
 
 [node name="Network" type="AudioStreamPlayer" parent="." unique_id=554416602]
 stream = SubResource("AudioStreamGenerator_choun")
+bus = &"Voice"
 
 [connection signal="look_at_interactable" from="Player" to="UI/CenterContainer/Reticle" method="_on_player_look_at_interactable"]
