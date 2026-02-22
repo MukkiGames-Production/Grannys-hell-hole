@@ -32,15 +32,16 @@ func chase(): # chases current chase_target
 	agent.target_position = chase_target.global_position
 
 func _physics_process(delta: float) -> void:
-
 	# Gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	else:
 		velocity.y = 0.0
 
+	# Update target (you can move this to the timer later if you want)
 	if status == State.CHASE:
-		chase()
+		if chase_target:
+			agent.target_position = chase_target.global_position
 
 	# Stop if we’re done
 	if agent.is_navigation_finished():
@@ -49,17 +50,31 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		return
 
-	# Follow next nav point
+	# Get next waypoint along the path
 	var next_pos := agent.get_next_path_position()
+
+	# Debug + “skip vertical projection first point” handling
+	var path := agent.get_current_navigation_path()
+	var idx := agent.get_current_navigation_path_index()
+
+	# If next waypoint is basically straight down/up, use the next corner instead.
+	if Vector2(next_pos.x - global_position.x, next_pos.z - global_position.z).length() < 0.01:
+		if path.size() > idx + 1:
+			next_pos = path[idx + 1]
+
+	# Compute direction AFTER possible replacement
 	var to_next := next_pos - global_position
 	to_next.y = 0.0
-	
-	debug_text.text = "%s dxz=%.3f dy=%.3f" % [
-		State.keys()[status],
+
+	debug_text.text = "idx=%d/%d nxt(dxz=%.3f dy=%.3f) vel=%.2f fin=%s" % [
+		idx, path.size(),
 		Vector2(next_pos.x - global_position.x, next_pos.z - global_position.z).length(),
-		abs(next_pos.y - global_position.y)
+		abs(next_pos.y - global_position.y),
+		Vector2(velocity.x, velocity.z).length(),
+		str(agent.is_navigation_finished())
 	]
 
+	# Constant-speed movement (no acceleration)
 	if to_next.length() > 0.001:
 		var dir := to_next.normalized()
 		velocity.x = dir.x * speed
