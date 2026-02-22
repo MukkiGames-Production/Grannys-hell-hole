@@ -15,6 +15,14 @@ signal look_at_interactable(can_see: bool) #signal to reticle to change type whe
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) #move mouse does not move cursor
+	# GameNetwork.p2p_packet_received.connect(_on_remote_packet)
+# func _on_remote_packet(sender_id: int, data: Dictionary):
+# 	match data.get("type"):
+# 			"player_update":
+# 				var remote_player = find_remote_player(sender_id)
+# 				if remote_player:
+# 					remote_player.global_transform = data.get("transform")
+# 					remote_player.velocity = data.get("velocity")
 
 func _physics_process(delta: float) -> void:
 	# Get input direction and handle the movement/deceleration.
@@ -49,6 +57,7 @@ func _process(delta: float) -> void:
 	if currently_sees != seesInteractable:
 		seesInteractable = currently_sees
 		emit_signal("look_at_interactable", seesInteractable)
+
 
 func _unhandled_input(event):
 	# Toggle menu with Escape

@@ -97,11 +97,14 @@ func _handle_player_action(sender_id: int, data: Dictionary) -> void:
 	if action  == "interact":
 		var remote: Node3D = remote_players.get(sender_id, null)
 		if remote and is_instance_valid(remote):
+			# now need to find the object they interacted with and trigger it locally
+
 			GameNetwork.send_p2p_packet(0, {
 				"message": "player_action_response",
 				"action": "interact_response",
 				"result": "success",
 			}, Steam.P2P_SEND_RELIABLE)
+
 
 # ---- Remote player management ----
 
@@ -139,6 +142,9 @@ func _spawn_remote_player(peer_steam_id: int, peer_name: String) -> void:
 	remote.global_position = Vector3(0, 2.38, 0)
 
 	# Add to the game world (Node3D is the instanced main.tscn)
+	if (peer_steam_id == Steam.getSteamID() or peer_name == Steam.getPersonaName()):
+		print("[World] WARNING: Attempted to spawn remote player for ourselves (steam_id: %s)" % peer_steam_id)
+		return
 	$Main.add_child(remote)
 	remote_players[peer_steam_id] = remote
 
@@ -151,7 +157,14 @@ func _remove_remote_player(peer_steam_id: int) -> void:
 			node.queue_free()
 		remote_players.erase(peer_steam_id)
 		print("[World] Removed remote player: %s" % peer_steam_id)
-
+func _update_remote_player_position(peer_steam_id: int, position: Vector3, rotation: Vector3) -> void:
+	if peer_steam_id in remote_players:
+		var remote: Node3D = remote_players[peer_steam_id]
+		if is_instance_valid(remote):
+			remote.global_position = position
+			remote.global_rotation = rotation
+func _update_remote_player_action(peer_steam_id: int, action: String) -> void:
+	print("[World] Received action '%s' from player %s" % [action, peer_steam_id])
 # ---- Lobby change callbacks ----
 
 func _on_player_joined(peer_steam_id: int, player_name: String) -> void:

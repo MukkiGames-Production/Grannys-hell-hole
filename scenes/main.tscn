@@ -73,6 +73,17 @@ buffer_length = 0.1
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_choun"]
 buffer_length = 0.1
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_85g3d"]
+properties/0/path = NodePath("Player:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("GrabbableSphere:position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("GrabbableCube:position")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
 [node name="Node3D" type="Node3D" unique_id=421424765]
 script = ExtResource("1_85g3d")
 auto_record = true
@@ -96,6 +107,7 @@ mesh = SubResource("BoxMesh_ig7tw")
 [node name="Player" type="CharacterBody3D" parent="." unique_id=1887340554 node_paths=PackedStringArray("camera_pivot", "camera")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3776362, 0)
 script = ExtResource("1_ig7tw")
+mouse_sensitivity = null
 camera_pivot = NodePath("CameraPivot")
 camera = NodePath("CameraPivot/Camera3D")
 
@@ -181,5 +193,10 @@ bus = &"Voice"
 [node name="Network" type="AudioStreamPlayer" parent="." unique_id=554416602]
 stream = SubResource("AudioStreamGenerator_choun")
 bus = &"Voice"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=377978589]
+replication_interval = 1.228
+replication_config = SubResource("SceneReplicationConfig_85g3d")
+visibility_update_mode = 1
 
 [connection signal="look_at_interactable" from="Player" to="UI/CenterContainer/Reticle" method="_on_player_look_at_interactable"]

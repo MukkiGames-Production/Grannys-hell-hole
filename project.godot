@@ -27,6 +27,14 @@ GameNetwork="*res://scripts/Networking/GameNetwork.gd"
 
 file_logging/enable_file_logging=true
 
+[debug_draw_3d]
+
+settings/addon_root_folder="res://addons/debug_draw_3d"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/tube/plugin.cfg")
+
 [input]
 
 move_left={
