@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ctcpaobx3sw3r"]
 
-[ext_resource type="Script" uid="uid://de64jyetu0c7k" path="res://scripts/Player/player.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://de64jyetu0c7k" path="res://scripts/Player/walkingPlayer.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://6de6v3rp0l3q" path="res://scenes/BreakableWall.tscn" id="1_tipki"]
 [ext_resource type="Script" uid="uid://dlfa4844hulox" path="res://scripts/objects/grabbableObject.gd" id="2_0xm2m"]
 [ext_resource type="Shader" uid="uid://im65mxkv3lyh" path="res://scripts/shaders/highlight.gdshader" id="3_o6xl0"]
