@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://bnbggqkcgb1wp"]
+
+[ext_resource type="Script" uid="uid://cnhfw0o2w7u0k" path="res://scripts/AI-Environment/npc.gd" id="1_mhefn"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tcuxl"]
+radius = 0.25
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_nh2m4"]
+radius = 0.25
+
+[node name="NPC" type="CharacterBody3D" unique_id=321508815]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.32948327, 0)
+script = ExtResource("1_mhefn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1627569678]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3782554, 0)
+shape = SubResource("CapsuleShape3D_tcuxl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1535243562]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3782554, 0)
+mesh = SubResource("CapsuleMesh_nh2m4")
+
+[node name="DebugText" type="Label3D" parent="." unique_id=1452481949]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.516634, 0)
+billboard = 1
+text = "debug text"
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=517011410]
+target_desired_distance = 0.5
+debug_enabled = true
+
+[node name="UpdateTimer" type="Timer" parent="." unique_id=254858480]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="UpdateTimer" to="." method="_on_update_timer_timeout"]
