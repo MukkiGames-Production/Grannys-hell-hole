@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://citxfvs8ykfpp"]
 
-[ext_resource type="Script" uid="uid://bhc3e7m5huvid" path="res://scripts/crippledPlayer.gd" id="1_v0h62"]
+[ext_resource type="Script" uid="uid://bhc3e7m5huvid" path="res://scripts/Player/crippledPlayer.gd" id="1_v0h62"]
 [ext_resource type="Script" uid="uid://dlfa4844hulox" path="res://scripts/objects/grabbableObject.gd" id="2_3edph"]
 [ext_resource type="Script" uid="uid://mklkxcpb5cmv" path="res://scripts/objects/pillar.gd" id="3_fieog"]
 [ext_resource type="Texture2D" uid="uid://cxsqe1ml8nmyh" path="res://Assets/reticleEmpty.tres" id="4_ny5j3"]
@@ -80,12 +80,12 @@ shape = SubResource("BoxShape3D_7dm0k")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=1475324025]
 mesh = SubResource("BoxMesh_ig7tw")
 
-[node name="Player" type="CharacterBody3D" parent="." unique_id=1887340554 node_paths=PackedStringArray("camera_pivot", "camera", "wheel_visual")]
+[node name="Player" type="CharacterBody3D" parent="." unique_id=1887340554 node_paths=PackedStringArray("wheel_visual", "camera_pivot", "camera")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3776362, 0)
 script = ExtResource("1_v0h62")
+wheel_visual = NodePath("WheelchairDir")
 camera_pivot = NodePath("CameraPivot")
 camera = NodePath("CameraPivot/Camera3D")
-wheel_visual = NodePath("WheelchairDir")
 
 [node name="CameraPivot" type="Node3D" parent="Player" unique_id=1901293811]
 
