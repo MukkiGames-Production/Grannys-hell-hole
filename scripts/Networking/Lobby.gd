@@ -448,6 +448,9 @@ func process_p2p_packet(sender_id: int, data: Dictionary) -> void:
 			print("Received start game signal from host!")
 			GameNetwork.set_lobby(lobby_id, lobby_members.duplicate(true), false)
 			get_tree().change_scene_to_file("res://scenes/world.tscn")
+		"accept_game":
+			print("Received accept game from: %s" % sender_id)
+
 		_:
 			print("Unknown message type: %s from %s" % [message_type, sender_id])
 
@@ -552,7 +555,7 @@ func _on_back_button_pressed() -> void:
 		leave_lobby()
 
 	# Go back to main menu
-	get_tree().change_scene_to_file("res://main.tscn")
+	get_tree().change_scene_to_file("res://scenes/world.tscn")
 
 func start_game() -> void:
 	# Only the host can start the game

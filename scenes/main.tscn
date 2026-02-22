@@ -83,8 +83,11 @@ properties/1/replication_mode = 1
 properties/2/path = NodePath("GrabbableCube:position")
 properties/2/spawn = true
 properties/2/replication_mode = 1
+properties/3/path = NodePath("Network:autoplay")
+properties/3/spawn = true
+properties/3/replication_mode = 1
 
-[node name="Node3D" type="Node3D" unique_id=421424765]
+[node name="Main" type="Node3D" unique_id=421424765]
 script = ExtResource("1_85g3d")
 auto_record = true
 
@@ -194,7 +197,7 @@ bus = &"Voice"
 stream = SubResource("AudioStreamGenerator_choun")
 bus = &"Voice"
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=377978589]
+[node name="MS" type="MultiplayerSynchronizer" parent="." unique_id=377978589]
 replication_interval = 1.228
 replication_config = SubResource("SceneReplicationConfig_85g3d")
 visibility_update_mode = 1
