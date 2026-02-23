@@ -1,5 +1,5 @@
 extends Node3D
-
+@onready var player = preload("res://scenes/Player.tscn")
 ## Dictionary mapping remote steam_id -> their CharacterBody3D node
 var remote_players: Dictionary = {}
 
@@ -20,7 +20,7 @@ func _ready() -> void:
 	if GameNetwork.lobby_id > 0:
 		print("[World] Game started with %s players in lobby" % GameNetwork.lobby_members.size())
 		for member in GameNetwork.lobby_members:
-			if member["steam_id"] != GameNetwork.steam_id:
+			if member["steam_id"] != GameNetwork.steam_id and member["steam_id"] != Steam.getSteamID() and member["steam_name"] != Steam.getPersonaName():
 				_spawn_remote_player(member["steam_id"], member["steam_name"])
 	else:
 		print("[World] No active lobby — running in single-player mode")
@@ -62,8 +62,8 @@ func _handle_player_update(sender_id: int, data: Dictionary) -> void:
 	if sender_id not in remote_players:
 		var sender_name: String = Steam.getFriendPersonaName(sender_id)
 		_spawn_remote_player(sender_id, sender_name)
-
-	var remote: Node3D = remote_players[sender_id]
+		return
+	var remote: Node3D = remote_players[sender_id]]
 	if not is_instance_valid(remote):
 		return
 
@@ -107,27 +107,15 @@ func _handle_player_action(sender_id: int, data: Dictionary) -> void:
 
 
 # ---- Remote player management ----
-
+# FIXME - the player spawns however no connection betweens the remote player nodes and the actual player updates, so they just sit at the spawn point and do not move. Need to debug why the position updates are not applying to the remote nodes.
 func _spawn_remote_player(peer_steam_id: int, peer_name: String) -> void:
 	if peer_steam_id in remote_players:
 		return
 
-	var remote := CharacterBody3D.new()
+	var remote := player.instantiate() as CharacterBody3D
 	remote.name = "RemotePlayer_%s" % peer_steam_id
 
-	# Collision shape
-	var col_shape := CollisionShape3D.new()
-	var capsule_shape := CapsuleShape3D.new()
-	capsule_shape.radius = 0.25
-	col_shape.shape = capsule_shape
-	remote.add_child(col_shape)
 
-	# Visible mesh
-	var mesh_instance := MeshInstance3D.new()
-	var capsule_mesh := CapsuleMesh.new()
-	capsule_mesh.radius = 0.25
-	mesh_instance.mesh = capsule_mesh
-	remote.add_child(mesh_instance)
 
 	# Name label above head
 	var label_3d := Label3D.new()
@@ -139,13 +127,11 @@ func _spawn_remote_player(peer_steam_id: int, peer_name: String) -> void:
 	remote.add_child(label_3d)
 
 	# Default spawn position (same as local player start)
-	remote.global_position = Vector3(0, 2.38, 0)
-
-	# Add to the game world (Node3D is the instanced main.tscn)
+	remote.call_deferred("set_global_transform", Transform3D(Basis(), Vector3(0, 0, 0)))
 	if (peer_steam_id == Steam.getSteamID() or peer_name == Steam.getPersonaName()):
-		print("[World] WARNING: Attempted to spawn remote player for ourselves (steam_id: %s)" % peer_steam_id)
+		# print("[World] WARNING: Attempted to spawn remote player for ourselves (steam_id: %s)" % peer_steam_id)
 		return
-	$Main.add_child(remote)
+	$Main.add_child(remote,true)
 	remote_players[peer_steam_id] = remote
 
 	print("[World] Spawned remote player: %s (steam_id: %s)" % [peer_name, peer_steam_id])

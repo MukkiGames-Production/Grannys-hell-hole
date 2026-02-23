@@ -4,7 +4,7 @@ extends Node
 ## Holds lobby/P2P state so the game scene can read it after leaving the lobby UI.
 
 const PACKET_READ_LIMIT: int = 32
-
+var peer: SteamMultiplayerPeer = null
 # Lobby state
 var lobby_id: int = 0
 var lobby_members: Array = []
@@ -161,7 +161,20 @@ func _on_lobby_chat_update(this_lobby_id: int, changed_id: int, _making_change_i
 		Steam.closeP2PSessionWithUser(changed_id)
 		player_left.emit(changed_id)
 
-# ---- Helpers ----
+
+# ---- P2P session management ----
+#
+func create_steam_socket()->void:
+
+	peer = SteamMultiplayerPeer.new()
+	peer.create_host(0)
+	multiplayer.multiplayer_peer = peer
+func connect_to_host(host_id: int)->void:
+	peer = SteamMultiplayerPeer.new()
+	peer.create_client(host_id)
+	multiplayer.multiplayer_peer = peer
+
+# ---- Helpers ---- #
 
 ## Returns the member dict for a given steam_id, or an empty dict if not found.
 func get_member_by_id(member_steam_id: int) -> Dictionary:
