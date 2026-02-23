@@ -44,6 +44,7 @@ func _ready() -> void:
 	# Listen for P2P packets via the GameNetwork autoload (it handles reading & session callbacks)
 	GameNetwork.p2p_packet_received.connect(process_p2p_packet)
 
+
 	# Check for command line arguments
 	check_command_line()
 
@@ -76,7 +77,7 @@ func create_lobby() -> void:
 			status_label.text = "Status: Creating lobby..."
 		print("Creating lobby with max members: %s" % lobby_members_max)
 		Steam.createLobby(Steam.LOBBY_TYPE_PUBLIC, lobby_members_max)
-
+		GameNetwork.create_steam_socket()
 func _on_lobby_created(connect: int, this_lobby_id: int) -> void:
 	if connect == 1:
 		# Set the lobby ID
@@ -161,7 +162,8 @@ func join_lobby(this_lobby_id: int) -> void:
 
 	# Make the lobby join request to Steam
 	Steam.joinLobby(this_lobby_id)
-
+	GameNetwork.connect_to_host(Steam.getLobbyOwner(this_lobby_id))
+@rpc("call_local", "any_peer")
 func _on_lobby_joined(this_lobby_id: int, _permissions: int, _locked: bool, response: int) -> void:
 	# If joining was successful
 	if response == Steam.CHAT_ROOM_ENTER_RESPONSE_SUCCESS:
@@ -437,6 +439,7 @@ func process_p2p_packet(sender_id: int, data: Dictionary) -> void:
 			print("Received handshake from: %s" % sender_id)
 		"player_update":
 			print("Received player update from: %s" % sender_id)
+			GameNetwork.process_player_update(data)
 		"chat":
 			var chat_message: String = data.get("text", "")
 			print("Chat from %s: %s" % [sender_id, chat_message])

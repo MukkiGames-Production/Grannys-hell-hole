@@ -66,6 +66,31 @@ func send_p2p_packet(target_id: int, data: Dictionary, send_type: int = Steam.P2
 	else:
 		Steam.sendP2PPacket(target_id, packet_data, send_type, 0)
 
+
+# ---- P2P Updating ----
+@rpc("call_local", "any_peer")
+func process_player_update(data: Dictionary) ->void:
+	if data.get("message", "") != "player_update":
+		return
+	var remote_id = data.get("id",0)
+	if remote_id:
+		var member_info = get_member_by_id(remote_id)
+		if member_info:
+			# Update the member's data in our lobby_members list
+			member_info["px"] = data.get("px", 0)
+			member_info["py"] = data.get("py", 0)
+			member_info["pz"] = data.get("pz", 0)
+			member_info["rx"] = data.get("rx", 0)
+			member_info["ry"] = data.get("ry", 0)
+			member_info["rz"] = data.get("rz", 0)
+			member_info["vx"] = data.get("vx", 0)
+			member_info["vy"] = data.get("vy", 0)
+			member_info["vz"] = data.get("vz", 0)
+	print("[GameNetwork] Processed player update from %s: pos=(%s, %s, %s) rot=(%s, %s, %s) vel=(%s, %s, %s)" %
+		[remote_id, data.get("px", 0), data.get("py", 0), data.get("pz", 0),
+			data.get("rx", 0), data.get("ry", 0), data.get("rz", 0),
+			data.get("vx", 0), data.get("vy", 0), data.get("vz", 0)])
+
 # ---- P2P Reading ----
 
 func read_all_p2p_packets(read_count: int = 0) -> void:

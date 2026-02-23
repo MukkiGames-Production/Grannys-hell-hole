@@ -15,15 +15,8 @@ signal look_at_interactable(can_see: bool) #signal to reticle to change type whe
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) #move mouse does not move cursor
-	# GameNetwork.p2p_packet_received.connect(_on_remote_packet)
-# func _on_remote_packet(sender_id: int, data: Dictionary):
-# 	match data.get("type"):
-# 			"player_update":
-# 				var remote_player = find_remote_player(sender_id)
-# 				if remote_player:
-# 					remote_player.global_transform = data.get("transform")
-# 					remote_player.velocity = data.get("velocity")
 
+@rpc("call_local", "any_peer")
 func _physics_process(delta: float) -> void:
 	# Get input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -35,8 +28,23 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
-
+	var player_data := {
+		"message": "player_update",
+		"id": Steam.getSteamID(),
+		"px": global_position.x,
+		"py": global_position.y,
+		"pz": global_position.z,
+		"rx": global_rotation.x,
+		"ry": global_rotation.y,
+		"rz": global_rotation.z,
+		"vx": velocity.x,
+		"vy": velocity.y,
+		"vz": velocity.z
+	}
+	GameNetwork.send_p2p_packet(0, player_data, Steam.P2P_SEND_RELIABLE)
 	move_and_slide()
+
+
 
 func _process(delta: float) -> void:
 	var space_state = get_world_3d().direct_space_state
@@ -84,7 +92,7 @@ func _unhandled_input(event):
 		)
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		try_interact()
-
+@rpc("call_local", "any_peer")
 func try_interact():
 	if not object_in_sight:
 		return
@@ -97,6 +105,7 @@ func try_interact():
 			if target.interact(held_object):	#checks if successful check
 				held_object.release()
 				held_object = null
+
 		else:
 			held_object.release()
 			held_object = null
