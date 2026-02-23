@@ -80,7 +80,7 @@ func _handle_player_update(sender_id: int, data: Dictionary) -> void:
 	)
 
 	# Lerp for smooth movement instead of snapping
-	remote.global_position = remote.global_position.lerp(target_pos, 1.5)
+	remote.global_position = remote.global_position.lerp(target_pos, 0.5)
 	remote.global_rotation = target_rot
 	print("[World] Updated player %s position to %s" % [sender_id, target_pos])
 
