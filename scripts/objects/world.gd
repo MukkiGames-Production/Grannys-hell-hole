@@ -60,8 +60,9 @@ func _on_p2p_packet_received(sender_id: int, data: Dictionary) -> void:
 
 func _handle_player_update(sender_id: int, data: Dictionary) -> void:
 	# Make sure we have a node for this remote player
+	var sender_name: String = Steam.getFriendPersonaName(sender_id)
 	if sender_id not in remote_players:
-		var sender_name: String = Steam.getFriendPersonaName(sender_id)
+
 		_spawn_remote_player(sender_id, sender_name)
 		return
 	var remote: Node3D = remote_players[sender_id]
@@ -82,7 +83,7 @@ func _handle_player_update(sender_id: int, data: Dictionary) -> void:
 	# Lerp for smooth movement instead of snapping
 	remote.global_position = remote.global_position.lerp(target_pos, 0.5)
 	remote.global_rotation = target_rot
-	print("[World] Updated player %s position to %s" % [sender_id, target_pos])
+	print("[World] Updated player %s position to %s" % [sender_name, target_pos])
 
 func _handle_voice_data(data: Dictionary) -> void:
 	var voice_buffer: PackedByteArray = data.get("buffer", PackedByteArray())
