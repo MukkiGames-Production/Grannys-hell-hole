@@ -197,7 +197,7 @@ bus = &"Voice"
 stream = SubResource("AudioStreamGenerator_choun")
 bus = &"Voice"
 
-[node name="MS" type="MultiplayerSynchronizer" parent="." unique_id=377978589]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=377978589]
 replication_interval = 1.228
 replication_config = SubResource("SceneReplicationConfig_85g3d")
 visibility_update_mode = 1

@@ -62,8 +62,7 @@ func _handle_player_update(sender_id: int, data: Dictionary) -> void:
 	if sender_id not in remote_players:
 		var sender_name: String = Steam.getFriendPersonaName(sender_id)
 		_spawn_remote_player(sender_id, sender_name)
-	if remote_players.size() == 0:
-		return
+
 	var remote: Node3D = remote_players[sender_id]
 	if not is_instance_valid(remote):
 		return
