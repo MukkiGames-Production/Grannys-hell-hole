@@ -30,6 +30,7 @@ func _ready() -> void:
 		print("[World] No active lobby — running in single-player mode")
 
 	voip_instance.voice_data_ready.connect(_on_voice_data_ready)
+	$Main.add_child(voip_instance)
 @rpc("call_local", "any_peer")
 func _on_voice_data_ready(buffer: PackedByteArray) -> void:
 	GameNetwork.send_p2p_packet(0, {
@@ -107,8 +108,8 @@ func _handle_voice_data(data: Dictionary) -> void:
 	if voice_buffer.size() > 0:
 		# Forward to the Voip node inside the instanced main scene
 		var voip_node = $Main as Node
-		if voip_node and voip_node.has_method("receive_voice_data"):
-			voip_node.receive_voice_data(voice_buffer)
+		if voip_instance.has_method("receive_voice_data"):
+			voip_instance.receive_voice_data(voice_buffer)
 
 func _handle_player_action(sender_id: int, data: Dictionary) -> void:
 	var action: String = data.get("action", "")

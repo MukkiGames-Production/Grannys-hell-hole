@@ -83,7 +83,6 @@ properties/3/replication_mode = 1
 
 [node name="Main" type="Node3D" unique_id=421424765]
 script = ExtResource("1_85g3d")
-auto_record = true
 
 [node name="breakablewall" parent="." unique_id=1113161578 instance=ExtResource("1_tipki")]
 transform = Transform3D(-0.99952555, 0.030797105, 0.00043326247, 0, -0.014066894, 0.99990106, 0.030800153, 0.99942666, 0.01406022, 0, 0.7378192, 3.8175683)
