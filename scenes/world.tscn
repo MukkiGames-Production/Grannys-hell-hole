@@ -3,11 +3,19 @@
 [ext_resource type="Script" uid="uid://ckix3hutnyvvu" path="res://scripts/objects/world.gd" id="1_f3sb7"]
 [ext_resource type="PackedScene" uid="uid://ctcpaobx3sw3r" path="res://scenes/main.tscn" id="2_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://bsspxi0kmi1qg" path="res://scenes/menu.tscn" id="3_aqk2v"]
+[ext_resource type="Script" uid="uid://bbdk8cpwa1nnk" path="res://scripts/Networking/Voip.gd" id="4_k0juu"]
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_4wyf3"]
+buffer_length = 0.1
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_k0juu"]
+buffer_length = 0.1
 
 [node name="World" type="Node3D" unique_id=948386596]
 script = ExtResource("1_f3sb7")
 
 [node name="Main" parent="." unique_id=421424765 instance=ExtResource("2_tlwt5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.009233952, -0.039105892, -0.018043518)
 
 [node name="UILayer" type="CanvasLayer" parent="." unique_id=633623206]
 layer = 10
@@ -20,3 +28,14 @@ transform = Transform3D(-0.98845565, 0.06745396, -0.13566625, -0.1332868, -0.812
 light_energy = 5.778
 light_indirect_energy = 0.775
 light_size = 0.111
+
+[node name="Voip" type="Node" parent="." unique_id=310842859]
+script = ExtResource("4_k0juu")
+
+[node name="Local" type="AudioStreamPlayer" parent="Voip" unique_id=1161200856]
+stream = SubResource("AudioStreamGenerator_4wyf3")
+bus = &"Voice"
+
+[node name="Network" type="AudioStreamPlayer" parent="Voip" unique_id=1882122582]
+stream = SubResource("AudioStreamGenerator_k0juu")
+bus = &"Voice"
