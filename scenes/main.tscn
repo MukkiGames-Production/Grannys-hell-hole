@@ -167,7 +167,7 @@ reticleWhenNotLooking = ExtResource("3_sugp2")
 reticleWhenLooking = ExtResource("5_tefeu")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1194049763]
-spawn_path = NodePath("../Floor")
+spawn_path = NodePath("../Node3D")
 
 [node name="Local" type="AudioStreamPlayer" parent="." unique_id=1109379672]
 stream = SubResource("AudioStreamGenerator_85g3d")
@@ -181,5 +181,8 @@ bus = &"Voice"
 replication_interval = 1.228
 replication_config = SubResource("SceneReplicationConfig_85g3d")
 visibility_update_mode = 1
+
+[node name="Node3D" type="Node3D" parent="." unique_id=232958870]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.29364634, 1.0581315, -5.182123)
 
 [connection signal="look_at_interactable" from="Player" to="UI/CenterContainer/Reticle" method="_on_player_look_at_interactable"]
