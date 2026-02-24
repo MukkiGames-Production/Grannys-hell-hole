@@ -9,6 +9,7 @@ radius = 0.25
 radius = 0.25
 
 [node name="Player" type="CharacterBody3D" unique_id=86458621 node_paths=PackedStringArray("camera_pivot", "camera")]
+physics_interpolation_mode = 1
 script = ExtResource("1_3vyb7")
 mouse_sensitivity = null
 camera_pivot = NodePath("CameraPivot")
