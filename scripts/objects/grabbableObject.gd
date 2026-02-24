@@ -5,11 +5,10 @@ class_name GrabbableObject
 @export var hold_distance := 1.0
 @export var follow_speed := 15.0
 @export var hold_offset := Vector3(0.6, -0.4, -2.0)
+@export var is_grabbable := true
 
 var is_held := false
 var holder: Node3D = null
-
-
 
 func _physics_process(delta):
 	if not is_held or holder == null:
