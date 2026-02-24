@@ -3,17 +3,13 @@
 [ext_resource type="Script" uid="uid://ckix3hutnyvvu" path="res://scripts/objects/world.gd" id="1_f3sb7"]
 [ext_resource type="PackedScene" uid="uid://ctcpaobx3sw3r" path="res://scenes/main.tscn" id="2_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://bsspxi0kmi1qg" path="res://scenes/menu.tscn" id="3_aqk2v"]
+[ext_resource type="Script" uid="uid://bbdk8cpwa1nnk" path="res://scripts/Networking/Voip.gd" id="4_k0juu"]
 
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_4wyf3"]
 buffer_length = 0.1
 
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_k0juu"]
 buffer_length = 0.1
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4wyf3"]
-properties/0/path = NodePath("Network:autoplay")
-properties/0/spawn = true
-properties/0/replication_mode = 1
 
 [node name="World" type="Node3D" unique_id=948386596]
 script = ExtResource("1_f3sb7")
@@ -33,15 +29,13 @@ light_energy = 5.778
 light_indirect_energy = 0.775
 light_size = 0.111
 
-[node name="Local" type="AudioStreamPlayer" parent="." unique_id=1161200856]
+[node name="Voip" type="Node" parent="." unique_id=310842859]
+script = ExtResource("4_k0juu")
+
+[node name="Local" type="AudioStreamPlayer" parent="Voip" unique_id=1161200856]
 stream = SubResource("AudioStreamGenerator_4wyf3")
 bus = &"Voice"
 
-[node name="Network" type="AudioStreamPlayer" parent="." unique_id=1882122582]
+[node name="Network" type="AudioStreamPlayer" parent="Voip" unique_id=1882122582]
 stream = SubResource("AudioStreamGenerator_k0juu")
 bus = &"Voice"
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1585383303]
-replication_interval = 1.228
-replication_config = SubResource("SceneReplicationConfig_4wyf3")
-visibility_update_mode = 1

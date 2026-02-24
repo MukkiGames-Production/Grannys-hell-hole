@@ -1,7 +1,7 @@
 extends Node3D
 @onready var player = preload("res://scenes/Player.tscn")
-@onready var Voip = preload("res://scripts/Networking/Voip.gd")
-@onready var voip_instance: Node = Voip.new()
+@onready var voip: Node = $Voip
+
 ## Dictionary mapping remote steam_id -> their CharacterBody3D node
 var remote_players: Dictionary = {}
 
@@ -29,10 +29,10 @@ func _ready() -> void:
 	else:
 		print("[World] No active lobby — running in single-player mode")
 
-	voip_instance.voice_data_ready.connect(_on_voice_data_ready)
-	$Main.add_child(voip_instance)
-	voip_instance.start_recording()
-	voip_instance.set_loopback(true) # Enable local playback of our own voice
+	voip.voice_data_ready.connect(_on_voice_data_ready)
+
+	voip.start_recording()
+	voip.set_loopback(true) # Enable local playback of our own voice
 @rpc("call_local", "any_peer")
 func _on_voice_data_ready(buffer: PackedByteArray) -> void:
 	GameNetwork.send_p2p_packet(0, {
@@ -40,9 +40,9 @@ func _on_voice_data_ready(buffer: PackedByteArray) -> void:
 		"buffer": buffer,
 		"id": Steam.getSteamID(),
 	}, Steam.P2P_SEND_RELIABLE)
-	if voip_instance.has_loopback:
+	if voip.has_loopback:
 		# Also play locally if loopback is enabled
-		voip_instance.process_voice_data(buffer,"local")
+		voip.process_voice_data(buffer,"local")
 
 func _physics_process(_delta: float) -> void:
 	if GameNetwork.lobby_id <= 0:
@@ -109,9 +109,9 @@ func _handle_voice_data(data: Dictionary) -> void:
 	var voice_buffer: PackedByteArray = data.get("buffer", PackedByteArray())
 	if voice_buffer.size() > 0:
 		# Forward to the Voip node inside the instanced main scene
-		var voip_node = $Main as Node
-		if voip_instance.has_method("receive_voice_data"):
-			voip_instance.receive_voice_data(voice_buffer)
+
+		if voip.has_method("receive_voice_data"):
+			voip.receive_voice_data(voice_buffer)
 			GameNetwork.send_p2p_packet(1, {
 				"message": "voice_data_response",
 				"result": "success",
