@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://ctcpaobx3sw3r"]
 
+[ext_resource type="Script" uid="uid://bbdk8cpwa1nnk" path="res://scripts/Networking/Voip.gd" id="1_85g3d"]
 [ext_resource type="Script" uid="uid://de64jyetu0c7k" path="res://scripts/Player/walkingPlayer.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://6de6v3rp0l3q" path="res://scenes/BreakableWall.tscn" id="1_tipki"]
 [ext_resource type="Script" uid="uid://dlfa4844hulox" path="res://scripts/objects/grabbableObject.gd" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://dgdfsni6615jc" path="res://scenes/Player.tscn" id="3_85g3d"]
 [ext_resource type="Shader" uid="uid://im65mxkv3lyh" path="res://scripts/shaders/highlight.gdshader" id="3_o6xl0"]
 [ext_resource type="Texture2D" uid="uid://cxsqe1ml8nmyh" path="res://Assets/reticleEmpty.tres" id="3_sugp2"]
 [ext_resource type="Script" uid="uid://mklkxcpb5cmv" path="res://scripts/objects/pillar.gd" id="3_tefeu"]
@@ -14,12 +16,6 @@ size = Vector3(10, 1, 10)
 
 [sub_resource type="BoxMesh" id="BoxMesh_ig7tw"]
 size = Vector3(10, 1, 10)
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0xm2m"]
-radius = 0.25
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_h2yge"]
-radius = 0.25
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ig7tw"]
 radius = 0.25
@@ -66,7 +62,28 @@ size = Vector3(0.5, 0.5, 0.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_o6xl0"]
 
-[node name="Node3D" type="Node3D" unique_id=421424765]
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_85g3d"]
+buffer_length = 0.1
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_choun"]
+buffer_length = 0.1
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_85g3d"]
+properties/0/path = NodePath("Player:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("GrabbableSphere:position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("GrabbableCube:position")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("Network:autoplay")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+
+[node name="Main" type="Node3D" unique_id=421424765]
+script = ExtResource("1_85g3d")
 
 [node name="breakablewall" parent="." unique_id=1113161578 instance=ExtResource("1_tipki")]
 transform = Transform3D(-0.99952555, 0.030797105, 0.00043326247, 0, -0.014066894, 0.99990106, 0.030800153, 0.99942666, 0.01406022, 0, 0.7378192, 3.8175683)
@@ -84,21 +101,8 @@ shape = SubResource("BoxShape3D_7dm0k")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 5.883131, -0.02372241, 0, 0.003080368)
 mesh = SubResource("BoxMesh_ig7tw")
 
-[node name="Player" type="CharacterBody3D" parent="." unique_id=1887340554 node_paths=PackedStringArray("camera_pivot", "camera")]
+[node name="Player" parent="." unique_id=86458621 groups=["players"] instance=ExtResource("3_85g3d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3776362, 0)
-script = ExtResource("1_ig7tw")
-camera_pivot = NodePath("CameraPivot")
-camera = NodePath("CameraPivot/Camera3D")
-
-[node name="CameraPivot" type="Node3D" parent="Player" unique_id=1901293811]
-
-[node name="Camera3D" type="Camera3D" parent="Player/CameraPivot" unique_id=1827588268]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=1107831405]
-shape = SubResource("CapsuleShape3D_0xm2m")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=1576148901]
-mesh = SubResource("CapsuleMesh_h2yge")
 
 [node name="GrabbableSphere" type="RigidBody3D" parent="." unique_id=1359684742]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7491686, 1.7128887, 0)
@@ -161,5 +165,29 @@ texture = ExtResource("3_sugp2")
 script = ExtResource("4_tbgi4")
 reticleWhenNotLooking = ExtResource("3_sugp2")
 reticleWhenLooking = ExtResource("5_tefeu")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1194049763]
+physics_interpolation_mode = 1
+_spawnable_scenes = PackedStringArray("uid://dgdfsni6615jc")
+spawn_path = NodePath("Marker3D")
+
+[node name="Marker3D" type="Marker3D" parent="MultiplayerSpawner" unique_id=1871877685]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0465317, 2.5486636, -17.278202)
+
+[node name="Local" type="AudioStreamPlayer" parent="." unique_id=1109379672]
+stream = SubResource("AudioStreamGenerator_85g3d")
+bus = &"Voice"
+
+[node name="Network" type="AudioStreamPlayer" parent="." unique_id=554416602]
+stream = SubResource("AudioStreamGenerator_choun")
+bus = &"Voice"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=377978589]
+replication_interval = 1.228
+replication_config = SubResource("SceneReplicationConfig_85g3d")
+visibility_update_mode = 1
+
+[node name="Node3D" type="Node3D" parent="." unique_id=232958870]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.29364634, 1.0581315, -5.182123)
 
 [connection signal="look_at_interactable" from="Player" to="UI/CenterContainer/Reticle" method="_on_player_look_at_interactable"]
