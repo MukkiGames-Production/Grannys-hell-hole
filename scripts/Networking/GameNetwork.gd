@@ -30,6 +30,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if lobby_id > 0:
 		read_all_p2p_packets()
+		read_voice_packets()
 
 # ---- Lobby State Management ----
 
@@ -102,7 +103,24 @@ func read_all_p2p_packets(read_count: int = 0) -> void:
 	if Steam.getAvailableP2PPacketSize(0) > 0:
 		read_p2p_packet()
 		read_all_p2p_packets(read_count + 1)
-
+func read_voice_packets(read_count: int = 0) -> void:
+	if read_count >= PACKET_READ_LIMIT:
+		return
+	var packet_size: int = Steam.getAvailableP2PPacketSize(0)
+	if packet_size > 0:
+		var this_packet: Dictionary = Steam.readP2PPacket(packet_size, 0)
+		if not this_packet.is_empty():
+			var packet_code: PackedByteArray = this_packet["data"]
+			var readable_data: Dictionary = bytes_to_var(packet_code)
+			if readable_data.get("message", "") == "voice_data":
+				_handle_voice_data(readable_data)
+		read_voice_packets(read_count + 1)
+func _handle_voice_data(data: Dictionary) -> void:
+	var sender_id: int = data.get("id", 0)
+	var buffer: PackedByteArray = data.get("buffer", PackedByteArray())
+	print("[GameNetwork] Received voice packet from %s: %s bytes" % [sender_id, buffer.size()])
+	# Emit signal so the world/game layer can process this for playback
+	p2p_packet_received.emit(sender_id, data)
 func read_p2p_packet() -> void:
 	var packet_size: int = Steam.getAvailableP2PPacketSize(0)
 	if packet_size <= 0:
