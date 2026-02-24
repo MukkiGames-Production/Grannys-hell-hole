@@ -119,7 +119,7 @@ func get_sample_rate(use_optimal: bool) -> void:
 		local_player.stream.mix_rate = current_sample_rate
 	if network_player and network_player.stream:
 		network_player.stream.mix_rate = current_sample_rate
-
+@rpc("call_local", "any_peer")
 func process_voice_data(compressed_buffer: PackedByteArray, voice_source: String) -> void:
 	if not steam_initialized:
 		return

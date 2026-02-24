@@ -40,7 +40,7 @@ func _physics_process(_delta: float) -> void:
 		"rx": local_player.global_rotation.x,
 		"ry": local_player.global_rotation.y,
 		"rz": local_player.global_rotation.z,
-	}, Steam.P2P_SEND_UNRELIABLE)
+	}, Steam.P2P_SEND_RELIABLE)
 
 # ---- Packet handling ----
 
@@ -83,6 +83,7 @@ func _handle_player_update(sender_id: int, data: Dictionary) -> void:
 	# Lerp for smooth movement instead of snapping
 	remote.global_position = remote.global_position.lerp(target_pos, 0.5)
 	remote.global_rotation = target_rot
+	remote.set_physics_process_enabled(true) # Disable physics for remote players to prevent jitter/collisions
 	print("[World] Updated player %s position to %s" % [sender_name, target_pos])
 
 func _handle_voice_data(data: Dictionary) -> void:
@@ -131,6 +132,10 @@ func _spawn_remote_player(peer_steam_id: int, peer_name: String) -> void:
 
 	# Default spawn position (same as local player start)
 	remote.call_deferred("set_global_transform", Transform3D(Basis(), Vector3(0, 0, 0)))
+	remote.connect("ready", func():
+		remote.set_physics_process_enabled(true)
+        remote.set_physics_process_priority(1)
+	)
 	if (peer_steam_id == Steam.getSteamID() or peer_name == Steam.getPersonaName()):
 		# print("[World] WARNING: Attempted to spawn remote player for ourselves (steam_id: %s)" % peer_steam_id)
 		return

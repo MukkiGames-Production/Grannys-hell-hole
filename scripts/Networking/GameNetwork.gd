@@ -86,6 +86,9 @@ func process_player_update(data: Dictionary) ->void:
 			member_info["vx"] = data.get("vx", 0)
 			member_info["vy"] = data.get("vy", 0)
 			member_info["vz"] = data.get("vz", 0)
+			if (member_info["pz"] > 1000 or member_info["pz"] < -1000):
+				print("[GameNetwork] WARNING: Received player update with out-of-bounds position from %s: pos=(%s, %s, %s)" %
+					[remote_id, data.get("px", 0), data.get("py", 0), data.get("pz", 0)])
 	print("[GameNetwork] Processed player update from %s: pos=(%s, %s, %s) rot=(%s, %s, %s) vel=(%s, %s, %s)" %
 		[remote_id, data.get("px", 0), data.get("py", 0), data.get("pz", 0),
 			data.get("rx", 0), data.get("ry", 0), data.get("rz", 0),
