@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://ctcpaobx3sw3r"]
 
 [ext_resource type="Script" uid="uid://bbdk8cpwa1nnk" path="res://scripts/Networking/Voip.gd" id="1_85g3d"]
-[ext_resource type="Script" uid="uid://de64jyetu0c7k" path="res://scripts/Player/walkingPlayer.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://6de6v3rp0l3q" path="res://scenes/BreakableWall.tscn" id="1_tipki"]
 [ext_resource type="Script" uid="uid://dlfa4844hulox" path="res://scripts/objects/grabbableObject.gd" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://dgdfsni6615jc" path="res://scenes/Player.tscn" id="3_85g3d"]
@@ -81,6 +80,12 @@ properties/2/replication_mode = 1
 properties/3/path = NodePath("Network:autoplay")
 properties/3/spawn = true
 properties/3/replication_mode = 1
+properties/4/path = NodePath("GrabbableSphere:is_grabbable")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath("GrabbableCube:is_grabbable")
+properties/5/spawn = true
+properties/5/replication_mode = 1
 
 [node name="Main" type="Node3D" unique_id=421424765]
 script = ExtResource("1_85g3d")
