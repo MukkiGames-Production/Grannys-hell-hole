@@ -66,7 +66,7 @@ func _process(delta: float) -> void:
 		seesInteractable = currently_sees
 		emit_signal("look_at_interactable", seesInteractable)
 
-
+@rpc("call_local", "any_peer")
 func _unhandled_input(event):
 	# Toggle menu with Escape
 	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
