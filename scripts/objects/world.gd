@@ -7,6 +7,8 @@ var remote_players: Dictionary = {}
 @onready var local_player: CharacterBody3D = $Main/Player
 
 func _ready() -> void:
+
+
 	# Initialize Steam if not already done
 	var init_steam_node = InitSteam.new()
 	add_child(init_steam_node)
@@ -24,6 +26,16 @@ func _ready() -> void:
 				_spawn_remote_player(member["steam_id"], member["steam_name"])
 	else:
 		print("[World] No active lobby — running in single-player mode")
+	Voip.voice_data_ready.connect(_on_voice_data_ready)
+func _on_voice_data_ready(buffer: PackedByteArray) -> void:
+	GameNetwork.send_p2p_packet(0, {
+		"message": "voice_data",
+		"buffer": buffer,
+		"id": Steam.getSteamID(),
+	}, Steam.P2P_SEND_RELIABLE)
+	if Voip.has_loopback:
+		# Also play locally if loopback is enabled
+		Voip.process_voice_data(buffer,"local")
 
 func _physics_process(_delta: float) -> void:
 	if GameNetwork.lobby_id <= 0:
