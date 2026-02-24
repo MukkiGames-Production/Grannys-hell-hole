@@ -134,7 +134,7 @@ func _spawn_remote_player(peer_steam_id: int, peer_name: String) -> void:
 	remote.call_deferred("set_global_transform", Transform3D(Basis(), Vector3(0, 0, 0)))
 	remote.connect("ready", func():
 		remote.set_physics_process_enabled(true)
-        remote.set_physics_process_priority(1)
+		remote.set_physics_process_priority(1)
 	)
 	if (peer_steam_id == Steam.getSteamID() or peer_name == Steam.getPersonaName()):
 		# print("[World] WARNING: Attempted to spawn remote player for ourselves (steam_id: %s)" % peer_steam_id)
