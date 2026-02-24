@@ -67,6 +67,10 @@ func _setup_audio_players() -> void:
 		network_player.play()
 		network_playback = network_player.get_stream_playback()
 
+	# Ensure local playback is properly initialized
+	
+
+
 func _process(_delta: float) -> void:
 	if is_recording and steam_initialized:
 		check_for_voice()
@@ -98,7 +102,7 @@ func check_for_voice() -> void:
 		return
 
 	print("[VOIP] Voice data captured: written=%s bytes" % voice_data['written'])
-
+	GameNetwork.send_voice_packet(voice_data['buffer'])
 	# Emit signal so the lobby/network layer can send this to other players
 	voice_data_ready.emit(voice_data['buffer'])
 

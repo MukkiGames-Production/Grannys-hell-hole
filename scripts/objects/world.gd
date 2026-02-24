@@ -1,7 +1,7 @@
 extends Node3D
 @onready var player = preload("res://scenes/Player.tscn")
 @onready var Voip = preload("res://scripts/Networking/Voip.gd")
-@onready var voip_instance = Voip.new()
+@onready var voip_instance: Node = Voip.new()
 ## Dictionary mapping remote steam_id -> their CharacterBody3D node
 var remote_players: Dictionary = {}
 
@@ -31,6 +31,8 @@ func _ready() -> void:
 
 	voip_instance.voice_data_ready.connect(_on_voice_data_ready)
 	$Main.add_child(voip_instance)
+	voip_instance.start_recording()
+	voip_instance.set_loopback(true) # Enable local playback of our own voice
 @rpc("call_local", "any_peer")
 func _on_voice_data_ready(buffer: PackedByteArray) -> void:
 	GameNetwork.send_p2p_packet(0, {
@@ -110,6 +112,10 @@ func _handle_voice_data(data: Dictionary) -> void:
 		var voip_node = $Main as Node
 		if voip_instance.has_method("receive_voice_data"):
 			voip_instance.receive_voice_data(voice_buffer)
+			GameNetwork.send_p2p_packet(1, {
+				"message": "voice_data_response",
+				"result": "success",
+			}, Steam.P2P_SEND_RELIABLE)
 
 func _handle_player_action(sender_id: int, data: Dictionary) -> void:
 	var action: String = data.get("action", "")
@@ -150,7 +156,7 @@ func _spawn_remote_player(peer_steam_id: int, peer_name: String) -> void:
 	# Default spawn position (same as local player start)
 	remote.call_deferred("set_global_transform", Transform3D(Basis(), Vector3(0, 0, 0)))
 	remote.connect("ready", func():
-		remote.set_physics_process(true)
+		remote.set_physics_process(false)
 		remote.set_physics_process_priority(1)
 	)
 	if (peer_steam_id == Steam.getSteamID() or peer_name == Steam.getPersonaName()):

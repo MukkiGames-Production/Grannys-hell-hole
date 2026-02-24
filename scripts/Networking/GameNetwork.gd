@@ -119,7 +119,12 @@ func read_p2p_packet() -> void:
 
 	# Emit for any connected listener (Lobby UI, game world, etc.)
 	p2p_packet_received.emit(packet_sender, readable_data)
-
+func send_voice_packet(voiceData: PackedByteArray) -> void:
+	send_p2p_packet(1, {
+		"message": "voice_data",
+		"buffer": voiceData,
+		"id": Steam.getSteamID(),
+	}, Steam.P2P_SEND_RELIABLE)
 # ---- P2P Session Callbacks ----
 
 func _on_p2p_session_request(remote_id: int) -> void:
