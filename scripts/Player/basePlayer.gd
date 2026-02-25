@@ -40,7 +40,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _handle_mouse_look(event: InputEventMouseMotion) -> void:
 	pass  # override in children
 
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	_update_interaction_raycast()
 
 func _update_interaction_raycast() -> void:
