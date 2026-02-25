@@ -190,7 +190,7 @@ reticleWhenLooking = ExtResource("5_tefeu")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1194049763]
 physics_interpolation_mode = 1
-_spawnable_scenes = PackedStringArray("uid://dgdfsni6615jc")
+_spawnable_scenes = PackedStringArray("uid://bkqn4xkij3yxm")
 spawn_path = NodePath("Marker3D")
 
 [node name="Marker3D" type="Marker3D" parent="MultiplayerSpawner" unique_id=1871877685]
