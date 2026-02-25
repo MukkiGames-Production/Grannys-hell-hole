@@ -38,6 +38,7 @@ enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/
 [global_group]
 
 players="The Players that spawn"
+interactables=""
 
 [input]
 
