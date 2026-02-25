@@ -100,7 +100,15 @@ func _handle_player_update(sender_id: int, data: Dictionary) -> void:
 	# Lerp for smooth movement instead of snapping
 	remote.global_position = remote.global_position.lerp(target_pos, 0.5)
 	remote.global_rotation = target_rot
-
+	# play animations
+	# walk
+	var remote_walking: bool = data.get("is_walking", false)
+	var anim_player: AnimationPlayer = remote.get_node_or_null("AnimationPlayer")
+	if anim_player:
+		if remote_walking and not anim_player.is_playing():
+			anim_player.play("Walk")
+		elif not remote_walking and anim_player.is_playing():
+			anim_player.stop()
 
 
 func _handle_voice_data(data: Dictionary) -> void:

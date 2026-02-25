@@ -3,7 +3,7 @@ class_name WalkingPlayer
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5  # if you add jumping later
-
+var is_walking: bool = false
 func _handle_mouse_look(event: InputEventMouseMotion) -> void:
 	# Yaw: rotate whole body
 	rotate_y(-event.relative.x * mouse_sensitivity)
@@ -19,6 +19,7 @@ func _physics_process(delta: float) -> void:
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if(velocity.x == 0 and velocity.z ==0):
+		is_walking = false
 		animation.stop()
 
 	if direction:
@@ -39,9 +40,11 @@ func _physics_process(delta: float) -> void:
 		"rz": global_rotation.z,
 		"vx": velocity.x,
 		"vy": velocity.y,
-		"vz": velocity.z
+		"vz": velocity.z,
+		"is_walking": is_walking
 	}
 	GameNetwork.send_p2p_packet(0, player_data, Steam.P2P_SEND_RELIABLE)
 	move_and_slide()
 	if not animation.is_playing():
+		is_walking = true
 		animation.play("Walk")
