@@ -72,16 +72,7 @@ func _physics_process(_delta: float) -> void:
 	if not is_instance_valid(local_player):
 		return
 
-	# Broadcast our position + rotation to all peers every physics tick
-	GameNetwork.send_p2p_packet(0, {
-		"message": "player_update",
-		"px": local_player.global_position.x,
-		"py": local_player.global_position.y,
-		"pz": local_player.global_position.z,
-		"rx": local_player.global_rotation.x,
-		"ry": local_player.global_rotation.y,
-		"rz": local_player.global_rotation.z,
-	}, Steam.P2P_SEND_RELIABLE)
+
 
 	# Update held objects to follow their remote player holders
 	for steam_id in remote_held_items:
