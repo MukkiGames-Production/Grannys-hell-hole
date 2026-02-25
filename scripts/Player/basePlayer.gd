@@ -42,7 +42,7 @@ func _handle_mouse_look(event: InputEventMouseMotion) -> void:
 
 func _physics_process(_delta: float) -> void:
 	_update_interaction_raycast()
-
+@rpc("call_local", "any_peer")
 func _update_interaction_raycast() -> void:
 	var space_state = get_world_3d().direct_space_state
 	var from = camera.global_position
@@ -64,7 +64,7 @@ func _update_interaction_raycast() -> void:
 	if currently_sees != sees_interactable:
 		sees_interactable = currently_sees
 		look_at_interactable.emit(sees_interactable)
-
+@rpc("call_local", "any_peer")
 func try_interact() -> void:
 	var target = null
 	if object_in_sight:
