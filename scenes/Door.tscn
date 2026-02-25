@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://bcskmit1xf54o"]
+
+[ext_resource type="Script" uid="uid://ct0qkvoglnfol" path="res://scripts/AI-Environment/door.gd" id="1_yfgsh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yfgsh"]
+size = Vector3(1.2, 2.2, 0.15)
+
+[sub_resource type="BoxMesh" id="BoxMesh_eyv6f"]
+size = Vector3(1.2, 2.2, 0.15)
+
+[sub_resource type="Animation" id="Animation_eyv6f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DoorModel:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_yfgsh"]
+resource_name = "open_door"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DoorModel:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 1.8395771, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eyv6f"]
+_data = {
+&"RESET": SubResource("Animation_eyv6f"),
+&"open_door": SubResource("Animation_yfgsh")
+}
+
+[node name="Door" type="Node3D" unique_id=304825365]
+script = ExtResource("1_yfgsh")
+
+[node name="DebugText" type="Label3D" parent="." unique_id=129029945]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.0526817, 0)
+text = "Door Closed"
+
+[node name="DoorModel" type="Node3D" parent="." unique_id=1231519681]
+
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="DoorModel" unique_id=2072983832]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DoorModel/AnimatableBody3D" unique_id=717430516]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+shape = SubResource("BoxShape3D_yfgsh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DoorModel/AnimatableBody3D" unique_id=1182234314]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+mesh = SubResource("BoxMesh_eyv6f")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1188430903]
+libraries/ = SubResource("AnimationLibrary_eyv6f")
