@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://bkqn4xkij3yxm"]
+[gd_scene format=4 uid="uid://b4y3txrunrrya"]
 
 [ext_resource type="Script" uid="uid://de64jyetu0c7k" path="res://scripts/Player/walkingPlayer.gd" id="1_ea1cc"]
 [ext_resource type="Texture2D" uid="uid://7kbpxwjpibwk" path="res://assets/Players/Stu_mouth.png" id="1_gcelq"]
@@ -335,11 +335,11 @@ _data = {
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gcelq"]
 
-[node name="Stu2" type="CharacterBody3D" unique_id=1816408022 node_paths=PackedStringArray("camera_pivot", "camera", "animation")]
+[node name="Stu2" type="CharacterBody3D" unique_id=1816408022 node_paths=PackedStringArray("camera_pivot", "camera")]
 script = ExtResource("1_ea1cc")
+mouse_sensitivity = null
 camera_pivot = NodePath("CameraPivot")
 camera = NodePath("CameraPivot/Camera3D")
-animation = NodePath("AnimationPlayer")
 
 [node name="Stu Normal Walk" type="Node3D" parent="." unique_id=23448833]
 

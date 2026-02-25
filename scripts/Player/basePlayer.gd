@@ -4,7 +4,8 @@ class_name BasePlayer
 @export var mouse_sensitivity := 0.002
 @export var camera_pivot: Node3D
 @export var camera: Camera3D
-@export var animation: AnimationPlayer
+@onready var animation: AnimationPlayer = $AnimationPlayer
+
 var object_in_sight: Dictionary = {}  # raycast result
 var held_object: GrabbableObject = null
 var sees_interactable: bool = false
@@ -13,6 +14,7 @@ signal look_at_interactable(can_see: bool)  # for reticle/UI feedback
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	# Toggle mouse capture with Escape
