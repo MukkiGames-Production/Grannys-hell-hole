@@ -104,6 +104,7 @@ func _handle_player_update(sender_id: int, data: Dictionary) -> void:
 	# walk
 	var remote_walking: bool = data.get("is_walking", false)
 	var anim_player: AnimationPlayer = remote.get_node_or_null("AnimationPlayer")
+	print("Remote player %s walking: %s" % [sender_name, remote_walking])
 	if anim_player:
 		if remote_walking and not anim_player.is_playing():
 			anim_player.play("Walk")
