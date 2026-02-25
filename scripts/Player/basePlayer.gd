@@ -4,7 +4,7 @@ class_name BasePlayer
 @export var mouse_sensitivity := 0.002
 @export var camera_pivot: Node3D
 @export var camera: Camera3D
-
+@export var animation: AnimationPlayer
 var object_in_sight: Dictionary = {}  # raycast result
 var held_object: GrabbableObject = null
 var sees_interactable: bool = false

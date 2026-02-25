@@ -18,6 +18,8 @@ func _handle_mouse_look(event: InputEventMouseMotion) -> void:
 func _physics_process(delta: float) -> void:
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	if(velocity.x == 0 and velocity.z ==0):
+		animation.stop()
 
 	if direction:
 		velocity.x = direction.x * SPEED
@@ -26,4 +28,7 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
+
 	move_and_slide()
+	if not animation.is_playing():
+		animation.play("Walk")
