@@ -1,5 +1,5 @@
 extends Node3D
-@onready var player = preload("res://scenes/Player.tscn")
+@onready var player = preload("res://scenes/Stu.tscn")
 @onready var voip: Node = $Voip
 
 ## Dictionary mapping remote steam_id -> their CharacterBody3D node
