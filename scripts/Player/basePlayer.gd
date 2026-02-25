@@ -40,9 +40,9 @@ func _unhandled_input(event: InputEvent) -> void:
 func _handle_mouse_look(event: InputEventMouseMotion) -> void:
 	pass  # override in children
 
-func _physics_process(_delta: float) -> void:
+func _process(_delta: float) -> void:
 	_update_interaction_raycast()
-@rpc("call_local", "any_peer")
+
 func _update_interaction_raycast() -> void:
 	var space_state = get_world_3d().direct_space_state
 	var from = camera.global_position

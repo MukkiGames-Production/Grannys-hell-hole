@@ -78,10 +78,8 @@ func _on_p2p_packet_received(sender_id: int, data: Dictionary) -> void:
 			print("[World] Unhandled packet type '%s' from %s" % [msg, sender_id])
 
 func _handle_player_update(sender_id: int, data: Dictionary) -> void:
-	# Make sure we have a node for this remote player
 	var sender_name: String = Steam.getFriendPersonaName(sender_id)
 	if sender_id not in remote_players:
-
 		_spawn_remote_player(sender_id, sender_name)
 		return
 	var remote: Node3D = remote_players[sender_id]
@@ -102,8 +100,8 @@ func _handle_player_update(sender_id: int, data: Dictionary) -> void:
 	# Lerp for smooth movement instead of snapping
 	remote.global_position = remote.global_position.lerp(target_pos, 0.5)
 	remote.global_rotation = target_rot
-	remote.set_physics_process(true) # Disable physics for remote players to prevent jitter/collisions
-	print("[World] Updated player %s position to %s" % [sender_name, target_pos])
+
+
 
 func _handle_voice_data(data: Dictionary) -> void:
 	var voice_buffer: PackedByteArray = data.get("buffer", PackedByteArray())
@@ -142,8 +140,6 @@ func _spawn_remote_player(peer_steam_id: int, peer_name: String) -> void:
 	var remote := player.instantiate() as CharacterBody3D
 	remote.name = "RemotePlayer_%s" % peer_steam_id
 
-
-
 	# Name label above head
 	var label_3d := Label3D.new()
 	label_3d.text = peer_name
@@ -156,16 +152,26 @@ func _spawn_remote_player(peer_steam_id: int, peer_name: String) -> void:
 	# Default spawn position (same as local player start)
 	remote.call_deferred("set_global_transform", Transform3D(Basis(), Vector3(0, 0, 0)))
 	remote.connect("ready", func():
+		# --- FIX: Disable ALL processing on remote players ---
 		remote.set_physics_process(false)
-		remote.set_physics_process_priority(1)
+		remote.set_process(false)
+		remote.set_process_input(false)
+		remote.set_process_unhandled_input(false)
+
+		# --- FIX: Disable the remote player's camera ---
+		var cam = remote.get_node_or_null("CameraPivot/Camera3D")
+		if cam:
+			cam.current = false
+			# Also disable physics interpolation on the remote camera
+			cam.physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_OFF
 	)
 	if (peer_steam_id == Steam.getSteamID() or peer_name == Steam.getPersonaName()):
-		# print("[World] WARNING: Attempted to spawn remote player for ourselves (steam_id: %s)" % peer_steam_id)
 		return
-	$Main.add_child(remote,true)
+	$Main.add_child(remote, true)
 	remote_players[peer_steam_id] = remote
 
 	print("[World] Spawned remote player: %s (steam_id: %s)" % [peer_name, peer_steam_id])
+
 
 func _remove_remote_player(peer_steam_id: int) -> void:
 	if peer_steam_id in remote_players:
