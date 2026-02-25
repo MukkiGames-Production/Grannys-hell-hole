@@ -5,11 +5,10 @@ class_name GrabbableObject
 @export var hold_distance := 1.0
 @export var follow_speed := 15.0
 @export var hold_offset := Vector3(0.6, -0.4, -2.0)
+@export var is_grabbable := true
 
 var is_held := false
 var holder: Node3D = null
-
-
 
 func _physics_process(delta):
 	if not is_held or holder == null:
@@ -28,12 +27,22 @@ func grab(camera: Node3D):
 	is_held = true
 	holder = camera
 	freeze = true
+	GameNetwork.send_p2p_packet(0, {
+		"message": "player_action",
+		"action": "grab",
+		"item_id": item_id,
+	}, Steam.P2P_SEND_RELIABLE)
 
 func release():
 	is_held = false
 	holder = null
 	freeze = false
-	
+	GameNetwork.send_p2p_packet(0, {
+		"message": "player_action",
+		"action": "release",
+		"item_id": item_id,
+	}, Steam.P2P_SEND_RELIABLE)
+
 #move helper
 func move_to_position(target: Vector3, duration: float = 0.3):
 	# Stop physics motion

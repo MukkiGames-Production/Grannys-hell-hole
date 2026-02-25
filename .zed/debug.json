@@ -3,6 +3,9 @@
     "adapter": "godot",
     "label": "Godot (Launch)",
     "request": "launch",
+    "inlay_hints": {
+      "show_value_hints": true,
+    },
   },
   {
     "adapter": "godot",

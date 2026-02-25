@@ -80,12 +80,12 @@ shape = SubResource("BoxShape3D_7dm0k")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=1475324025]
 mesh = SubResource("BoxMesh_ig7tw")
 
-[node name="Player" type="CharacterBody3D" parent="." unique_id=1887340554 node_paths=PackedStringArray("camera_pivot", "camera", "wheel_visual")]
+[node name="Player" type="CharacterBody3D" parent="." unique_id=1887340554 node_paths=PackedStringArray("wheel_visual", "camera_pivot", "camera")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3776362, 0)
 script = ExtResource("1_v0h62")
+wheel_visual = NodePath("WheelchairDir")
 camera_pivot = NodePath("CameraPivot")
 camera = NodePath("CameraPivot/Camera3D")
-wheel_visual = NodePath("WheelchairDir")
 
 [node name="CameraPivot" type="Node3D" parent="Player" unique_id=1901293811]
 
