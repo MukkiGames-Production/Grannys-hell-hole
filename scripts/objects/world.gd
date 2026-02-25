@@ -206,7 +206,7 @@ func _handle_remote_break_wall(impact_pos: Vector3) -> void:
 			# the same code path, we directly trigger the break visuals.
 			wall.is_broken = true
 			var impact_point :Vector3 = impact_pos if impact_pos != Vector3.ZERO else wall.global_position
-			var meshes :BreakableWall= wall._get_all_meshes(wall)
+			var meshes :Array[MeshInstance3D]= wall._get_all_meshes(wall)
 			for mesh in meshes:
 				wall._convert_to_physics_piece(mesh, impact_point)
 			wall.set_process(false)
