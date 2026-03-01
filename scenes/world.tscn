@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://ctcpaobx3sw3r" path="res://scenes/main.tscn" id="2_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://bsspxi0kmi1qg" path="res://scenes/menu.tscn" id="3_aqk2v"]
 [ext_resource type="Script" uid="uid://bbdk8cpwa1nnk" path="res://scripts/Networking/Voip.gd" id="4_k0juu"]
+[ext_resource type="PackedScene" uid="uid://bmpg058odbxwl" path="res://scenes/bingo_room.scn" id="5_71j4m"]
 
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_4wyf3"]
 buffer_length = 0.1
@@ -39,3 +40,6 @@ bus = &"Voice"
 [node name="Network" type="AudioStreamPlayer" parent="Voip" unique_id=1882122582]
 stream = SubResource("AudioStreamGenerator_k0juu")
 bus = &"Voice"
+
+[node name="BingoRoom" parent="." unique_id=964912059 instance=ExtResource("5_71j4m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.98331, -0.4101162, -107.06925)
