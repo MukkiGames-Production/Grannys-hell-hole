@@ -42,4 +42,40 @@ stream = SubResource("AudioStreamGenerator_k0juu")
 bus = &"Voice"
 
 [node name="BingoRoom" parent="." unique_id=964912059 instance=ExtResource("5_71j4m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.98331, -0.4101162, -107.06925)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.98331, -0.4101162, -132.76068)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=845833995]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1413421987]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.3556213, 4.7474976, -96.41478)
+flip_faces = true
+size = Vector3(21.824036, 10.494995, 132.10614)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1990499650]
+transform = Transform3D(0.00079070404, 0.00063383323, 0.9999996, 0.016619636, 0.99986166, -0.0006468871, -0.99986154, 0.016620137, 0.0007800609, -71.66066, 4.7474976, 17.466564)
+flip_faces = true
+size = Vector3(21.824036, 10.494995, 132.10614)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=921388679]
+transform = Transform3D(1, 0, 0, 0, 0.023385257, 0.99972653, 0, -0.99972653, 0.023385257, -29.448463, 3.1770947, 36.53275)
+flip_faces = true
+radius = 6.0585938
+height = 19.447266
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=777089655]
+transform = Transform3D(1, 0, 0, 0, 0.023385257, 0.99972653, 0, -0.99972653, 0.023385257, -56.338318, 3.1770947, 36.53275)
+flip_faces = true
+radius = 6.0585938
+height = 19.447266
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=82662624]
+transform = Transform3D(1, 0, 0, 0, 0.023385257, 0.99972653, 0, -0.99972653, 0.023385257, -81.69841, 3.1770947, 36.53275)
+flip_faces = true
+radius = 6.0585938
+height = 19.447266
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=2061634137]
+transform = Transform3D(1, 0, 0, 0, 0.023385257, 0.99972653, 0, -0.99972653, 0.023385257, -110.10097, 3.1770947, 36.53275)
+flip_faces = true
+radius = 6.0585938
+height = 19.447266
