@@ -1,10 +1,9 @@
 [gd_scene format=4 uid="uid://b4y3txrunrrya"]
 
 [ext_resource type="Script" uid="uid://de64jyetu0c7k" path="res://scripts/Player/walkingPlayer.gd" id="1_ea1cc"]
-[ext_resource type="Texture2D" uid="uid://7kbpxwjpibwk" path="res://assets/Players/Stu_mouth.png" id="1_gcelq"]
-[ext_resource type="Texture2D" uid="uid://b0nwljqmretrm" path="res://assets/Players/Stu_BakedBase.png" id="2_u3om5"]
-[ext_resource type="Texture2D" uid="uid://bh4rb7hqdn5y3" path="res://assets/Players/Stu_EyeBase.png" id="3_ea1cc"]
-[ext_resource type="Shader" uid="uid://im65mxkv3lyh" path="res://scripts/shaders/highlight.gdshader" id="5_1bogl"]
+[ext_resource type="Texture2D" uid="uid://7kbpxwjpibwk" path="res://Assets/Players/Stu_mouth.png" id="1_gcelq"]
+[ext_resource type="Texture2D" uid="uid://b0nwljqmretrm" path="res://Assets/Players/Stu_BakedBase.png" id="2_u3om5"]
+[ext_resource type="Texture2D" uid="uid://bh4rb7hqdn5y3" path="res://Assets/Players/Stu_EyeBase.png" id="3_ea1cc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0cuu2"]
 resource_name = "mouth"
@@ -143,18 +142,6 @@ bind/19/pose = Transform3D(0.035888564, -0.9993562, 9.886339e-09, 9.374797e-08, 
 bind/20/name = &"Lower_Foot.R.001"
 bind/20/bone = -1
 bind/20/pose = Transform3D(0.035888564, -0.9993562, -4.4293645e-16, 9.360511e-08, -1.5821965e-07, -0.9999999, 0.999356, 0.03588844, 1.590654e-17, 0.036007203, -0.24147047, -0.25859275)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_sn2ld"]
-render_priority = 0
-shader = ExtResource("5_1bogl")
-shader_parameter/shine_color = Color(1, 1, 1, 1)
-shader_parameter/shine_speed = 1.0
-shader_parameter/shine_width = 1.0
-shader_parameter/cycle_interval = 1.0
-shader_parameter/angle_fade = 1.0
-shader_parameter/x_direction = 0.0
-shader_parameter/y_direction = 0.0
-shader_parameter/z_direction = 1.0
 
 [sub_resource type="Animation" id="Animation_mj0cj"]
 resource_name = "Stu PuppetAction"
@@ -335,7 +322,7 @@ _data = {
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gcelq"]
 
-[node name="Stu" type="CharacterBody3D" unique_id=1816408022 node_paths=PackedStringArray("camera_pivot", "camera")]
+[node name="Stu" type="CharacterBody3D" unique_id=1816408022 node_paths=PackedStringArray("camera_pivot", "camera") groups=["players"]]
 script = ExtResource("1_ea1cc")
 camera_pivot = NodePath("CameraPivot")
 camera = NodePath("CameraPivot/Camera3D")
@@ -495,7 +482,6 @@ bones/20/scale = Vector3(1, 1, 1)
 mesh = SubResource("ArrayMesh_ycs3i")
 skin = SubResource("Skin_185v7")
 skeleton = NodePath("..")
-surface_material_override/0 = SubResource("ShaderMaterial_sn2ld")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2083255531]
 libraries/ = SubResource("AnimationLibrary_4miig")

@@ -33,7 +33,7 @@ settings/addon_root_folder="res://addons/debug_draw_3d"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/tube/plugin.cfg")
+enabled=PackedStringArray()
 
 [global_group]
 
