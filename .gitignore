@@ -17,8 +17,5 @@ export_credentials.cfg
 .mono/
 data_*/
 mono_crash.*.json
->>>>>>> dbae8d47408c82259df8f10b31327b2f67da67f8
-<<<<<<< HEAD
-=======
+
 *.import
->>>>>>> ded9846 (Remove large files from index, re-add with LFS tracking)

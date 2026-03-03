@@ -35,6 +35,12 @@ settings/addon_root_folder="res://addons/debug_draw_3d"
 
 enabled=PackedStringArray()
 
+[file_customization]
+
+folder_colors={
+"res://assets/objects/": "red"
+}
+
 [global_group]
 
 players="The Players that spawn"
