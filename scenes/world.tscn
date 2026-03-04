@@ -17,7 +17,7 @@ buffer_length = 0.1
 script = ExtResource("1_f3sb7")
 
 [node name="Main" parent="." unique_id=421424765 instance=ExtResource("2_tlwt5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.009233952, -0.039105892, -0.018043518)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.009233952, -0.039105892, 1.0897388)
 
 [node name="UILayer" type="CanvasLayer" parent="." unique_id=633623206]
 layer = 10
@@ -53,9 +53,9 @@ flip_faces = true
 size = Vector3(21.824036, 10.494995, 132.10614)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1990499650]
-transform = Transform3D(0.00079070404, 0.00063383323, 0.9999996, 0.016619636, 0.99986166, -0.0006468871, -0.99986154, 0.016620137, 0.0007800609, -71.66066, 4.7474976, 17.466564)
+transform = Transform3D(0.00079070404, 0.00063383323, 0.9999996, 0.016619636, 0.99986166, -0.0006468871, -0.99986154, 0.016620137, 0.0007800609, -77.15521, 4.751052, 17.462278)
 flip_faces = true
-size = Vector3(21.824036, 10.494995, 132.10614)
+size = Vector3(21.824036, 10.494995, 121.117035)
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D" unique_id=814964668]
 transform = Transform3D(0.9998612, -0.01661889, 0.0011397605, 0.016619636, 0.99986166, -0.00064688706, -0.0011288524, 0.0006657382, 0.9999992, -124.00828, 6.6357803, -59.26873)
