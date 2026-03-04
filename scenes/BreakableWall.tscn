@@ -4,7 +4,7 @@
 [ext_resource type="Material" uid="uid://be2x16v4u7bly" path="res://Assets/objects/MI_wdipfjw.tres" id="2_alrwc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sqvaa"]
-size = Vector3(1.9196777, 1, 7.1102295)
+size = Vector3(8.84, 1, 7.09)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_evwd0"]
 resource_name = "Material"
@@ -1165,13 +1165,13 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_6mpjt")
 
 [node name="Sketchfab_model" type="RigidBody3D" unique_id=2053432695]
-transform = Transform3D(1, 0, 0, 0, 2.220446e-16, 1, 0, -1, 2.220446e-16, 0, 0, -0.45172548)
+transform = Transform3D(1, 0, 0, 0, 2.220446e-16, 1, 0, -1, 2.220446e-16, 0, 0, 0)
 freeze = true
 script = ExtResource("1_gfd1w")
 explosion_force = 3.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=631766935]
-transform = Transform3D(4.7479763, 0, 0, 0, 1, 0, 0, 0, 1, 0.005216345, 0, 3.0551147)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.005216345, 0, 3.0551147)
 shape = SubResource("BoxShape3D_sqvaa")
 
 [node name="Cube" type="Node3D" parent="." unique_id=889870239]
