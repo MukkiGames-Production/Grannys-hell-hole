@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://b4y3txrunrrya" path="res://scenes/stu.tscn" id="9_85g3d"]
 [ext_resource type="PackedScene" uid="uid://dd0u3ut37gxg4" path="res://Assets/objects/5fab.glb" id="9_choun"]
 [ext_resource type="Material" uid="uid://be2x16v4u7bly" path="res://Assets/objects/MI_wdipfjw.tres" id="10_choun"]
+[ext_resource type="PackedScene" uid="uid://dxxbfvrhhxd2" path="res://scenes/BigBoom.tscn" id="11_f31b2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_85g3d"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -278,3 +279,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.29364634, 1.0581315, -5.18
 
 [node name="Player" parent="." unique_id=1816408022 instance=ExtResource("9_85g3d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9205735, 0.50315577, 0.51238036)
+
+[node name="Bigboom" parent="." unique_id=1707289294 instance=ExtResource("11_f31b2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.29047453, 1, -6.110713)

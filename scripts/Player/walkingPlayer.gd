@@ -18,6 +18,14 @@ func _handle_mouse_look(event: InputEventMouseMotion) -> void:
 func _physics_process(delta: float) -> void:
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	
+	# Apply gravity
+	if not is_on_floor():
+		velocity.y -= gravity * delta
+		move_and_slide()
+		return
+
+	# Move the character
 
 	if direction:
 		velocity.x = direction.x * SPEED

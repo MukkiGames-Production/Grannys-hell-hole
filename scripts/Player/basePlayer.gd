@@ -1,6 +1,7 @@
 extends CharacterBody3D
 class_name BasePlayer
 
+@export var gravity = 20
 @export var mouse_sensitivity := 0.002
 @export var camera_pivot: Node3D
 @export var camera: Camera3D
@@ -135,3 +136,17 @@ func try_interact() -> void:
 		print("Picked up ", held_object)
 	elif target is InteractionPoint:
 		target.empty_interact()
+		
+func boom_ragdoll(origin: Vector3, strength: float):
+	# Horizontal direction only (ignore Y difference)
+	var horizontal = global_transform.origin - origin
+	horizontal.y = 0.0
+	horizontal = horizontal.normalized()
+
+	# Add upward lift
+	var up_force = Vector3.UP * 0.4  # tweak this value
+
+	# Combine and normalize once
+	var final_dir = (horizontal + up_force).normalized()
+
+	velocity += final_dir * strength
