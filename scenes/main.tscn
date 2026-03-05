@@ -1,15 +1,16 @@
-[gd_scene format=3 uid="uid://ctcpaobx3sw3r"]
+[gd_scene format=3 uid="uid://dd0ndre6k7joq"]
 
 [ext_resource type="PackedScene" uid="uid://6de6v3rp0l3q" path="res://scenes/BreakableWall.tscn" id="1_tipki"]
 [ext_resource type="Script" uid="uid://dlfa4844hulox" path="res://scripts/objects/grabbableObject.gd" id="2_0xm2m"]
+[ext_resource type="Material" uid="uid://cdvkbhmcfxfug" path="res://assets/objects/Textures/laminate_floor_02_2k.gltf/textures/laminate_floor_02.tres" id="2_choun"]
 [ext_resource type="Shader" uid="uid://im65mxkv3lyh" path="res://scripts/shaders/highlight.gdshader" id="3_o6xl0"]
-[ext_resource type="Texture2D" uid="uid://cxsqe1ml8nmyh" path="res://Assets/reticleEmpty.tres" id="3_sugp2"]
+[ext_resource type="Texture2D" uid="uid://cxsqe1ml8nmyh" path="res://assets/reticleEmpty.tres" id="3_sugp2"]
 [ext_resource type="Script" uid="uid://mklkxcpb5cmv" path="res://scripts/objects/pillar.gd" id="3_tefeu"]
 [ext_resource type="Script" uid="uid://d0co7xxx1604o" path="res://scripts/Player/swapReticle.gd" id="4_tbgi4"]
-[ext_resource type="Texture2D" uid="uid://dhu4lf3trb2sp" path="res://Assets/reticleFull.tres" id="5_tefeu"]
+[ext_resource type="Texture2D" uid="uid://dhu4lf3trb2sp" path="res://assets/reticleFull.tres" id="5_tefeu"]
 [ext_resource type="PackedScene" uid="uid://b4y3txrunrrya" path="res://scenes/stu.tscn" id="9_85g3d"]
-[ext_resource type="PackedScene" uid="uid://dd0u3ut37gxg4" path="res://Assets/objects/5fab.glb" id="9_choun"]
-[ext_resource type="Material" uid="uid://be2x16v4u7bly" path="res://Assets/objects/MI_wdipfjw.tres" id="10_choun"]
+[ext_resource type="PackedScene" uid="uid://dd0u3ut37gxg4" path="res://assets/objects/5fab.glb" id="9_choun"]
+[ext_resource type="Material" uid="uid://be2x16v4u7bly" path="res://assets/objects/MI_wdipfjw.tres" id="10_choun"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_85g3d"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -131,6 +132,7 @@ shape = SubResource("BoxShape3D_7dm0k")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=1475324025]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 5.883131, -0.02372241, 0, 0.003080368)
 mesh = SubResource("BoxMesh_ig7tw")
+surface_material_override/0 = ExtResource("2_choun")
 
 [node name="GrabbableSphere" type="RigidBody3D" parent="." unique_id=1359684742 groups=["interactables"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7491686, 1.7128887, 0)
