@@ -116,14 +116,15 @@ properties/5/replication_mode = 1
 environment = SubResource("Environment_ya4ey")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1677066253]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 1.2068288, 4.180578, -2.0902886)
+transform = Transform3D(-0.30954736, -0.39551282, -0.8647254, 0.6989645, -0.7112042, 0.075084984, -0.6446935, -0.5811699, 0.49660066, 2.2953513, 4.590679, -2.1683154)
+visible = false
 shadow_enabled = true
 
 [node name="breakablewall" parent="." unique_id=1113161578 instance=ExtResource("1_tipki")]
 transform = Transform3D(-0.99994445, -0.010541633, -4.607894e-10, 0, -4.371139e-08, 1, -0.010541633, 0.99994445, 4.3708962e-08, 0, 0.7378192, 11.167059)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=462466673]
-transform = Transform3D(-0.9313874, 0.26246417, -0.25225022, -0.20996034, 0.17875239, 0.9612306, 0.29737893, 0.9482406, -0.11138058, 0, 4.228172, 0)
+transform = Transform3D(-0.47423586, 0.6141271, 0.63083136, -0.8319281, -0.5470624, -0.092836864, 0.2880905, -0.5688329, 0.77034616, 0, 4.228172, 0)
 omni_range = 29.749
 
 [node name="Objects" type="Node3D" parent="." unique_id=2116984738]

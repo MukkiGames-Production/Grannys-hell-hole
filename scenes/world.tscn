@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://fhptkm3jlkgk" path="res://scenes/main2.tscn" id="2_qfnet"]
 [ext_resource type="PackedScene" uid="uid://bsspxi0kmi1qg" path="res://scenes/menu.tscn" id="3_aqk2v"]
 [ext_resource type="Script" uid="uid://bbdk8cpwa1nnk" path="res://scripts/Networking/Voip.gd" id="4_k0juu"]
-[ext_resource type="PackedScene" path="res://scenes/bingo_room.scn" id="5_71j4m"]
-[ext_resource type="PackedScene" path="res://scenes/DinningRoom.tscn" id="6_qfnet"]
+[ext_resource type="PackedScene" uid="uid://c3wmm5bbs16p5" path="res://scenes/bingo_room.scn" id="5_71j4m"]
+[ext_resource type="PackedScene" uid="uid://dred1hawtnhcb" path="res://scenes/DinningRoom.tscn" id="6_qfnet"]
 
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_4wyf3"]
 buffer_length = 0.1
@@ -43,19 +43,19 @@ stream = SubResource("AudioStreamGenerator_k0juu")
 bus = &"Voice"
 
 [node name="BingoRoom" parent="." unique_id=964912059 instance=ExtResource("5_71j4m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.522274, -2.470827, -167.76253)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.522274, -2.470827, -87.73313)
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=845833995]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1413421987]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.3556213, 4.7474976, -96.41478)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.3556213, 4.7474976, -73.49469)
 flip_faces = true
-size = Vector3(21.824036, 10.494995, 132.10614)
+size = Vector3(21.824036, 10.494995, 86.26596)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1990499650]
-transform = Transform3D(0.00079070404, 0.00063383323, 0.9999996, 0.016619636, 0.99986166, -0.0006468871, -0.99986154, 0.016620137, 0.0007800609, -61.129917, 5.2882457, -15.466258)
+transform = Transform3D(0.00079070404, 0.00063383323, 0.9999996, 0.016619636, 0.99986166, -0.0006468871, -0.99986154, 0.016620137, 0.0007800609, -57.09421, 5.285635, -15.46311)
 flip_faces = true
-size = Vector3(21.824036, 10.494995, 121.117035)
+size = Vector3(21.824036, 10.494995, 113.045616)
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D" unique_id=814964668]
 transform = Transform3D(0.9998612, -0.01661889, 0.0011397605, 0.016619636, 0.99986166, -0.00064688706, -0.0011288524, 0.0006657382, 0.9999992, -124.021416, 6.643238, -70.79771)
@@ -63,32 +63,32 @@ flip_faces = true
 size = Vector3(21.824036, 10.494995, 132.76096)
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=921388679]
-transform = Transform3D(1, 0, 0, 0, 0.023385257, 0.99972653, 0, -0.99972653, 0.023385257, -29.448463, 4.1158223, -3.5981255)
+transform = Transform3D(1, 0, 0, 0, 0.023385257, 0.99972653, 0, -0.99972653, 0.023385257, -9.886339, 3.9410105, 3.8751345)
 flip_faces = true
 radius = 6.0585938
 height = 19.447266
 
 [node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=777089655]
-transform = Transform3D(1, 0, 0, 0, 0.023385257, 0.99972653, 0, -0.99972653, 0.023385257, -56.338318, 4.1158223, -3.5981255)
+transform = Transform3D(1, 0, 0, 0, 0.023385257, 0.99972653, 0, -0.99972653, 0.023385257, -36.77619, 3.9410105, 3.8751345)
 flip_faces = true
 radius = 6.0585938
 height = 19.447266
 
 [node name="CSGCylinder3D3" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=82662624]
-transform = Transform3D(1, 0, 0, 0, 0.023385257, 0.99972653, 0, -0.99972653, 0.023385257, -81.69841, 4.1158223, -3.5981255)
+transform = Transform3D(1, 0, 0, 0, 0.023385257, 0.99972653, 0, -0.99972653, 0.023385257, -62.136284, 3.9410105, 3.8751345)
 flip_faces = true
 radius = 6.0585938
 height = 19.447266
 
 [node name="CSGCylinder3D4" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=2061634137]
-transform = Transform3D(1, 0, 0, 0, 0.023385257, 0.99972653, 0, -0.99972653, 0.023385257, -110.10097, 4.1158223, -3.5981255)
+transform = Transform3D(1, 0, 0, 0, 0.023385257, 0.99972653, 0, -0.99972653, 0.023385257, -90.53884, 3.9410105, 3.8751345)
 flip_faces = true
 radius = 6.0585938
 height = 19.447266
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D" unique_id=752061652]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65.71503, -1.874136, -145.92465)
-size = Vector3(121.606705, 1, 59.831787)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65.71503, -1.874136, -131.91837)
+size = Vector3(121.606705, 1, 31.819214)
 
 [node name="DinningRoom" parent="." unique_id=181590580 instance=ExtResource("6_qfnet")]
-transform = Transform3D(0.0040491745, 0, -0.99999183, 0, 1, 0, 0.99999183, 0, 0.0040491745, 37.447357, -4.5086155, -16.14611)
+transform = Transform3D(0.0040491745, 0, -0.99999183, 0, 1, 0, 0.99999183, 0, 0.0040491745, 33.385777, -4.5086155, -16.129663)
