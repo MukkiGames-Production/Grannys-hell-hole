@@ -1,11 +1,12 @@
 [gd_scene format=3 uid="uid://bw4p3rdmo33fl"]
 
 [ext_resource type="Script" uid="uid://ckix3hutnyvvu" path="res://scripts/objects/world.gd" id="1_f3sb7"]
-[ext_resource type="PackedScene" uid="uid://fhptkm3jlkgk" path="res://scenes/main2.tscn" id="2_qfnet"]
+[ext_resource type="PackedScene" uid="uid://0np70rfgmlqq" path="res://scenes/main2.tscn" id="2_qfnet"]
 [ext_resource type="PackedScene" uid="uid://bsspxi0kmi1qg" path="res://scenes/menu.tscn" id="3_aqk2v"]
 [ext_resource type="Script" uid="uid://bbdk8cpwa1nnk" path="res://scripts/Networking/Voip.gd" id="4_k0juu"]
-[ext_resource type="PackedScene" uid="uid://c3wmm5bbs16p5" path="res://scenes/bingo_room.scn" id="5_71j4m"]
-[ext_resource type="PackedScene" uid="uid://dred1hawtnhcb" path="res://scenes/DinningRoom.tscn" id="6_qfnet"]
+[ext_resource type="PackedScene" uid="uid://bmpg058odbxwl" path="res://scenes/bingo_room.scn" id="5_71j4m"]
+[ext_resource type="PackedScene" uid="uid://b1dsiu7t22qj2" path="res://scenes/DinningRoom.tscn" id="6_qfnet"]
+[ext_resource type="PackedScene" uid="uid://cy6fcjmiigclv" path="res://scenes/hallway_1.tscn" id="7_i7141"]
 
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_4wyf3"]
 buffer_length = 0.1
@@ -43,14 +44,9 @@ stream = SubResource("AudioStreamGenerator_k0juu")
 bus = &"Voice"
 
 [node name="BingoRoom" parent="." unique_id=964912059 instance=ExtResource("5_71j4m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.522274, -2.470827, -87.73313)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.348934, 1.583128, -87.73313)
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=845833995]
-
-[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1413421987]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.3556213, 4.7474976, -73.49469)
-flip_faces = true
-size = Vector3(21.824036, 10.494995, 86.26596)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1990499650]
 transform = Transform3D(0.00079070404, 0.00063383323, 0.9999996, 0.016619636, 0.99986166, -0.0006468871, -0.99986154, 0.016620137, 0.0007800609, -57.09421, 5.285635, -15.46311)
@@ -91,4 +87,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65.71503, -1.874136, -131.91
 size = Vector3(121.606705, 1, 31.819214)
 
 [node name="DinningRoom" parent="." unique_id=181590580 instance=ExtResource("6_qfnet")]
-transform = Transform3D(0.0040491745, 0, -0.99999183, 0, 1, 0, 0.99999183, 0, 0.0040491745, 33.385777, -4.5086155, -16.129663)
+transform = Transform3D(0.0040491745, 0, -0.99999183, 0, 1, 0, 0.99999183, 0, 0.0040491745, 33.385777, -1.3928041, -16.129663)
+
+[node name="Hallway1" parent="." unique_id=1357505118 instance=ExtResource("7_i7141")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.695938)

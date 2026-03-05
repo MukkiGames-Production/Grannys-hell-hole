@@ -1,7 +1,6 @@
-[gd_scene format=3 uid="uid://dred1hawtnhcb"]
+[gd_scene format=3 uid="uid://b1dsiu7t22qj2"]
 
-[ext_resource type="PackedScene" uid="uid://cq3u812aueuj2" path="res://assets/objects/old_metal_stool_ukknbeyaw_mid.glb" id="1_cim4k"]
-[ext_resource type="PackedScene" uid="uid://b4y3txrunrrya" path="res://scenes/stu.tscn" id="1_eu447"]
+[ext_resource type="PackedScene" uid="uid://cq3u812aueuj2" path="res://Assets/objects/old_metal_stool_ukknbeyaw_mid.glb" id="1_cim4k"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_eu447"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -35,7 +34,7 @@ size = Vector3(65.58594, 1, 33.461)
 [sub_resource type="BoxMesh" id="BoxMesh_eu447"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_eu447"]
-size = Vector3(84.06006, 1, 33.461)
+size = Vector3(71.16528, 1, 32.681183)
 
 [node name="DinningRoom" type="Node3D" unique_id=181590580]
 
@@ -44,6 +43,7 @@ environment = SubResource("Environment_4x7e1")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=968347944]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+visible = false
 shadow_enabled = true
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=1435273909]
@@ -331,17 +331,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.115234, 0, -1.7904968)
 shape = SubResource("BoxShape3D_cim4k")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=2098405648]
-transform = Transform3D(71.054504, 0, 0, 0, 1, 0, 0, 0, 32.043697, -15.0734005, 0, 0)
+transform = Transform3D(71.054504, 0, 0, 0, 1, 0, 0, 0, 32.043697, -15.0734005, -0.16189241, 0)
 mesh = SubResource("BoxMesh_eu447")
-
-[node name="Stu" parent="Floor" unique_id=1816408022 instance=ExtResource("1_eu447")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.672424, 0.5031555, 0.15571594)
 
 [node name="Ceiling" type="StaticBody3D" parent="." unique_id=1024792477]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.4813023, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ceiling" unique_id=1423559816]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.237061, 2.5984154, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.684448, 2.5984154, 0.38990784)
 shape = SubResource("BoxShape3D_eu447")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ceiling" unique_id=808343849]
@@ -361,4 +358,10 @@ transform = Transform3D(2.2249756, 0, 0, 0, 1.483641, 0, 0, 0, 2.1487076, -40.12
 transform = Transform3D(2.2249756, 0, 0, 0, 1.483641, 0, 0, 0, 2.1487076, -40.12643, 0.5035907, -6.1966534)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1133587036]
-transform = Transform3D(-0.8965016, 0.0042062113, -0.44302037, 0.0037709083, 0.99999124, 0.0018634535, 0.44302428, -1.1641532e-10, -0.8965096, -42.76187, 7.408057, 2.748373)
+transform = Transform3D(-0.88214344, -0.17830415, -0.43592495, -0.075070605, -0.8605044, 0.5038816, -0.4649595, 0.47722095, 0.7457029, -43.82984, 2.0812607, 2.748373)
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="." unique_id=1823439140]
+transform = Transform3D(1, 0, 0, 0, -0.06702275, 0.9977515, 0, -0.9977515, -0.067022756, 0, 9.573128, 3.9114542)
+light_color = Color(0.5616765, 0.3702135, 0.102508835, 1)
+light_energy = 0.366
+directional_shadow_max_distance = 23.0

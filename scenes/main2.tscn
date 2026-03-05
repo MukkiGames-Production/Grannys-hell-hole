@@ -1,16 +1,16 @@
-[gd_scene format=3 uid="uid://fhptkm3jlkgk"]
+[gd_scene format=3 uid="uid://0np70rfgmlqq"]
 
 [ext_resource type="PackedScene" uid="uid://6de6v3rp0l3q" path="res://scenes/BreakableWall.tscn" id="1_tipki"]
 [ext_resource type="Script" uid="uid://dlfa4844hulox" path="res://scripts/objects/grabbableObject.gd" id="2_0xm2m"]
 [ext_resource type="Shader" uid="uid://im65mxkv3lyh" path="res://scripts/shaders/highlight.gdshader" id="3_o6xl0"]
-[ext_resource type="Texture2D" uid="uid://cxsqe1ml8nmyh" path="res://assets/reticleEmpty.tres" id="3_sugp2"]
+[ext_resource type="Texture2D" uid="uid://cxsqe1ml8nmyh" path="res://Assets/reticleEmpty.tres" id="3_sugp2"]
 [ext_resource type="Script" uid="uid://mklkxcpb5cmv" path="res://scripts/objects/pillar.gd" id="3_tefeu"]
 [ext_resource type="Script" uid="uid://d0co7xxx1604o" path="res://scripts/Player/swapReticle.gd" id="4_tbgi4"]
-[ext_resource type="Material" uid="uid://cdvkbhmcfxfug" path="res://assets/objects/Textures/laminate_floor_02_2k.gltf/textures/laminate_floor_02.tres" id="5_kxs5y"]
-[ext_resource type="Texture2D" uid="uid://dhu4lf3trb2sp" path="res://assets/reticleFull.tres" id="5_tefeu"]
-[ext_resource type="Material" uid="uid://d084hehk2o6wp" path="res://assets/objects/Textures/Modular_Floor_Molding_Kit_wfsndg2dw_Mid.tres" id="6_f31b2"]
+[ext_resource type="Material" uid="uid://cdvkbhmcfxfug" path="res://Assets/objects/Textures/laminate_floor_02_2k.gltf/textures/laminate_floor_02.tres" id="5_kxs5y"]
+[ext_resource type="Texture2D" uid="uid://dhu4lf3trb2sp" path="res://Assets/reticleFull.tres" id="5_tefeu"]
+[ext_resource type="Material" path="res://assets/objects/Textures/Modular_Floor_Molding_Kit_wfsndg2dw_Mid.tres" id="6_f31b2"]
 [ext_resource type="PackedScene" uid="uid://b4y3txrunrrya" path="res://scenes/stu.tscn" id="9_85g3d"]
-[ext_resource type="PackedScene" uid="uid://dd0u3ut37gxg4" path="res://assets/objects/5fab.glb" id="9_choun"]
+[ext_resource type="PackedScene" uid="uid://dd0u3ut37gxg4" path="res://Assets/objects/5fab.glb" id="9_choun"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_85g3d"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -73,7 +73,7 @@ size = Vector3(0.5, 0.5, 0.5)
 [sub_resource type="BoxMesh" id="BoxMesh_85g3d"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_f31b2"]
-size = Vector3(1, 5, 14)
+size = Vector3(1, 5, 4.1279297)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kxs5y"]
 size = Vector3(1, 5, 22)
@@ -121,7 +121,7 @@ visible = false
 shadow_enabled = true
 
 [node name="breakablewall" parent="." unique_id=1113161578 instance=ExtResource("1_tipki")]
-transform = Transform3D(-0.99994445, -0.010541633, -4.607894e-10, 0, -4.371139e-08, 1, -0.010541633, 0.99994445, 4.3708962e-08, 0, 0.7378192, 11.167059)
+transform = Transform3D(-0.95555454, -0.010541633, -4.793198e-10, 0, -4.371139e-08, 1.0402144, -0.010073665, 0.99994445, 4.546669e-08, 0, 0.7378192, 11.167059)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=462466673]
 transform = Transform3D(-0.47423586, 0.6141271, 0.63083136, -0.8319281, -0.5470624, -0.092836864, 0.2880905, -0.5688329, 0.77034616, 0, 4.228172, 0)
@@ -180,7 +180,7 @@ mesh = SubResource("BoxMesh_o6xl0")
 [node name="Room" type="Node3D" parent="." unique_id=70063553]
 
 [node name="Wall" type="StaticBody3D" parent="Room" unique_id=219840055]
-transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 0.058270454, 3.1152802, -10.982541)
+transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 0.05827045, 3.1152802, -11.102474)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Room/Wall" unique_id=1992753278]
 transform = Transform3D(0.99999994, 0, -7.955481e-14, 0, 5, 0, 1.7763568e-14, 0, 3.91872, 8.294829e-14, -0.09368515, -4.7858763)
@@ -193,6 +193,12 @@ material_override = ExtResource("5_kxs5y")
 mesh = SubResource("BoxMesh_85g3d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Wall" unique_id=173464402]
+transform = Transform3D(0.99999267, 0, -1.1723955e-13, 0, 1, 0, 1.1723955e-13, 0, 0.99999267, 0, 0, 4.936034)
+shape = SubResource("BoxShape3D_f31b2")
+debug_fill = false
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Room/Wall" unique_id=888675732]
+transform = Transform3D(0.99999267, 0, -1.1723955e-13, 0, 1, 0, 1.1723955e-13, 0, 0.99999267, 1.1471083e-12, 0, -4.8482065)
 shape = SubResource("BoxShape3D_f31b2")
 debug_fill = false
 
@@ -240,7 +246,7 @@ transform = Transform3D(1.4, 0, 0, 0, 1, 0, 0, 0, 2.1, 0, 0, 0)
 mesh = SubResource("BoxMesh_ig7tw")
 
 [node name="Ceiling" type="StaticBody3D" parent="Room" unique_id=954280528]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.966907, 0)
+transform = Transform3D(1.1104618, 0, 0, 0, 1, 0, 0, 0, 1.0777501, 0, 5.966907, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Ceiling" unique_id=713794144]
 shape = SubResource("BoxShape3D_7dm0k")
