@@ -279,6 +279,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.29364634, 1.0581315, -5.18
 
 [node name="Player" parent="." unique_id=1816408022 instance=ExtResource("9_85g3d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9205735, 0.50315577, 0.51238036)
+gravity = 20
+mouse_sensitivity = 0.002
+max_throw_force = 20.0
+max_charge_time = 1.5
+ragdoll_time = 2.0
+center_bone_name = "Root"
 
 [node name="Bigboom" parent="." unique_id=1707289294 instance=ExtResource("11_f31b2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.29047453, 1, -6.110713)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1006626138]
+transform = Transform3D(0.80385685, -0.22762886, 0.5495447, 0, 0.9238795, 0.3826835, -0.5948228, -0.30762273, 0.7426669, 5.7240562, 8.09907, 10.665975)

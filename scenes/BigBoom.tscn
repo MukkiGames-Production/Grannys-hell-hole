@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dxxbfvrhhxd2"]
 
-[ext_resource type="Script" uid="uid://ckfksl81853yy" path="res://scenes/boom.gd" id="1_2arrn"]
+[ext_resource type="Script" uid="uid://ckfksl81853yy" path="res://scripts/Player/boom.gd" id="1_2arrn"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_gwd4l"]
 radius = 1.0
