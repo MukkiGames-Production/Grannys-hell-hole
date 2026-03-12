@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dnpxhlu0rnq5d"]
+
+[ext_resource type="PackedScene" uid="uid://bdreeycqu5ha" path="res://scenes/StuMap.fbx" id="1_p5lrn"]
+
+[node name="StuMap" unique_id=516339591 instance=ExtResource("1_p5lrn")]
+
+[node name="Camera" parent="." index="0" unique_id=269961388]
+transform = Transform3D(68.59208, -32.40135, 65.15581, 8.940697e-06, 89.53957, 44.527138, -72.767624, -30.542088, 61.41705, -129.82527, 4.958291, 152.46104)
+
+[node name="Light" parent="." index="3" unique_id=876841678]
+visible = false
