@@ -37,6 +37,7 @@ size = Vector3(65.58594, 1, 33.461)
 size = Vector3(71.16528, 1, 32.681183)
 
 [node name="DinningRoom" type="Node3D" unique_id=181590580]
+transform = Transform3D(0.7274449, 0, 0, 0, 1, 0, 0, 0, 0.7178215, 0, 0, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=41661479]
 environment = SubResource("Environment_4x7e1")

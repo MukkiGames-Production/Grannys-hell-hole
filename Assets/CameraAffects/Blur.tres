@@ -1,0 +1,14 @@
+[gd_resource type="Environment" format=3 uid="uid://kex6lnsjlah5"]
+
+[resource]
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+reflected_light_source = 2
+fog_enabled = true
+fog_light_color = Color(0.86146677, 0.36354673, 0.41059086, 1)
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.1634
+volumetric_fog_emission_energy = 53.78
+volumetric_fog_gi_inject = 1.29
+volumetric_fog_anisotropy = 0.27
+volumetric_fog_length = 85.11

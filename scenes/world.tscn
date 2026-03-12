@@ -83,11 +83,11 @@ radius = 6.0585938
 height = 19.447266
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D" unique_id=752061652]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65.71503, -1.874136, -131.91837)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65.71503, 2.125864, -72.918365)
 size = Vector3(121.606705, 1, 31.819214)
 
 [node name="DinningRoom" parent="." unique_id=181590580 instance=ExtResource("6_qfnet")]
 transform = Transform3D(0.0040491745, 0, -0.99999183, 0, 1, 0, 0.99999183, 0, 0.0040491745, 33.385777, -1.3928041, -16.129663)
 
 [node name="Hallway1" parent="." unique_id=1357505118 instance=ExtResource("7_i7141")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.695938)
+transform = Transform3D(1, 0, 0, 0, 0.4011098, 0, 0, 0, 0.654799, 0, 0.40110993, -7.13712)
