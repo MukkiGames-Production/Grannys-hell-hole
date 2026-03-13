@@ -11,6 +11,7 @@ radius = 1.0
 script = ExtResource("1_2arrn")
 
 [node name="Area3D" type="Area3D" parent="." unique_id=691818838]
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=391314855]
 shape = SubResource("SphereShape3D_gwd4l")

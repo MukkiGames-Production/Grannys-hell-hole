@@ -7,11 +7,14 @@ class_name BasePlayer
 @export var camera: Camera3D
 @export var max_throw_force := 20.0
 @export var max_charge_time := 1.5  # seconds to reach full power
-@export var ragdoll_time := 2.0 # seconds the player will not have control after entering ragdoll
-@export var skeleton: Skeleton3D
-@export var physical_bone_sim: PhysicalBoneSimulator3D
-@export var main_collision: CollisionShape3D
-@onready var animation: AnimationPlayer = $AnimationPlayer
+@export var ragdoll_time := 4.0 # seconds the player will not have control after entering ragdoll
+@export var ragdoll_skeleton: Skeleton3D
+@export var stus_bone_simulator: PhysicalBoneSimulator3D
+@export var stus_root_bone: PhysicalBone3D
+@export var stu_mesh_normal: MeshInstance3D
+@export var stu_mesh_ragdoll: MeshInstance3D
+
+@export var animation: AnimationPlayer
 
 var is_charging_throw := false
 var throw_charge := 0.0
@@ -19,21 +22,29 @@ var object_in_sight: Dictionary = {}  # raycast result
 var held_object: GrabbableObject = null
 var sees_interactable: bool = false
 var ragdoll_timer: Timer = Timer.new()
-
 var ragdoll_state = false
+
+var root_bone_idx: int = -1
 
 signal look_at_interactable(can_see: bool)  # for reticle/UI feedback
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
-	physical_bone_sim.physical_bones_add_collision_exception(get_rid())
-	
 	#initialize ragdoll timer
 	ragdoll_timer.wait_time = ragdoll_time
 	ragdoll_timer.one_shot = true
 	ragdoll_timer.timeout.connect(_on_ragdoll_timer_timeout)
+	root_bone_idx = ragdoll_skeleton.find_bone("Root")  # or "Hips", "pelvis", "Spine", whatever your rig's main/root bone is
+	print(root_bone_idx)
 	add_child(ragdoll_timer)
+	
+	#make ragdoll body invis
+	stu_mesh_ragdoll.visible = false
+	
+	for child in stus_bone_simulator.get_children():
+		if child is PhysicalBone3D:
+			bones.append(child)
 
 func _unhandled_input(event: InputEvent) -> void:
 	# Toggle mouse capture with Escape
@@ -166,63 +177,30 @@ func boom_ragdoll(origin: Vector3, strength: float):
 	var final_dir = (horizontal + up_force).normalized()
 
 	velocity += final_dir * strength
-	
+			
 	ragdoll_state = true
-	ragdoll_timer.start()
-	enable_ragdoll()
+	ragdoll_timer.start()	
 	
-	for child in skeleton.get_children():
-		if child is PhysicalBone3D and child.is_active():
-			var bone_pos = child.global_position
-			var to_bone = bone_pos - origin
-			
-			# Optional: falloff with distance (feels more natural)
-			var dist = to_bone.length()
-			var force_multiplier = strength / (1.0 + dist * dist * 0.08)  # tweak falloff
-			
-			# Same direction style as the root
-			var dir_horizontal = to_bone
-			dir_horizontal.y = 0
-			if dir_horizontal.length() > 0.01:
-				dir_horizontal = dir_horizontal.normalized()
-			else:
-				dir_horizontal = Vector3.FORWARD
-			
-			var bone_dir = (dir_horizontal + Vector3.UP * 0.4).normalized()
-			
-			# Apply!
-			child.apply_central_impulse(bone_dir * force_multiplier)
-			# Alternative: child.apply_impulse(bone_dir * force_multiplier, Vector3.ZERO)
+	enable_ragdoll(final_dir * strength)
 
 func _on_ragdoll_timer_timeout():
 	ragdoll_state = false
 	disable_ragdoll()
-	
-func enable_ragdoll() -> void:
-	if physical_bone_sim == null:
-		push_error("No PhysicalBoneSimulator3D found!")
-		return
 
-	physical_bone_sim.physical_bones_add_collision_exception(get_rid())
-	physical_bone_sim.physical_bones_start_simulation()
+var bones = [] #initialized in ready()
+func enable_ragdoll(v) -> void:
+	stu_mesh_normal.visible = false
+	stu_mesh_ragdoll.visible = true
+	stus_bone_simulator.physical_bones_start_simulation()
 	
-	if animation.is_playing():
-		animation.stop()
-	
-	# Optional: make character kinematic-like during ragdoll so move_and_slide doesn't fight
-	# (but most people just let velocity carry over from boom_ragdoll)
+	for bone in bones:
+		bone.apply_central_impulse(v)
+
+
 	
 func disable_ragdoll() -> void:
-	if physical_bone_sim == null:
-		return
-	
-	# Stop simulation → bones go back to following Skeleton3D animations
-	physical_bone_sim.physical_bones_stop_simulation()
-	physical_bone_sim.physical_bones_remove_collision_exception(get_rid())
-	
-	# Optional: reset velocity, snap to average ragdoll position, restart idle animation, etc.
-	velocity = Vector3.ZERO
-	# Example: teleport root to approximate ragdoll center
-	# global_position = $Skeleton3D.get_bone_global_pose(some_pelvis_bone_index).origin
+	stu_mesh_normal.visible = true
+	stu_mesh_ragdoll.visible = false
+	stus_bone_simulator.physical_bones_stop_simulation()
 	
 	
