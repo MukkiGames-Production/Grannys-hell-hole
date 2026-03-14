@@ -31,9 +31,11 @@ func grab(camera: Node3D):
 		"message": "player_action",
 		"action": "grab",
 		"item_id": item_id,
+		"id": Steam.getSteamID(),
 	}, Steam.P2P_SEND_RELIABLE)
 
 func release():
+	var pos := global_position
 	is_held = false
 	holder = null
 	freeze = false
@@ -41,6 +43,25 @@ func release():
 		"message": "player_action",
 		"action": "release",
 		"item_id": item_id,
+		"id": Steam.getSteamID(),
+		"px": pos.x,
+		"py": pos.y,
+		"pz": pos.z,
+	}, Steam.P2P_SEND_RELIABLE)
+
+# Called when item is placed on an interaction point
+func place_on(interaction_point: Node3D):
+	var target_pos := interaction_point.global_position + Vector3(0, 1.5, 0)
+	is_held = false
+	holder = null
+	GameNetwork.send_p2p_packet(0, {
+		"message": "player_action",
+		"action": "place",
+		"item_id": item_id,
+		"id": Steam.getSteamID(),
+		"px": target_pos.x,
+		"py": target_pos.y,
+		"pz": target_pos.z,
 	}, Steam.P2P_SEND_RELIABLE)
 
 #move helper

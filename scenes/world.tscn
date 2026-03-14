@@ -1,9 +1,13 @@
 [gd_scene format=3 uid="uid://bw4p3rdmo33fl"]
 
 [ext_resource type="Script" uid="uid://ckix3hutnyvvu" path="res://scripts/objects/world.gd" id="1_f3sb7"]
-[ext_resource type="PackedScene" uid="uid://ctcpaobx3sw3r" path="res://scenes/main.tscn" id="2_tlwt5"]
+[ext_resource type="PackedScene" uid="uid://0np70rfgmlqq" path="res://scenes/main2.tscn" id="2_qfnet"]
 [ext_resource type="PackedScene" uid="uid://bsspxi0kmi1qg" path="res://scenes/menu.tscn" id="3_aqk2v"]
 [ext_resource type="Script" uid="uid://bbdk8cpwa1nnk" path="res://scripts/Networking/Voip.gd" id="4_k0juu"]
+[ext_resource type="PackedScene" uid="uid://bmpg058odbxwl" path="res://scenes/bingo_room.scn" id="5_71j4m"]
+[ext_resource type="PackedScene" uid="uid://b1dsiu7t22qj2" path="res://scenes/DinningRoom.tscn" id="6_qfnet"]
+[ext_resource type="PackedScene" uid="uid://cy6fcjmiigclv" path="res://scenes/hallway_1.tscn" id="7_i7141"]
+[ext_resource type="PackedScene" uid="uid://dnpxhlu0rnq5d" path="res://scenes/stu_map.tscn" id="8_4mrxx"]
 
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_4wyf3"]
 buffer_length = 0.1
@@ -14,8 +18,8 @@ buffer_length = 0.1
 [node name="World" type="Node3D" unique_id=948386596]
 script = ExtResource("1_f3sb7")
 
-[node name="Main" parent="." unique_id=421424765 instance=ExtResource("2_tlwt5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.009233952, -0.039105892, -0.018043518)
+[node name="Main" parent="." unique_id=421424765 instance=ExtResource("2_qfnet")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.076851, 0, -15.232468)
 
 [node name="UILayer" type="CanvasLayer" parent="." unique_id=633623206]
 layer = 10
@@ -24,7 +28,7 @@ follow_viewport_enabled = true
 [node name="MenuBar" parent="UILayer" unique_id=1192271255 instance=ExtResource("3_aqk2v")]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1091512600]
-transform = Transform3D(-0.98845565, 0.06745396, -0.13566625, -0.1332868, -0.8129056, 0.5669384, -0.07204162, 0.578476, 0.8125119, -1.8069329, 3.0817065, 0)
+transform = Transform3D(-0.98845565, 0.06745396, -0.13566625, -0.1332868, -0.8129056, 0.5669384, -0.07204162, 0.578476, 0.8125119, -3.5996938, 24.686749, -15.374473)
 light_energy = 5.778
 light_indirect_energy = 0.775
 light_size = 0.111
@@ -39,3 +43,66 @@ bus = &"Voice"
 [node name="Network" type="AudioStreamPlayer" parent="Voip" unique_id=1882122582]
 stream = SubResource("AudioStreamGenerator_k0juu")
 bus = &"Voice"
+
+[node name="BingoRoom" parent="." unique_id=964912059 instance=ExtResource("5_71j4m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.348934, 1.583128, -87.73313)
+visible = false
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=845833995]
+visible = false
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1990499650]
+transform = Transform3D(0.00079070404, 0.00063383323, 0.9999996, 0.016619636, 0.99986166, -0.0006468871, -0.99986154, 0.016620137, 0.0007800609, -57.09421, 5.285635, -15.46311)
+visible = false
+flip_faces = true
+size = Vector3(21.824036, 10.494995, 113.045616)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D" unique_id=814964668]
+transform = Transform3D(0.9998612, -0.01661889, 0.0011397605, 0.016619636, 0.99986166, -0.00064688706, -0.0011288524, 0.0006657382, 0.9999992, -124.021416, 6.643238, -70.79771)
+visible = false
+flip_faces = true
+size = Vector3(21.824036, 10.494995, 132.76096)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=921388679]
+transform = Transform3D(1, 0, 0, 0, 0.023385257, 0.99972653, 0, -0.99972653, 0.023385257, -9.886339, 3.9410105, 3.8751345)
+visible = false
+flip_faces = true
+radius = 6.0585938
+height = 19.447266
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=777089655]
+transform = Transform3D(1, 0, 0, 0, 0.023385257, 0.99972653, 0, -0.99972653, 0.023385257, -36.77619, 3.9410105, 3.8751345)
+visible = false
+flip_faces = true
+radius = 6.0585938
+height = 19.447266
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=82662624]
+transform = Transform3D(1, 0, 0, 0, 0.023385257, 0.99972653, 0, -0.99972653, 0.023385257, -62.136284, 3.9410105, 3.8751345)
+visible = false
+flip_faces = true
+radius = 6.0585938
+height = 19.447266
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=2061634137]
+transform = Transform3D(1, 0, 0, 0, 0.023385257, 0.99972653, 0, -0.99972653, 0.023385257, -90.53884, 3.9410105, 3.8751345)
+visible = false
+flip_faces = true
+radius = 6.0585938
+height = 19.447266
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D" unique_id=752061652]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65.71503, 2.125864, -72.918365)
+visible = false
+size = Vector3(121.606705, 1, 31.819214)
+
+[node name="DinningRoom" parent="." unique_id=181590580 instance=ExtResource("6_qfnet")]
+transform = Transform3D(0.0040491745, 0, -0.99999183, 0, 1, 0, 0.99999183, 0, 0.0040491745, 33.385777, -1.3928041, -16.129663)
+visible = false
+
+[node name="Hallway1" parent="." unique_id=1357505118 instance=ExtResource("7_i7141")]
+transform = Transform3D(1, 0, 0, 0, 0.4011098, 0, 0, 0, 0.654799, 0, 0.40110993, -7.13712)
+visible = false
+
+[node name="StuMap" parent="." unique_id=120006424 instance=ExtResource("8_4mrxx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -46)

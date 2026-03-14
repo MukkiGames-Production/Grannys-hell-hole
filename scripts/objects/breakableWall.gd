@@ -61,6 +61,17 @@ func break_wall(impact_position: Vector3 = Vector3.ZERO) -> void:
 		return
 
 	is_broken = true
+
+	# Notify all other players that the wall broke
+	GameNetwork.send_p2p_packet(0, {
+		"message": "player_action",
+		"action": "break_wall",
+		"id": Steam.getSteamID(),
+		"px": impact_position.x,
+		"py": impact_position.y,
+		"pz": impact_position.z,
+	}, Steam.P2P_SEND_RELIABLE)
+
 	var impact_point := impact_position if impact_position != Vector3.ZERO else global_position
 
 	# Find all MeshInstance3D children (recursively)
@@ -71,6 +82,7 @@ func break_wall(impact_position: Vector3 = Vector3.ZERO) -> void:
 
 	# Stop processing since wall is broken
 	set_process(false)
+
 
 
 ## Recursively find all MeshInstance3D nodes

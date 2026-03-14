@@ -17,4 +17,5 @@ export_credentials.cfg
 .mono/
 data_*/
 mono_crash.*.json
->>>>>>> dbae8d47408c82259df8f10b31327b2f67da67f8
+
+*.import
