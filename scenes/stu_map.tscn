@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dnpxhlu0rnq5d"]
+
+[ext_resource type="PackedScene" uid="uid://0w3i0l61movw" path="res://scenes/StuMap.fbx" id="1_p5lrn"]
+
+[node name="StuMap" unique_id=120006424 instance=ExtResource("1_p5lrn")]
+
+[node name="Light" parent="." index="3" unique_id=965348245]
+visible = false

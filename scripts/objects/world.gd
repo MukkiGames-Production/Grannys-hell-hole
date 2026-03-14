@@ -224,7 +224,7 @@ func _spawn_remote_player(peer_steam_id: int, peer_name: String) -> void:
 	# Name label above head
 	var label_3d := Label3D.new()
 	label_3d.text = peer_name
-	label_3d.position = Vector3(0, 1.2, 0)
+	label_3d.position = Vector3(0, 2, 0)
 	label_3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	label_3d.font_size = 32
 	label_3d.no_depth_test = true

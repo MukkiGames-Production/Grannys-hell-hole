@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b0nwljqmretrm"
-path.s3tc="res://.godot/imported/Stu_BakedBase.png-872708709fc343b1509b1c451602300d.s3tc.ctex"
+path.s3tc="res://.godot/imported/Stu_BakedBase.png-2c253477a06bd98814da5e856a312197.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://Assets/Players/Stu_BakedBase.png"
-dest_files=["res://.godot/imported/Stu_BakedBase.png-872708709fc343b1509b1c451602300d.s3tc.ctex"]
+source_file="res://assets/Players/Stu_BakedBase.png"
+dest_files=["res://.godot/imported/Stu_BakedBase.png-2c253477a06bd98814da5e856a312197.s3tc.ctex"]
 
 [params]
 

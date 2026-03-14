@@ -507,7 +507,7 @@ func _on_p2p_session_connect_fail(steam_id_remote: int, session_error: int) -> v
 
 # ---- LOBBY SIGNAL CALLBACKS ----
 
-func _on_lobby_chat_update(this_lobby_id: int, changed_id: int, making_change_id: int, chat_state: int) -> void:
+func _on_lobby_chat_update(_this_lobby_id: int, changed_id: int, making_change_id: int, chat_state: int) -> void:
 	var changer_name: String = Steam.getFriendPersonaName(making_change_id)
 	var changed_name: String = Steam.getFriendPersonaName(changed_id)
 

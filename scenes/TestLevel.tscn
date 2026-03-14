@@ -443,6 +443,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1499443, 0.5257294, -9.902
 
 [node name="NPC" parent="." unique_id=321508815 instance=ExtResource("2_1fpmp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.395205, 0.6265161, -3.1351604)
-speed = 5.0
 stop_distance = 0.3
-status = 2
