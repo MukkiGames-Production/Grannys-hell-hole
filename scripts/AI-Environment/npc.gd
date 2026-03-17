@@ -17,11 +17,20 @@ enum State {
 }
 
 func _ready() -> void:
+	if not multiplayer.is_server():
+		set_physics_process(false)
+		$UpdateTimer.stop()
+		return
 	var root := get_tree().current_scene
 	status = State.CHASE
-	chase_target = root.find_child("Stu")
+	chase_target = root.find_child("Player")
 	agent.path_desired_distance = stop_distance
 	agent.target_desired_distance = stop_distance
+
+@rpc("unreliable", "call_remote", "authority")
+func sync_npc_state(pos: Vector3, vel: Vector3) -> void:
+	global_position = pos
+	velocity = vel
 
 func set_move_target(world_pos: Vector3) -> void:
 	agent.target_position = world_pos
@@ -91,8 +100,10 @@ func _physics_process(delta: float) -> void:
 		velocity.z = 0.0
 
 	move_and_slide()
+	rpc("sync_npc_state", global_position, velocity)
 
 func _on_update_timer_timeout() -> void:
+	if not multiplayer.is_server(): return
 	if status == State.CHASE:
 		chase()
 

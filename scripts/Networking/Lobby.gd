@@ -9,7 +9,7 @@ var lobby_members_max: int = 10
 var lobby_vote_kick: bool = false
 var steam_id: int = 0
 var steam_username: String = ""
-
+@export var ReturnScene: PackedScene = null
 # UI Node references
 @onready var player_name_label: Label = %PlayerName
 @onready var lobbies_list: VBoxContainer = %List
@@ -558,7 +558,7 @@ func _on_back_button_pressed() -> void:
 		leave_lobby()
 
 	# Go back to main menu
-	get_tree().change_scene_to_file("res://scenes/world.tscn")
+	get_tree().change_scene_to_file(ReturnScene.resource_path)
 
 func start_game() -> void:
 	# Only the host can start the game
@@ -570,7 +570,7 @@ func start_game() -> void:
 		# Send start game message to all players
 		send_p2p_packet(0, {"message": "start_game"})
 		# Load your game scene
-		get_tree().change_scene_to_file("res://scenes/world.tscn")
+		get_tree().change_scene_to_file(ReturnScene.resource_path)
 func record_voice(is_recording: bool) -> void:
 	print("Voice recording toggled: %s" % is_recording)
 	if voip:

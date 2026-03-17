@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bcskmit1xf54o" path="res://scenes/Door.tscn" id="1_dojpo"]
 [ext_resource type="PackedScene" uid="uid://bnbggqkcgb1wp" path="res://scenes/NPC.tscn" id="2_1fpmp"]
+[ext_resource type="PackedScene" uid="uid://b4y3txrunrrya" path="res://scenes/stu.tscn" id="3_df0lk"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_d0gs8"]
 vertices = PackedVector3Array(-4.6375, 1, -4.507332, -2.3874998, 1, -4.757332, -2.3874998, 1, -9.257332, -11.6375, 1, -9.257332, -11.8875, 1, -14.007332, -14.1375, 1, -14.007332, -14.1375, 1, 3.9926682, -4.6375, 1, 3.9926682, -10.3875, 1, -14.007332, -10.3875, 1, -10.757332, 11.1125, 1, -10.757332, 11.1125, 1, -14.007332, 2.6125002, 1, 7.992668, 2.6125002, 1, 4.492668, 1.3625002, 1, 4.242668, 0.3625002, 1, 4.242668, -4.3875, 1, 4.492668, 7.6125, 1, 4.242668, 4.1125, 1, 4.492668, 4.1125, 1, 7.992668, -3.1374998, 1, -3.2573318, -3.1374998, 1, 2.9926682, 0.11250019, 1, 2.9926682, 12.6125, 1, -4.007332, 12.6125, 1, 2.9926682, 14.1125, 1, 2.9926682, 14.1125, 1, -14.007332, 12.6125, 1, -14.007332, 12.3625, 1, -6.757332, 10.3625, 1, 3.2426682, 11.1125, 1, 2.9926682, 11.3625, 1, -4.257332, 14.1125, 1, 11.242668, 14.1125, 1, 4.492668, 10.6125, 1, 4.492668, 3.8625002, 1, 10.492668, 4.1125, 1, 11.242668, 1.3625002, 1, 3.2426682, 5.3625, 1, 2.9926682, 5.3625, 1, -3.2573318, 2.6125002, 1, 14.242668, 2.8625002, 1, 10.492668, -14.1375, 1, 14.242668, 7.6125, 1, 3.2426682, 11.1125, 1, -7.007332, 6.8625, 1, -4.757332, 6.8625, 1, 2.9926682, 11.1125, 1, -9.257332, 4.1125, 1, 12.742668, 4.1125, 1, 14.242668, 14.1125, 1, 14.242668, 14.1125, 1, 12.742668)
@@ -441,6 +442,10 @@ mesh = SubResource("BoxMesh_i6x8u")
 [node name="Door" parent="NavigationRegion3D/Doors" unique_id=304825365 instance=ExtResource("1_dojpo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1499443, 0.5257294, -9.902578)
 
-[node name="NPC" parent="." unique_id=321508815 instance=ExtResource("2_1fpmp")]
+[node name="NPC" parent="." unique_id=321508815 node_paths=PackedStringArray("chase_target") instance=ExtResource("2_1fpmp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.395205, 0.6265161, -3.1351604)
 stop_distance = 0.3
+chase_target = NodePath("../Stu")
+
+[node name="Stu" parent="." unique_id=1816408022 instance=ExtResource("3_df0lk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.145393, 0.5031555, 8.006634)

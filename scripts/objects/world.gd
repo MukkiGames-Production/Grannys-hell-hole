@@ -42,6 +42,7 @@ func _ready() -> void:
 
 func _register_scene_objects() -> void:
 	# Find all GrabbableObject nodes under $Main and index them by item_id
+
 	for node in _find_nodes_of_type($Main, "GrabbableObject"):
 		var obj := node as GrabbableObject
 		if obj and obj.item_id != "":

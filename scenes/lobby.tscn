@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dlj5x8k2mq3vh"]
 
 [ext_resource type="Script" uid="uid://c0xc4p84ca6o4" path="res://scripts/Networking/Lobby.gd" id="1_lobby"]
+[ext_resource type="PackedScene" uid="uid://cdfjjq5asub2d" path="res://scenes/worldTest.tscn" id="2_q60fs"]
 [ext_resource type="Script" uid="uid://bbdk8cpwa1nnk" path="res://scripts/Networking/Voip.gd" id="2_voip"]
 
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_local"]
@@ -9,7 +10,7 @@ buffer_length = 0.1
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_network"]
 buffer_length = 0.1
 
-[node name="Lobby" type="Control"]
+[node name="Lobby" type="Control" unique_id=231418997]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,8 +18,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_lobby")
+ReturnScene = ExtResource("2_q60fs")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="." unique_id=1006599003]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,7 +29,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.1, 0.1, 0.15, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1094676159]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -39,155 +41,155 @@ theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=947468003]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Title" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer" unique_id=274449583]
 layout_mode = 2
 text = "MULTIPLAYER LOBBY"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PlayerInfo" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="PlayerInfo" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1130019065]
 layout_mode = 2
 alignment = 1
 
-[node name="PlayerLabel" type="Label" parent="MarginContainer/VBoxContainer/PlayerInfo"]
+[node name="PlayerLabel" type="Label" parent="MarginContainer/VBoxContainer/PlayerInfo" unique_id=720603546]
 layout_mode = 2
 text = "Playing as: "
 
-[node name="PlayerName" type="Label" parent="MarginContainer/VBoxContainer/PlayerInfo"]
+[node name="PlayerName" type="Label" parent="MarginContainer/VBoxContainer/PlayerInfo" unique_id=433845300]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Loading..."
 
-[node name="ButtonRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="ButtonRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=2000884761]
 layout_mode = 2
-alignment = 1
 theme_override_constants/separation = 20
+alignment = 1
 
-[node name="CreateLobbyButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonRow"]
+[node name="CreateLobbyButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonRow" unique_id=1054753343]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 text = "Create Lobby"
 
-[node name="RefreshButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonRow"]
+[node name="RefreshButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonRow" unique_id=1726760631]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 text = "Refresh Lobbies"
 
-[node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonRow"]
+[node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonRow" unique_id=559629984]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 text = "Back to Menu"
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=951041300]
 layout_mode = 2
 
-[node name="LobbiesLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="LobbiesLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1505933149]
 layout_mode = 2
 text = "Available Lobbies:"
 
-[node name="Lobbies" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+[node name="Lobbies" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=1477734209]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Scroll" type="ScrollContainer" parent="MarginContainer/VBoxContainer/Lobbies"]
+[node name="Scroll" type="ScrollContainer" parent="MarginContainer/VBoxContainer/Lobbies" unique_id=417613574]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="List" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Lobbies/Scroll"]
+[node name="List" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Lobbies/Scroll" unique_id=1528369814]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 10
 
-[node name="NoLobbiesLabel" type="Label" parent="MarginContainer/VBoxContainer/Lobbies/Scroll/List"]
+[node name="NoLobbiesLabel" type="Label" parent="MarginContainer/VBoxContainer/Lobbies/Scroll/List" unique_id=1771718610]
 unique_name_in_owner = true
 layout_mode = 2
 text = "No lobbies found. Click 'Refresh Lobbies' or create your own!"
 horizontal_alignment = 1
 
-[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=2094098905]
 layout_mode = 2
 
-[node name="CurrentLobbyPanel" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+[node name="CurrentLobbyPanel" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=1304651719]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CurrentLobbyPanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CurrentLobbyPanel" unique_id=617112670]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="CurrentLobbyLabel" type="Label" parent="MarginContainer/VBoxContainer/CurrentLobbyPanel/VBoxContainer"]
+[node name="CurrentLobbyLabel" type="Label" parent="MarginContainer/VBoxContainer/CurrentLobbyPanel/VBoxContainer" unique_id=589328832]
 layout_mode = 2
 text = "Current Lobby"
 horizontal_alignment = 1
 
-[node name="LobbyName" type="Label" parent="MarginContainer/VBoxContainer/CurrentLobbyPanel/VBoxContainer"]
+[node name="LobbyName" type="Label" parent="MarginContainer/VBoxContainer/CurrentLobbyPanel/VBoxContainer" unique_id=1101884817]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Lobby Name: ---"
 
-[node name="MembersLabel" type="Label" parent="MarginContainer/VBoxContainer/CurrentLobbyPanel/VBoxContainer"]
+[node name="MembersLabel" type="Label" parent="MarginContainer/VBoxContainer/CurrentLobbyPanel/VBoxContainer" unique_id=1735628458]
 layout_mode = 2
 text = "Members:"
 
-[node name="MembersList" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CurrentLobbyPanel/VBoxContainer"]
+[node name="MembersList" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CurrentLobbyPanel/VBoxContainer" unique_id=233769451]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="LobbyButtonRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CurrentLobbyPanel/VBoxContainer"]
+[node name="LobbyButtonRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CurrentLobbyPanel/VBoxContainer" unique_id=1460813993]
 layout_mode = 2
-alignment = 1
 theme_override_constants/separation = 20
+alignment = 1
 
-[node name="StartGameButton" type="Button" parent="MarginContainer/VBoxContainer/CurrentLobbyPanel/VBoxContainer/LobbyButtonRow"]
+[node name="StartGameButton" type="Button" parent="MarginContainer/VBoxContainer/CurrentLobbyPanel/VBoxContainer/LobbyButtonRow" unique_id=1784038952]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 text = "Start Game"
 
-[node name="InviteFriendButton" type="Button" parent="MarginContainer/VBoxContainer/CurrentLobbyPanel/VBoxContainer/LobbyButtonRow"]
+[node name="InviteFriendButton" type="Button" parent="MarginContainer/VBoxContainer/CurrentLobbyPanel/VBoxContainer/LobbyButtonRow" unique_id=409695152]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 text = "Invite Friend"
 
-[node name="LeaveLobbyButton" type="Button" parent="MarginContainer/VBoxContainer/CurrentLobbyPanel/VBoxContainer/LobbyButtonRow"]
+[node name="LeaveLobbyButton" type="Button" parent="MarginContainer/VBoxContainer/CurrentLobbyPanel/VBoxContainer/LobbyButtonRow" unique_id=330210819]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 text = "Leave Lobby"
 
-[node name="RecordVoiceButton" type="Button" parent="MarginContainer/VBoxContainer/CurrentLobbyPanel/VBoxContainer/LobbyButtonRow"]
+[node name="RecordVoiceButton" type="Button" parent="MarginContainer/VBoxContainer/CurrentLobbyPanel/VBoxContainer/LobbyButtonRow" unique_id=2090036436]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 toggle_mode = true
 text = "Record Voice"
 
-[node name="Voip" type="Node" parent="."]
-script = ExtResource("2_voip")
-
-[node name="Local" type="AudioStreamPlayer" parent="Voip"]
-stream = SubResource("AudioStreamGenerator_local")
-
-[node name="Network" type="AudioStreamPlayer" parent="Voip"]
-stream = SubResource("AudioStreamGenerator_network")
-
-[node name="StatusLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="StatusLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=814472007]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Status: Not connected to any lobby"
 horizontal_alignment = 1
+
+[node name="Voip" type="Node" parent="." unique_id=1100103321]
+script = ExtResource("2_voip")
+
+[node name="Local" type="AudioStreamPlayer" parent="Voip" unique_id=32390983]
+stream = SubResource("AudioStreamGenerator_local")
+
+[node name="Network" type="AudioStreamPlayer" parent="Voip" unique_id=523594942]
+stream = SubResource("AudioStreamGenerator_network")
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonRow/CreateLobbyButton" to="." method="create_lobby"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonRow/RefreshButton" to="." method="_on_open_lobby_list_pressed"]
