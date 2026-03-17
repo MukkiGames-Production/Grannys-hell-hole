@@ -193,14 +193,12 @@ func enable_ragdoll(v) -> void:
 	stu_mesh_ragdoll.visible = true
 	stus_bone_simulator.physical_bones_start_simulation()
 	
-	for bone in bones:
-		bone.apply_central_impulse(v)
-
-
-	
+	bones[0].apply_central_impulse(1.5 * v)
+	for i in range(1, bones.size()):
+		bones[i].apply_central_impulse(v)
+		
+		
 func disable_ragdoll() -> void:
 	stu_mesh_normal.visible = true
 	stu_mesh_ragdoll.visible = false
 	stus_bone_simulator.physical_bones_stop_simulation()
-	
-	
