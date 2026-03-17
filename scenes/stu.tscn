@@ -1,9 +1,9 @@
 [gd_scene format=4 uid="uid://b4y3txrunrrya"]
 
 [ext_resource type="Script" uid="uid://de64jyetu0c7k" path="res://scripts/Player/walkingPlayer.gd" id="1_ea1cc"]
-[ext_resource type="Texture2D" uid="uid://7kbpxwjpibwk" path="res://Assets/Players/Stu_mouth.png" id="1_gcelq"]
-[ext_resource type="Texture2D" uid="uid://b0nwljqmretrm" path="res://Assets/Players/Stu_BakedBase.png" id="2_u3om5"]
-[ext_resource type="Texture2D" uid="uid://bh4rb7hqdn5y3" path="res://Assets/Players/Stu_EyeBase.png" id="3_ea1cc"]
+[ext_resource type="Texture2D" uid="uid://7kbpxwjpibwk" path="res://assets/Players/Stu_mouth.png" id="1_gcelq"]
+[ext_resource type="Texture2D" uid="uid://b0nwljqmretrm" path="res://assets/Players/Stu_BakedBase.png" id="2_u3om5"]
+[ext_resource type="Texture2D" uid="uid://bh4rb7hqdn5y3" path="res://assets/Players/Stu_EyeBase.png" id="3_ea1cc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0cuu2"]
 resource_name = "mouth"
@@ -487,7 +487,7 @@ skeleton = NodePath("..")
 libraries/ = SubResource("AnimationLibrary_4miig")
 
 [node name="CameraPivot" type="Node3D" parent="." unique_id=648934604]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3643394, -0.28810003)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3783965, -0.28810003)
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=715171785]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.4148818)
