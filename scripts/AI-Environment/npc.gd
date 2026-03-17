@@ -8,17 +8,18 @@ extends CharacterBody3D
 @onready var agent: NavigationAgent3D = $NavigationAgent3D
 @onready var update_timer: Timer = $UpdateTimer
 @onready var debug_text: Label3D = $DebugText
-
+@onready var last_to_next : Vector3 = Vector3.ZERO
 enum State {
 	CHASE,
 	ROAM,
-	IDLE
+	IDLE,
+	RESET
 }
 
 func _ready() -> void:
 	var root := get_tree().current_scene
 	status = State.CHASE
-	chase_target = root.find_child("Player")
+	chase_target = root.find_child("Stu")
 	agent.path_desired_distance = stop_distance
 	agent.target_desired_distance = stop_distance
 
@@ -27,7 +28,7 @@ func set_move_target(world_pos: Vector3) -> void:
 
 func chase(): # chases current chase_target
 	# if chasee dies or becomes unreachable or timeout, exit state
-	
+
 	# else update current target:
 	agent.target_position = chase_target.global_position
 
@@ -48,6 +49,7 @@ func _physics_process(delta: float) -> void:
 		velocity.x = 0.0
 		velocity.z = 0.0
 		move_and_slide()
+
 		return
 
 	# Get next waypoint along the path
@@ -65,7 +67,11 @@ func _physics_process(delta: float) -> void:
 	# Compute direction AFTER possible replacement
 	var to_next := next_pos - global_position
 	to_next.y = 0.0
-
+	if(last_to_next != to_next):
+		last_to_next = to_next
+	else:
+		to_next = Vector3.ZERO
+		_reset_pos()
 	debug_text.text = "idx=%d/%d nxt(dxz=%.3f dy=%.3f) vel=%.2f fin=%s" % [
 		idx, path.size(),
 		Vector2(next_pos.x - global_position.x, next_pos.z - global_position.z).length(),
@@ -73,6 +79,7 @@ func _physics_process(delta: float) -> void:
 		Vector2(velocity.x, velocity.z).length(),
 		str(agent.is_navigation_finished())
 	]
+
 
 	# Constant-speed movement (no acceleration)
 	if to_next.length() > 0.001:
@@ -88,3 +95,7 @@ func _physics_process(delta: float) -> void:
 func _on_update_timer_timeout() -> void:
 	if status == State.CHASE:
 		chase()
+
+
+func _reset_pos():
+	global_position = Vector3.ZERO
