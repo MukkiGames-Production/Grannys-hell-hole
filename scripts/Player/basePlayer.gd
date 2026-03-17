@@ -7,7 +7,7 @@ class_name BasePlayer
 @export var camera: Camera3D
 @export var max_throw_force := 20.0
 @export var max_charge_time := 1.5  # seconds to reach full power
-@export var ragdoll_time := 4.0 # seconds the player will not have control after entering ragdoll
+@export var ragdoll_time := 3.5 # seconds the player will not have control after entering ragdoll
 @export var ragdoll_skeleton: Skeleton3D
 @export var stus_bone_simulator: PhysicalBoneSimulator3D
 @export var stus_root_bone: PhysicalBone3D
@@ -45,6 +45,7 @@ func _ready() -> void:
 	for child in stus_bone_simulator.get_children():
 		if child is PhysicalBone3D:
 			bones.append(child)
+			child.angular_damp = 10
 
 func _unhandled_input(event: InputEvent) -> void:
 	# Toggle mouse capture with Escape
@@ -193,7 +194,7 @@ func enable_ragdoll(v) -> void:
 	stu_mesh_ragdoll.visible = true
 	stus_bone_simulator.physical_bones_start_simulation()
 	
-	bones[0].apply_central_impulse(1.5 * v)
+	bones[0].apply_central_impulse(1.2 * v)
 	for i in range(1, bones.size()):
 		bones[i].apply_central_impulse(v)
 		

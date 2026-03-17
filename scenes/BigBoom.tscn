@@ -3,12 +3,14 @@
 [ext_resource type="Script" uid="uid://ckfksl81853yy" path="res://scripts/Player/boom.gd" id="1_2arrn"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_gwd4l"]
-radius = 1.0
+radius = 0.001
 
 [sub_resource type="SphereMesh" id="SphereMesh_ymlwh"]
 
-[node name="Bigboom" type="Node3D" unique_id=1707289294]
+[node name="Bigboom" type="Node3D" unique_id=1707289294 node_paths=PackedStringArray("area", "collision_shape")]
 script = ExtResource("1_2arrn")
+area = NodePath("Area3D")
+collision_shape = NodePath("Area3D/CollisionShape3D")
 
 [node name="Area3D" type="Area3D" parent="." unique_id=691818838]
 collision_mask = 2

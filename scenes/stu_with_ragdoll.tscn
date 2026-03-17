@@ -720,10 +720,10 @@ skeleton = NodePath("..")
 [node name="PhysicalBoneSimulator3D" type="PhysicalBoneSimulator3D" parent="Rag Bones" unique_id=532397335]
 
 [node name="Physical Bone Root" type="PhysicalBone3D" parent="Rag Bones/PhysicalBoneSimulator3D" unique_id=199636501]
-transform = Transform3D(-1, -1.17728876e-08, 5.6927153e-08, -5.813176e-08, 0.20252079, -0.97927797, -3.0595307e-15, -0.979278, -0.20252077, -2.0165706e-08, 0.4951667, 0.074718714)
+transform = Transform3D(-1, -1.1729114e-08, 5.6833194e-08, -5.8030892e-08, 0.20211849, -0.97936106, -3.0655429e-15, -0.9793611, -0.20211849, -2.0115271e-08, 0.4951667, 0.074718714)
 collision_layer = 4
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1992796e-10, 0.0021504313, 0.35854506)
-body_offset = Transform3D(3.1473214e-15, 0.9792781, 0.20252076, 1.4728805e-09, 0.20252077, -0.9792782, -1.0000001, 2.982886e-10, -1.4423598e-09, -0.0747187, 0.35067987, 7.364376e-10)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3498897e-10, 0.0022977293, 0.3585442)
+body_offset = Transform3D(3.1593459e-15, 0.9793612, 0.20211846, 1.5737491e-09, 0.20211847, -0.9793613, -1.0000001, 3.1808342e-10, -1.5412709e-09, -0.0747187, 0.35067987, 7.868719e-10)
 bone_name = "Root"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Rag Bones/PhysicalBoneSimulator3D/Physical Bone Root" unique_id=514665882]
@@ -746,11 +746,11 @@ transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_pfi4u")
 
 [node name="Physical Bone Chest" type="PhysicalBone3D" parent="Rag Bones/PhysicalBoneSimulator3D" unique_id=1791211747]
-transform = Transform3D(-4.4395375e-07, 1, -8.452244e-08, -0.63956386, -3.4891235e-07, -0.768738, -0.76873803, -2.872266e-07, 0.63956386, -4.2699178e-08, 0.91799253, -0.012704439)
+transform = Transform3D(-4.447607e-07, 1, -8.331075e-08, -0.63956386, -3.48497e-07, -0.768738, -0.76873803, -2.886219e-07, 0.63956386, -4.3506127e-08, 0.91799253, -0.012704439)
 collision_layer = 4
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2805653e-08, 9.3652e-09, 0.13106683)
-body_offset = Transform3D(1.0000001, 1.1660447e-08, 5.066395e-07, 3.874302e-07, 1.7512988e-08, -1.0000002, -1.1660418e-08, 1.0000001, 1.7513003e-08, -1.1920929e-07, 0.13106686, -1.1660575e-08)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2805653e-08, 1.00133395e-08, 0.13106683)
+body_offset = Transform3D(1.0000001, 1.246741e-08, 5.066395e-07, 3.874302e-07, 1.8724648e-08, -1.0000002, -1.2467368e-08, 1.0000001, 1.8724677e-08, -1.1920929e-07, 0.13106686, -1.2467524e-08)
 bone_name = "Chest"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
