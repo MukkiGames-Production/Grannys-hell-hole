@@ -244,7 +244,8 @@ func _spawn_remote_player(peer_steam_id: int, peer_name: String) -> void:
 	remote.add_child(label_3d)
 
 	# Default spawn position (same as local player start)
-	remote.call_deferred("set_global_transform", Transform3D(Basis(), Vector3(0, 0, 0)))
+
+	remote.call_deferred("set_global_transform", Transform3D(Basis(), $Main/Marker3D.global_position))
 	remote.connect("ready", func():
 		remote.set_physics_process(false)
 		remote.set_process(false)
