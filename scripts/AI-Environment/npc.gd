@@ -105,7 +105,7 @@ func _physics_process(delta: float) -> void:
 		"vy": velocity.y,
 		"vz": velocity.z
 	}
-	GameNetwork.rpc("process_npc_update", data)
+	GameNetwork.send_p2p_packet(0, data, 0)
 
 func _on_update_timer_timeout() -> void:
 	if not multiplayer.is_server(): return

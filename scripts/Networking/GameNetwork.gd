@@ -96,11 +96,7 @@ func process_player_update(data: Dictionary) ->void:
 			data.get("rx", 0), data.get("ry", 0), data.get("rz", 0),
 			data.get("vx", 0), data.get("vy", 0), data.get("vz", 0)])
 
-@rpc("call_remote", "authority", "unreliable")
-func process_npc_update(data: Dictionary) -> void:
-	if data.get("message", "") != "npc_update":
-		return
-	npc_update_received.emit(data)
+
 
 # ---- P2P Reading ----
 
