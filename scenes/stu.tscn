@@ -323,6 +323,7 @@ _data = {
 [sub_resource type="BoxShape3D" id="BoxShape3D_gcelq"]
 
 [node name="Stu" type="CharacterBody3D" unique_id=1816408022 node_paths=PackedStringArray("camera_pivot", "camera") groups=["players"]]
+physics_interpolation_mode = 1
 script = ExtResource("1_ea1cc")
 camera_pivot = NodePath("CameraPivot")
 camera = NodePath("CameraPivot/Camera3D")
@@ -490,7 +491,6 @@ libraries/ = SubResource("AnimationLibrary_4miig")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3783965, -0.28810003)
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=715171785]
-physics_interpolation_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.4148818)
 current = true
 
