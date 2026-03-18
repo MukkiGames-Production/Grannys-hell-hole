@@ -97,6 +97,10 @@ func _on_p2p_packet_received(sender_id: int, data: Dictionary) -> void:
 			_handle_voice_data(data)
 		"player_action":
 			_handle_player_action(sender_id, data)
+		"npc_update":
+			GameNetwork.npc_update_received.emit(data)
+		"handshake":
+			print("[World] Received handshake from %s" % sender_id)
 		_:
 			print("[World] Unhandled packet type '%s' from %s" % [msg, sender_id])
 
