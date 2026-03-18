@@ -57,6 +57,12 @@ properties/4/replication_mode = 1
 properties/5/path = NodePath("GrabbableCube:is_grabbable")
 properties/5/spawn = true
 properties/5/replication_mode = 1
+properties/6/path = NodePath("NPC:position")
+properties/6/spawn = true
+properties/6/replication_mode = 1
+properties/7/path = NodePath("NPC:status")
+properties/7/spawn = true
+properties/7/replication_mode = 1
 
 [node name="StuMap_GODOT" unique_id=2073853177 instance=ExtResource("1_4xfga")]
 
