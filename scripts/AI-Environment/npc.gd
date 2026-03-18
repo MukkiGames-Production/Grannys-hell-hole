@@ -1,5 +1,5 @@
 extends CharacterBody3D
-
+class_name NPC
 @export var speed := 6.0
 @export var chase_target: CharacterBody3D
 @export var status : State = State.IDLE

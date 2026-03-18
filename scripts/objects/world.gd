@@ -98,11 +98,19 @@ func _on_p2p_packet_received(sender_id: int, data: Dictionary) -> void:
 		"player_action":
 			_handle_player_action(sender_id, data)
 		"npc_update":
-			GameNetwork.npc_update_received.emit(data)
+			_handle_npc_update(data)
 		"handshake":
 			print("[World] Received handshake from %s" % sender_id)
 		_:
 			print("[World] Unhandled packet type '%s' from %s" % [msg, sender_id])
+func _handle_npc_update(data: Dictionary) -> void:
+	var npc_id: String = data.get("id", "")
+	var npc_node: Node = $Main.get_node_or_null(npc_id)
+	if npc_node and is_instance_valid(npc_node):
+		npc_node.global_position = Vector3(data.get("px", 0), data.get("py", 0), data.get("pz", 0))
+		npc_node.velocity = Vector3(data.get("vx", 0), data.get("vy", 0), data.get("vz", 0))
+		npc_node.status = data.get("status",0 )
+
 
 func _handle_player_update(sender_id: int, data: Dictionary) -> void:
 	var sender_name: String = Steam.getFriendPersonaName(sender_id)
