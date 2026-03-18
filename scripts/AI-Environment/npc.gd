@@ -19,17 +19,18 @@ func _ready() -> void:
 	if not multiplayer.is_server():
 		set_physics_process(false)
 		$UpdateTimer.stop()
+		GameNetwork.npc_update_received.connect(_on_npc_update)
 		return
 	var root := get_tree().current_scene
 	status = State.CHASE
-	chase_target = root.find_child("Stu")
+	chase_target = root.find_child("Player")
 	agent.path_desired_distance = 1.0
 	agent.target_desired_distance = 0.8
 
-@rpc("unreliable", "call_remote", "authority")
-func sync_npc_state(pos: Vector3, vel: Vector3) -> void:
-	global_position = pos
-	velocity = vel
+func _on_npc_update(data: Dictionary) -> void:
+	if data.get("id", "") == name:
+		global_position = Vector3(data.get("px", 0), data.get("py", 0), data.get("pz", 0))
+		velocity = Vector3(data.get("vx", 0), data.get("vy", 0), data.get("vz", 0))
 
 func set_move_target(world_pos: Vector3) -> void:
 	agent.target_position = world_pos
@@ -93,7 +94,18 @@ func _physics_process(delta: float) -> void:
 		velocity.z = 0.0
 
 	move_and_slide()
-	rpc("sync_npc_state", global_position, velocity)
+
+	var data := {
+		"message": "npc_update",
+		"id": name,
+		"px": global_position.x,
+		"py": global_position.y,
+		"pz": global_position.z,
+		"vx": velocity.x,
+		"vy": velocity.y,
+		"vz": velocity.z
+	}
+	GameNetwork.rpc("process_npc_update", data)
 
 func _on_update_timer_timeout() -> void:
 	if not multiplayer.is_server(): return
