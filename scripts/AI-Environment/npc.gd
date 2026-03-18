@@ -1,7 +1,6 @@
 extends CharacterBody3D
 
-@export var speed := 5.0
-@export var stop_distance := 1.0
+@export var speed := 6.0
 @export var chase_target: CharacterBody3D
 @export var status : State = State.IDLE
 
@@ -23,9 +22,9 @@ func _ready() -> void:
 		return
 	var root := get_tree().current_scene
 	status = State.CHASE
-	chase_target = root.find_child("Player")
-	agent.path_desired_distance = stop_distance
-	agent.target_desired_distance = stop_distance
+	chase_target = root.find_child("Stu")
+	agent.path_desired_distance = 1.0
+	agent.target_desired_distance = 0.8
 
 @rpc("unreliable", "call_remote", "authority")
 func sync_npc_state(pos: Vector3, vel: Vector3) -> void:
@@ -37,9 +36,8 @@ func set_move_target(world_pos: Vector3) -> void:
 
 func chase(): # chases current chase_target
 	# if chasee dies or becomes unreachable or timeout, exit state
-
-	# else update current target:
-	agent.target_position = chase_target.global_position
+	if chase_target:
+		agent.target_position = chase_target.global_position
 
 func _physics_process(delta: float) -> void:
 	# Gravity
@@ -47,11 +45,6 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 	else:
 		velocity.y = 0.0
-
-	# Update target (you can move this to the timer later if you want)
-	if status == State.CHASE:
-		if chase_target:
-			agent.target_position = chase_target.global_position
 
 	# Stop if we’re done
 	if agent.is_navigation_finished():
@@ -69,9 +62,9 @@ func _physics_process(delta: float) -> void:
 	var idx := agent.get_current_navigation_path_index()
 
 	# If next waypoint is basically straight down/up, use the next corner instead.
-	if Vector2(next_pos.x - global_position.x, next_pos.z - global_position.z).length() < 0.01:
-		if path.size() > idx + 1:
-			next_pos = path[idx + 1]
+	#if Vector2(next_pos.x - global_position.x, next_pos.z - global_position.z).length() < 0.01:
+		#if path.size() > idx + 1:
+			#next_pos = path[idx + 1]
 
 	# Compute direction AFTER possible replacement
 	var to_next := next_pos - global_position
