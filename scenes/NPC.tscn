@@ -9,7 +9,6 @@ radius = 0.25
 radius = 0.25
 
 [node name="NPC" type="CharacterBody3D" unique_id=321508815]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.32948327, 0)
 script = ExtResource("1_mhefn")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1627569678]
@@ -30,7 +29,7 @@ target_desired_distance = 0.5
 debug_enabled = true
 
 [node name="UpdateTimer" type="Timer" parent="." unique_id=254858480]
-wait_time = 0.5
+wait_time = 0.25
 autostart = true
 
 [connection signal="timeout" from="UpdateTimer" to="." method="_on_update_timer_timeout"]
