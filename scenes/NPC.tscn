@@ -8,6 +8,13 @@ radius = 0.25
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_nh2m4"]
 radius = 0.25
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_mhefn"]
+radius = 0.045
+height = 0.85
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_mhefn"]
+points = PackedVector3Array(0, 0, 0, 14.745, 0, -9, 14.7, 0, 9, 0, 2, 0, 14.7, 2, -9, 14.7, 2, 9)
+
 [node name="NPC" type="CharacterBody3D" unique_id=321508815]
 script = ExtResource("1_mhefn")
 
@@ -18,6 +25,10 @@ shape = SubResource("CapsuleShape3D_tcuxl")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1535243562]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3782554, 0)
 mesh = SubResource("CapsuleMesh_nh2m4")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1423725020]
+transform = Transform3D(1, 0, 0, 0, -0.63334036, -0.7738733, 0, 0.7738733, -0.63334036, 0, 1.693243, 0.49140579)
+mesh = SubResource("CapsuleMesh_mhefn")
 
 [node name="DebugText" type="Label3D" parent="." unique_id=1452481949]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.516634, 0)
@@ -32,4 +43,31 @@ debug_enabled = true
 wait_time = 0.25
 autostart = true
 
+[node name="WaitTimer" type="Timer" parent="." unique_id=966391778]
+wait_time = 2.0
+one_shot = true
+
+[node name="DetectTimer" type="Timer" parent="." unique_id=448625987]
+one_shot = true
+
+[node name="RayCastC" type="RayCast3D" parent="." unique_id=1265460831]
+transform = Transform3D(1.26, 0, 0, 0, 1.0743266, -0.65834814, 0, 0.65834814, 1.0743266, 0, 1.6741009, 0)
+
+[node name="RayCastL" type="RayCast3D" parent="." unique_id=602170702]
+transform = Transform3D(1.1419477, 0.27822995, 0.45403004, 0, 1.0743266, -0.65834814, -0.532499, 0.59666604, 0.9736705, 0, 1.6741009, 0)
+
+[node name="RayCastR" type="RayCast3D" parent="." unique_id=1928941026]
+transform = Transform3D(1.1276172, -0.2937535, -0.47936216, 0, 1.0743266, -0.65834814, 0.56220925, 0.5891784, 0.9614518, 0, 1.6741009, 0)
+
+[node name="Eyes" type="Area3D" parent="." unique_id=1851697460]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.43771267, 0)
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Eyes" unique_id=1544553815]
+shape = SubResource("ConvexPolygonShape3D_mhefn")
+
 [connection signal="timeout" from="UpdateTimer" to="." method="_on_update_timer_timeout"]
+[connection signal="timeout" from="WaitTimer" to="." method="_on_wait_timer_timeout"]
+[connection signal="timeout" from="DetectTimer" to="." method="_on_detect_timer_timeout"]
+[connection signal="body_entered" from="Eyes" to="." method="_on_eyes_body_entered"]
