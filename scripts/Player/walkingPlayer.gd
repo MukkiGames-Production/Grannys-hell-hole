@@ -1,7 +1,7 @@
 extends BasePlayer
 class_name WalkingPlayer
 
-const SPEED = 5.0
+const SPEED = 15.0
 const JUMP_VELOCITY = 4.5  # if you add jumping later
 var is_walking: bool = false
 func _handle_mouse_look(event: InputEventMouseMotion) -> void:
