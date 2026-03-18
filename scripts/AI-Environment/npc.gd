@@ -5,8 +5,8 @@ class_name NPC
 @export var status : State = State.IDLE
 var map : Node3D
 #var patrols : Dictionary[Node3D, int] = {}
-var patrola : Node3D 
-var patrolb : Node3D 
+var patrola : Node3D
+var patrolb : Node3D
 @export var patrol_route : String = "a"
 var current_patrol : Array[Node]
 var timer_expired_count : int = 0
@@ -31,20 +31,8 @@ enum State {
 	IDLE
 }
 
-func _ready() -> void:
-	#var root := get_node("/root/Main")
-	#status = State.CHASE
-	#chase_target = root.find_child("Stu")
-	#map = root.find_child("Map")
-	map = get_parent().get_node("Map") as Node3D
-	print(map)
-@onready var last_to_next : Vector3 = Vector3.ZERO
-enum State {
-	CHASE,
-	ROAM,
-	IDLE,
-	RESET
-}
+
+
 
 func _ready() -> void:
 	if not multiplayer.is_server():
@@ -57,7 +45,7 @@ func _ready() -> void:
 	chase_target = root.find_child("Player")
 	agent.path_desired_distance = 1.0
 	agent.target_desired_distance = 1.5
-	
+
 	patrola = map.find_child("PatrolA")
 	patrolb = map.find_child("PatrolB")
 	#patrols = {
@@ -89,7 +77,7 @@ func advance_patrol_point(pts: Array[Node], reverse: bool) -> void:
 			patrol_dir = 1
 	else:
 		current_patrol_pt = (current_patrol_pt+1) % pts.size()
-	
+
 	var next_pt := current_patrol_pt
 	agent.target_position = pts[next_pt].global_position
 
@@ -128,7 +116,7 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 	else:
 		velocity.y = 0.0
-		
+
 	match status:
 		State.PATROL:
 			if agent.is_navigation_finished():
@@ -136,16 +124,16 @@ func _physics_process(delta: float) -> void:
 				if wait_timer.is_stopped():
 					print("timer is stopped")
 					start_patrol_wait(2.2)
-					
+
 					velocity.x = 0.0
 					velocity.z = 0.0
 					move_and_slide()
 					return
-					
+
 			var next_posn := agent.get_next_path_position()
 			var to_next := next_posn - global_position
 			to_next.y = 0.0
-				
+
 			var dist := to_next.length()
 			var max_step := speed * delta
 
@@ -155,13 +143,12 @@ func _physics_process(delta: float) -> void:
 			else:
 				var nav_dir := to_next / dist
 				var move_dir := _get_avoidance_dir(nav_dir)
-	# Stop if we’re done
-	if agent.is_navigation_finished():
-		velocity.x = 0.0
-		velocity.z = 0.0
-		move_and_slide()
-
-		return
+				# Stop if we’re done
+				if agent.is_navigation_finished():
+					velocity.x = 0.0
+					velocity.z = 0.0
+					move_and_slide()
+					return
 
 				if move_dir.length() <= 0.001:
 					velocity.x = 0.0
@@ -175,14 +162,13 @@ func _physics_process(delta: float) -> void:
 					velocity.x = move_dir.x * speed
 					velocity.z = move_dir.z * speed
 
-			move_and_slide()
-			face_dir(velocity, delta)
-			
+				move_and_slide()
+				face_dir(velocity, delta)
+
 			# CHECK STATE TRANSITIONS:
-			
+
 
 		State.CHASE:
-			
 			# Stop if we’re done
 			if agent.is_navigation_finished():
 				velocity.x = 0.0
@@ -200,31 +186,6 @@ func _physics_process(delta: float) -> void:
 			if to_next.length() > 0.001:
 				var nav_dir := to_next.normalized()
 				var move_dir := _get_avoidance_dir(nav_dir)
-	# Compute direction AFTER possible replacement
-	var to_next := next_pos - global_position
-	to_next.y = 0.0
-	if(last_to_next != to_next):
-		last_to_next = to_next
-	else:
-		to_next = Vector3.ZERO
-		_reset_pos()
-	debug_text.text = "idx=%d/%d nxt(dxz=%.3f dy=%.3f) vel=%.2f fin=%s" % [
-		idx, path.size(),
-		Vector2(next_pos.x - global_position.x, next_pos.z - global_position.z).length(),
-		abs(next_pos.y - global_position.y),
-		Vector2(velocity.x, velocity.z).length(),
-		str(agent.is_navigation_finished())
-	]
-
-
-	# Constant-speed movement (no acceleration)
-	if to_next.length() > 0.001:
-		var dir := to_next.normalized()
-		velocity.x = dir.x * speed
-		velocity.z = dir.z * speed
-	else:
-		velocity.x = 0.0
-		velocity.z = 0.0
 
 				if move_dir.length() > 0.001:
 					velocity.x = move_dir.x * speed
@@ -238,9 +199,9 @@ func _physics_process(delta: float) -> void:
 
 			move_and_slide()
 			face_dir(velocity, delta)
-			
+
 			# CHECK STATE TRANSITIONS:
-			
+
 
 	var data := {
 		"message": "npc_update",
