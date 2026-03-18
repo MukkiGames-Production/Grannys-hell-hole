@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://bkngoexmlkto3"]
+[gd_scene format=3 uid="uid://w8wxgyyoxupy"]
 
 [ext_resource type="PackedScene" uid="uid://bf1ndswf745ew" path="res://Assets/Blender/StuMap_GODOT.blend" id="1_4xfga"]
 [ext_resource type="PackedScene" uid="uid://b4y3txrunrrya" path="res://scenes/stu.tscn" id="2_gldc4"]
