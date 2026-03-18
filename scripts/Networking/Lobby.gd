@@ -450,7 +450,7 @@ func process_p2p_packet(sender_id: int, data: Dictionary) -> void:
 		"start_game":
 			print("Received start game signal from host!")
 			GameNetwork.set_lobby(lobby_id, lobby_members.duplicate(true), false)
-			get_tree().change_scene_to_file("res://scenes/world.tscn")
+			get_tree().change_scene_to_file(ReturnScene.resource_path)
 		"accept_game":
 			print("Received accept game from: %s" % sender_id)
 
