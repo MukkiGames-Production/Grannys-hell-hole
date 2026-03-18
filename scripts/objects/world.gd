@@ -42,6 +42,7 @@ func _ready() -> void:
 
 func _register_scene_objects() -> void:
 	# Find all GrabbableObject nodes under $Main and index them by item_id
+
 	for node in _find_nodes_of_type($Main, "GrabbableObject"):
 		var obj := node as GrabbableObject
 		if obj and obj.item_id != "":
@@ -96,8 +97,20 @@ func _on_p2p_packet_received(sender_id: int, data: Dictionary) -> void:
 			_handle_voice_data(data)
 		"player_action":
 			_handle_player_action(sender_id, data)
+		"npc_update":
+			_handle_npc_update(data)
+		"handshake":
+			print("[World] Received handshake from %s" % sender_id)
 		_:
 			print("[World] Unhandled packet type '%s' from %s" % [msg, sender_id])
+func _handle_npc_update(data: Dictionary) -> void:
+	var npc_id: String = data.get("id", "")
+	var npc_node: Node = $Main.get_node_or_null(npc_id)
+	if npc_node and is_instance_valid(npc_node):
+		npc_node.global_position = Vector3(data.get("px", 0), data.get("py", 0), data.get("pz", 0))
+		npc_node.velocity = Vector3(data.get("vx", 0), data.get("vy", 0), data.get("vz", 0))
+		npc_node.status = data.get("status",0 )
+
 
 func _handle_player_update(sender_id: int, data: Dictionary) -> void:
 	var sender_name: String = Steam.getFriendPersonaName(sender_id)
@@ -231,18 +244,20 @@ func _spawn_remote_player(peer_steam_id: int, peer_name: String) -> void:
 	remote.add_child(label_3d)
 
 	# Default spawn position (same as local player start)
-	remote.call_deferred("set_global_transform", Transform3D(Basis(), Vector3(0, 0, 0)))
+
+	remote.call_deferred("set_global_transform", Transform3D(Basis(), Vector3(5, 0, 0)))
 	remote.connect("ready", func():
 		remote.set_physics_process(false)
 		remote.set_process(false)
 		remote.set_process_input(false)
 		remote.set_process_unhandled_input(false)
-
-		var cam = remote.get_node_or_null("CameraPivot/Camera3D")
-		if cam:
-			cam.current = false
-			cam.physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_OFF
 	)
+
+	var cam = remote.get_node_or_null("CameraPivot/Camera3D")
+	if cam:
+		cam.current = false
+		cam.queue_free()
+
 	if (peer_steam_id == Steam.getSteamID() or peer_name == Steam.getPersonaName()):
 		return
 	$Main.add_child(remote, true)
