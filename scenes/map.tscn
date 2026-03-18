@@ -124,7 +124,8 @@ _spawnable_scenes = PackedStringArray("uid://b4y3txrunrrya")
 spawn_path = NodePath("Marker3D")
 
 [node name="Marker3D" type="Marker3D" parent="MultiplayerSpawner" index="0" unique_id=1320762838]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.906487, 3.6569457, 2.4580793)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9617481, 1.6474087, 2.4580793)
+gizmo_extents = 0.6
 
 [node name="Local" type="AudioStreamPlayer" parent="." index="144" unique_id=1907834062]
 stream = SubResource("AudioStreamGenerator_2lpho")
