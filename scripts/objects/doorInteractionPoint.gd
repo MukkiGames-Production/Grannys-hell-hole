@@ -1,7 +1,8 @@
-extends InteractionPoint
+extends Area3D
+class_name DoorInteractionArea
 
 
-func empty_interact() -> void:
+func interact() -> void:
 	var door := _find_door_controller()
 	if door:
 		door.toggle_door()

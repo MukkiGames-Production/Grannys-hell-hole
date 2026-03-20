@@ -12,12 +12,15 @@ enum State {
 @onready var door: Node3D = $"."
 @onready var debug_text: Label3D = $DebugText
 @onready var door_model: Node3D = $DoorModel
+@onready var door_body: AnimatableBody3D = $DoorModel/AnimatableBody3D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_update_debug_text()
 	animation_player.process_mode = Node.PROCESS_MODE_ALWAYS
+	animation_player.callback_mode_process = AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_PHYSICS
+	door_body.sync_to_physics = true
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

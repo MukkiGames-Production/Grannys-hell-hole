@@ -41,8 +41,9 @@ func _ready() -> void:
 		GameNetwork.npc_update_received.connect(_on_npc_update)
 		return
 	var root := get_tree().current_scene
-	status = State.CHASE
-	chase_target = root.find_child("Player")
+	#status = State.CHASE
+	#chase_target = root.find_child("Player")
+	map = root.find_child("Map")
 	agent.path_desired_distance = 1.0
 	agent.target_desired_distance = 1.5
 

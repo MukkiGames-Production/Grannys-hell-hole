@@ -65,6 +65,12 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		_handle_mouse_look(event)
 
+	if event.is_action_pressed("interact"):
+		if event is InputEventKey and event.echo:
+			return
+		try_door_interact()
+		return
+
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
 			if held_object:
@@ -125,7 +131,7 @@ func _update_interaction_raycast() -> void:
 
 	var query = PhysicsRayQueryParameters3D.create(from, to)
 	query.exclude = [self]
-	query.collide_with_areas = true  # important for InteractionPoint (Area3D)
+	query.collide_with_areas = true  # important for Area3D interactions
 	query.collision_mask = query.collision_mask | INTERACTION_LAYER_8_MASK
 
 	object_in_sight = space_state.intersect_ray(query)
@@ -134,7 +140,7 @@ func _update_interaction_raycast() -> void:
 	if object_in_sight:
 		var collider = object_in_sight.collider
 		if collider != held_object:
-			if (collider is GrabbableObject and collider.is_grabbable) or collider is InteractionPoint:
+			if (collider is GrabbableObject and collider.is_grabbable) or collider is InteractionPoint or collider is DoorInteractionArea:
 				currently_sees = true
 
 	if currently_sees != sees_interactable:
@@ -145,6 +151,8 @@ func try_interact() -> void:
 	var target = null
 	if object_in_sight:
 		target = object_in_sight.collider
+	
+	print("collider clicked: ", target)
 
 	# Case 1: Holding something → try place or drop
 	if held_object:
@@ -165,6 +173,25 @@ func try_interact() -> void:
 		print("Picked up ", held_object)
 	elif target is InteractionPoint:
 		target.empty_interact()
+
+
+func try_door_interact() -> void:
+	if not object_in_sight:
+		return
+
+	var target = object_in_sight.collider
+	var door = _find_door_controller(target)
+	if door:
+		door.toggle_door()
+
+
+func _find_door_controller(start: Object) -> Node:
+	var node := start as Node
+	while node:
+		if node.has_method("toggle_door"):
+			return node
+		node = node.get_parent()
+	return null
 		
 func boom_ragdoll(origin: Vector3, strength: float):
 	# Horizontal direction only (ignore Y difference)

@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://d0co7xxx1604o" path="res://scripts/Player/swapReticle.gd" id="4_tbgi4"]
 [ext_resource type="Texture2D" uid="uid://dhu4lf3trb2sp" path="res://Assets/reticleFull.tres" id="5_tefeu"]
 [ext_resource type="PackedScene" uid="uid://h5sep0m58vfb" path="res://scenes/stu_with_ragdoll.tscn" id="8_85g3d"]
-[ext_resource type="PackedScene" uid="uid://bkngoexmlkto3" path="res://scenes/map.tscn" id="8_tipki"]
+[ext_resource type="PackedScene" uid="uid://bkngoexmlkto3" path="res://scenes/Patrolmap.tscn" id="8_tipki"]
 [ext_resource type="PackedScene" uid="uid://bnbggqkcgb1wp" path="res://scenes/NPC.tscn" id="9_85g3d"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_85g3d"]

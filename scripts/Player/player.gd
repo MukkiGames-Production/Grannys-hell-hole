@@ -62,7 +62,7 @@ func _process(delta: float) -> void:
 
 	var currently_sees: bool = (object_in_sight) \
 								and (object_in_sight.collider != held_object) \
-								and (object_in_sight.collider is GrabbableObject or object_in_sight.collider is InteractionPoint)
+								and (object_in_sight.collider is GrabbableObject or object_in_sight.collider is InteractionPoint or object_in_sight.collider is DoorInteractionArea)
 
 	if currently_sees != seesInteractable:
 		seesInteractable = currently_sees
@@ -120,3 +120,5 @@ func try_interact():
 		print("Picked up " + str(held_object))
 	elif target is InteractionPoint:
 		target.empty_interact()
+	elif target is DoorInteractionArea:
+		target.interact()
