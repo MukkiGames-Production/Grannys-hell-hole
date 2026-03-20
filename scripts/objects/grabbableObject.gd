@@ -7,8 +7,14 @@ class_name GrabbableObject
 @export var hold_offset := Vector3(0.6, -0.4, -2.0)
 @export var is_grabbable := true
 
+@onready var explosion: PackedScene = preload("res://scenes/BigBoom.tscn")
+
 var is_held := false
 var holder: Node3D = null
+
+func _ready():
+	contact_monitor = true
+	max_contacts_reported = 10
 
 func _physics_process(delta):
 	if not is_held or holder == null:
@@ -21,6 +27,24 @@ func _physics_process(delta):
 	global_position = global_position.lerp(target_pos, follow_speed * delta)
 	linear_velocity = Vector3.ZERO
 	angular_velocity = Vector3.ZERO
+	
+#check for player, and if hit, ragdoll
+func _on_body_entered(body):
+	if body.is_in_group("players"):
+		try_ragdoll(body)
+		
+func try_ragdoll(body):
+	var speed = linear_velocity.length()
+	print("pelted stu with speed " + str(speed))
+
+	if speed > 4.0: 
+		var boom = explosion.instantiate()
+		add_child(boom)
+		boom.global_position = global_position
+		print(boom.position)
+		boom.create(1.0, 5)
+		
+
 
 #grab helper
 func grab(camera: Node3D):

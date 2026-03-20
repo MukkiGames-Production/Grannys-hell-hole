@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bw4p3rdmo33fl"]
 
 [ext_resource type="Script" uid="uid://ckix3hutnyvvu" path="res://scripts/objects/world.gd" id="1_f3sb7"]
-[ext_resource type="PackedScene" uid="uid://0np70rfgmlqq" path="res://scenes/main2.tscn" id="2_qfnet"]
+[ext_resource type="PackedScene" uid="uid://0np70rfgmlqq" path="res://scenes/DemoRoom.tscn" id="2_qfnet"]
 [ext_resource type="PackedScene" uid="uid://bsspxi0kmi1qg" path="res://scenes/menu.tscn" id="3_aqk2v"]
 [ext_resource type="Script" uid="uid://bbdk8cpwa1nnk" path="res://scripts/Networking/Voip.gd" id="4_k0juu"]
 [ext_resource type="PackedScene" uid="uid://bmpg058odbxwl" path="res://scenes/bingo_room.scn" id="5_71j4m"]
