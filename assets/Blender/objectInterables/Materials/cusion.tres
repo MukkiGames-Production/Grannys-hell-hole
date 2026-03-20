@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cuki2yiks7xec"]
+
+[resource]
+resource_name = "cusion"
+cull_mode = 2
+albedo_color = Color(0.49158937, 0.09401657, 0.09010366, 1)
+roughness = 0.5

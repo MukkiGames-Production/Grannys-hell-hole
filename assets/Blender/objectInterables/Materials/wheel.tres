@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bhikbi0xbbp22"]
+
+[resource]
+resource_name = "wheel"
+cull_mode = 2
+albedo_color = Color(0.17499742, 0.17499742, 0.17499742, 1)
+roughness = 0.5

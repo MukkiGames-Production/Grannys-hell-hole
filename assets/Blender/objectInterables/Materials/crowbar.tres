@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cu6qsjwknsf8w"]
+
+[resource]
+resource_name = "crowbar"
+cull_mode = 2
+albedo_color = Color(0.6666604, 0.21612905, 0.23739938, 1)
+roughness = 0.5
