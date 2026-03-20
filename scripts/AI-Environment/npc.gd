@@ -1,12 +1,12 @@
 extends CharacterBody3D
-
+class_name NPC
 @export var speed := 6.0
 @export var chase_target: CharacterBody3D
 @export var status : State = State.IDLE
 var map : Node3D
 #var patrols : Dictionary[Node3D, int] = {}
-var patrola : Node3D 
-var patrolb : Node3D 
+var patrola : Node3D
+var patrolb : Node3D
 @export var patrol_route : String = "a"
 var current_patrol : Array[Node]
 var timer_expired_count : int = 0
@@ -31,28 +31,21 @@ enum State {
 	IDLE
 }
 
+
+
+
 func _ready() -> void:
-<<<<<<< Updated upstream
-	#var root := get_node("/root/Main")
-	#status = State.CHASE
-	#chase_target = root.find_child("Stu")
-	#map = root.find_child("Map")
-	map = get_parent().get_node("Map") as Node3D
-	print(map)
-=======
 	if not multiplayer.is_server():
 		set_physics_process(false)
 		$UpdateTimer.stop()
 		GameNetwork.npc_update_received.connect(_on_npc_update)
 		return
 	var root := get_tree().current_scene
-	map = root.find_child("Map")
-	#status = State.CHASE
-	#chase_target = root.find_child("Player")
->>>>>>> Stashed changes
+	status = State.CHASE
+	chase_target = root.find_child("Player")
 	agent.path_desired_distance = 1.0
 	agent.target_desired_distance = 1.5
-	
+
 	patrola = map.find_child("PatrolA")
 	patrolb = map.find_child("PatrolB")
 	#patrols = {
@@ -84,7 +77,7 @@ func advance_patrol_point(pts: Array[Node], reverse: bool) -> void:
 			patrol_dir = 1
 	else:
 		current_patrol_pt = (current_patrol_pt+1) % pts.size()
-	
+
 	var next_pt := current_patrol_pt
 	agent.target_position = pts[next_pt].global_position
 
@@ -104,6 +97,13 @@ func start_patrol_wait(seconds: float) -> void:
 	velocity.x = 0.0
 	velocity.z = 0.0
 	wait_timer.start(seconds)
+func _on_npc_update(data: Dictionary) -> void:
+	if data.get("id", "") == name:
+		global_position = Vector3(data.get("px", 0), data.get("py", 0), data.get("pz", 0))
+		velocity = Vector3(data.get("vx", 0), data.get("vy", 0), data.get("vz", 0))
+
+func set_move_target(world_pos: Vector3) -> void:
+	agent.target_position = world_pos
 
 func chase(): # chases current chase_target
 	# if chasee dies or becomes unreachable or timeout, exit state
@@ -116,7 +116,7 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 	else:
 		velocity.y = 0.0
-		
+
 	match status:
 		State.PATROL:
 			if agent.is_navigation_finished():
@@ -124,16 +124,16 @@ func _physics_process(delta: float) -> void:
 				if wait_timer.is_stopped():
 					print("timer is stopped")
 					start_patrol_wait(2.2)
-					
+
 					velocity.x = 0.0
 					velocity.z = 0.0
 					move_and_slide()
 					return
-					
+
 			var next_posn := agent.get_next_path_position()
 			var to_next := next_posn - global_position
 			to_next.y = 0.0
-				
+
 			var dist := to_next.length()
 			var max_step := speed * delta
 
@@ -143,6 +143,12 @@ func _physics_process(delta: float) -> void:
 			else:
 				var nav_dir := to_next / dist
 				var move_dir := _get_avoidance_dir(nav_dir)
+				# Stop if we’re done
+				if agent.is_navigation_finished():
+					velocity.x = 0.0
+					velocity.z = 0.0
+					move_and_slide()
+					return
 
 				if move_dir.length() <= 0.001:
 					velocity.x = 0.0
@@ -156,14 +162,13 @@ func _physics_process(delta: float) -> void:
 					velocity.x = move_dir.x * speed
 					velocity.z = move_dir.z * speed
 
-			move_and_slide()
-			face_dir(velocity, delta)
-			
+				move_and_slide()
+				face_dir(velocity, delta)
+
 			# CHECK STATE TRANSITIONS:
-			
+
 
 		State.CHASE:
-			
 			# Stop if we’re done
 			if agent.is_navigation_finished():
 				velocity.x = 0.0
@@ -194,11 +199,24 @@ func _physics_process(delta: float) -> void:
 
 			move_and_slide()
 			face_dir(velocity, delta)
-			
+
 			# CHECK STATE TRANSITIONS:
-			
+
+
+	var data := {
+		"message": "npc_update",
+		"id": name,
+		"px": global_position.x,
+		"py": global_position.y,
+		"pz": global_position.z,
+		"vx": velocity.x,
+		"vy": velocity.y,
+		"vz": velocity.z
+	}
+	GameNetwork.send_p2p_packet(0, data, 0)
 
 func _on_update_timer_timeout() -> void:
+	if not multiplayer.is_server(): return
 	if status == State.CHASE:
 		chase()
 
@@ -327,3 +345,5 @@ func _on_detect_timer_timeout() -> void:
 	status = State.CHASE
 	chase()
 	detect_candidate = null
+func _reset_pos():
+	global_position = Vector3.ZERO
