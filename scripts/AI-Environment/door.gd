@@ -16,7 +16,7 @@ enum State {
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	debug_text.text = "Door Closed"
+	_update_debug_text()
 	animation_player.process_mode = Node.PROCESS_MODE_ALWAYS
 
 
@@ -25,6 +25,9 @@ func _process(delta: float) -> void:
 	pass
 
 func toggle_door():
+	if animation_player.is_playing():
+		return
+
 	if status == State.CLOSED:
 		# open
 		status = State.OPEN
@@ -35,3 +38,18 @@ func toggle_door():
 		status = State.CLOSED
 		# do door anim
 		animation_player.play_backwards("open_door")
+
+	_update_debug_text()
+
+
+func _update_debug_text() -> void:
+	if not debug_text:
+		return
+
+	match status:
+		State.OPEN:
+			debug_text.text = "Door Open"
+		State.CLOSED:
+			debug_text.text = "Door Closed"
+		_:
+			debug_text.text = "Door"

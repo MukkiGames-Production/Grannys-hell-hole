@@ -32,12 +32,24 @@ enum State {
 }
 
 func _ready() -> void:
+<<<<<<< Updated upstream
 	#var root := get_node("/root/Main")
 	#status = State.CHASE
 	#chase_target = root.find_child("Stu")
 	#map = root.find_child("Map")
 	map = get_parent().get_node("Map") as Node3D
 	print(map)
+=======
+	if not multiplayer.is_server():
+		set_physics_process(false)
+		$UpdateTimer.stop()
+		GameNetwork.npc_update_received.connect(_on_npc_update)
+		return
+	var root := get_tree().current_scene
+	map = root.find_child("Map")
+	#status = State.CHASE
+	#chase_target = root.find_child("Player")
+>>>>>>> Stashed changes
 	agent.path_desired_distance = 1.0
 	agent.target_desired_distance = 1.5
 	

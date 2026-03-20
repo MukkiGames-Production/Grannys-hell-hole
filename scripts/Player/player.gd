@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
+const INTERACTION_LAYER_8_MASK := 1 << 7
 
 @export var mouse_sensitivity := 0.002
 @export var camera_pivot: Node3D
@@ -55,6 +56,7 @@ func _process(delta: float) -> void:
 	var query = PhysicsRayQueryParameters3D.create(from, to)
 	query.exclude = [self]
 	query.collide_with_areas = true
+	query.collision_mask = query.collision_mask | INTERACTION_LAYER_8_MASK
 
 	object_in_sight = space_state.intersect_ray(query)
 

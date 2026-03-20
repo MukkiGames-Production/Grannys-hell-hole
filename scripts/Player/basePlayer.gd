@@ -27,6 +27,7 @@ var ragdoll_state = false
 var root_bone_idx: int = -1
 
 signal look_at_interactable(can_see: bool)  # for reticle/UI feedback
+const INTERACTION_LAYER_8_MASK := 1 << 7
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -125,6 +126,7 @@ func _update_interaction_raycast() -> void:
 	var query = PhysicsRayQueryParameters3D.create(from, to)
 	query.exclude = [self]
 	query.collide_with_areas = true  # important for InteractionPoint (Area3D)
+	query.collision_mask = query.collision_mask | INTERACTION_LAYER_8_MASK
 
 	object_in_sight = space_state.intersect_ray(query)
 
