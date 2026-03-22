@@ -1,5 +1,6 @@
 extends RigidBody3D
 class_name GrabbableObject
+@onready var mesh_instance: MeshInstance3D = $MeshInstance3D
 @export var item_id: String = ""
 @export var hold_distance := 1.0
 @export var follow_speed := 40.0
@@ -70,3 +71,6 @@ func move_to_position(target: Vector3, duration: float = 0.3):
 	tween.tween_property(self, "global_position", target, duration)\
 		.set_trans(Tween.TRANS_SINE)\
 		.set_ease(Tween.EASE_OUT)
+		
+func replace_model(model: Mesh):
+	mesh_instance.mesh = model

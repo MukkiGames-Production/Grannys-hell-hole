@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://brxe1qi1uvucs"]
+
+[ext_resource type="Script" uid="uid://dlfa4844hulox" path="res://scripts/objects/grabbableObject.gd" id="1_xi8cj"]
+[ext_resource type="ArrayMesh" uid="uid://vptm3kp0gg2y" path="res://Assets/Blender/Grabbables/StuItems_Carrot.res" id="2_spbup"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xi8cj"]
+size = Vector3(0.1873703, 0.22363281, 0.890625)
+
+[node name="Carrot" type="Node3D" unique_id=2076690088]
+
+[node name="GrabbableObject" type="RigidBody3D" parent="." unique_id=421883646]
+script = ExtResource("1_xi8cj")
+item_id = "Carrot"
+metadata/_custom_type_script = "uid://dlfa4844hulox"
+
+[node name="StuItemsCarrot" type="MeshInstance3D" parent="GrabbableObject" unique_id=1283946406]
+mesh = ExtResource("2_spbup")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GrabbableObject" unique_id=784429323]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.009212494, 0, -0.0546875)
+shape = SubResource("BoxShape3D_xi8cj")

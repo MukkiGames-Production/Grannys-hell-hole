@@ -17,13 +17,17 @@ func empty_interact():
 #helpers
 	
 #moves relative to interaction object
-func move_to_point(item, offset: Vector3, duration: float = 0.3, keep_frozen: bool = false):
+func move_to_point(item, offset: Vector3, duration: float = 0.3,
+ 				keep_frozen: bool = false, target_rotation: Basis = Basis.IDENTITY):
 	item.linear_velocity = Vector3.ZERO
 	item.angular_velocity = Vector3.ZERO
 	item.freeze = true
 	var target = global_position + offset
 	var tween = create_tween()
 	tween.tween_property(item, "global_position", target, duration)\
+		.set_trans(Tween.TRANS_SINE)\
+		.set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(item, "global_basis", target_rotation, duration)\
 		.set_trans(Tween.TRANS_SINE)\
 		.set_ease(Tween.EASE_OUT)
 	if not keep_frozen:
