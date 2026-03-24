@@ -1,27 +1,27 @@
-[gd_scene format=3 uid="uid://di85bl0mj8xfo"]
+[gd_scene format=3 uid="uid://csd6mw1abb31t"]
 
-[ext_resource type="Script" uid="uid://cwfrabe3emd5g" path="res://scripts/objects/Pot.gd" id="1_h267t"]
-[ext_resource type="ArrayMesh" uid="uid://dupwh0xci5ox0" path="res://Assets/Blender/Interactables/StuInteractables_Pot.res" id="1_uxrai"]
-[ext_resource type="ArrayMesh" uid="uid://duvvxoiefpen7" path="res://Assets/Blender/Grabbables/StuItems_Hot Ladle.res" id="2_6w76y"]
-[ext_resource type="PackedScene" uid="uid://brxe1qi1uvucs" path="res://scenes/Objects/Carrot.tscn" id="3_33163"]
-[ext_resource type="ArrayMesh" uid="uid://b0qmlkne4hols" path="res://Assets/Blender/Interactables/StuInteractables_Stew.res" id="4_krxr5"]
+[ext_resource type="Script" uid="uid://cwfrabe3emd5g" path="res://scripts/objects/Pot.gd" id="1_qv0rk"]
+[ext_resource type="ArrayMesh" uid="uid://duvvxoiefpen7" path="res://Assets/Blender/Grabbables/StuItems_Hot Ladle.res" id="2_g87nl"]
+[ext_resource type="PackedScene" uid="uid://brxe1qi1uvucs" path="res://scenes/Objects/Carrot.tscn" id="3_evays"]
+[ext_resource type="ArrayMesh" uid="uid://dupwh0xci5ox0" path="res://Assets/Blender/Interactables/StuInteractables_Pot.res" id="4_dwba8"]
+[ext_resource type="ArrayMesh" uid="uid://b0qmlkne4hols" path="res://Assets/Blender/Interactables/StuInteractables_Stew.res" id="5_fjlj7"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_33163"]
 height = 0.6883119
 radius = 0.75146484
 
 [node name="Pot" type="Area3D" unique_id=913797376]
-script = ExtResource("1_h267t")
-hotladle = ExtResource("2_6w76y")
-carrot = ExtResource("3_33163")
+script = ExtResource("1_qv0rk")
+hotladle = ExtResource("2_g87nl")
+carrot = ExtResource("3_evays")
 metadata/_custom_type_script = "uid://d0uhvbq4j1buf"
 
 [node name="StuInteractablesPot" type="MeshInstance3D" parent="." unique_id=899464032]
-mesh = ExtResource("1_uxrai")
+mesh = ExtResource("4_dwba8")
 
 [node name="StuInteractablesStew" type="MeshInstance3D" parent="." unique_id=248250887]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08466864, 0.11734998, 0.14738613)
-mesh = ExtResource("4_krxr5")
+mesh = ExtResource("5_fjlj7")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=730581702]
 
