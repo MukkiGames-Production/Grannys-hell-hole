@@ -8,6 +8,15 @@ var map : Node3D
 var patrola : Node3D
 var patrolb : Node3D
 @export var patrol_route : String = "a"
+@export var schedule_entries: Array[Dictionary] = [
+	{ "block": "EARLY_MORNING", "location_key": "patrol_a", "behavior": "patrol", "priority": 0 },
+	{ "block": "MORNING",       "location_key": "dining_hall", "behavior": "patrol", "priority": 0 },
+	{ "block": "AFTERNOON",     "location_key": "patrol_b", "behavior": "patrol", "priority": 0 },
+	{ "block": "EVENING",       "location_key": "patrol_a", "behavior": "patrol", "priority": 0 },
+	{ "block": "NIGHT",         "location_key": "idle_spot", "behavior": "idle", "priority": 0 },
+	{ "block": "LATE_NIGHT",    "location_key": "idle_spot", "behavior": "idle", "priority": 0 },
+]
+var current_schedule_entry: Dictionary = {}
 var current_patrol : Array[Node]
 var timer_expired_count : int = 0
 var patrol_dir : int = 1 # 1 = forward, -1 = backward
@@ -40,26 +49,75 @@ func _ready() -> void:
 		$UpdateTimer.stop()
 		GameNetwork.npc_update_received.connect(_on_npc_update)
 		return
-	var root := get_tree().current_scene
+	map = get_tree().current_scene
 	status = State.CHASE
-	chase_target = root.find_child("Player")
+	chase_target = map.find_child("Player", true, false)
 	agent.path_desired_distance = 1.0
 	agent.target_desired_distance = 1.5
 
-	patrola = map.find_child("PatrolA")
-	patrolb = map.find_child("PatrolB")
-	#patrols = {
-		#patrola: patrola.get_child_count() # (Node3D, int)
-		#
-	#}
-	# testing patrol
-	status = State.PATROL
-	match patrol_route:
-		"a":
-			startPatrolA()
-		"b":
-			startPatrolB()
+	patrola = map.find_child("PatrolA", true, false)
+	patrolb = map.find_child("PatrolB", true, false)
 
+	Schduler.register_npc(self, schedule_entries)
+
+	# Apply schedule immediately
+	_apply_schedule_for_current_block()
+
+	# React when block changes (MORNING -> AFTERNOON etc)
+	Schduler.block_changed.connect(_on_scheduler_block_changed)
+
+
+
+func _exit_tree() -> void:
+	if Engine.has_singleton("Schduler"):
+		Schduler.unregister_npc(self)
+
+func _on_scheduler_block_changed(_new_block_name: String) -> void:
+	if not multiplayer.is_server():
+		return
+	_apply_schedule_for_current_block()
+
+func _apply_schedule_for_current_block() -> void:
+	current_schedule_entry = Schduler.get_schedule_for(self)
+
+	if current_schedule_entry.is_empty():
+		status = State.IDLE
+		return
+
+	var behavior: String = current_schedule_entry.get("behavior", "idle")
+	var location_key: String = current_schedule_entry.get("location_key", "")
+
+	match behavior:
+		"chase":
+			status = State.CHASE
+			chase()
+		"patrol":
+			status = State.PATROL
+			_apply_location(location_key)
+		"idle":
+			status = State.IDLE
+			velocity.x = 0.0
+			velocity.z = 0.0
+		_:
+			status = State.IDLE
+
+func _apply_location(location_key: String) -> void:
+	match location_key:
+		"patrol_a":
+			startPatrolA()
+		"patrol_b":
+			startPatrolB()
+		"dining_hall":
+			var dining := map.find_child("DinningRoom", true, false)
+			if dining:
+				set_move_target((dining as Node3D).global_position)
+		"idle_spot":
+			var idle := map.find_child("IdleSpot", true, false)
+			if idle:
+				set_move_target((idle as Node3D).global_position)
+		_:
+			# fallback
+			startPatrolA()
 
 #func set_move_target(world_pos: Vector3) -> void:
 	#agent.target_position = world_pos
@@ -82,16 +140,22 @@ func advance_patrol_point(pts: Array[Node], reverse: bool) -> void:
 	agent.target_position = pts[next_pt].global_position
 
 func startPatrolA():
-	#var pts_num := patrola.get_child_count()
-	current_patrol = patrolb.get_children()
-	var next_pt := current_patrol_pt
-	agent.target_position = current_patrol[next_pt].global_position
+	if patrola == null:
+		return
+	current_patrol = patrola.get_children()
+	if current_patrol.is_empty():
+		return
+	current_patrol_pt = clamp(current_patrol_pt, 0, current_patrol.size() - 1)
+	agent.target_position = (current_patrol[current_patrol_pt] as Node3D).global_position
 
 func startPatrolB():
-	#var pts_num := patrola.get_child_count()
+	if patrolb == null:
+		return
 	current_patrol = patrolb.get_children()
-	var next_pt := current_patrol_pt
-	agent.target_position = current_patrol[next_pt].global_position
+	if current_patrol.is_empty():
+		return
+	current_patrol_pt = clamp(current_patrol_pt, 0, current_patrol.size() - 1)
+	agent.target_position = (current_patrol[current_patrol_pt] as Node3D).global_position
 
 func start_patrol_wait(seconds: float) -> void:
 	velocity.x = 0.0
@@ -213,6 +277,7 @@ func _physics_process(delta: float) -> void:
 		"vy": velocity.y,
 		"vz": velocity.z
 	}
+	Schduler.debug_print_all_schedules()
 	GameNetwork.send_p2p_packet(0, data, 0)
 
 func _on_update_timer_timeout() -> void:
