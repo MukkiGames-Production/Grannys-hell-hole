@@ -29,7 +29,6 @@
 # the current block.  NPCs should poll this every update-timer tick.
 
 extends Node
-
 # ---------------------------------------------------------------------------
 # Signals
 # ---------------------------------------------------------------------------
@@ -45,7 +44,7 @@ signal new_day(day_number: int)
 # ---------------------------------------------------------------------------
 
 ## How many real-world seconds make up one full in-game day.
-@export var real_day_duration_seconds: float = 480.0   # 8 minutes default
+@export var real_day_duration_seconds: float = 50.0   # 8 minutes default
 
 ## Which hour the day starts at (0–23).  Lets you skip the night if desired.
 @export var start_hour: float = 6.0
