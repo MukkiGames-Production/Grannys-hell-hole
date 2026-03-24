@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://di85bl0mj8xfo"]
+
+[ext_resource type="Script" uid="uid://wekguu7pwmym" path="res://scripts/objects/Board.gd" id="1_h267t"]
+[ext_resource type="ArrayMesh" uid="uid://dwhi6yxtdncgd" path="res://Assets/Blender/Interactables/StuInteractables_Board.res" id="2_6w76y"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h267t"]
+size = Vector3(3.677246, 0.14056396, 0.49743652)
+
+[node name="Board" type="Area3D" unique_id=913797376]
+script = ExtResource("1_h267t")
+valid_objects = Array[String](["Crowbar"])
+metadata/_custom_type_script = "uid://d0uhvbq4j1buf"
+
+[node name="StuInteractablesBoard" type="MeshInstance3D" parent="." unique_id=899464032]
+mesh = ExtResource("2_6w76y")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1579440407]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0012207031, 0.09333572, 0.20721436)
+shape = SubResource("BoxShape3D_h267t")

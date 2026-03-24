@@ -3,7 +3,7 @@ class_name NPC
 @export var speed := 6.0
 @export var chase_target: CharacterBody3D
 @export var status : State = State.IDLE
-var map : Node3D
+@export var map : Node3D 
 #var patrols : Dictionary[Node3D, int] = {}
 var patrola : Node3D
 var patrolb : Node3D

@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://b7hd85122tk12"]
+
+[ext_resource type="Script" uid="uid://dlfa4844hulox" path="res://scripts/objects/grabbableObject.gd" id="1_yixwb"]
+[ext_resource type="ArrayMesh" uid="uid://v7xae4sadwje" path="res://Assets/Blender/Grabbables/StuItems_Ladle.res" id="2_mkhkl"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tce2y"]
+size = Vector3(0.3310547, 0.23397827, 1.0747681)
+
+[node name="Ladle" type="Node3D" unique_id=727576897]
+
+[node name="GrabbableObject" type="RigidBody3D" parent="." unique_id=715981625]
+script = ExtResource("1_yixwb")
+item_id = "Ladle"
+metadata/_custom_type_script = "uid://dlfa4844hulox"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GrabbableObject" unique_id=832887198]
+transform = Transform3D(1, 0, 0, 0, 0.5934189, 0.8048938, 0, -0.8048938, 0.5934189, -0.003923416, 0.25848347, 0.22768903)
+shape = SubResource("BoxShape3D_tce2y")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GrabbableObject" unique_id=333314668]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0025399774, 0, -0.0046494007)
+mesh = ExtResource("2_mkhkl")
