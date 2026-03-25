@@ -52,7 +52,7 @@ func _ready() -> void:
 	var root := get_tree().current_scene
 	#status = State.CHASE
 	#chase_target = root.find_child("Player")
-	map = root.find_child("Map")
+	map = root.find_child("map")
 	agent.path_desired_distance = 1.0
 	agent.target_desired_distance = 1.5
 
