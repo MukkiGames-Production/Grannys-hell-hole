@@ -24,10 +24,13 @@ var current_patrol_pt : int = 0 # not unique to any patrol route
 @onready var eyes: Area3D = $Eyes
 var detect_candidate: BasePlayer = null
 
+var investigate_source : Marker3D = null
+
 enum State {
 	CHASE,
 	ROAM,
 	PATROL,
+	INVESTIGATE,
 	IDLE
 }
 
@@ -220,6 +223,13 @@ func _on_update_timer_timeout() -> void:
 	if not multiplayer.is_server(): return
 	if status == State.CHASE:
 		chase()
+	match status:
+		State.CHASE:
+			chase()
+		State.PATROL:
+			pass
+		State.INVESTIGATE:
+			agent.target_position = investigate_source.global_position
 
 
 func _on_wait_timer_timeout() -> void:
@@ -324,6 +334,19 @@ func _on_eyes_body_entered(body: Node3D) -> void:
 	if not _has_line_of_sight_to(player):
 		return
 
+	# check the players suspicion level, The players suspicion level should be always updated within the baseplayer 
+	# player script to maintain a suspicion level . 
+	# If we're investigating or patrolling we should chase high suspicion players if we fully detect them
+	#      (possibly focus player who's most recently done a suspicious activity like break something/drop 
+	#       contraband/etc) 
+	# 
+	# 
+	# If the investigate is triggered, we need to add this event to a list somewhere and return to it so
+	# if we get distracted and chase someone, we should return to investigating. Things that trigger investigations
+	# may have a "fix". Like sweep up broken vase, close door that should be closed that was open, pick up contraband
+
+	# If the player is ragdolled and we're chasing them, stop moving, stop updating target position, wait for player to return to normal state
+	# 
 	detect_candidate = player
 	detect_timer.start(1.8)
 
