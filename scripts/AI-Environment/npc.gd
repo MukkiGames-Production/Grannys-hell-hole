@@ -405,10 +405,17 @@ func _on_eyes_body_entered(body: Node3D) -> void:
 	#      (possibly focus player who's most recently done a suspicious activity like break something/drop 
 	#       contraband/etc) 
 	# 
-	# 
 	# If the investigate is triggered, we need to add this event to a list somewhere and return to it so
 	# if we get distracted and chase someone, we should return to investigating. Things that trigger investigations
 	# may have a "fix". Like sweep up broken vase, close door that should be closed that was open, pick up contraband
+	
+	# Scripted movement State should run priority over everything else, if chasing when scripted movement takes over
+	# we should do nothing for now and just let that player go. 
+	
+	# each Marker3D in a patrol should be able to hold @export metadata for how long to wait, string of animation
+	# to play while waiting at this Marker
+	
+	# each state should have a different customizable speed for the NPC
 
 	# If the player is ragdolled and we're chasing them, stop moving, stop updating target position, wait for player to return to normal state
 	# 
