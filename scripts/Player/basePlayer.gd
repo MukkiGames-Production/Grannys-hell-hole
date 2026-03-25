@@ -157,11 +157,11 @@ func try_interact() -> void:
 	# Case 1: Holding something → try place or drop
 	if held_object:
 		if target is InteractionPoint:
-			if target.interact(held_object):  # success → item was placed/used
-				held_object.place_on(target)  # sends network "place" action
-				held_object = null
-				return
-		# Otherwise just drop
+			if target.interact(held_object):
+				if not target.returns_item():
+					held_object.place_on(target)
+					held_object = null
+			return
 		held_object.release()
 		held_object = null
 		return
