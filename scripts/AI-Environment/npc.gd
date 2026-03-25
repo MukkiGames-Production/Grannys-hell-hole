@@ -49,9 +49,10 @@ func _ready() -> void:
 		$UpdateTimer.stop()
 		GameNetwork.npc_update_received.connect(_on_npc_update)
 		return
-	map = get_tree().current_scene
-	status = State.CHASE
-	chase_target = map.find_child("Player", true, false)
+	var root := get_tree().current_scene
+	#status = State.CHASE
+	#chase_target = root.find_child("Player")
+	map = root.find_child("Map")
 	agent.path_desired_distance = 1.0
 	agent.target_desired_distance = 1.5
 

@@ -1,0 +1,207 @@
+[gd_scene format=3 uid="uid://bxuxpaxvnjxdr"]
+
+[ext_resource type="Script" uid="uid://dlfa4844hulox" path="res://scripts/objects/grabbableObject.gd" id="1_w8gd0"]
+[ext_resource type="Shader" uid="uid://im65mxkv3lyh" path="res://scripts/shaders/highlight.gdshader" id="2_xisyg"]
+[ext_resource type="Script" uid="uid://mklkxcpb5cmv" path="res://scripts/objects/pillar.gd" id="3_x5m1f"]
+[ext_resource type="Texture2D" uid="uid://cxsqe1ml8nmyh" path="res://Assets/reticleEmpty.tres" id="4_5mu32"]
+[ext_resource type="Script" uid="uid://d0co7xxx1604o" path="res://scripts/Player/swapReticle.gd" id="5_328si"]
+[ext_resource type="Texture2D" uid="uid://dhu4lf3trb2sp" path="res://Assets/reticleFull.tres" id="6_wohun"]
+[ext_resource type="PackedScene" uid="uid://bkngoexmlkto3" path="res://scenes/Patrolmap.tscn" id="7_hhpsk"]
+[ext_resource type="PackedScene" uid="uid://h5sep0m58vfb" path="res://scenes/stu_with_ragdoll.tscn" id="8_ewkpc"]
+[ext_resource type="PackedScene" uid="uid://bnbggqkcgb1wp" path="res://scenes/NPC.tscn" id="9_ct1me"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_85g3d"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_choun"]
+sky_material = SubResource("ProceduralSkyMaterial_85g3d")
+
+[sub_resource type="Environment" id="Environment_ya4ey"]
+background_mode = 2
+sky = SubResource("Sky_choun")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ig7tw"]
+radius = 0.25
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tipki"]
+render_priority = 0
+shader = ExtResource("2_xisyg")
+shader_parameter/shine_color = Color(0.95485765, 0.90626836, 0.10159994, 1)
+shader_parameter/shine_speed = 1.0
+shader_parameter/shine_width = 1.0
+shader_parameter/cycle_interval = 1.0
+shader_parameter/angle_fade = 1.0
+shader_parameter/x_direction = 0.0
+shader_parameter/y_direction = 0.0
+shader_parameter/z_direction = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_0xm2m"]
+radius = 0.25
+height = 0.5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o6xl0"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_85g3d"]
+render_priority = 0
+shader = ExtResource("2_xisyg")
+shader_parameter/shine_color = Color(1, 1, 1, 1)
+shader_parameter/shine_speed = 1.0
+shader_parameter/shine_width = 1.0
+shader_parameter/cycle_interval = 1.0
+shader_parameter/angle_fade = 1.0
+shader_parameter/x_direction = 0.0
+shader_parameter/y_direction = 0.0
+shader_parameter/z_direction = 1.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_tipki"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_tbgi4"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_tefeu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tefeu"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_o6xl0"]
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_85g3d"]
+buffer_length = 0.1
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_choun"]
+buffer_length = 0.1
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_85g3d"]
+properties/0/path = NodePath("Player:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("GrabbableSphere:position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("GrabbableCube:position")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("Network:autoplay")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath("GrabbableSphere:is_grabbable")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath("GrabbableCube:is_grabbable")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+
+[node name="Main" type="Node3D" unique_id=421424765]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=119318621]
+environment = SubResource("Environment_ya4ey")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1677066253]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=462466673]
+transform = Transform3D(0.5629059, 0.26246423, -0.7837407, -0.8265211, 0.17875244, -0.53377026, 0, 0.94824064, 0.317553, 0, 4.228172, 0)
+omni_range = 11.665
+
+[node name="GrabbableSphere" type="RigidBody3D" parent="." unique_id=1359684742 groups=["interactables"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7491686, 1.7128887, 0)
+script = ExtResource("1_w8gd0")
+item_id = "Sphere"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GrabbableSphere" unique_id=82670695]
+shape = SubResource("SphereShape3D_ig7tw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GrabbableSphere" unique_id=1189420485]
+material_overlay = SubResource("ShaderMaterial_tipki")
+mesh = SubResource("SphereMesh_0xm2m")
+
+[node name="GrabbableCube" type="RigidBody3D" parent="." unique_id=2129657889 groups=["interactables"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7491686, 1.7128887, 1.6358725)
+script = ExtResource("1_w8gd0")
+item_id = "Cube"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GrabbableCube" unique_id=530913942]
+shape = SubResource("BoxShape3D_o6xl0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GrabbableCube" unique_id=1100484109]
+material_overlay = SubResource("ShaderMaterial_85g3d")
+mesh = SubResource("BoxMesh_tipki")
+
+[node name="InteractablePillar" type="Area3D" parent="." unique_id=1067331861 groups=["interactables"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, 0.575, 0)
+script = ExtResource("3_x5m1f")
+valid_objects = Array[String](["Sphere"])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractablePillar" unique_id=1909589200]
+shape = SubResource("CylinderShape3D_tbgi4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="InteractablePillar" unique_id=812250400]
+mesh = SubResource("CylinderMesh_tefeu")
+
+[node name="InteractableCube" type="Area3D" parent="." unique_id=1293362004 groups=["interactables"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, 0.99340373, 2.0016556)
+script = ExtResource("3_x5m1f")
+valid_objects = Array[String](["Cube"])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractableCube" unique_id=662335870]
+shape = SubResource("BoxShape3D_tefeu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="InteractableCube" unique_id=561088858]
+mesh = SubResource("BoxMesh_o6xl0")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=768951899]
+
+[node name="CenterContainer" type="CenterContainer" parent="UI" unique_id=610493749]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Reticle" type="TextureRect" parent="UI/CenterContainer" unique_id=694459326]
+layout_mode = 2
+texture = ExtResource("4_5mu32")
+script = ExtResource("5_328si")
+reticleWhenNotLooking = ExtResource("4_5mu32")
+reticleWhenLooking = ExtResource("6_wohun")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1194049763]
+physics_interpolation_mode = 1
+_spawnable_scenes = PackedStringArray("uid://b4y3txrunrrya")
+spawn_path = NodePath("Marker3D")
+
+[node name="Marker3D" type="Marker3D" parent="MultiplayerSpawner" unique_id=1871877685]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.906487, 2.7068806, 2.4580793)
+
+[node name="Local" type="AudioStreamPlayer" parent="." unique_id=1109379672]
+stream = SubResource("AudioStreamGenerator_85g3d")
+bus = &"Voice"
+
+[node name="Network" type="AudioStreamPlayer" parent="." unique_id=554416602]
+stream = SubResource("AudioStreamGenerator_choun")
+bus = &"Voice"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=377978589]
+replication_interval = 1.228
+replication_config = SubResource("SceneReplicationConfig_85g3d")
+visibility_update_mode = 1
+
+[node name="Node3D" type="Node3D" parent="." unique_id=232958870]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.29364634, 1.0581315, -5.182123)
+
+[node name="Stu" parent="." unique_id=1959823504 instance=ExtResource("8_ewkpc")]
+collision_layer = 10
+collision_mask = 9
+
+[node name="NPC2" parent="." unique_id=321508815 instance=ExtResource("9_ct1me")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.463314, 0.05524683, -49.07776)
+patrol_route = "b"
+
+[node name="NPC" parent="." unique_id=1609349030 instance=ExtResource("9_ct1me")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.231657, -0.19916272, -7.8431396)
+
+[node name="Map" parent="." unique_id=2041657041 instance=ExtResource("7_hhpsk")]

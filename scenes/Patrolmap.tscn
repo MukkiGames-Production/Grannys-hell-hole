@@ -43,7 +43,7 @@ shadow_enabled = true
 [node name="Doors" type="Node3D" parent="." unique_id=437804519]
 
 [node name="Door" parent="Doors" unique_id=304825365 instance=ExtResource("2_paxxb")]
-transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, 0.55968904, 0, -16.067852)
+transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, -2.1721392, 0, -16.067852)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1434161820]
 navigation_mesh = SubResource("NavigationMesh_paxxb")
