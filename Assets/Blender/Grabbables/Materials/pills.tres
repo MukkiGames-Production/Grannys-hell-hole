@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://d0yualmq7qmyg"]
+
+[resource]
+resource_name = "pills"
+cull_mode = 2
+albedo_color = Color(0.9066551, 0.50350195, 0.14265472, 1)
+roughness = 0.5

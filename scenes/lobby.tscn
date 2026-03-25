@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dlj5x8k2mq3vh"]
 
 [ext_resource type="Script" uid="uid://c0xc4p84ca6o4" path="res://scripts/Networking/Lobby.gd" id="1_lobby"]
-[ext_resource type="PackedScene" uid="uid://cdfjjq5asub2d" path="res://scenes/worldTest.tscn" id="2_q60fs"]
+[ext_resource type="PackedScene" uid="uid://cdfjjq5asub2d" path="res://scenes/GameManager.tscn" id="2_q60fs"]
 [ext_resource type="Script" uid="uid://bbdk8cpwa1nnk" path="res://scripts/Networking/Voip.gd" id="2_voip"]
 
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_local"]

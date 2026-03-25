@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://doviewe1i2l86"]
+
+[resource]
+resource_name = "dyanamite"
+cull_mode = 2
+albedo_color = Color(0.47916257, 0.11179645, 0.11560533, 1)
+roughness = 0.8248408

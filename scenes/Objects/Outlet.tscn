@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cpv6w1ui8yybj"]
+
+[ext_resource type="ArrayMesh" uid="uid://bhwqmxdswlb84" path="res://Assets/Blender/Interactables/StuInteractables_Outlet.res" id="1_2o032"]
+[ext_resource type="Script" uid="uid://3fctg0snq3m7" path="res://scenes/Objects/Outlet.gd" id="1_8r8re"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8r8re"]
+size = Vector3(1.4755859, 1, 2.374176)
+
+[node name="Outlet" type="Area3D" unique_id=526045756]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+script = ExtResource("1_8r8re")
+valid_objects = Array[String](["Fork"])
+metadata/_custom_type_script = "uid://d0uhvbq4j1buf"
+
+[node name="StuInteractablesOutlet" type="MeshInstance3D" parent="." unique_id=1648421335]
+mesh = ExtResource("1_2o032")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1263731442]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07080078, 0, -0.08131409)
+shape = SubResource("BoxShape3D_8r8re")

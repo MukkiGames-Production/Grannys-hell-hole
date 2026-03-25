@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://danjd6fb1nulr"]
+
+[ext_resource type="Script" uid="uid://dlfa4844hulox" path="res://scripts/objects/grabbableObject.gd" id="1_sbmyu"]
+[ext_resource type="ArrayMesh" uid="uid://bddgabra3rrsm" path="res://Assets/Blender/Grabbables/StuItems_Crowbar.res" id="2_sbmyu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_odoac"]
+size = Vector3(0.3359375, 1.1268616, 0.5601196)
+
+[node name="Crowbar" type="Node3D" unique_id=1863615465]
+
+[node name="GrabbableObject" type="RigidBody3D" parent="." unique_id=1354601695]
+script = ExtResource("1_sbmyu")
+item_id = "Crowbar"
+metadata/_custom_type_script = "uid://dlfa4844hulox"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GrabbableObject" unique_id=715182417]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0018157959, 0.011077881)
+shape = SubResource("BoxShape3D_odoac")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GrabbableObject" unique_id=1385018482]
+mesh = ExtResource("2_sbmyu")
