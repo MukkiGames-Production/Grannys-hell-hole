@@ -227,8 +227,14 @@ func enable_ragdoll(v) -> void:
 	for i in range(1, bones.size()):
 		bones[i].apply_central_impulse(v)
 		
+	#also the camera
+	camera_pivot.position += Vector3(0, 2, 4)
+		
 		
 func disable_ragdoll() -> void:
 	stu_mesh_normal.visible = true
 	stu_mesh_ragdoll.visible = false
 	stus_bone_simulator.physical_bones_stop_simulation()
+	
+	#put cam back
+	camera_pivot.position -= Vector3(0, 2, 4)
