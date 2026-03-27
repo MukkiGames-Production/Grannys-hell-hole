@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://ch73hpi8dk463"]
+
+[ext_resource type="Script" uid="uid://cwfrabe3emd5g" path="res://scripts/objects/Pot.gd" id="1_guqxa"]
+[ext_resource type="ArrayMesh" uid="uid://duvvxoiefpen7" path="res://Assets/Blender/Grabbables/StuItems_Hot Ladle.res" id="2_bd2i1"]
+[ext_resource type="PackedScene" uid="uid://brxe1qi1uvucs" path="res://scenes/Objects/Carrot.tscn" id="3_fjn05"]
+[ext_resource type="ArrayMesh" uid="uid://b84bc38auk4ba" path="res://Assets/Blender/Interactables/StuInteractables_Alter.res" id="4_anrib"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_33163"]
+height = 1.6881912
+radius = 0.44433594
+
+[node name="Altar" type="Area3D" unique_id=913797376]
+script = ExtResource("1_guqxa")
+hotladle = ExtResource("2_bd2i1")
+carrot = ExtResource("3_fjn05")
+metadata/_custom_type_script = "uid://d0uhvbq4j1buf"
+
+[node name="StuInteractablesAltar" type="MeshInstance3D" parent="." unique_id=899464032]
+mesh = ExtResource("4_anrib")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1579440407]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10636985, 0)
+shape = SubResource("CylinderShape3D_33163")
