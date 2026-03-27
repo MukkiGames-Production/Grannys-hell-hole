@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cpv6w1ui8yybj"]
 
-[ext_resource type="ArrayMesh" uid="uid://bhwqmxdswlb84" path="res://Assets/Blender/Interactables/StuInteractables_Outlet.res" id="1_2o032"]
-[ext_resource type="Script" uid="uid://3fctg0snq3m7" path="res://scenes/Objects/Outlet.gd" id="1_8r8re"]
+[ext_resource type="ArrayMesh" uid="uid://da1v0ulc1a6cu" path="res://Assets/Blender/Interactables/StuInteractables_Outlet.res" id="1_2o032"]
+[ext_resource type="Script" uid="uid://3fctg0snq3m7" path="res://scripts/objects/Outlet.gd" id="1_8r8re"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8r8re"]
 size = Vector3(1.4755859, 1, 2.374176)

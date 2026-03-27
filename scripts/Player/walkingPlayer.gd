@@ -51,15 +51,17 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 	# Send network data AFTER all state is resolved
-	var player_data := {
-		"message": "player_update",
-		"id": Steam.getSteamID(),
-		"px": global_position.x,
-		"py": global_position.y,
-		"pz": global_position.z,
-		"rx": global_rotation.x,
-		"ry": global_rotation.y,
-		"rz": global_rotation.z,
-		"is_walking": is_walking
-	}
-	GameNetwork.send_p2p_packet(0, player_data, Steam.P2P_SEND_RELIABLE)
+	var ifStem: Steam.SteamAPIInitResult
+	if ifStem:
+		var player_data := {
+			"message": "player_update",
+			"id": Steam.getSteamID(),
+			"px": global_position.x,
+			"py": global_position.y,
+			"pz": global_position.z,
+			"rx": global_rotation.x,
+			"ry": global_rotation.y,
+			"rz": global_rotation.z,
+			"is_walking": is_walking
+		}
+		GameNetwork.send_p2p_packet(0, player_data, Steam.P2P_SEND_RELIABLE)

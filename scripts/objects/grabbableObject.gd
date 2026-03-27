@@ -11,13 +11,17 @@ class_name GrabbableObject
 
 var is_held := false
 var holder: Node3D = null
+var _last_velocity := Vector3.ZERO
+
 
 func _ready():
 	contact_monitor = true
 	max_contacts_reported = 10
+	body_entered.connect(_on_body_entered)
 
 func _physics_process(delta):
 	if not is_held or holder == null:
+		_last_velocity = linear_velocity
 		return
 	freeze = true  # keep frozen while held so gravity never kicks in
 	var target_pos = holder.global_transform.origin + holder.global_transform.basis.z * -hold_distance + holder.global_transform.basis.x * 0.6 + holder.global_transform.basis.y * -0.3
@@ -30,6 +34,7 @@ func _physics_process(delta):
 func _on_body_entered(body):
 	if body.is_in_group("players"):
 		try_ragdoll(body)
+	_check_fast_hit(body)
 		
 func try_ragdoll(body):
 	var speed = linear_velocity.length()
@@ -97,5 +102,13 @@ func move_to_position(target: Vector3, duration: float = 0.3):
 		.set_trans(Tween.TRANS_SINE)\
 		.set_ease(Tween.EASE_OUT)
 		
-func replace_model(model: Mesh):
+func replace_model(model: Mesh, new_id: String = item_id):
 	mesh_instance.mesh = model
+	item_id = new_id
+	
+func _check_fast_hit(body: Node3D, threshold: float = 10.0) -> void:
+	if _last_velocity.length() >= threshold:
+		on_fast_hit(body)
+
+func on_fast_hit(body: Node3D) -> void:
+	pass
