@@ -26,7 +26,7 @@ func interact(item: GrabbableObject):
 		get_tree().current_scene.add_child(instance)
 		instance.global_position = global_position
 	
-	item.replace_model(hotladle)
+	item.replace_model(hotladle, "Hot_ladle")
 	
 	var tween = create_tween()
 	tween.tween_interval(0.8)

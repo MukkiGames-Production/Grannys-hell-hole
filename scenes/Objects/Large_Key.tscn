@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://1bjldkdyo4fe"]
+
+[ext_resource type="Script" uid="uid://dlfa4844hulox" path="res://scripts/objects/grabbableObject.gd" id="1_7f8ex"]
+[ext_resource type="ArrayMesh" uid="uid://q2cd7htktjnd" path="res://Assets/Blender/Grabbables/StuItems_Large Key_001.res" id="2_7f8ex"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xi8cj"]
+size = Vector3(2.1845703, 1.0604858, 0.19433594)
+
+[node name="Large_Key" type="Node3D" unique_id=2076690088]
+
+[node name="GrabbableObject" type="RigidBody3D" parent="." unique_id=421883646]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+script = ExtResource("1_7f8ex")
+item_id = "Large_Key"
+metadata/_custom_type_script = "uid://dlfa4844hulox"
+
+[node name="StuItemsKey" type="MeshInstance3D" parent="GrabbableObject" unique_id=1283946406]
+mesh = ExtResource("2_7f8ex")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GrabbableObject" unique_id=784429323]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.017513275, -0.0010681152, 8.863211e-05)
+shape = SubResource("BoxShape3D_xi8cj")

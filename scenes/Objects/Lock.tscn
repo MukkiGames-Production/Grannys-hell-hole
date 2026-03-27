@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bppcdisoxiwun"]
+
+[ext_resource type="Script" uid="uid://wekguu7pwmym" path="res://scripts/objects/Board.gd" id="1_lasnp"]
+[ext_resource type="ArrayMesh" uid="uid://dn7kfu5n6b8em" path="res://Assets/Blender/Interactables/StuInteractables_Large Lock.res" id="2_lasnp"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_na3pj"]
+size = Vector3(0.3095703, 2.4191895, 1.8891602)
+
+[node name="Lock" type="Area3D" unique_id=913797376]
+script = ExtResource("1_lasnp")
+valid_objects = Array[String](["Large_Key"])
+metadata/_custom_type_script = "uid://d0uhvbq4j1buf"
+
+[node name="StuInteractablesLock" type="MeshInstance3D" parent="." unique_id=899464032]
+mesh = ExtResource("2_lasnp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1579440407]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0012207031, -0.24722815, 0.15933275)
+shape = SubResource("BoxShape3D_na3pj")
