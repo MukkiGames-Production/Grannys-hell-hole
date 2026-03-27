@@ -22,7 +22,7 @@ buses/default_bus_layout="uid://7axefrjv8f3v"
 [autoload]
 
 GameNetwork="*res://scripts/Networking/GameNetwork.gd"
-Schduler="*uid://bys1cfmdwhnv5"
+Scheduler="*res://scripts/AI-Environment/scheduler.gd"
 
 [debug]
 
