@@ -213,21 +213,22 @@ func get_behavior_for(npc: Node) -> String:
 # ---------------------------------------------------------------------------
 
 ## Prints a human-readable summary of the current time state.
-func debug_print_status() -> void:
-	print("[Scheduler] Day %d | %s | Block: %s" % [day_count, get_time_string(), current_block_name])
+#func debug_print_status() -> void:
+	#print("[Scheduler] Day %d | %s | Block: %s" % [day_count, get_time_string(), current_block_name])
 
 
 ## Prints every registered NPC and their current schedule entry.
 func debug_print_all_schedules() -> void:
-	debug_print_status()
-	for npc in _npc_schedules.keys():
-		var entry := get_schedule_for(npc)
-		if entry.is_empty():
-			print("  %s → (no entry for %s)" % [npc.name, current_block_name])
-		else:
-			print("  %s → location='%s'  behavior='%s'  priority=%d" % [
-				npc.name,
-				entry.get("location_key", ""),
-				entry.get("behavior", ""),
-				entry.get("priority", 0)
-			])
+	pass
+	#debug_print_status()
+	#for npc in _npc_schedules.keys():
+		#var entry := get_schedule_for(npc)
+		#if entry.is_empty():
+			#print("  %s → (no entry for %s)" % [npc.name, current_block_name])
+		#else:
+			#print("  %s → location='%s'  behavior='%s'  priority=%d" % [
+				#npc.name,
+				#entry.get("location_key", ""),
+				#entry.get("behavior", ""),
+				#entry.get("priority", 0)
+			#])

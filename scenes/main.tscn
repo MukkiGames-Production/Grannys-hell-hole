@@ -214,3 +214,4 @@ map = NodePath("../map")
 
 [node name="Door" parent="." unique_id=304825365 instance=ExtResource("10_choun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.216036, 0.004819274, 17.40107)
+okay_status = 1

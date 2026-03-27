@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bxuxpaxvnjxdr"]
 
 [ext_resource type="Script" uid="uid://dlfa4844hulox" path="res://scripts/objects/grabbableObject.gd" id="1_w8gd0"]
-[ext_resource type="Script" path="res://scripts/AI-Environment/scheduler.gd" id="1_xisyg"]
+[ext_resource type="Script" uid="uid://bys1cfmdwhnv5" path="res://scripts/AI-Environment/scheduler.gd" id="1_xisyg"]
 [ext_resource type="Shader" uid="uid://im65mxkv3lyh" path="res://scripts/shaders/highlight.gdshader" id="2_xisyg"]
 [ext_resource type="Script" uid="uid://mklkxcpb5cmv" path="res://scripts/objects/pillar.gd" id="3_x5m1f"]
 [ext_resource type="Texture2D" uid="uid://cxsqe1ml8nmyh" path="res://Assets/reticleEmpty.tres" id="4_5mu32"]
@@ -201,9 +201,9 @@ collision_mask = 9
 
 [node name="NPC2" parent="." unique_id=321508815 instance=ExtResource("9_ct1me")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.463314, 0.05524683, -49.07776)
-patrol_route = "b"
 
 [node name="NPC" parent="." unique_id=1609349030 instance=ExtResource("9_ct1me")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.231657, -0.19916272, -7.8431396)
 
 [node name="Map" parent="." unique_id=2041657041 instance=ExtResource("7_hhpsk")]
+real_day_duration_seconds = 50000.0

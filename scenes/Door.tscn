@@ -176,3 +176,9 @@ shape = SubResource("BoxShape3D_q8f3x")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1188430903]
 libraries/ = SubResource("AnimationLibrary_eyv6f")
+
+[node name="ExternalMarker" type="Marker3D" parent="." unique_id=101730890]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1071032, 0.7760334, 1.5090921)
+
+[node name="InternalMarker" type="Marker3D" parent="." unique_id=1190810282]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1071032, 0.7760334, -2.2214303)

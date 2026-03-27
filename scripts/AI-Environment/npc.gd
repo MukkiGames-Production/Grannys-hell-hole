@@ -1,6 +1,10 @@
 extends CharacterBody3D
 class_name NPC
 @export var speed := 6.0
+@export var patrol_speed := 3.2
+@export var investigate_speed := 2.6
+@export var chase_speed := 7.0
+@export var investigate_stop_time := 3.5
 @export var chase_target: CharacterBody3D
 @export var status : State = State.IDLE
 @export var map : Node3D 
@@ -43,6 +47,19 @@ enum State {
 	IDLE
 }
 
+const DOOR_STATE_NONE := 2
+const INVESTIGATE_TO_FIRST := 0
+const INVESTIGATE_TO_SECOND := 1
+const INVESTIGATE_WAIT_AT_SECOND := 2
+
+var known_doors: Array[Node3D] = []
+var investigate_door: Node3D = null
+var investigate_first_marker: Marker3D = null
+var investigate_second_marker: Marker3D = null
+var investigate_phase: int = INVESTIGATE_TO_FIRST
+var investigate_wait_left: float = 0.0
+var previous_state_before_investigate: State = State.IDLE
+
 
 
 
@@ -55,31 +72,36 @@ func _ready() -> void:
 	var root := get_tree().current_scene
 	#status = State.CHASE
 	#chase_target = root.find_child("Player")
-	map = root.find_child("Map")
+	if map == null:
+		map = root.find_child("Map", true, false)
+	if map == null:
+		map = root.find_child("map", true, false)
 	agent.path_desired_distance = 1.0
 	agent.target_desired_distance = 1.5
 
-	patrola = map.find_child("PatrolA", true, false)
-	patrolb = map.find_child("PatrolB", true, false)
+	if map:
+		patrola = map.find_child("PatrolA", true, false)
+		patrolb = map.find_child("PatrolB", true, false)
+
+	_cache_doors()
 
 	Scheduler.register_npc(self, schedule_entries)
 
-	# Apply schedule immediately
-	_apply_schedule_for_current_block()
-
-	# React when block changes (MORNING -> AFTERNOON etc)
-	Scheduler.block_changed.connect(_on_scheduler_block_changed)
+	if status == State.IDLE:
+		status = State.PATROL
+		if patrol_route == "b":
+			startPatrolB()
+		else:
+			startPatrolA()
 
 
 
 func _exit_tree() -> void:
-	if Engine.has_singleton("Scheduler"):
+	if has_node("/root/Scheduler"):
 		Scheduler.unregister_npc(self)
 
 func _on_scheduler_block_changed(_new_block_name: String) -> void:
-	if not multiplayer.is_server():
-		return
-	_apply_schedule_for_current_block()
+	return
 
 func _apply_schedule_for_current_block() -> void:
 	current_schedule_entry = Scheduler.get_schedule_for(self)
@@ -178,12 +200,253 @@ func chase(): # chases current chase_target
 	if chase_target:
 		agent.target_position = chase_target.global_position
 
+func _set_speed_for_state() -> void:
+	match status:
+		State.CHASE:
+			speed = chase_speed
+		State.PATROL:
+			speed = patrol_speed
+		State.INVESTIGATE:
+			speed = investigate_speed
+		_:
+			speed = patrol_speed
+
+func _cache_doors() -> void:
+	known_doors.clear()
+	var root := get_tree().current_scene
+	if root == null:
+		return
+	for node in root.find_children("*", "Node3D", true, false):
+		if _is_door_node(node):
+			known_doors.append(node as Node3D)
+	
+	print("KNOWN DOORS: ", known_doors)
+
+func _is_door_node(node: Node) -> bool:
+	if not node.has_method("toggle_door"):
+		return false
+	if node.get("status") == null:
+		return false
+	if node.get("okay_status") == null:
+		return false
+	if node.find_child("ExternalMarker", true, false) == null:
+		return false
+	if node.find_child("InternalMarker", true, false) == null:
+		return false
+	return true
+
+func _door_needs_fix(door: Node) -> bool:
+	if door == null:
+		return false
+	var door_status = door.get("status")
+	var door_okay_status = door.get("okay_status")
+	if door_status == null or door_okay_status == null:
+		return false
+	if int(door_okay_status) == DOOR_STATE_NONE:
+		return false
+	return int(door_status) != int(door_okay_status)
+
+func _find_unexpected_door_in_sight() -> Node3D:
+	if known_doors.is_empty():
+		_cache_doors()
+	var best_door: Node3D = null
+	var best_dist := INF
+	for door in _doors_in_eyes():
+		if door == null or not is_instance_valid(door):
+			continue
+		if not _door_needs_fix(door):
+			continue
+		if not _door_has_line_of_sight(door):
+			continue
+		var d := global_position.distance_to(door.global_position)
+		if d < best_dist:
+			best_dist = d
+			best_door = door
+	return best_door
+
+func _doors_in_eyes() -> Array[Node3D]:
+	var result: Array[Node3D] = []
+	var seen: Dictionary = {}
+	for body in eyes.get_overlapping_bodies():
+		if not (body is Node):
+			continue
+		var door := _find_door_ancestor(body as Node)
+		if door == null:
+			continue
+		var key := door.get_instance_id()
+		if seen.has(key):
+			continue
+		seen[key] = true
+		result.append(door)
+	return result
+
+func _find_door_ancestor(start_node: Node) -> Node3D:
+	var node: Node = start_node
+	while node:
+		if _is_door_node(node):
+			return node as Node3D
+		node = node.get_parent()
+	return null
+
+func _door_has_line_of_sight(door: Node3D) -> bool:
+	var eye_pos := global_position + Vector3(0.0, 1.4, 0.0)
+	var door_pos := _door_target_point(door)
+
+	var query := PhysicsRayQueryParameters3D.create(
+		eye_pos,
+		door_pos,
+		0xFFFFFFFF,
+		[self.get_rid()]
+	)
+	var hit := get_world_3d().direct_space_state.intersect_ray(query)
+	if hit.is_empty():
+		return false
+	var collider = hit.get("collider")
+	if collider == null:
+		return false
+	if collider is Node and _node_is_same_or_child_of(collider as Node, door):
+		return true
+	return false
+
+func _door_target_point(door: Node3D) -> Vector3:
+	var external := door.find_child("ExternalMarker", true, false) as Marker3D
+	var internal := door.find_child("InternalMarker", true, false) as Marker3D
+	if external and internal:
+		return (external.global_position + internal.global_position) * 0.5
+	return door.global_position + Vector3(0.0, 1.0, 0.0)
+
+func _node_is_same_or_child_of(node: Node, ancestor: Node) -> bool:
+	var current: Node = node
+	while current:
+		if current == ancestor:
+			return true
+		current = current.get_parent()
+	return false
+
+func _start_door_investigation(door: Node3D) -> void:
+	if door == null or not is_instance_valid(door):
+		return
+	var ext := door.find_child("ExternalMarker", true, false) as Marker3D
+	var interior := door.find_child("InternalMarker", true, false) as Marker3D
+	if ext == null or interior == null:
+		return
+
+	previous_state_before_investigate = status
+	investigate_door = door
+
+	if global_position.distance_to(ext.global_position) <= global_position.distance_to(interior.global_position):
+		investigate_first_marker = ext
+		investigate_second_marker = interior
+	else:
+		investigate_first_marker = interior
+		investigate_second_marker = ext
+
+	investigate_phase = INVESTIGATE_TO_FIRST
+	investigate_wait_left = 0.0
+	investigate_source = investigate_first_marker
+	wait_timer.stop()
+	status = State.INVESTIGATE
+	if investigate_source:
+		agent.target_position = investigate_source.global_position
+
+func _clear_investigation_context() -> void:
+	investigate_door = null
+	investigate_first_marker = null
+	investigate_second_marker = null
+	investigate_source = null
+	investigate_phase = INVESTIGATE_TO_FIRST
+	investigate_wait_left = 0.0
+
+func _finish_investigation() -> void:
+	var resume_state := previous_state_before_investigate
+	_clear_investigation_context()
+	status = resume_state
+	if status == State.PATROL:
+		if patrol_route == "b":
+			startPatrolB()
+		else:
+			startPatrolA()
+
+func _process_investigation(delta: float) -> void:
+	if investigate_door == null or not is_instance_valid(investigate_door):
+		_finish_investigation()
+		return
+	if not _door_needs_fix(investigate_door):
+		_finish_investigation()
+		return
+
+	if investigate_phase == INVESTIGATE_WAIT_AT_SECOND:
+		velocity.x = 0.0
+		velocity.z = 0.0
+		move_and_slide()
+		investigate_wait_left -= delta
+		if investigate_wait_left <= 0.0:
+			npc_toggle_door(investigate_door)
+			_finish_investigation()
+		return
+
+	if investigate_source == null:
+		_finish_investigation()
+		return
+
+	var dist_to_target := global_position.distance_to(investigate_source.global_position)
+	if dist_to_target <= 1.35 or agent.is_navigation_finished():
+		if investigate_phase == INVESTIGATE_TO_FIRST:
+			investigate_phase = INVESTIGATE_TO_SECOND
+			investigate_source = investigate_second_marker
+			if investigate_source:
+				agent.target_position = investigate_source.global_position
+			return
+		if investigate_phase == INVESTIGATE_TO_SECOND:
+			investigate_phase = INVESTIGATE_WAIT_AT_SECOND
+			investigate_wait_left = investigate_stop_time
+			velocity.x = 0.0
+			velocity.z = 0.0
+			move_and_slide()
+			return
+
+	if agent.is_navigation_finished():
+		velocity.x = 0.0
+		velocity.z = 0.0
+		move_and_slide()
+		return
+
+	var next_posn := agent.get_next_path_position()
+	var to_next := next_posn - global_position
+	to_next.y = 0.0
+
+	if to_next.length() > 0.001:
+		var nav_dir := to_next.normalized()
+		var move_dir := _get_avoidance_dir(nav_dir)
+		if move_dir.length() > 0.001:
+			velocity.x = move_dir.x * speed
+			velocity.z = move_dir.z * speed
+		else:
+			velocity.x = 0.0
+			velocity.z = 0.0
+	else:
+		velocity.x = 0.0
+		velocity.z = 0.0
+
+	move_and_slide()
+	face_dir(velocity, delta)
+
+func npc_toggle_door(door: Node3D) -> void:
+	if door == null or not is_instance_valid(door):
+		return
+	if not _door_needs_fix(door):
+		return
+	if door.has_method("toggle_door"):
+		door.toggle_door()
+
 func _physics_process(delta: float) -> void:
 	# Gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	else:
 		velocity.y = 0.0
+
+	_set_speed_for_state()
 
 	match status:
 		State.PATROL:
@@ -236,6 +499,10 @@ func _physics_process(delta: float) -> void:
 			# CHECK STATE TRANSITIONS:
 
 
+		State.INVESTIGATE:
+			_process_investigation(delta)
+
+
 		State.CHASE:
 			# Stop if we’re done
 			if agent.is_navigation_finished():
@@ -286,15 +553,18 @@ func _physics_process(delta: float) -> void:
 
 func _on_update_timer_timeout() -> void:
 	if not multiplayer.is_server(): return
-	if status == State.CHASE:
-		chase()
+
 	match status:
 		State.CHASE:
 			chase()
 		State.PATROL:
-			pass
+			var bad_door := _find_unexpected_door_in_sight()
+			if bad_door:
+				print( "BAD DOOR FOUND: ", bad_door)
+				_start_door_investigation(bad_door)
 		State.INVESTIGATE:
-			agent.target_position = investigate_source.global_position
+			if investigate_source:
+				agent.target_position = investigate_source.global_position
 
 
 func _on_wait_timer_timeout() -> void:
@@ -436,6 +706,9 @@ func _on_detect_timer_timeout() -> void:
 	if not _has_line_of_sight_to(detect_candidate):
 		detect_candidate = null
 		return
+
+	if status == State.INVESTIGATE:
+		_clear_investigation_context()
 
 	chase_target = detect_candidate
 	status = State.CHASE
