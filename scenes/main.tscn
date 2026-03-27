@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ctcpaobx3sw3r"]
 
-[ext_resource type="Script" uid="uid://bys1cfmdwhnv5" path="res://scripts/AI-Environment/schduler.gd" id="1_choun"]
+[ext_resource type="Script" path="res://scripts/AI-Environment/scheduler.gd" id="1_choun"]
 [ext_resource type="Script" uid="uid://dlfa4844hulox" path="res://scripts/objects/grabbableObject.gd" id="2_0xm2m"]
 [ext_resource type="Shader" uid="uid://im65mxkv3lyh" path="res://scripts/shaders/highlight.gdshader" id="3_o6xl0"]
 [ext_resource type="Texture2D" uid="uid://cxsqe1ml8nmyh" path="res://Assets/reticleEmpty.tres" id="3_sugp2"]

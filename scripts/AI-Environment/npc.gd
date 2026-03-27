@@ -55,26 +55,26 @@ func _ready() -> void:
 	var root := get_tree().current_scene
 	#status = State.CHASE
 	#chase_target = root.find_child("Player")
-	map = root.find_child("map")
+	map = root.find_child("Map")
 	agent.path_desired_distance = 1.0
 	agent.target_desired_distance = 1.5
 
 	patrola = map.find_child("PatrolA", true, false)
 	patrolb = map.find_child("PatrolB", true, false)
 
-	Schduler.register_npc(self, schedule_entries)
+	Scheduler.register_npc(self, schedule_entries)
 
 	# Apply schedule immediately
 	_apply_schedule_for_current_block()
 
 	# React when block changes (MORNING -> AFTERNOON etc)
-	Schduler.block_changed.connect(_on_scheduler_block_changed)
+	Scheduler.block_changed.connect(_on_scheduler_block_changed)
 
 
 
 func _exit_tree() -> void:
-	if Engine.has_singleton("Schduler"):
-		Schduler.unregister_npc(self)
+	if Engine.has_singleton("Scheduler"):
+		Scheduler.unregister_npc(self)
 
 func _on_scheduler_block_changed(_new_block_name: String) -> void:
 	if not multiplayer.is_server():
@@ -82,7 +82,7 @@ func _on_scheduler_block_changed(_new_block_name: String) -> void:
 	_apply_schedule_for_current_block()
 
 func _apply_schedule_for_current_block() -> void:
-	current_schedule_entry = Schduler.get_schedule_for(self)
+	current_schedule_entry = Scheduler.get_schedule_for(self)
 
 	if current_schedule_entry.is_empty():
 		status = State.IDLE
@@ -281,7 +281,7 @@ func _physics_process(delta: float) -> void:
 		"vy": velocity.y,
 		"vz": velocity.z
 	}
-	Schduler.debug_print_all_schedules()
+	Scheduler.debug_print_all_schedules()
 	GameNetwork.send_p2p_packet(0, data, 0)
 
 func _on_update_timer_timeout() -> void:
