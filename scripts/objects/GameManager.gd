@@ -263,7 +263,7 @@ func _spawn_remote_player(peer_steam_id: int, peer_name: String) -> void:
 
 	# Default spawn position (same as local player start)
 
-	remote.call_deferred("set_global_transform", Transform3D(Basis(), Vector3(5, 0, 0)))
+	remote.call_deferred("set_global_transform", Transform3D(Basis(), Vector3(5, 0, 5)))
 	remote.connect("ready", func():
 		remote.set_physics_process(false)
 		remote.set_process(false)
