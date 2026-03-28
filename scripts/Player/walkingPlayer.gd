@@ -1,19 +1,22 @@
 extends BasePlayer
 class_name WalkingPlayer
 
-const SPEED = 15.0
-const JUMP_VELOCITY = 4.5  # if you add jumping later
+const SPEED = 5.0
 var is_walking: bool = false
+
 func _handle_mouse_look(event: InputEventMouseMotion) -> void:
-	# Yaw: rotate whole body
 	rotate_y(-event.relative.x * mouse_sensitivity)
-	# Pitch: rotate camera pivot only
-	camera_pivot.rotate_x(-event.relative.y * mouse_sensitivity)
-	camera_pivot.rotation.x = clamp(
-		camera_pivot.rotation.x,
+	stu_camera.root.rotate_x(-event.relative.y * mouse_sensitivity)
+
+	if camera_mode == CameraMode.THIRD_PERSON:
+		set_third_person_cam_pos()
+
+	stu_camera.root.rotation.x = clamp(
+		stu_camera.root.rotation.x,
 		deg_to_rad(-80),
 		deg_to_rad(80)
 	)
+
 @rpc("call_local", "any_peer")
 func _physics_process(delta: float) -> void:
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
