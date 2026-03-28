@@ -1,5 +1,5 @@
 extends Node3D
-@onready var player = preload("res://scenes/Stu.tscn")
+@onready var player = preload("res://scenes/Stu_with_ragdoll.tscn")
 @onready var voip: Node = $Voip
 
 ## Dictionary mapping remote steam_id -> their CharacterBody3D node
@@ -12,7 +12,7 @@ var scene_objects: Dictionary = {}
 var remote_held_items: Dictionary = {}
 
 ## Reference to the local player node (inside the instanced main.tscn, which is "Node3D")
-@onready var local_player: CharacterBody3D = $Main/Player
+@onready var local_player: CharacterBody3D = $Main/Stu
 
 func _ready() -> void:
 	# Initialize Steam if not already done
@@ -145,6 +145,7 @@ func _handle_player_update(sender_id: int, data: Dictionary) -> void:
 		elif not remote_walking and anim_player.is_playing():
 			anim_player.stop()
 
+
 func _handle_voice_data(data: Dictionary) -> void:
 	var voice_buffer: PackedByteArray = data.get("buffer", PackedByteArray())
 	if voice_buffer.size() > 0:
@@ -168,6 +169,11 @@ func _handle_player_action(sender_id: int, data: Dictionary) -> void:
 		"break_wall":
 			var pos := Vector3(data.get("px", 0.0), data.get("py", 0.0), data.get("pz", 0.0))
 			_handle_remote_break_wall(pos)
+		"enable_ragdoll":
+			var v := Vector3(data.get("vx", 0.0), data.get("vy", 0.0), data.get("vz", 0.0))
+			_handle_remote_ragdoll(sender_id, v)
+		"disable_ragdoll":
+			_handle_remote_disable_ragdoll(sender_id)
 		_:
 			print("[World] Unknown action: %s" % action)
 
@@ -209,6 +215,18 @@ func _handle_remote_place(sender_id: int, item_id: String, pos: Vector3) -> void
 			.set_trans(Tween.TRANS_SINE)\
 			.set_ease(Tween.EASE_OUT)
 		print("[World] Remote player %s placed %s at %s" % [sender_id, item_id, pos])
+
+func _handle_remote_ragdoll(sender_id: int, v: Vector3) -> void:
+	var remote = remote_players.get(sender_id, null)
+	if remote and is_instance_valid(remote) and remote.has_method("enable_ragdoll"):
+		remote.enable_ragdoll(v)
+		print("[World] Remote player %s ragdolled" % sender_id)
+
+func _handle_remote_disable_ragdoll(sender_id: int) -> void:
+	var remote = remote_players.get(sender_id, null)
+	if remote and is_instance_valid(remote) and remote.has_method("disable_ragdoll"):
+		remote.disable_ragdoll()
+		print("[World] Remote player %s disabled ragdoll" % sender_id)
 
 func _handle_remote_break_wall(impact_pos: Vector3) -> void:
 	var wall = $Main/breakablewall

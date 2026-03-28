@@ -31,7 +31,7 @@ const INTERACTION_LAYER_8_MASK := 1 << 7
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	
+
 	#initialize ragdoll timer
 	ragdoll_timer.wait_time = ragdoll_time
 	ragdoll_timer.one_shot = true
@@ -39,10 +39,10 @@ func _ready() -> void:
 	root_bone_idx = ragdoll_skeleton.find_bone("Root")  # or "Hips", "pelvis", "Spine", whatever your rig's main/root bone is
 	print(root_bone_idx)
 	add_child(ragdoll_timer)
-	
+
 	#make ragdoll body invis
 	stu_mesh_ragdoll.visible = false
-	
+
 	for child in stus_bone_simulator.get_children():
 		if child is PhysicalBone3D:
 			bones.append(child)
@@ -96,7 +96,7 @@ func _process(delta: float) -> void:
 	if is_charging_throw:
 		throw_charge += delta
 		throw_charge = clamp(throw_charge, 0.0, max_charge_time)
-		
+
 func _throw_held_object() -> void:
 	if not held_object:
 		return
@@ -151,7 +151,7 @@ func try_interact() -> void:
 	var target = null
 	if object_in_sight:
 		target = object_in_sight.collider
-	
+
 	print("collider clicked: ", target)
 
 	# Case 1: Holding something → try place or drop
@@ -192,10 +192,10 @@ func _find_door_controller(start: Object) -> Node:
 			return node
 		node = node.get_parent()
 	return null
-		
+
 func boom_ragdoll(origin: Vector3, strength: float):
 	# Horizontal direction only (ignore Y difference)
-	
+
 	var horizontal = global_transform.origin - origin
 	horizontal.y = 0.0
 	horizontal = horizontal.normalized()
@@ -207,10 +207,10 @@ func boom_ragdoll(origin: Vector3, strength: float):
 	var final_dir = (horizontal + up_force).normalized()
 
 	velocity += final_dir * strength
-			
+
 	ragdoll_state = true
-	ragdoll_timer.start()	
-	
+	ragdoll_timer.start()
+
 	enable_ragdoll(final_dir * strength)
 
 func _on_ragdoll_timer_timeout():
@@ -222,13 +222,28 @@ func enable_ragdoll(v) -> void:
 	stu_mesh_normal.visible = false
 	stu_mesh_ragdoll.visible = true
 	stus_bone_simulator.physical_bones_start_simulation()
-	
-	bones[0].apply_central_impulse(1.2 * v)
+
+	var force = bones[0].apply_central_impulse(1.2 * v)
 	for i in range(1, bones.size()):
 		bones[i].apply_central_impulse(v)
-		
-		
+
+	if GameNetwork.lobby_id > 0:
+		GameNetwork.send_p2p_packet(0, {
+			"message": "player_action",
+			"action": "enable_ragdoll",
+			"vx": v.x,
+			"vy": v.y,
+			"vz": v.z
+		}, Steam.P2P_SEND_RELIABLE)
+
+
 func disable_ragdoll() -> void:
 	stu_mesh_normal.visible = true
 	stu_mesh_ragdoll.visible = false
 	stus_bone_simulator.physical_bones_stop_simulation()
+
+	if GameNetwork.lobby_id > 0:
+		GameNetwork.send_p2p_packet(0, {
+			"message": "player_action",
+			"action": "disable_ragdoll"
+		}, Steam.P2P_SEND_RELIABLE)
