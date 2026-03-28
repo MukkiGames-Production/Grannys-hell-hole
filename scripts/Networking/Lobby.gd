@@ -450,6 +450,7 @@ func process_p2p_packet(sender_id: int, data: Dictionary) -> void:
 		"start_game":
 			print("Received start game signal from host!")
 			GameNetwork.set_lobby(lobby_id, lobby_members.duplicate(true), false)
+			GameNetwork.connect_to_host(sender_id)
 			get_tree().change_scene_to_file(ReturnScene.resource_path)
 		"accept_game":
 			print("Received accept game from: %s" % sender_id)
@@ -566,6 +567,7 @@ func start_game() -> void:
 		print("Starting game...")
 		# Save lobby state to the persistent singleton before scene change
 		GameNetwork.set_lobby(lobby_id, lobby_members.duplicate(true), true)
+		GameNetwork.create_steam_socket()
 
 		# Send start game message to all players
 		send_p2p_packet(0, {"message": "start_game"})
