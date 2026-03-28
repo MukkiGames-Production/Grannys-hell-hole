@@ -1,0 +1,112 @@
+[gd_scene format=3 uid="uid://cbgmcphjrls6b"]
+
+[ext_resource type="Script" uid="uid://bln1qhx3eqiju" path="res://scripts/UI/CharacterCustomization.gd" id="1_ts7vt"]
+[ext_resource type="PackedScene" uid="uid://b2q4gcul8cneu" path="res://Assets/Players/Stu.glb" id="1_yo1d1"]
+
+[node name="Control" type="Control" unique_id=279572440]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ts7vt")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=537165822]
+layout_mode = 0
+offset_right = 1148.0
+offset_bottom = 647.0
+mouse_filter = 1
+color = Color(0, 0, 0, 0.42745098)
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1624888657]
+layout_mode = 0
+offset_left = 209.0
+offset_top = 125.0
+offset_right = 939.0
+offset_bottom = 520.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer" unique_id=527082508]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer" unique_id=1053987719]
+layout_mode = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="PanelContainer/HBoxContainer/MarginContainer" unique_id=1761226336]
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="PanelContainer/HBoxContainer/MarginContainer/SubViewportContainer" unique_id=1382009775]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(341, 395)
+render_target_update_mode = 4
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="PanelContainer/HBoxContainer/MarginContainer/SubViewportContainer/SubViewport" unique_id=945978973]
+transform = Transform3D(0.560639, -0.26685542, 0.7838827, 0, 0.94664925, 0.32226568, -0.8280603, -0.18067472, 0.5307285, 4.7911744, 0, 7.9588394)
+
+[node name="Camera3D" type="Camera3D" parent="PanelContainer/HBoxContainer/MarginContainer/SubViewportContainer/SubViewport" unique_id=715736416]
+transform = Transform3D(0.9156276, 0, 0.40202758, 0, 1, 0, -0.40202758, 0, 0.9156276, 1.4413136, 0.47204733, 3.1305635)
+projection = 1
+size = 3.5
+
+[node name="Stu2" parent="PanelContainer/HBoxContainer/MarginContainer/SubViewportContainer/SubViewport" unique_id=2133011850 instance=ExtResource("1_yo1d1")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="Shirt Color" type="Label" parent="PanelContainer/HBoxContainer/MarginContainer/SubViewportContainer/SubViewport" unique_id=800655527]
+offset_left = 112.0
+offset_top = 274.0
+offset_right = 212.0
+offset_bottom = 299.0
+text = "Shirt Color"
+horizontal_alignment = 1
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="PanelContainer/HBoxContainer/MarginContainer/SubViewportContainer/SubViewport/Shirt Color" unique_id=2017531019]
+layout_mode = 0
+offset_left = -14.0
+offset_top = 19.0
+offset_right = 120.0
+offset_bottom = 40.0
+
+[node name="Pants Color" type="Label" parent="PanelContainer/HBoxContainer/MarginContainer/SubViewportContainer/SubViewport" unique_id=1865377038]
+offset_left = 113.0
+offset_top = 317.0
+offset_right = 213.0
+offset_bottom = 342.0
+text = "Pants Color"
+horizontal_alignment = 1
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="PanelContainer/HBoxContainer/MarginContainer/SubViewportContainer/SubViewport/Pants Color" unique_id=1787323146]
+layout_mode = 0
+offset_left = -14.0
+offset_top = 19.0
+offset_right = 120.0
+offset_bottom = 40.0
+
+[node name="Right Side" type="VBoxContainer" parent="PanelContainer/HBoxContainer" unique_id=1327548781]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Options" type="Label" parent="PanelContainer/HBoxContainer/Right Side" unique_id=311616269]
+layout_mode = 2
+text = "Character Customization"
+horizontal_alignment = 1
+
+[node name="TabContainer" type="TabContainer" parent="PanelContainer/HBoxContainer/Right Side/Options" unique_id=1341866106]
+layout_mode = 0
+offset_top = 27.0
+offset_right = 380.0
+offset_bottom = 81.0
+mouse_filter = 0
+current_tab = 2
+
+[node name="Left Eye" type="GridContainer" parent="PanelContainer/HBoxContainer/Right Side/Options/TabContainer" unique_id=1705727828]
+visible = false
+layout_mode = 2
+columns = 3
+metadata/_tab_index = 0
+
+[node name="Right Eye" type="Label" parent="PanelContainer/HBoxContainer/Right Side/Options/TabContainer" unique_id=947623226]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Mouth" type="Label" parent="PanelContainer/HBoxContainer/Right Side/Options/TabContainer" unique_id=1479792407]
+layout_mode = 2
+metadata/_tab_index = 2

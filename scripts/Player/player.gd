@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
+const INTERACTION_LAYER_8_MASK := 1 << 7
 
 @export var mouse_sensitivity := 0.002
 @export var camera_pivot: Node3D
@@ -55,12 +56,13 @@ func _process(delta: float) -> void:
 	var query = PhysicsRayQueryParameters3D.create(from, to)
 	query.exclude = [self]
 	query.collide_with_areas = true
+	query.collision_mask = query.collision_mask | INTERACTION_LAYER_8_MASK
 
 	object_in_sight = space_state.intersect_ray(query)
 
 	var currently_sees: bool = (object_in_sight) \
 								and (object_in_sight.collider != held_object) \
-								and (object_in_sight.collider is GrabbableObject or object_in_sight.collider is InteractionPoint)
+								and (object_in_sight.collider is GrabbableObject or object_in_sight.collider is InteractionPoint or object_in_sight.collider is DoorInteractionArea)
 
 	if currently_sees != seesInteractable:
 		seesInteractable = currently_sees
@@ -118,3 +120,5 @@ func try_interact():
 		print("Picked up " + str(held_object))
 	elif target is InteractionPoint:
 		target.empty_interact()
+	elif target is DoorInteractionArea:
+		target.interact()

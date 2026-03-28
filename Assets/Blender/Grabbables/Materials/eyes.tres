@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dv6d00bew8p5n"]
+
+[ext_resource type="Texture2D" uid="uid://c7f0vsxkt4hx1" path="res://assets/Blender/textures/EyeBase.png" id="1_xesyt"]
+
+[resource]
+resource_name = "eyes"
+cull_mode = 2
+albedo_texture = ExtResource("1_xesyt")
+roughness = 0.5

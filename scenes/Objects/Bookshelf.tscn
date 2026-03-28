@@ -1,0 +1,105 @@
+[gd_scene format=3 uid="uid://clc6g2eg8hxlu"]
+
+[ext_resource type="Script" uid="uid://c32hco8uj8upi" path="res://scripts/objects/Bookshelf.gd" id="1_yccmt"]
+[ext_resource type="ArrayMesh" uid="uid://ca0n3rvnt38g1" path="res://Assets/Blender/Interactables/StuInteractables_Bookshelf.res" id="2_yccmt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n4y64"]
+size = Vector3(3.1425781, 3.4283447, 1)
+
+[sub_resource type="Animation" id="Animation_yccmt"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StuInteractablesBookshelf:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StuInteractablesBookshelf:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StuInteractablesBookshelf:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_n4y64"]
+resource_name = "bookshelf_open"
+length = 15.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath("StuInteractablesBookshelf:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-4, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StuInteractablesBookshelf:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0.48791885, -0.25, 0, 0.25, 0, -2.807127, -0.33855122, 0.23, 0, 0, -2.807127, -0.2873418, 0, 0, 0, -1.3105822, -0.21195018, -0.10446145, 0, 0, -2.807127, -0.33855122, 0.23, 0, 0, -2.807127, -0.2873418, 0, 0, 0, -1.3105822, -0.21195018, -0.10446145, 0, 0, -2.807127, -0.33855122, 0.23, 0, 0, -2.807127, -0.2873418, 0, 0, 0, -1.3105822, -0.21195018, -0.10446145, 0, 0, -2.807127, -0.33855122, 0.23, 0, 0, -2.807127, -0.2873418, 0, 0, 0, -1.3105822, -0.21195018, -0.10446145, 0, 0, -2.807127, -0.33855122, 0.23, 0, 0, -2.807127, -0.2873418, 0, 0, 0, -1.3105822, -0.21195018, -0.10446145, 0, 0, -2.807127, -0.33855122, 0.23, 0, 0, -2.807127, -0.25, 0, 0.25, 0, 1.500001, -0.25, 0, 0.25, 0, 1.500001, -0.25, 0, 0.25, 0, -8.955039, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 2.0313075, 3.1666672, 3.7000005, 4.250383, 5.1333337, 5.666667, 6.2170496, 7.0333343, 7.133334, 7.233334, 7.366895, 7.466895, 7.566895, 7.7053576, 7.8053575, 7.9053574, 8.600001, 9.04541, 9.300001, 9.649932)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath("StuInteractablesBookshelf:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-4, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uvwr4"]
+_data = {
+&"RESET": SubResource("Animation_yccmt"),
+&"bookshelf_open": SubResource("Animation_n4y64")
+}
+
+[node name="Bookshelf" type="Area3D" unique_id=913797376]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7305055, 0)
+script = ExtResource("1_yccmt")
+valid_objects = Array[String](["Book"])
+metadata/_custom_type_script = "uid://d0uhvbq4j1buf"
+
+[node name="TargetPos" type="Node3D" parent="." unique_id=43627124]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0408148, 0.79967, 0.2398026)
+
+[node name="StuInteractablesBookshelf" type="MeshInstance3D" parent="." unique_id=899464032]
+mesh = ExtResource("2_yccmt")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1579440407]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.008100152, 0)
+shape = SubResource("BoxShape3D_n4y64")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1787480223]
+libraries/ = SubResource("AnimationLibrary_uvwr4")

@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://wtrltn6qm2a3"]
+
+[ext_resource type="PackedScene" uid="uid://d1eo52axtu0x5" path="res://Assets/objects/10_2k_pbr_scifi_textures_4_free.glb" id="1_w2ptg"]
+
+[node name="Sketchfab_Scene" unique_id=1918135357 instance=ExtResource("1_w2ptg")]
+
+[node name="BlastDoor1_Blastdoor1_0" parent="Sketchfab_model/e31b21c012554b61aa13da2eef6ca3a6_fbx/RootNode/BlastDoor1" parent_id_path=PackedInt32Array(722528770) index="0" unique_id=183495781]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -409.49338, -7.2623873e-22, 0)
+
+[node name="Plane_003_Hatch1_0" parent="Sketchfab_model/e31b21c012554b61aa13da2eef6ca3a6_fbx/RootNode/Plane_005/Plane_003" parent_id_path=PackedInt32Array(375498647) index="0" unique_id=1693219990]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 217.32855, 0, 0)
+
+[node name="Plane_019_CeilingPlasticCurve_0" parent="Sketchfab_model/e31b21c012554b61aa13da2eef6ca3a6_fbx/RootNode/Plane_019" parent_id_path=PackedInt32Array(2059942568) index="0" unique_id=1484623594]
+transform = Transform3D(0.9999734, -0.0021859908, 0.0069612986, 0.002177403, 0.99999684, 0.0012419682, -0.006963989, -0.0012267902, 0.999975, 0, 0, 0)

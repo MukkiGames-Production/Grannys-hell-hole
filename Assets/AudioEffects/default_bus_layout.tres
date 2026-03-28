@@ -1,33 +1,30 @@
 [gd_resource type="AudioBusLayout" format=3 uid="uid://7axefrjv8f3v"]
 
-[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_moxex"]
-resource_name = "Reverb"
-room_size = 0.0
-damping = 0.1
-spread = 0.0
-dry = 0.16
-wet = 0.1
-
-[sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_moxex"]
-resource_name = "Compressor"
-ratio = 11.0
-gain = 6.3
-release_ms = 128.0
-sidechain = &"Voice"
-
 [sub_resource type="AudioEffectEQ" id="AudioEffectEQ_moxex"]
 resource_name = "EQ"
-band_db/32_hz = 11.5
-band_db/100_hz = 11.7
-band_db/320_hz = 14.0
-band_db/1000_hz = -12.4
-band_db/3200_hz = -26.4
-band_db/10000_hz = -38.1
+band_db/100_hz = 3.9
+band_db/1000_hz = -17.9
+band_db/3200_hz = -40.8
+band_db/10000_hz = -45.8
 
 [sub_resource type="AudioEffectPitchShift" id="AudioEffectPitchShift_moxex"]
 resource_name = "PitchShift"
 pitch_scale = 0.85
 oversampling = 8
+
+[sub_resource type="AudioEffectChorus" id="AudioEffectChorus_moxex"]
+resource_name = "Chorus"
+voice_count = 1
+dry = 0.13
+wet = 0.02
+
+[sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_moxex"]
+resource_name = "LowPassFilter"
+cutoff_hz = 4158.0
+
+[sub_resource type="AudioEffectDistortion" id="AudioEffectDistortion_moxex"]
+resource_name = "Distortion"
+drive = 0.15
 
 [resource]
 bus/0/volume_db = -0.0016212463
@@ -37,11 +34,13 @@ bus/1/mute = false
 bus/1/bypass_fx = false
 bus/1/volume_db = -2.312501
 bus/1/send = &"Master"
-bus/1/effect/0/effect = SubResource("AudioEffectReverb_moxex")
+bus/1/effect/0/effect = SubResource("AudioEffectEQ_moxex")
 bus/1/effect/0/enabled = true
-bus/1/effect/1/effect = SubResource("AudioEffectCompressor_moxex")
+bus/1/effect/1/effect = SubResource("AudioEffectPitchShift_moxex")
 bus/1/effect/1/enabled = true
-bus/1/effect/2/effect = SubResource("AudioEffectEQ_moxex")
+bus/1/effect/2/effect = SubResource("AudioEffectChorus_moxex")
 bus/1/effect/2/enabled = true
-bus/1/effect/3/effect = SubResource("AudioEffectPitchShift_moxex")
+bus/1/effect/3/effect = SubResource("AudioEffectLowPassFilter_moxex")
 bus/1/effect/3/enabled = true
+bus/1/effect/4/effect = SubResource("AudioEffectDistortion_moxex")
+bus/1/effect/4/enabled = true

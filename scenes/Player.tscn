@@ -1,17 +1,13 @@
 [gd_scene format=3 uid="uid://dgdfsni6615jc"]
 
-[ext_resource type="Script" uid="uid://de64jyetu0c7k" path="res://scripts/Player/player.gd" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://de64jyetu0c7k" path="res://scripts/Player/walkingPlayer.gd" id="1_3vyb7"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0xm2m"]
-radius = 0.25
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_h2yge"]
 radius = 0.25
 
 [node name="Player" type="CharacterBody3D" unique_id=86458621 node_paths=PackedStringArray("camera_pivot", "camera")]
 physics_interpolation_mode = 1
 script = ExtResource("1_3vyb7")
-mouse_sensitivity = null
 camera_pivot = NodePath("CameraPivot")
 camera = NodePath("CameraPivot/Camera3D")
 
@@ -21,6 +17,3 @@ camera = NodePath("CameraPivot/Camera3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=38373972]
 shape = SubResource("CapsuleShape3D_0xm2m")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=973675218]
-mesh = SubResource("CapsuleMesh_h2yge")

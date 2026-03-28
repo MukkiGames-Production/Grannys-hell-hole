@@ -3,3 +3,4 @@
 # LFS Tracking Assets
 *.obj filter=lfs diff=lfs merge=lfs -text
 *.fbx filter=lfs diff=lfs merge=lfs -text
+Assets/objects/**/* filter=lfs diff=lfs merge=lfs -text

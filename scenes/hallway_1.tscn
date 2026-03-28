@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://cy6fcjmiigclv"]
+
+[ext_resource type="Material" uid="uid://m7uvlvtlk2er" path="res://Assets/objects/Textures/wood_cabinet_worn_long_2k.gltf/wood_cabinet_worn_long.tres" id="1_dpel1"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_i7141"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4mrxx"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_qfnet"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qfnet"]
+size = Vector3(1, 0.34326172, 86.26973)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i7141"]
+size = Vector3(1, 0.34326172, 85.799355)
+
+[node name="Hallway1" type="Node3D" unique_id=1357505118]
+transform = Transform3D(1, 0, 0, 0, 0.774672, 0, 0, 0, 0.654799, 0, 0, 0)
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="." unique_id=2083918837]
+transform = Transform3D(7.078706, 0, 0, 0, 10.004418, 0, 0, 0, 1, 12.113149, 5.2888756, -31.250051)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2" unique_id=1315576951]
+material_override = ExtResource("1_dpel1")
+mesh = SubResource("BoxMesh_i7141")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2" unique_id=1751961243]
+shape = SubResource("BoxShape3D_4mrxx")
+
+[node name="StaticBody3D4" type="StaticBody3D" parent="." unique_id=253572793]
+transform = Transform3D(-0.16634224, 0, 0.99999475, 0, 10.004418, 0, -51.79688, 0, -0.003211417, 16.460258, 5.2888756, -56.645454)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D4" unique_id=683247957]
+material_override = ExtResource("1_dpel1")
+mesh = SubResource("BoxMesh_i7141")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D4" unique_id=2108656885]
+shape = SubResource("BoxShape3D_4mrxx")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="." unique_id=257512655]
+transform = Transform3D(-0.16634224, 0, 0.99999475, 0, 10.004418, 0, -51.79688, 0, -0.003211417, -5.3263683, 5.2888756, -56.57549)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D3" unique_id=1750634104]
+material_override = ExtResource("1_dpel1")
+mesh = SubResource("BoxMesh_i7141")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3" unique_id=1267839799]
+shape = SubResource("BoxShape3D_4mrxx")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=2052742741]
+transform = Transform3D(7.078706, 0, 0, 0, 10.004418, 0, 0, 0, 1, -1.7783504, 5.2888756, -31.15747)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=230672887]
+material_override = ExtResource("1_dpel1")
+mesh = SubResource("BoxMesh_i7141")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1690108563]
+shape = SubResource("BoxShape3D_4mrxx")
+
+[node name="Ceiling" type="StaticBody3D" parent="." unique_id=1994484950]
+transform = Transform3D(25.460058, 0, 0, 0, 0.37356824, 0, 0, 0, 0.62564915, 6.7887344, 10.52862, -36.28132)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ceiling" unique_id=1949500551]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 86.43986, 0, 0, -33.095116)
+material_override = ExtResource("1_dpel1")
+mesh = SubResource("BoxMesh_qfnet")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ceiling" unique_id=577225]
+transform = Transform3D(1.0000005, 0, 0, 0, 1, 0, 0, 0, 1.0000013, 0, -0.32836914, -33.022667)
+shape = SubResource("BoxShape3D_qfnet")
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=1184181881]
+transform = Transform3D(22.813745, 0, 0, 0, 0.37356824, 0, 0, 0, 0.60530835, 5.6906404, 0, -36.37994)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=322107953]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 85.2744, 0, 0, -33.095116)
+material_override = ExtResource("1_dpel1")
+mesh = SubResource("BoxMesh_qfnet")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=195589109]
+transform = Transform3D(0.9999959, 0, 0, 0, 0.9999956, 0, 0, 0, 0.99999565, 0, -0.32836893, -33.399113)
+shape = SubResource("BoxShape3D_i7141")

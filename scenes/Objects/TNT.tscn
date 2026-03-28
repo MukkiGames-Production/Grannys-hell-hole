@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://thxqp2l1th2c"]
+
+[ext_resource type="Script" uid="uid://dhlkjmfatnkiw" path="res://scripts/objects/explodingObject.gd" id="1_uv0oq"]
+[ext_resource type="ArrayMesh" uid="uid://du6e23m4rs4ur" path="res://Assets/Blender/Grabbables/StuItems_TNT.res" id="2_uv0oq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_odoac"]
+size = Vector3(0.116241455, 0.52182007, 0.11053467)
+
+[node name="TNT" type="Node3D" unique_id=1863615465]
+
+[node name="GrabbableObject" type="RigidBody3D" parent="." unique_id=1354601695]
+script = ExtResource("1_uv0oq")
+item_id = "TNT"
+metadata/_custom_type_script = "uid://dlfa4844hulox"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GrabbableObject" unique_id=715182417]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06877136, -0.2572174, 0.00076293945)
+shape = SubResource("BoxShape3D_odoac")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GrabbableObject" unique_id=1385018482]
+mesh = ExtResource("2_uv0oq")

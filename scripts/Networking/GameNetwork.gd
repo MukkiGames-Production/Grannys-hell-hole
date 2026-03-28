@@ -18,6 +18,7 @@ signal player_joined(peer_steam_id: int, player_name: String)
 signal player_left(peer_steam_id: int)
 signal game_started()
 signal p2p_packet_received(sender_id: int, data: Dictionary)
+signal npc_update_received(data: Dictionary)
 
 func _ready() -> void:
 	Steam.p2p_session_request.connect(_on_p2p_session_request)
@@ -94,6 +95,8 @@ func process_player_update(data: Dictionary) ->void:
 		[remote_id, data.get("px", 0), data.get("py", 0), data.get("pz", 0),
 			data.get("rx", 0), data.get("ry", 0), data.get("rz", 0),
 			data.get("vx", 0), data.get("vy", 0), data.get("vz", 0)])
+
+
 
 # ---- P2P Reading ----
 
