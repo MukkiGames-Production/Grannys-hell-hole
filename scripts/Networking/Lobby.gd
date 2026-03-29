@@ -162,7 +162,6 @@ func join_lobby(this_lobby_id: int) -> void:
 
 	# Make the lobby join request to Steam
 	Steam.joinLobby(this_lobby_id)
-	GameNetwork.connect_to_host(Steam.getLobbyOwner(this_lobby_id))
 @rpc("call_local", "any_peer")
 func _on_lobby_joined(this_lobby_id: int, _permissions: int, _locked: bool, response: int) -> void:
 	# If joining was successful
