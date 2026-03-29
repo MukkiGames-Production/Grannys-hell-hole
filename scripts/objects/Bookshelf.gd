@@ -2,7 +2,7 @@ extends InteractionPoint
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var targetpos: Node3D = $TargetPos
-
+@rpc("call_remote","any_peer")
 func interact(item: GrabbableObject):
 	if item and item.item_id not in valid_objects:
 		return false

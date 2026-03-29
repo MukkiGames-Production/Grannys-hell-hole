@@ -183,7 +183,7 @@ func _handle_player_action(sender_id: int, data: Dictionary) -> void:
 func _handle_remote_replace_model(sender_id: int, item_id: String, new_model_id: String) -> void:
 	var obj: GrabbableObject = scene_objects.get(item_id, null)
 	if obj and is_instance_valid(obj):
-		obj.replace_model(new_model_id)
+		obj.replace_model(obj.mesh, new_model_id)
 		print("[World] Remote player %s replaced model of %s with %s" % [sender_id, item_id, new_model_id])
 func _handle_remote_grab(sender_id: int, item_id: String) -> void:
 	var obj: GrabbableObject = scene_objects.get(item_id, null)
