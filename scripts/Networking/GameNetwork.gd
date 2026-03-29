@@ -221,12 +221,19 @@ func _on_lobby_chat_update(this_lobby_id: int, changed_id: int, _making_change_i
 func create_steam_socket()->void:
 
 	peer = SteamMultiplayerPeer.new()
-	peer.create_host(0)
-	multiplayer.multiplayer_peer = peer
+	var err = peer.create_host(1)
+	if err == OK:
+		multiplayer.multiplayer_peer = peer
+	else:
+		push_error("[GameNetwork] Failed to create steam socket host: ", err)
+
 func connect_to_host(host_id: int)->void:
 	peer = SteamMultiplayerPeer.new()
-	peer.create_client(host_id)
-	multiplayer.multiplayer_peer = peer
+	var err = peer.create_client(host_id, 1)
+	if err == OK:
+		multiplayer.multiplayer_peer = peer
+	else:
+		push_error("[GameNetwork] Failed to connect to host: ", err)
 
 # ---- Helpers ---- #
 
