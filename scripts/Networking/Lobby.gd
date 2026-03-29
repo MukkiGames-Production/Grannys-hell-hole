@@ -569,6 +569,9 @@ func start_game() -> void:
 		GameNetwork.set_lobby(lobby_id, lobby_members.duplicate(true), true)
 		GameNetwork.create_steam_socket()
 
+		# Give the socket a brief moment to initialize before telling clients to connect
+		await get_tree().create_timer(0.5).timeout
+
 		# Send start game message to all players
 		send_p2p_packet(0, {"message": "start_game"})
 		# Load your game scene
