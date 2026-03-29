@@ -2,6 +2,26 @@
 
 [ext_resource type="Script" uid="uid://bln1qhx3eqiju" path="res://scripts/UI/CharacterCustomization.gd" id="1_ts7vt"]
 [ext_resource type="PackedScene" uid="uid://b2q4gcul8cneu" path="res://Assets/Players/Stu.glb" id="1_yo1d1"]
+[ext_resource type="Texture2D" uid="uid://dgqo7odxc5bkw" path="res://Assets/Blender/textures/customization/eye1.png" id="3_m7sml"]
+[ext_resource type="Texture2D" uid="uid://cjqcobejvpdrj" path="res://Assets/Blender/textures/customization/eye2.png" id="4_cicpb"]
+[ext_resource type="Texture2D" uid="uid://dg078xpapskn0" path="res://Assets/Blender/textures/customization/eye3.png" id="5_7yc06"]
+[ext_resource type="Texture2D" uid="uid://dubowvsjvsheq" path="res://Assets/Blender/textures/customization/eye4.png" id="6_m3b8i"]
+[ext_resource type="Texture2D" uid="uid://bk0ccgu1b5dgp" path="res://Assets/Blender/textures/customization/eye5.png" id="7_805nj"]
+[ext_resource type="Texture2D" uid="uid://bg2dxlbpf5e3v" path="res://Assets/Blender/textures/customization/eye6.png" id="8_k30yi"]
+[ext_resource type="Texture2D" uid="uid://cwjgajqw5ljhg" path="res://Assets/Blender/textures/customization/eye7.png" id="9_nthxs"]
+[ext_resource type="Texture2D" uid="uid://c2bgqfgsv4uyl" path="res://Assets/Blender/textures/customization/eye8.png" id="10_vqo11"]
+[ext_resource type="Texture2D" uid="uid://bs5v5i4osyu4u" path="res://Assets/Blender/textures/customization/eye9.png" id="11_8yg4u"]
+[ext_resource type="Texture2D" uid="uid://c4xsyvgc21x81" path="res://Assets/Blender/textures/customization/eye10.png" id="12_40me3"]
+[ext_resource type="Texture2D" uid="uid://s3bgx3jkjsdd" path="res://Assets/Blender/textures/customization/mouth1.png" id="13_3s5my"]
+[ext_resource type="Texture2D" uid="uid://drfrtx7muui6d" path="res://Assets/Blender/textures/customization/mouth2.png" id="14_4kwff"]
+[ext_resource type="Texture2D" uid="uid://cuiy8tciwgygl" path="res://Assets/Blender/textures/customization/mouth3.png" id="15_2st7q"]
+[ext_resource type="Texture2D" uid="uid://nh7h1sedkaub" path="res://Assets/Blender/textures/customization/mouth4.png" id="16_a6ydn"]
+[ext_resource type="Texture2D" uid="uid://b8dt3dv45iymn" path="res://Assets/Blender/textures/customization/mouth5.png" id="17_yjmku"]
+[ext_resource type="Texture2D" uid="uid://dgsaljajslkpn" path="res://Assets/Blender/textures/customization/mouth6.png" id="18_c1two"]
+[ext_resource type="Texture2D" uid="uid://d26qpj4ycyu40" path="res://Assets/Blender/textures/customization/mouth7.png" id="19_hfb41"]
+[ext_resource type="Texture2D" uid="uid://c0j0dwevsir8f" path="res://Assets/Blender/textures/customization/mouth8.png" id="20_4l6p4"]
+[ext_resource type="Texture2D" uid="uid://c4v3f14d3loav" path="res://Assets/Blender/textures/customization/mouth9.png" id="21_mh1kl"]
+[ext_resource type="Texture2D" uid="uid://cnd1pv38h3654" path="res://Assets/Blender/textures/customization/mouth10.png" id="22_bk3so"]
 
 [node name="Control" type="Control" unique_id=279572440]
 layout_mode = 3
@@ -90,23 +110,235 @@ horizontal_alignment = 1
 
 [node name="TabContainer" type="TabContainer" parent="PanelContainer/HBoxContainer/Right Side/Options" unique_id=1341866106]
 layout_mode = 0
-offset_top = 27.0
-offset_right = 380.0
-offset_bottom = 81.0
+offset_top = 42.0
+offset_right = 384.0
+offset_bottom = 395.0
 mouse_filter = 0
 current_tab = 2
 
 [node name="Left Eye" type="GridContainer" parent="PanelContainer/HBoxContainer/Right Side/Options/TabContainer" unique_id=1705727828]
 visible = false
 layout_mode = 2
-columns = 3
+columns = 4
 metadata/_tab_index = 0
 
-[node name="Right Eye" type="Label" parent="PanelContainer/HBoxContainer/Right Side/Options/TabContainer" unique_id=947623226]
+[node name="TextureButton" type="TextureButton" parent="PanelContainer/HBoxContainer/Right Side/Options/TabContainer/Left Eye" unique_id=1648942861]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture_normal = ExtResource("3_m7sml")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureButton2" type="TextureButton" parent="PanelContainer/HBoxContainer/Right Side/Options/TabContainer/Left Eye" unique_id=1493297634]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture_normal = ExtResource("4_cicpb")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureButton3" type="TextureButton" parent="PanelContainer/HBoxContainer/Right Side/Options/TabContainer/Left Eye" unique_id=2083655980]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture_normal = ExtResource("5_7yc06")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureButton4" type="TextureButton" parent="PanelContainer/HBoxContainer/Right Side/Options/TabContainer/Left Eye" unique_id=931644756]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture_normal = ExtResource("6_m3b8i")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureButton5" type="TextureButton" parent="PanelContainer/HBoxContainer/Right Side/Options/TabContainer/Left Eye" unique_id=1141265075]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture_normal = ExtResource("7_805nj")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureButton6" type="TextureButton" parent="PanelContainer/HBoxContainer/Right Side/Options/TabContainer/Left Eye" unique_id=1128482746]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture_normal = ExtResource("8_k30yi")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureButton7" type="TextureButton" parent="PanelContainer/HBoxContainer/Right Side/Options/TabContainer/Left Eye" unique_id=1534290526]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture_normal = ExtResource("9_nthxs")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureButton8" type="TextureButton" parent="PanelContainer/HBoxContainer/Right Side/Options/TabContainer/Left Eye" unique_id=1867524047]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture_normal = ExtResource("10_vqo11")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureButton9" type="TextureButton" parent="PanelContainer/HBoxContainer/Right Side/Options/TabContainer/Left Eye" unique_id=1119746030]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture_normal = ExtResource("11_8yg4u")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureButton10" type="TextureButton" parent="PanelContainer/HBoxContainer/Right Side/Options/TabContainer/Left Eye" unique_id=338745804]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture_normal = ExtResource("12_40me3")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Right Eye" type="GridContainer" parent="PanelContainer/HBoxContainer/Right Side/Options/TabContainer" unique_id=828830655]
 visible = false
 layout_mode = 2
+columns = 2
 metadata/_tab_index = 1
 
-[node name="Mouth" type="Label" parent="PanelContainer/HBoxContainer/Right Side/Options/TabContainer" unique_id=1479792407]
+[node name="TextureButton" type="TextureButton" parent="PanelContainer/HBoxContainer/Right Side/Options/TabContainer/Right Eye" unique_id=58238208]
+custom_minimum_size = Vector2(85, 85)
 layout_mode = 2
+texture_normal = ExtResource("3_m7sml")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureButton2" type="TextureButton" parent="PanelContainer/HBoxContainer/Right Side/Options/TabContainer/Right Eye" unique_id=2121539070]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture_normal = ExtResource("4_cicpb")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureButton3" type="TextureButton" parent="PanelContainer/HBoxContainer/Right Side/Options/TabContainer/Right Eye" unique_id=1580499738]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture_normal = ExtResource("5_7yc06")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureButton4" type="TextureButton" parent="PanelContainer/HBoxContainer/Right Side/Options/TabContainer/Right Eye" unique_id=1442760685]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture_normal = ExtResource("6_m3b8i")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureButton5" type="TextureButton" parent="PanelContainer/HBoxContainer/Right Side/Options/TabContainer/Right Eye" unique_id=2143134757]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture_normal = ExtResource("7_805nj")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureButton6" type="TextureButton" parent="PanelContainer/HBoxContainer/Right Side/Options/TabContainer/Right Eye" unique_id=1542783297]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture_normal = ExtResource("8_k30yi")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureButton7" type="TextureButton" parent="PanelContainer/HBoxContainer/Right Side/Options/TabContainer/Right Eye" unique_id=1895803248]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture_normal = ExtResource("9_nthxs")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureButton8" type="TextureButton" parent="PanelContainer/HBoxContainer/Right Side/Options/TabContainer/Right Eye" unique_id=705282095]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture_normal = ExtResource("10_vqo11")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureButton9" type="TextureButton" parent="PanelContainer/HBoxContainer/Right Side/Options/TabContainer/Right Eye" unique_id=782270149]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture_normal = ExtResource("11_8yg4u")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureButton10" type="TextureButton" parent="PanelContainer/HBoxContainer/Right Side/Options/TabContainer/Right Eye" unique_id=1285097021]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture_normal = ExtResource("12_40me3")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Mouth" type="GridContainer" parent="PanelContainer/HBoxContainer/Right Side/Options/TabContainer" unique_id=16456501]
+layout_mode = 2
+columns = 4
 metadata/_tab_index = 2
+
+[node name="TextureButton" type="TextureButton" parent="PanelContainer/HBoxContainer/Right Side/Options/TabContainer/Mouth" unique_id=457960974]
+custom_minimum_size = Vector2(90, 50)
+layout_mode = 2
+texture_normal = ExtResource("13_3s5my")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureButton2" type="TextureButton" parent="PanelContainer/HBoxContainer/Right Side/Options/TabContainer/Mouth" unique_id=214130506]
+custom_minimum_size = Vector2(90, 50)
+layout_mode = 2
+texture_normal = ExtResource("14_4kwff")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureButton3" type="TextureButton" parent="PanelContainer/HBoxContainer/Right Side/Options/TabContainer/Mouth" unique_id=350505854]
+custom_minimum_size = Vector2(90, 50)
+layout_mode = 2
+texture_normal = ExtResource("15_2st7q")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureButton4" type="TextureButton" parent="PanelContainer/HBoxContainer/Right Side/Options/TabContainer/Mouth" unique_id=1373326279]
+custom_minimum_size = Vector2(90, 50)
+layout_mode = 2
+texture_normal = ExtResource("16_a6ydn")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureButton5" type="TextureButton" parent="PanelContainer/HBoxContainer/Right Side/Options/TabContainer/Mouth" unique_id=612106555]
+custom_minimum_size = Vector2(90, 50)
+layout_mode = 2
+texture_normal = ExtResource("17_yjmku")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureButton6" type="TextureButton" parent="PanelContainer/HBoxContainer/Right Side/Options/TabContainer/Mouth" unique_id=837377496]
+custom_minimum_size = Vector2(90, 50)
+layout_mode = 2
+texture_normal = ExtResource("18_c1two")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureButton7" type="TextureButton" parent="PanelContainer/HBoxContainer/Right Side/Options/TabContainer/Mouth" unique_id=539343143]
+custom_minimum_size = Vector2(90, 50)
+layout_mode = 2
+texture_normal = ExtResource("19_hfb41")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureButton8" type="TextureButton" parent="PanelContainer/HBoxContainer/Right Side/Options/TabContainer/Mouth" unique_id=105582014]
+custom_minimum_size = Vector2(90, 50)
+layout_mode = 2
+texture_normal = ExtResource("20_4l6p4")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureButton9" type="TextureButton" parent="PanelContainer/HBoxContainer/Right Side/Options/TabContainer/Mouth" unique_id=472648111]
+custom_minimum_size = Vector2(90, 50)
+layout_mode = 2
+texture_normal = ExtResource("21_mh1kl")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureButton10" type="TextureButton" parent="PanelContainer/HBoxContainer/Right Side/Options/TabContainer/Mouth" unique_id=1828108320]
+custom_minimum_size = Vector2(90, 50)
+layout_mode = 2
+texture_normal = ExtResource("22_bk3so")
+ignore_texture_size = true
+stretch_mode = 0
