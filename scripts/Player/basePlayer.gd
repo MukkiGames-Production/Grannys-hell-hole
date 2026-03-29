@@ -223,7 +223,7 @@ func enable_ragdoll(v) -> void:
 	stu_mesh_ragdoll.visible = true
 	stus_bone_simulator.physical_bones_start_simulation()
 
-	var force = bones[0].apply_central_impulse(1.2 * v)
+	bones[0].apply_central_impulse(1.2 * v)
 	for i in range(1, bones.size()):
 		bones[i].apply_central_impulse(v)
 
@@ -231,7 +231,6 @@ func enable_ragdoll(v) -> void:
 		GameNetwork.send_p2p_packet(0, {
 			"message": "player_action",
 			"action": "enable_ragdoll",
-			"force":force,
 			"vx": v.x,
 			"vy": v.y,
 			"vz": v.z
