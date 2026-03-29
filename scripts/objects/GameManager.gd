@@ -173,7 +173,8 @@ func _handle_player_action(sender_id: int, data: Dictionary) -> void:
 			var v := Vector3(data.get("vx", 0.0), data.get("vy", 0.0), data.get("vz", 0.0))
 			_handle_remote_ragdoll(sender_id, v)
 		"bookshelf_open":
-			_handle_remote_bookshelf_open(sender_id, item_id)
+			var book_id: String = data.get("book_id", "")
+			_handle_remote_bookshelf_open(sender_id, item_id, book_id)
 		"replace_model":
 			var new_model_id: String = data.get("new_model_id", "")
 			_handle_remote_replace_model(sender_id, item_id, new_model_id)
@@ -181,11 +182,20 @@ func _handle_player_action(sender_id: int, data: Dictionary) -> void:
 			_handle_remote_disable_ragdoll(sender_id)
 		_:
 			print("[World] Unknown action: %s" % action)
-func _handle_remote_bookshelf_open(sender_id: int, item_id: String) -> void:
+func _handle_remote_bookshelf_open(sender_id: int, item_id: String, book_id: String) -> void:
 	var obj: Node = scene_objects.get(item_id, null)
-	if obj and is_instance_valid(obj) and obj.get_node("AnimationPlayer"):
+	var book: Node = scene_objects.get(book_id, null)
+
+	if obj and is_instance_valid(obj) and obj.has_node("AnimationPlayer"):
 		var anim_player: AnimationPlayer = obj.get_node("AnimationPlayer")
 		anim_player.play("bookshelf_open")
+
+		if book and is_instance_valid(book) and obj.has_node("TargetPos"):
+			var target = obj.get_node("TargetPos")
+			if obj.has_method("move_to_point"):
+				obj.move_to_point(book, target.global_position, true)
+			book.reparent(obj, true)
+
 		print("[World] Remote player %s opened bookshelf %s" % [sender_id, item_id])
 func _handle_remote_replace_model(sender_id: int, item_id: String, new_model_id: String) -> void:
 	var obj: GrabbableObject = scene_objects.get(item_id, null)

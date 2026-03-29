@@ -10,5 +10,10 @@ func interact(item: GrabbableObject):
 		animation_player.play("bookshelf_open")
 		move_to_point(item, targetpos.global_position, true)
 		item.reparent(self, true)
-		GameNetwork.send_p2p_packet(0, {"message": "player_action", "action": "bookshelf_open","item_id": "Bookshelf" })
+		GameNetwork.send_p2p_packet(0, {
+			"message": "player_action",
+			"action": "bookshelf_open",
+			"item_id": name,
+			"book_id": item.name
+		})
 	return true
