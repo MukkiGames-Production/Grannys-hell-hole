@@ -37,6 +37,8 @@ func _ready() -> void:
 	voip.start_recording()
 	voip.set_loopback(true)
 
+
+
 	# Build a lookup table of all interactive objects by their item_id
 	_register_scene_objects()
 
@@ -182,6 +184,8 @@ func _handle_player_action(sender_id: int, data: Dictionary) -> void:
 			_handle_remote_replace_model(sender_id, item_id, new_model_id)
 		"disable_ragdoll":
 			_handle_remote_disable_ragdoll(sender_id)
+		"reset_game":
+			_do_reset()
 		_:
 			print("[World] Unknown action: %s" % action)
 func _handle_remote_bookshelf_open(sender_id: int, item_id: String, book_id: String) -> void:
@@ -222,6 +226,19 @@ func _handle_remote_release(sender_id: int, item_id: String, pos: Vector3) -> vo
 		obj.freeze = false
 		obj.global_position = pos
 		print("[World] Remote player %s released %s at %s" % [sender_id, item_id, pos])
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_F6:
+		_on_debug_reset_pressed()
+
+func _on_debug_reset_pressed() -> void:
+	if GameNetwork.lobby_id > 0:
+		GameNetwork.send_p2p_packet(0, {"message": "player_action", "action": "reset_game"})
+	_do_reset()
+
+func _do_reset() -> void:
+	print("[World] Resetting game state...")
+	get_tree().reload_current_scene()
 
 func _handle_remote_place(sender_id: int, item_id: String, pos: Vector3) -> void:
 	remote_held_items.erase(sender_id)
