@@ -231,6 +231,7 @@ func enable_ragdoll(v) -> void:
 		GameNetwork.send_p2p_packet(0, {
 			"message": "player_action",
 			"action": "enable_ragdoll",
+			"force":force,
 			"vx": v.x,
 			"vy": v.y,
 			"vz": v.z
