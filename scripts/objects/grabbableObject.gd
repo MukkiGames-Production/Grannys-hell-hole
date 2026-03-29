@@ -78,6 +78,12 @@ func release():
 		"py": pos.y,
 		"pz": pos.z,
 	}, Steam.P2P_SEND_RELIABLE)
+	
+func special(): ##on right click down
+	pass
+
+func special_released(): ##on right click up
+	pass
 
 func place_on(interaction_point: Node3D):
 	var target_pos := interaction_point.global_position + Vector3(0, 1.5, 0)

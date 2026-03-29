@@ -15,7 +15,6 @@ func create(radius: float, new_strength: float) -> void:
 	
 	# Now apply the effect once, to whoever is overlapping right now
 	for body in area.get_overlapping_bodies():
-		print(body)
 		if body is BasePlayer or body is DummyPlayer:
 			body.boom_ragdoll(global_position, strength)  # adjust multiplier as needed
 			print("BOOM applied via poll!")

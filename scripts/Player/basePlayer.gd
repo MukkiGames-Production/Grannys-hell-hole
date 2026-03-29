@@ -82,6 +82,11 @@ func _unhandled_input(event: InputEvent) -> void:
 				else:
 					try_interact()
 				is_charging_throw = false
+	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
+		if event.pressed and held_object:
+			try_special()
+		elif not event.pressed and held_object:
+			try_special_released()
 
 # Virtual method — child classes override this for yaw/pitch handling
 func _handle_mouse_look(event: InputEventMouseMotion) -> void:
@@ -167,6 +172,15 @@ func try_interact() -> void:
 	elif target is InteractionPoint:
 		target.empty_interact()
 		
+func try_special() -> void:
+	if held_object:
+		held_object.special()
+	return
+func try_special_released() -> void:
+	if held_object:
+		held_object.special_released()
+	return
+
 func boom_ragdoll(origin: Vector3, strength: float):
 	# Horizontal direction only (ignore Y difference)
 	
