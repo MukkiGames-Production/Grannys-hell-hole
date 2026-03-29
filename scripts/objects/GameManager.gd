@@ -41,18 +41,20 @@ func _ready() -> void:
 	_register_scene_objects()
 
 func _register_scene_objects() -> void:
-	# Find all GrabbableObject nodes under $Main and index them by item_id
+	# Find all interactive nodes under $Main and index them
 
 	for node in _find_nodes_of_type($Main, "GrabbableObject"):
-		var obj := node as GrabbableObject
-		if obj and obj.item_id != "":
-			scene_objects[obj.item_id] = obj
-			print("[World] Registered scene object: %s" % obj.item_id)
+		if node is GrabbableObject and node.item_id != "":
+			scene_objects[node.item_id] = node
+			print("[World] Registered scene object: %s" % node.item_id)
+		elif node is InteractionPoint:
+			scene_objects[node.name] = node
+			print("[World] Registered interaction point: %s" % node.name)
 
 func _find_nodes_of_type(root: Node, type_name: String) -> Array:
 	var results := []
 	for child in root.get_children():
-		if child.get_class() == type_name or child is GrabbableObject:
+		if child.get_class() == type_name or child is GrabbableObject or child is InteractionPoint:
 			results.append(child)
 		results.append_array(_find_nodes_of_type(child, type_name))
 	return results
