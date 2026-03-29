@@ -12,4 +12,3 @@ func interact(item: GrabbableObject):
 		item.reparent(self, true)
 		GameNetwork.send_p2p_packet(0, {"message": "player_action", "action": "bookshelf_open","item_id": item.item_id})
 	return true
-func 
