@@ -87,6 +87,12 @@ func _unhandled_input(event: InputEvent) -> void:
 					try_interact()
 				is_charging_throw = false
 
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
+		if event.pressed:
+			print("Right click", held_object.has_method("use"))
+			if held_object and held_object.has_method("use"):
+				held_object.use()
+
 # Virtual method — child classes override this for yaw/pitch handling
 func _handle_mouse_look(event: InputEventMouseMotion) -> void:
 	pass  # override in children

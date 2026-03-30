@@ -5,6 +5,7 @@ class_name GrabbableObject
 @export var hold_distance := 1.0
 @export var follow_speed := 40.0
 @export var hold_offset := Vector3(0.6, -0.4, -2.0)
+@export var hold_rotation_offset := Vector3.ZERO
 @export var is_grabbable := true
 
 @onready var explosion: PackedScene = preload("res://scenes/BigBoom.tscn")
@@ -26,9 +27,17 @@ func _physics_process(delta):
 	freeze = true  # keep frozen while held so gravity never kicks in
 	var target_pos = holder.global_transform.origin + holder.global_transform.basis.z * -hold_distance + holder.global_transform.basis.x * 0.6 + holder.global_transform.basis.y * -0.3
 	global_position = global_position.lerp(target_pos, follow_speed * delta)
-	global_basis = global_basis.slerp(holder.global_basis, follow_speed * delta)
+
+	var current_scale = scale
+	var target_basis = holder.global_basis.orthonormalized() * Basis.from_euler(hold_rotation_offset)
+	global_basis = global_basis.orthonormalized().slerp(target_basis, follow_speed * delta)
+	scale = current_scale
+
 	linear_velocity = Vector3.ZERO
 	angular_velocity = Vector3.ZERO
+
+func use() -> void:
+	pass
 
 #check for player, and if hit, ragdoll
 func _on_body_entered(body):
