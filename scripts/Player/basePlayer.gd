@@ -58,11 +58,10 @@ func _unhandled_input(event: InputEvent) -> void:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		return
 
-	# When in customization, do nothing — let UI handle all input
 	if in_customization:
-		return  # ← this is fine, _unhandled_input fires AFTER gui_input
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
-	if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
+	if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED: ##stop looking around
 		return
 
 	if event is InputEventMouseMotion:

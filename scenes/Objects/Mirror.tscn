@@ -8,7 +8,6 @@ size = Vector3(1.3532715, 2.9044724, 0.5839081)
 
 [node name="Mirror" type="Area3D" unique_id=1049146003]
 script = ExtResource("1_xct5j")
-valid_objects = null
 metadata/_custom_type_script = "uid://d0uhvbq4j1buf"
 
 [node name="StuInteractablesMirror" type="MeshInstance3D" parent="." unique_id=899464032]
