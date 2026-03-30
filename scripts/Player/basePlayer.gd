@@ -6,7 +6,7 @@ class_name BasePlayer
 @export var camera_pivot: Node3D
 @export var camera: Camera3D
 @export var max_throw_force := 20.0
-@export var max_charge_time := 1.5  # seconds to reach full power
+@export var max_charge_time := .75  # seconds to reach full power
 @export var ragdoll_time := 3.5 # seconds the player will not have control after entering ragdoll
 @export var ragdoll_skeleton: Skeleton3D
 @export var stus_bone_simulator: PhysicalBoneSimulator3D
@@ -29,6 +29,8 @@ var root_bone_idx: int = -1
 signal look_at_interactable(can_see: bool)  # for reticle/UI feedback
 const INTERACTION_LAYER_8_MASK := 1 << 7
 
+var in_customization := false  #Player is using character customization
+
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
@@ -49,17 +51,18 @@ func _ready() -> void:
 			child.angular_damp = 10
 
 func _unhandled_input(event: InputEvent) -> void:
-	# Toggle mouse capture with Escape
+	# Always allow escape
 	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		# Early return so mouse motion doesn't process while menu is open
 		return
 
-	# Ignore mouse input when menu visible
-	if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
+	if in_customization:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+	if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED: ##stop looking around
 		return
 
 	if event is InputEventMouseMotion:
@@ -79,13 +82,17 @@ func _unhandled_input(event: InputEvent) -> void:
 			else:
 				try_interact()
 		else:
-			# Mouse released → throw
 			if is_charging_throw and held_object:
 				if throw_charge > 0.25:
 					_throw_held_object()
 				else:
 					try_interact()
 				is_charging_throw = false
+	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
+		if event.pressed and held_object:
+			try_special()
+		elif not event.pressed and held_object:
+			try_special_released()
 
 # Virtual method — child classes override this for yaw/pitch handling
 func _handle_mouse_look(event: InputEventMouseMotion) -> void:
@@ -173,6 +180,15 @@ func try_interact() -> void:
 		print("Picked up ", held_object)
 	elif target is InteractionPoint:
 		target.empty_interact()
+		
+func try_special() -> void:
+	if held_object:
+		held_object.special()
+	return
+func try_special_released() -> void:
+	if held_object:
+		held_object.special_released()
+	return
 
 
 func try_door_interact() -> void:
