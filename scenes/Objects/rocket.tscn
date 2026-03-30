@@ -13,6 +13,7 @@
 [ext_resource type="ArrayMesh" uid="uid://ej335x3kyqyp" path="res://Assets/objects/Rpg/Sketchfab_Scene_Cylinder_004_BlackMetal_0.res" id="11_ystfq"]
 [ext_resource type="ArrayMesh" uid="uid://eqvc7p7gfqk8" path="res://Assets/objects/Rpg/Sketchfab_Scene_Cylinder_005_Metal02_0.res" id="12_be5ey"]
 [ext_resource type="ArrayMesh" uid="uid://6f88ra1xb1lf" path="res://Assets/objects/Rpg/Sketchfab_Scene_Cylinder_005_BlackMetal_0.res" id="13_be5x1"]
+[ext_resource type="PackedScene" uid="uid://goh3vkv8vodf" path="res://Assets/VFX/BigExplosionScene.tscn" id="14_37rxd"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ctxcg"]
 radius = 4.451172
@@ -20,6 +21,9 @@ height = 10.345703
 
 [node name="Rocket" type="Node3D" unique_id=753045710]
 transform = Transform3D(3.774895e-06, 3.774895e-06, 143.796, -50, -2.1855694e-06, 1.0856296e-05, 2.1855699e-06, -50, 1.0856296e-05, 0, 0, 0)
+
+[node name="Node3D" parent="." unique_id=311121018 instance=ExtResource("14_37rxd")]
+transform = Transform3D(1216.8405, 4.7293724e-11, 1.07496186e-10, 1.0186341e-10, 983.4373, 7.275958e-12, -7.5001234e-11, -5.4569682e-11, 210.18063, 3.9215976e-07, 2.4882433, 2.30705)
 
 [node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=1894372717]
 transform = Transform3D(1, 1.4558379e-22, 1.4210855e-14, 0, 1, 1.4210855e-14, -5.8291725e-24, 0, 0.99999994, 0, 0, 0)
