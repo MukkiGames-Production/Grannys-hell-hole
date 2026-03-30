@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://bcskmit1xf54o"]
 
 [ext_resource type="Script" uid="uid://ct0qkvoglnfol" path="res://scripts/AI-Environment/door.gd" id="1_yfgsh"]
+[ext_resource type="Script" uid="uid://l7egliu21idv" path="res://scripts/objects/doorInteractionPoint.gd" id="2_q8f3x"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yfgsh"]
 size = Vector3(2.0214355, 3.1428466, 0.23659667)
@@ -102,12 +103,15 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_0r55n")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_q8f3x"]
+size = Vector3(2.2, 3.3, 0.36)
+
 [sub_resource type="Animation" id="Animation_eyv6f"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("DoorModel:rotation")
+tracks/0/path = NodePath("DoorModel/AnimatableBody3D:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -123,7 +127,7 @@ length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("DoorModel:rotation")
+tracks/0/path = NodePath("DoorModel/AnimatableBody3D:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -150,15 +154,25 @@ text = "Door Closed"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11756706, 0, -0.10176253)
 
 [node name="AnimatableBody3D" type="AnimatableBody3D" parent="DoorModel" unique_id=2072983832]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08642697, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DoorModel/AnimatableBody3D" unique_id=717430516]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.41071773, 1.5714233, -0.002307132)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.82097864, 1.5714233, -0.002307132)
 shape = SubResource("BoxShape3D_yfgsh")
 
 [node name="Plane_017" type="MeshInstance3D" parent="DoorModel/AnimatableBody3D" unique_id=547138011]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.41356277, 1.57, -0.14762068)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8238237, 1.57, -0.14762068)
 mesh = SubResource("ArrayMesh_yt5s5")
+
+[node name="InteractArea" type="Area3D" parent="DoorModel/AnimatableBody3D" unique_id=938107724]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.41026092, 0, 0)
+collision_layer = 128
+collision_mask = 0
+script = ExtResource("2_q8f3x")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DoorModel/AnimatableBody3D/InteractArea" unique_id=1325624430]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.41071773, 1.5714233, -0.002307132)
+shape = SubResource("BoxShape3D_q8f3x")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1188430903]
 libraries/ = SubResource("AnimationLibrary_eyv6f")

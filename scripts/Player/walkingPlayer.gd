@@ -18,13 +18,13 @@ func _handle_mouse_look(event: InputEventMouseMotion) -> void:
 func _physics_process(delta: float) -> void:
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	
+
 	#gravity
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
 	# Move the character
-	
+
 	#set position to ragdoll if in ragdoll
 	if ragdoll_state:
 		global_position = stus_root_bone.global_position
@@ -51,8 +51,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 	# Send network data AFTER all state is resolved
-	var ifStem: Steam.SteamAPIInitResult
-	if ifStem:
+	if GameNetwork.lobby_id > 0:
 		var player_data := {
 			"message": "player_update",
 			"id": Steam.getSteamID(),
@@ -64,4 +63,4 @@ func _physics_process(delta: float) -> void:
 			"rz": global_rotation.z,
 			"is_walking": is_walking
 		}
-		GameNetwork.send_p2p_packet(0, player_data, Steam.P2P_SEND_RELIABLE)
+		GameNetwork.send_p2p_packet(0, player_data, Steam.P2P_SEND_UNRELIABLE)

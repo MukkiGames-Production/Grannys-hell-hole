@@ -29,24 +29,24 @@ func _physics_process(delta):
 	global_basis = global_basis.slerp(holder.global_basis, follow_speed * delta)
 	linear_velocity = Vector3.ZERO
 	angular_velocity = Vector3.ZERO
-	
+
 #check for player, and if hit, ragdoll
 func _on_body_entered(body):
 	if body.is_in_group("players"):
 		try_ragdoll(body)
 	_check_fast_hit(body)
-		
+
 func try_ragdoll(body):
 	var speed = linear_velocity.length()
 	print("pelted stu with speed " + str(speed))
 
-	if speed > 4.0: 
+	if speed > 4.0:
 		var boom = explosion.instantiate()
 		add_child(boom)
 		boom.global_position = global_position
 		print(boom.position)
 		boom.create(1.0, 5)
-		
+
 
 
 func grab(camera: Node3D):
@@ -107,11 +107,18 @@ func move_to_position(target: Vector3, duration: float = 0.3):
 	tween.tween_property(self, "global_position", target, duration)\
 		.set_trans(Tween.TRANS_SINE)\
 		.set_ease(Tween.EASE_OUT)
-		
+
 func replace_model(model: Mesh, new_id: String = item_id):
 	mesh_instance.mesh = model
 	item_id = new_id
-	
+	GameNetwork.send_p2p_packet(0, {
+		"message": "player_action",
+		"action": "replace_model",
+		"item_id": item_id,
+		"mesh":model,
+		"id": Steam.getSteamID(),
+	}, Steam.P2P_SEND_RELIABLE)
+
 func _check_fast_hit(body: Node3D, threshold: float = 10.0) -> void:
 	if _last_velocity.length() >= threshold:
 		on_fast_hit(body)

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dd0ndre6k7joq"]
 
-[ext_resource type="Script" uid="uid://bys1cfmdwhnv5" path="res://scripts/AI-Environment/schduler.gd" id="1_choun"]
+[ext_resource type="Script" uid="uid://bys1cfmdwhnv5" path="res://scripts/AI-Environment/scheduler.gd" id="1_choun"]
 [ext_resource type="Texture2D" uid="uid://cxsqe1ml8nmyh" path="res://Assets/reticleEmpty.tres" id="3_sugp2"]
 [ext_resource type="Script" uid="uid://d0co7xxx1604o" path="res://scripts/Player/swapReticle.gd" id="4_tbgi4"]
 [ext_resource type="Texture2D" uid="uid://dhu4lf3trb2sp" path="res://Assets/reticleFull.tres" id="5_tefeu"]
@@ -114,21 +114,23 @@ visibility_update_mode = 1
 [node name="Node3D" type="Node3D" parent="." unique_id=232958870]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.29364634, 1.0581315, -5.182123)
 
-[node name="map" parent="." unique_id=2041657041 instance=ExtResource("8_tipki")]
+[node name="Map" parent="." unique_id=2041657041 instance=ExtResource("8_tipki")]
 
 [node name="Stu" parent="." unique_id=1959823504 instance=ExtResource("8_85g3d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.845158, 2.5912304, 0)
 collision_layer = 10
 collision_mask = 9
 
-[node name="NPC2" parent="." unique_id=321508815 node_paths=PackedStringArray("map") instance=ExtResource("9_85g3d")]
+[node name="NPC2" parent="." unique_id=321508815 node_paths=PackedStringArray("chase_target", "map") instance=ExtResource("9_85g3d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.463314, 0.05524683, -49.07776)
-map = NodePath("../map")
+chase_target = NodePath("../Stu")
+map = NodePath("../Map")
 patrol_route = "b"
 
-[node name="NPC" parent="." unique_id=1609349030 node_paths=PackedStringArray("map") instance=ExtResource("9_85g3d")]
+[node name="NPC" parent="." unique_id=1609349030 node_paths=PackedStringArray("chase_target", "map") instance=ExtResource("9_85g3d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.231657, -0.19916272, -7.8431396)
-map = NodePath("../map")
+chase_target = NodePath("../Stu")
+map = NodePath("../Map")
 
 [node name="Outlet" parent="." unique_id=526045756 instance=ExtResource("12_eb6dy")]
 transform = Transform3D(-2.1855694e-08, 0.5, -2.1855694e-08, 0, -2.1855694e-08, -0.5, -0.5, -2.1855694e-08, 9.553427e-16, -20.250465, 0.8339747, 20.608727)
