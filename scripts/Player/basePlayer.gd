@@ -94,6 +94,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif not event.pressed and held_object:
 			try_special_released()
 
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
+		if event.pressed:
+			print("Right click", held_object.has_method("use"))
+			if held_object and held_object.has_method("use"):
+				held_object.use()
+
 # Virtual method — child classes override this for yaw/pitch handling
 func _handle_mouse_look(event: InputEventMouseMotion) -> void:
 	pass  # override in children
@@ -239,7 +245,7 @@ func enable_ragdoll(v) -> void:
 	stu_mesh_ragdoll.visible = true
 	stus_bone_simulator.physical_bones_start_simulation()
 
-	var force = bones[0].apply_central_impulse(1.2 * v)
+	bones[0].apply_central_impulse(1.2 * v)
 	for i in range(1, bones.size()):
 		bones[i].apply_central_impulse(v)
 

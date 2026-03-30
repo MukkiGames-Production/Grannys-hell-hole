@@ -1,0 +1,121 @@
+[gd_scene format=3 uid="uid://bvf3xx8tld6ip"]
+
+[ext_resource type="Script" uid="uid://bnwcampub50bx" path="res://scripts/AI-Environment/warden.gd" id="1_wthw5"]
+[ext_resource type="Shader" uid="uid://im65mxkv3lyh" path="res://scripts/shaders/highlight.gdshader" id="2_3gffh"]
+[ext_resource type="Script" uid="uid://dvaah6wtme7fe" path="res://addons/rope_gen_mesh_3d/rope_gen_mesh_3d.gd" id="3_t1s11"]
+[ext_resource type="Material" uid="uid://s233joir2kgm" path="res://Assets/objects/Bundled_Rope_Coil_vhnmbdcs_Low.tres" id="4_ggq7t"]
+[ext_resource type="Script" uid="uid://q8kx0347laa3" path="res://addons/rope_gen_mesh_3d/rope_data.gd" id="5_uvufd"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_wthw5"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_wthw5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6w4ry"]
+render_priority = 0
+shader = ExtResource("2_3gffh")
+shader_parameter/shine_color = Color(0.00011382803, 0.00011382803, 0.00011382803, 1)
+shader_parameter/shine_speed = 1.0850000515375
+shader_parameter/shine_width = 1.0
+shader_parameter/cycle_interval = 1.1750000558125
+shader_parameter/angle_fade = 0.6400000304
+shader_parameter/x_direction = 0.150000054625
+shader_parameter/y_direction = 0.0
+shader_parameter/z_direction = 1.0
+
+[sub_resource type="Resource" id="Resource_r53ma"]
+script = ExtResource("5_uvufd")
+material = ExtResource("4_ggq7t")
+single_mesh = false
+mesh_type = 0
+ext_radius = 0.01
+ext_u_segments = 13
+ext_v_segments = 8
+tex_uv_translation = Vector2(0, 0)
+tex_uv_rotation_origin = Vector2(0.5, 0.5)
+tex_uv_rotation_angle_degrees = 0.0
+tex_uv_scale = Vector2(1, 1)
+sag_offset = Vector3(0, -0.1, 0)
+sag_keep_local_space = false
+use_collisions = false
+col_shape_type = 0
+col_collision_layer = 1
+col_collision_mask = 0
+lod_bias = 0.02
+lod_level1_distance = 2.0
+lod_level2_distance = 10.0
+lod_level3_distance = 40.0
+points = PackedVector3Array(0.58074045, -0.98623455, -0.22010624, -0.8166523, 0.26411277, 1.7956055, -0.2485399, -0.21122456, 1.9182041, -0.18459871, -0.64083266, 1.2801576, -0.28311875, -0.29969072, 1.0126352)
+visibility_layers = 1
+metadata/_custom_type_script = "uid://q8kx0347laa3"
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_mhefn"]
+radius = 0.045
+height = 0.85
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_mhefn"]
+points = PackedVector3Array(0, 0, 0, 14.745, 0, -9, 14.7, 0, 9, 0, 2, 0, 14.7, 2, -9, 14.7, 2, 9)
+
+[node name="Warden" type="CharacterBody3D" unique_id=1734464095]
+script = ExtResource("1_wthw5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1742251249]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3782554, 0)
+shape = SubResource("CylinderShape3D_wthw5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1502444377]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3782554, 0)
+mesh = SubResource("CylinderMesh_wthw5")
+surface_material_override/0 = SubResource("ShaderMaterial_6w4ry")
+
+[node name="Lasso" type="Node3D" parent="." unique_id=375421112]
+transform = Transform3D(0.96429497, -0.26287892, 0.03209117, 0.26301438, 0.96479195, 6.6549095e-09, -0.030961245, 0.00844042, 0.9994851, -0.6073131, 2.8303845, 0.46259928)
+visible = false
+script = ExtResource("3_t1s11")
+rope_data = SubResource("Resource_r53ma")
+metadata/_custom_type_script = "uid://dvaah6wtme7fe"
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1948362506]
+transform = Transform3D(1, 0, 0, 0, -0.63334036, -0.7738733, 0, 0.7738733, -0.63334036, 0, 1.693243, 0.49140579)
+mesh = SubResource("CapsuleMesh_mhefn")
+
+[node name="DebugText" type="Label3D" parent="." unique_id=780564604]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.516634, 0)
+billboard = 1
+text = "debug text"
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=396728285]
+target_desired_distance = 0.5
+debug_enabled = true
+
+[node name="UpdateTimer" type="Timer" parent="." unique_id=417457985]
+wait_time = 0.25
+autostart = true
+
+[node name="WaitTimer" type="Timer" parent="." unique_id=1616234550]
+wait_time = 2.0
+one_shot = true
+
+[node name="DetectTimer" type="Timer" parent="." unique_id=239046109]
+one_shot = true
+
+[node name="RayCastC" type="RayCast3D" parent="." unique_id=1016320484]
+transform = Transform3D(1.26, 0, 0, 0, 1.0743266, -0.65834814, 0, 0.65834814, 1.0743266, 0, 1.6741009, 0)
+
+[node name="RayCastL" type="RayCast3D" parent="." unique_id=694380424]
+transform = Transform3D(1.1419477, 0.27822995, 0.45403004, 0, 1.0743266, -0.65834814, -0.532499, 0.59666604, 0.9736705, 0, 1.6741009, 0)
+
+[node name="RayCastR" type="RayCast3D" parent="." unique_id=336532902]
+transform = Transform3D(1.1276172, -0.2937535, -0.47936216, 0, 1.0743266, -0.65834814, 0.56220925, 0.5891784, 0.9614518, 0, 1.6741009, 0)
+
+[node name="Eyes" type="Area3D" parent="." unique_id=1108373482]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.43771267, 0)
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Eyes" unique_id=1720902875]
+shape = SubResource("ConvexPolygonShape3D_mhefn")
+
+[connection signal="timeout" from="UpdateTimer" to="." method="_on_update_timer_timeout"]
+[connection signal="timeout" from="WaitTimer" to="." method="_on_wait_timer_timeout"]
+[connection signal="timeout" from="DetectTimer" to="." method="_on_detect_timer_timeout"]
+[connection signal="body_entered" from="Eyes" to="." method="_on_eyes_body_entered"]
