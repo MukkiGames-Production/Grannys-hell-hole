@@ -20,7 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://xl74pfdkcihd" path="res://scenes/Objects/Mirror.tscn" id="19_yc10j"]
 [ext_resource type="PackedScene" uid="uid://bvf3xx8tld6ip" path="res://scenes/warden.tscn" id="20_gqmmt"]
 [ext_resource type="PackedScene" uid="uid://di85bl0mj8xfo" path="res://scenes/Objects/Board.tscn" id="20_yc10j"]
-[ext_resource type="PackedScene" uid="uid://custmxyuudvf6" path="res://scenes/rpg.tscn" id="21_yc10j"]
+[ext_resource type="PackedScene" uid="uid://custmxyuudvf6" path="res://scenes/Objects/rpg.tscn" id="21_yc10j"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_85g3d"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
