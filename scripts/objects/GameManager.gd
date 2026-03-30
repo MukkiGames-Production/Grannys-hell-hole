@@ -1,5 +1,6 @@
 extends Node3D
 @onready var player = preload("res://scenes/Stu_with_ragdoll.tscn")
+@onready var rocket_scene = preload("res://scenes/Objects/rocket.tscn")
 @onready var voip: Node = $Voip
 
 ## Dictionary mapping remote steam_id -> their CharacterBody3D node
@@ -103,10 +104,48 @@ func _on_p2p_packet_received(sender_id: int, data: Dictionary) -> void:
 			_handle_player_action(sender_id, data)
 		"npc_update":
 			_handle_npc_update(data)
+		"spawn_rocket":
+			_handle_spawn_rocket(data)
 		"handshake":
 			print("[World] Received handshake from %s" % sender_id)
 		_:
 			print("[World] Unhandled packet type '%s' from %s" % [msg, sender_id])
+func _handle_spawn_rocket(data: Dictionary) -> void:
+	if not rocket_scene:
+		return
+	var rocket_instance = rocket_scene.instantiate()
+	get_tree().current_scene.add_child(rocket_instance)
+
+	var pos: Vector3 = data.get("position", Vector3.ZERO)
+	var rot: Vector3 = data.get("rotation", Vector3.ZERO)
+	var vel: Vector3 = data.get("velocity", Vector3.ZERO)
+
+	var spawn_xform := Transform3D()
+	spawn_xform.basis = Basis.from_euler(rot)
+	spawn_xform.origin = pos
+
+	rocket_instance.global_transform = spawn_xform
+	rocket_instance.scale = Vector3(0.05, 0.05, 0.05)
+
+	var rb = rocket_instance.get_node_or_null("RigidBody3D")
+	if rb is RigidBody3D:
+		rb.linear_velocity = vel
+
+		# Despawn logic for clients
+		rb.contact_monitor = true
+		rb.max_contacts_reported = 1
+		rb.body_entered.connect(func(body: Node):
+			# Skip the holder/player check here since it's a remote rocket
+			# but we still despawn it on environment impact
+			if is_instance_valid(rocket_instance):
+				rocket_instance.queue_free()
+		)
+
+	get_tree().create_timer(5.0).timeout.connect(func():
+		if is_instance_valid(rocket_instance):
+			rocket_instance.queue_free()
+	)
+
 func _handle_npc_update(data: Dictionary) -> void:
 	var npc_id: String = data.get("id", "")
 	var npc_node: Node = $Main.get_node_or_null(npc_id)

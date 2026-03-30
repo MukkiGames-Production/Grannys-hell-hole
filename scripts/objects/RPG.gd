@@ -38,6 +38,12 @@ func fire() -> void:
 
 	# Since the new rocket scene uses a RigidBody3D child for physics,
 	# we can just apply velocity to it directly so it flies naturally!
+	GameNetwork.send_p2p_packet(0, {
+		"message": "spawn_rocket",
+		"position": spawn_xform.origin,
+		"rotation": spawn_xform.basis.get_euler(),
+		"velocity": rocket_velocity
+	}, Steam.P2P_SEND_RELIABLE)
 	var rb = rocket_instance.get_node_or_null("RigidBody3D")
 	if rb is RigidBody3D:
 		rb.linear_velocity = rocket_velocity
