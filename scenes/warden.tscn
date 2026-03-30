@@ -3,7 +3,8 @@
 [ext_resource type="Script" uid="uid://bnwcampub50bx" path="res://scripts/AI-Environment/warden.gd" id="1_wthw5"]
 [ext_resource type="Shader" uid="uid://im65mxkv3lyh" path="res://scripts/shaders/highlight.gdshader" id="2_3gffh"]
 [ext_resource type="Script" uid="uid://dvaah6wtme7fe" path="res://addons/rope_gen_mesh_3d/rope_gen_mesh_3d.gd" id="3_t1s11"]
-[ext_resource type="Material" uid="uid://s233joir2kgm" path="res://Assets/objects/Bundled_Rope_Coil_vhnmbdcs_Low.tres" id="4_ggq7t"]
+[ext_resource type="Shader" uid="uid://qgwe03vp55xl" path="res://addons/rope_gen_mesh_3d/shaders/example_wind.gdshader" id="4_t1s11"]
+[ext_resource type="Texture2D" uid="uid://c3ikdfpgogbql" path="res://Assets/objects/Textures/wood_cabinet_worn_long_2k.gltf/textures/wood_cabinet_worn_long_diff_2k.jpg" id="5_ggq7t"]
 [ext_resource type="Script" uid="uid://q8kx0347laa3" path="res://addons/rope_gen_mesh_3d/rope_data.gd" id="5_uvufd"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_wthw5"]
@@ -22,9 +23,20 @@ shader_parameter/x_direction = 0.150000054625
 shader_parameter/y_direction = 0.0
 shader_parameter/z_direction = 1.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ggq7t"]
+render_priority = 0
+shader = ExtResource("4_t1s11")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("5_ggq7t")
+shader_parameter/uv1_scale = Vector2(1, 1)
+shader_parameter/uv1_offset = Vector2(0, 0)
+shader_parameter/wind_direction = Vector3(0, 0, 1)
+shader_parameter/wind_freq = 1.0
+shader_parameter/wind_strength = 0.25
+
 [sub_resource type="Resource" id="Resource_r53ma"]
 script = ExtResource("5_uvufd")
-material = ExtResource("4_ggq7t")
+material = SubResource("ShaderMaterial_ggq7t")
 single_mesh = false
 mesh_type = 0
 ext_radius = 0.01
@@ -37,9 +49,6 @@ tex_uv_scale = Vector2(1, 1)
 sag_offset = Vector3(0, -0.1, 0)
 sag_keep_local_space = false
 use_collisions = false
-col_shape_type = 0
-col_collision_layer = 1
-col_collision_mask = 0
 lod_bias = 0.02
 lod_level1_distance = 2.0
 lod_level2_distance = 10.0
