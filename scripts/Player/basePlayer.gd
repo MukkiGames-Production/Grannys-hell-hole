@@ -1,10 +1,10 @@
 extends CharacterBody3D
 class_name BasePlayer
 
-@export var gravity = 20
+const gravity = 20
 @export var mouse_sensitivity := 0.002
-@export var camera_pivot: Node3D
-@export var camera: Camera3D
+@export var stu_camera: StuCamera
+@export var spectator_camera: SpectatorCamera
 @export var max_throw_force := 20.0
 @export var max_charge_time := .75  # seconds to reach full power
 @export var ragdoll_time := 3.5 # seconds the player will not have control after entering ragdoll
@@ -29,6 +29,12 @@ var root_bone_idx: int = -1
 signal look_at_interactable(can_see: bool)  # for reticle/UI feedback
 const INTERACTION_LAYER_8_MASK := 1 << 7
 
+enum CameraMode {
+	FIRST_PERSON,
+	THIRD_PERSON
+}
+
+var camera_mode = CameraMode.FIRST_PERSON
 var in_customization := false  #Player is using character customization
 
 func _ready() -> void:
@@ -38,9 +44,11 @@ func _ready() -> void:
 	ragdoll_timer.wait_time = ragdoll_time
 	ragdoll_timer.one_shot = true
 	ragdoll_timer.timeout.connect(_on_ragdoll_timer_timeout)
-	root_bone_idx = ragdoll_skeleton.find_bone("Root")  # or "Hips", "pelvis", "Spine", whatever your rig's main/root bone is
-	print(root_bone_idx)
 	add_child(ragdoll_timer)
+	
+	#mark root bone to knock it back farther later
+	root_bone_idx = ragdoll_skeleton.find_bone("Root")  # or "Hips", "pelvis", "Spine", whatever your rig's main/root bone is
+	
 
 	#make ragdoll body invis
 	stu_mesh_ragdoll.visible = false
@@ -117,7 +125,7 @@ func _throw_held_object() -> void:
 	var power_ratio = throw_charge / max_charge_time
 	var force = power_ratio * max_throw_force
 
-	var throw_dir = (-camera.global_transform.basis.z + Vector3.UP * 0.2).normalized()
+	var throw_dir = (-stu_camera.camera.global_transform.basis.z + Vector3.UP * 0.2).normalized()
 
 	var obj := held_object
 	held_object = null
@@ -139,8 +147,8 @@ func _throw_held_object() -> void:
 
 func _update_interaction_raycast() -> void:
 	var space_state = get_world_3d().direct_space_state
-	var from = camera.global_position
-	var to = from + camera.global_transform.basis.z * -5.0  # 5 units forward
+	var from = stu_camera.camera.global_position
+	var to = from + stu_camera.camera.global_transform.basis.z * -5.0  # 5 units forward
 
 	var query = PhysicsRayQueryParameters3D.create(from, to)
 	query.exclude = [self]
@@ -182,7 +190,7 @@ func try_interact() -> void:
 	# Case 2: Not holding → pick up or empty interact
 	if target is GrabbableObject and target.is_grabbable:
 		held_object = target
-		held_object.grab(camera)
+		held_object.grab(stu_camera.camera)
 		print("Picked up ", held_object)
 	elif target is InteractionPoint:
 		target.empty_interact()
@@ -248,6 +256,11 @@ func enable_ragdoll(v) -> void:
 	bones[0].apply_central_impulse(1.2 * v)
 	for i in range(1, bones.size()):
 		bones[i].apply_central_impulse(v)
+		
+	#also the camera
+	camera_mode = CameraMode.THIRD_PERSON
+	set_third_person_cam_pos()
+	
 
 	if GameNetwork.lobby_id > 0:
 		GameNetwork.send_p2p_packet(0, {
@@ -263,6 +276,33 @@ func disable_ragdoll() -> void:
 	stu_mesh_normal.visible = true
 	stu_mesh_ragdoll.visible = false
 	stus_bone_simulator.physical_bones_stop_simulation()
+	
+	#put cam back
+	camera_mode = CameraMode.FIRST_PERSON
+	stu_camera.pivot.global_position = stu_camera.root.global_position
+	
+func set_third_person_cam_pos():
+	var origin = stu_camera.root.global_transform.origin
+	
+	# Direction backwards from player
+	var direction = stu_camera.root.global_transform.basis.z.normalized()
+	
+	var max_distance = 4.0
+	var target_position = origin + direction * max_distance
+
+	# Raycast
+	var space_state = get_world_3d().direct_space_state
+	var query = PhysicsRayQueryParameters3D.create(origin, target_position)
+	query.exclude = [self]  # avoid hitting the player
+	
+	var result = space_state.intersect_ray(query)
+
+	if result:
+		# Move camera to hit point (slightly forward to avoid clipping)
+		stu_camera.pivot.global_transform.origin = result.position + result.normal * 0.2
+	else:
+		# No collision → full distance
+		stu_camera.pivot.global_transform.origin = target_position
 
 	if GameNetwork.lobby_id > 0:
 		GameNetwork.send_p2p_packet(0, {
