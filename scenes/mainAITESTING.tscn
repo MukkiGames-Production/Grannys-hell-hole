@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bxuxpaxvnjxdr"]
 
 [ext_resource type="Script" uid="uid://dlfa4844hulox" path="res://scripts/objects/grabbableObject.gd" id="1_w8gd0"]
+[ext_resource type="Script" path="res://scripts/AI-Environment/scheduler.gd" id="1_xisyg"]
 [ext_resource type="Shader" uid="uid://im65mxkv3lyh" path="res://scripts/shaders/highlight.gdshader" id="2_xisyg"]
 [ext_resource type="Script" uid="uid://mklkxcpb5cmv" path="res://scripts/objects/pillar.gd" id="3_x5m1f"]
 [ext_resource type="Texture2D" uid="uid://cxsqe1ml8nmyh" path="res://Assets/reticleEmpty.tres" id="4_5mu32"]
@@ -95,6 +96,7 @@ properties/5/spawn = true
 properties/5/replication_mode = 1
 
 [node name="Main" type="Node3D" unique_id=421424765]
+script = ExtResource("1_xisyg")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=119318621]
 environment = SubResource("Environment_ya4ey")

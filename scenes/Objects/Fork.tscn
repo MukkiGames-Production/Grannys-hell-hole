@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://c2m2tu5d2gdp5"]
 
-[ext_resource type="Script" uid="uid://dlfa4844hulox" path="res://scripts/objects/grabbableObject.gd" id="1_vipli"]
-[ext_resource type="ArrayMesh" uid="uid://cw72qxclg8ofy" path="res://Assets/Blender/Grabbables/StuItems_Fork.res" id="2_sknvm"]
+[ext_resource type="Script" uid="uid://6vvpjr3mbvig" path="res://scripts/objects/Fork.gd" id="1_vipli"]
+[ext_resource type="ArrayMesh" uid="uid://b1vblis356dmx" path="res://Assets/Blender/Grabbables/StuItems_Lockpick.res" id="2_odoac"]
+[ext_resource type="ArrayMesh" uid="uid://bt0te2no5vbd2" path="res://Assets/Blender/Grabbables/StuItems_Fork.res" id="2_sknvm"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_odoac"]
 size = Vector3(0.3359375, 0.6932373, 0.100097656)
@@ -10,6 +11,7 @@ size = Vector3(0.3359375, 0.6932373, 0.100097656)
 
 [node name="GrabbableObject" type="RigidBody3D" parent="." unique_id=1354601695]
 script = ExtResource("1_vipli")
+lockpick = ExtResource("2_odoac")
 item_id = "Fork"
 metadata/_custom_type_script = "uid://dlfa4844hulox"
 

@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://xl74pfdkcihd"]
+
+[ext_resource type="Script" uid="uid://bm5asusbot3dw" path="res://scripts/objects/Mirror.gd" id="1_xct5j"]
+[ext_resource type="ArrayMesh" uid="uid://rgoe5lqqdwf6" path="res://Assets/Blender/Interactables/StuInteractables_Mirror.res" id="2_xct5j"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h267t"]
+size = Vector3(1.3532715, 2.9044724, 0.5839081)
+
+[node name="Mirror" type="Area3D" unique_id=1049146003]
+script = ExtResource("1_xct5j")
+metadata/_custom_type_script = "uid://d0uhvbq4j1buf"
+
+[node name="StuInteractablesMirror" type="MeshInstance3D" parent="." unique_id=899464032]
+mesh = ExtResource("2_xct5j")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1579440407]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0012207031, 0.006196618, -0.0035272837)
+shape = SubResource("BoxShape3D_h267t")

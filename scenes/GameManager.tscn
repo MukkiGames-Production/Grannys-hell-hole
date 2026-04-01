@@ -22,10 +22,11 @@ follow_viewport_enabled = true
 metadata/_edit_use_anchors_ = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1091512600]
-transform = Transform3D(-0.98845565, 0.06745396, -0.13566625, -0.1332868, -0.8129056, 0.5669384, -0.07204162, 0.578476, 0.8125119, -3.5996938, 24.686749, -15.374473)
+transform = Transform3D(-0.98845565, 0.06745396, -0.13566625, -0.1332868, -0.8129056, 0.5669384, -0.07204162, 0.578476, 0.8125119, -3.2883108, 20.934189, -12.704095)
 light_energy = 5.778
 light_indirect_energy = 0.775
 light_size = 0.111
+omni_range = 103.69677
 
 [node name="Voip" type="Node" parent="." unique_id=310842859]
 script = ExtResource("3_jg7te")

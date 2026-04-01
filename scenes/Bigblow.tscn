@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://do1d536qje504"]
+
+[ext_resource type="Script" uid="uid://ch8bry6w0t85f" path="res://scripts/Player/blow.gd" id="1_viuem"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_viuem"]
+height = 1.961731
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_viuem"]
+top_radius = 0.4
+bottom_radius = 0.25
+
+[node name="Bigblow" type="Node3D" unique_id=1707289294 node_paths=PackedStringArray("area", "collision_shape")]
+script = ExtResource("1_viuem")
+area = NodePath("Area3D")
+collision_shape = NodePath("Area3D/CollisionShape3D")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=691818838]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.0951629, 0)
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=391314855]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0301819, 0)
+shape = SubResource("CylinderShape3D_viuem")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D" unique_id=2030408132]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0120906, 0)
+mesh = SubResource("CylinderMesh_viuem")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

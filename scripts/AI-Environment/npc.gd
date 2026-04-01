@@ -3,7 +3,7 @@ class_name NPC
 @export var speed := 6.0
 @export var chase_target: CharacterBody3D
 @export var status : State = State.IDLE
-@export var map : Node3D 
+@export var map : Node3D
 #var patrols : Dictionary[Node3D, int] = {}
 var patrola : Node3D
 var patrolb : Node3D
@@ -33,10 +33,13 @@ var current_patrol_pt : int = 0 # not unique to any patrol route
 @onready var eyes: Area3D = $Eyes
 var detect_candidate: BasePlayer = null
 
+var investigate_source : Marker3D = null
+
 enum State {
 	CHASE,
 	ROAM,
 	PATROL,
+	INVESTIGATE,
 	IDLE
 }
 
@@ -52,26 +55,26 @@ func _ready() -> void:
 	var root := get_tree().current_scene
 	#status = State.CHASE
 	#chase_target = root.find_child("Player")
-	map = root.find_child("map")
+	map = root.find_child("Map")
 	agent.path_desired_distance = 1.0
 	agent.target_desired_distance = 1.5
 
 	patrola = map.find_child("PatrolA", true, false)
 	patrolb = map.find_child("PatrolB", true, false)
 
-	Schduler.register_npc(self, schedule_entries)
+	Scheduler.register_npc(self, schedule_entries)
 
 	# Apply schedule immediately
 	_apply_schedule_for_current_block()
 
 	# React when block changes (MORNING -> AFTERNOON etc)
-	Schduler.block_changed.connect(_on_scheduler_block_changed)
+	Scheduler.block_changed.connect(_on_scheduler_block_changed)
 
 
 
 func _exit_tree() -> void:
-	if Engine.has_singleton("Schduler"):
-		Schduler.unregister_npc(self)
+	if Engine.has_singleton("Scheduler"):
+		Scheduler.unregister_npc(self)
 
 func _on_scheduler_block_changed(_new_block_name: String) -> void:
 	if not multiplayer.is_server():
@@ -79,7 +82,7 @@ func _on_scheduler_block_changed(_new_block_name: String) -> void:
 	_apply_schedule_for_current_block()
 
 func _apply_schedule_for_current_block() -> void:
-	current_schedule_entry = Schduler.get_schedule_for(self)
+	current_schedule_entry = Scheduler.get_schedule_for(self)
 
 	if current_schedule_entry.is_empty():
 		status = State.IDLE
@@ -278,13 +281,20 @@ func _physics_process(delta: float) -> void:
 		"vy": velocity.y,
 		"vz": velocity.z
 	}
-	Schduler.debug_print_all_schedules()
+	# Scheduler.debug_print_all_schedules()
 	GameNetwork.send_p2p_packet(0, data, 0)
 
 func _on_update_timer_timeout() -> void:
 	if not multiplayer.is_server(): return
 	if status == State.CHASE:
 		chase()
+	match status:
+		State.CHASE:
+			chase()
+		State.PATROL:
+			pass
+		State.INVESTIGATE:
+			agent.target_position = investigate_source.global_position
 
 
 func _on_wait_timer_timeout() -> void:
@@ -389,6 +399,26 @@ func _on_eyes_body_entered(body: Node3D) -> void:
 	if not _has_line_of_sight_to(player):
 		return
 
+	# check the players suspicion level, The players suspicion level should be always updated within the baseplayer
+	# player script to maintain a suspicion level .
+	# If we're investigating or patrolling we should chase high suspicion players if we fully detect them
+	#      (possibly focus player who's most recently done a suspicious activity like break something/drop
+	#       contraband/etc)
+	#
+	# If the investigate is triggered, we need to add this event to a list somewhere and return to it so
+	# if we get distracted and chase someone, we should return to investigating. Things that trigger investigations
+	# may have a "fix". Like sweep up broken vase, close door that should be closed that was open, pick up contraband
+
+	# Scripted movement State should run priority over everything else, if chasing when scripted movement takes over
+	# we should do nothing for now and just let that player go.
+
+	# each Marker3D in a patrol should be able to hold @export metadata for how long to wait, string of animation
+	# to play while waiting at this Marker
+
+	# each state should have a different customizable speed for the NPC
+
+	# If the player is ragdolled and we're chasing them, stop moving, stop updating target position, wait for player to return to normal state
+	#
 	detect_candidate = player
 	detect_timer.start(1.8)
 

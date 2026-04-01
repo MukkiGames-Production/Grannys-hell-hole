@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://danjd6fb1nulr"]
 
 [ext_resource type="Script" uid="uid://dlfa4844hulox" path="res://scripts/objects/grabbableObject.gd" id="1_sbmyu"]
-[ext_resource type="ArrayMesh" uid="uid://bddgabra3rrsm" path="res://Assets/Blender/Grabbables/StuItems_Crowbar.res" id="2_sbmyu"]
+[ext_resource type="ArrayMesh" uid="uid://dmvuhale3a7tw" path="res://Assets/Blender/Grabbables/StuItems_Crowbar.res" id="2_sbmyu"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_odoac"]
 size = Vector3(0.3359375, 1.1268616, 0.5601196)

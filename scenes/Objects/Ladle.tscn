@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b7hd85122tk12"]
 
-[ext_resource type="Script" uid="uid://dlfa4844hulox" path="res://scripts/objects/grabbableObject.gd" id="1_yixwb"]
+[ext_resource type="Script" uid="uid://ok3odwweadkg" path="res://scripts/objects/Ladle.gd" id="1_yixwb"]
 [ext_resource type="ArrayMesh" uid="uid://v7xae4sadwje" path="res://Assets/Blender/Grabbables/StuItems_Ladle.res" id="2_mkhkl"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tce2y"]
@@ -10,6 +10,7 @@ size = Vector3(0.3310547, 0.23397827, 1.0747681)
 
 [node name="GrabbableObject" type="RigidBody3D" parent="." unique_id=715981625]
 script = ExtResource("1_yixwb")
+Ladle = ExtResource("2_mkhkl")
 item_id = "Ladle"
 metadata/_custom_type_script = "uid://dlfa4844hulox"
 

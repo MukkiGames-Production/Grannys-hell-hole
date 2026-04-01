@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://custmxyuudvf6"]
+
+[ext_resource type="ArrayMesh" uid="uid://wvocxeu4q3fg" path="res://Assets/objects/Rpg/Sketchfab_Scene_Cylinder_BlackMetal_0.res" id="1_etcj7"]
+[ext_resource type="Script" uid="uid://c15t0bqfkytwd" path="res://scripts/objects/RPG.gd" id="1_rpg_script"]
+[ext_resource type="ArrayMesh" uid="uid://dk0ofw0af2th8" path="res://Assets/objects/Rpg/Sketchfab_Scene_Cylinder_Wood_0.res" id="2_lvp3f"]
+[ext_resource type="ArrayMesh" uid="uid://ctjf5oo0dkfb3" path="res://Assets/objects/Rpg/Sketchfab_Scene_Cylinder_Metal02_0.res" id="3_jtnpw"]
+[ext_resource type="ArrayMesh" uid="uid://cdlncekqohdt8" path="res://Assets/objects/Rpg/Sketchfab_Scene_Cylinder_Glass_0.res" id="4_si3ea"]
+[ext_resource type="ArrayMesh" uid="uid://betqe0eo4r2xc" path="res://Assets/objects/Rpg/Sketchfab_Scene_Cylinder_BlackMetal_002_0.res" id="5_nvk48"]
+[ext_resource type="ArrayMesh" uid="uid://b0u5ypb2phvi1" path="res://Assets/objects/Rpg/Sketchfab_Scene_Cylinder_RedMetal_0.res" id="6_f4f4m"]
+[ext_resource type="ArrayMesh" uid="uid://jwq6gfr54si" path="res://Assets/objects/Rpg/Sketchfab_Scene_Cylinder_027_GreenMetal_0.res" id="7_54jm6"]
+[ext_resource type="ArrayMesh" uid="uid://dhllb4gf34jja" path="res://Assets/objects/Rpg/Sketchfab_Scene_Cylinder_027_Metal02_0.res" id="8_ks12q"]
+[ext_resource type="ArrayMesh" uid="uid://depd5mj3ti10e" path="res://Assets/objects/Rpg/Sketchfab_Scene_Cylinder_027_BlackMetal_0.res" id="9_k0ajc"]
+[ext_resource type="ArrayMesh" uid="uid://b6qvykpqfxf2k" path="res://Assets/objects/Rpg/Sketchfab_Scene_Cylinder_027_BlackMetal_001_0.res" id="10_pumay"]
+[ext_resource type="ArrayMesh" uid="uid://dwmgi08y6guvt" path="res://Assets/objects/Rpg/Sketchfab_Scene_Cylinder_027_BlackMetal_003_0.res" id="11_xbkwy"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r4e17"]
+radius = 87.23193
+height = 1055.946
+
+[node name="Sketchfab_Scene" type="Node3D" unique_id=845348862]
+transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, 0, 0, 0)
+
+[node name="Launcher" type="Node3D" parent="." unique_id=1346349382]
+transform = Transform3D(1, 0, 0, 0, 1, -2.220446e-16, 0, 2.220446e-16, 1, 0, 0, 0)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Launcher" unique_id=896879371]
+transform = Transform3D(-4.371138e-08, -0.9999998, -4.371139e-08, 0, -4.371138e-08, 1, -0.9999998, 4.371138e-08, 1.9106855e-15, 42.320557, 0, 0)
+script = ExtResource("1_rpg_script")
+item_id = "Rocket"
+hold_distance = 2.72
+hold_offset = Vector3(0.6, -50, 2.5)
+
+[node name="Cylinder_027_GreenMetal_0" type="MeshInstance3D" parent="Launcher/RigidBody3D" unique_id=674638991]
+transform = Transform3D(1.3483411e-06, 1.3483411e-06, 51.360954, 0, 17.85932, -3.8776443e-06, -17.85932, 9.913914e-14, 3.8776443e-06, 0, 0, 0)
+mesh = ExtResource("7_54jm6")
+
+[node name="Cylinder_027_Metal02_0" type="MeshInstance3D" parent="Launcher/RigidBody3D" unique_id=1062435557]
+transform = Transform3D(1.3483411e-06, 1.3483411e-06, 51.360954, 0, 17.85932, -3.8776443e-06, -17.85932, 9.913914e-14, 3.8776443e-06, 0, 0, 0)
+mesh = ExtResource("8_ks12q")
+
+[node name="Cylinder_027_BlackMetal_0" type="MeshInstance3D" parent="Launcher/RigidBody3D" unique_id=1095268013]
+transform = Transform3D(1.3483411e-06, 1.3483411e-06, 51.360954, 0, 17.85932, -3.8776443e-06, -17.85932, 9.913914e-14, 3.8776443e-06, 0, 0, 0)
+mesh = ExtResource("9_k0ajc")
+
+[node name="Cylinder_027_BlackMetal_001_0" type="MeshInstance3D" parent="Launcher/RigidBody3D" unique_id=210487027]
+transform = Transform3D(1.3483411e-06, 1.3483411e-06, 51.360954, 0, 17.85932, -3.8776443e-06, -17.85932, 9.913914e-14, 3.8776443e-06, 0, 0, 0)
+mesh = ExtResource("10_pumay")
+
+[node name="Cylinder_027_BlackMetal_003_0" type="MeshInstance3D" parent="Launcher/RigidBody3D" unique_id=629961335]
+transform = Transform3D(1.3483411e-06, 1.3483411e-06, 51.360954, 0, 17.85932, -3.8776443e-06, -17.85932, 9.913914e-14, 3.8776443e-06, 0, 0, 0)
+mesh = ExtResource("11_xbkwy")
+
+[node name="Cylinder_BlackMetal_0" type="MeshInstance3D" parent="Launcher/RigidBody3D" unique_id=756582121]
+transform = Transform3D(2.1283536e-06, 2.1283536e-06, 49.111565, 0, 28.190899, -3.7078198e-06, -28.190899, 1.5649091e-13, 3.7078198e-06, 0, 0, 0)
+mesh = ExtResource("1_etcj7")
+
+[node name="Cylinder_Wood_0" type="MeshInstance3D" parent="Launcher/RigidBody3D" unique_id=238998215]
+transform = Transform3D(2.1283536e-06, 2.1283536e-06, 49.111565, 0, 28.190899, -3.7078198e-06, -28.190899, 1.5649091e-13, 3.7078198e-06, 0, 0, 0)
+mesh = ExtResource("2_lvp3f")
+
+[node name="Cylinder_Metal02_0" type="MeshInstance3D" parent="Launcher/RigidBody3D" unique_id=653765090]
+transform = Transform3D(2.1283536e-06, 2.1283536e-06, 49.111565, 0, 28.190899, -3.7078198e-06, -28.190899, 1.5649091e-13, 3.7078198e-06, 0, 0, 0)
+mesh = ExtResource("3_jtnpw")
+
+[node name="Cylinder_Glass_0" type="MeshInstance3D" parent="Launcher/RigidBody3D" unique_id=1426995026]
+transform = Transform3D(2.1283536e-06, 2.1283536e-06, 49.111565, 0, 28.190899, -3.7078198e-06, -28.190899, 1.5649091e-13, 3.7078198e-06, 0, 0, 0)
+mesh = ExtResource("4_si3ea")
+
+[node name="Cylinder_BlackMetal_002_0" type="MeshInstance3D" parent="Launcher/RigidBody3D" unique_id=1587381958]
+transform = Transform3D(2.1283536e-06, 2.1283536e-06, 49.111565, 0, 28.190899, -3.7078198e-06, -28.190899, 1.5649091e-13, 3.7078198e-06, 0, 0, 0)
+mesh = ExtResource("5_nvk48")
+
+[node name="Cylinder_RedMetal_0" type="MeshInstance3D" parent="Launcher/RigidBody3D" unique_id=1032355769]
+transform = Transform3D(2.1283536e-06, 2.1283536e-06, 49.111565, 0, 28.190899, -3.7078198e-06, -28.190899, 1.5649091e-13, 3.7078198e-06, 0, 0, 0)
+mesh = ExtResource("6_f4f4m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Launcher/RigidBody3D" unique_id=1218611990]
+transform = Transform3D(-0.0027226612, 0.99999624, -2.2204377e-16, -0.99999624, -0.0027226612, 2.2264915e-16, 2.2204377e-16, 2.2264915e-16, 1, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_r4e17")

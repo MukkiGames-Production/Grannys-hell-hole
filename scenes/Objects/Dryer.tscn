@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://21ou3dhnikj0"]
+
+[ext_resource type="Script" uid="uid://dtubd5kceafqu" path="res://scripts/objects/Dryer.gd" id="1_serlf"]
+[ext_resource type="ArrayMesh" uid="uid://clqrkxqviteqs" path="res://Assets/Blender/Interactables/StuInteractables_Dryer.res" id="2_serlf"]
+[ext_resource type="PackedScene" uid="uid://do1d536qje504" path="res://scenes/Bigblow.tscn" id="2_tsdcp"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_odoac"]
+size = Vector3(1.6455078, 1.1844177, 0.640625)
+
+[node name="Dryer" type="Node3D" unique_id=1863615465]
+
+[node name="GrabbableObject" type="RigidBody3D" parent="." unique_id=1354601695]
+script = ExtResource("1_serlf")
+blow_cone = ExtResource("2_tsdcp")
+metadata/_custom_type_script = "uid://dlfa4844hulox"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GrabbableObject" unique_id=715182417]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20201111, -0.029052734)
+shape = SubResource("BoxShape3D_odoac")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GrabbableObject" unique_id=1385018482]
+mesh = ExtResource("2_serlf")

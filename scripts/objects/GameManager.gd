@@ -1,5 +1,5 @@
 extends Node3D
-@onready var player = preload("res://scenes/Stu.tscn")
+@onready var player = preload("res://scenes/Stu_with_ragdoll.tscn")
 @onready var voip: Node = $Voip
 
 ## Dictionary mapping remote steam_id -> their CharacterBody3D node
@@ -12,7 +12,7 @@ var scene_objects: Dictionary = {}
 var remote_held_items: Dictionary = {}
 
 ## Reference to the local player node (inside the instanced main.tscn, which is "Node3D")
-@onready var local_player: CharacterBody3D = $Main/Player
+@onready var local_player: CharacterBody3D = $Main/Stu
 
 func _ready() -> void:
 	# Initialize Steam if not already done
@@ -37,22 +37,26 @@ func _ready() -> void:
 	voip.start_recording()
 	voip.set_loopback(true)
 
+
+
 	# Build a lookup table of all interactive objects by their item_id
 	_register_scene_objects()
 
 func _register_scene_objects() -> void:
-	# Find all GrabbableObject nodes under $Main and index them by item_id
+	# Find all interactive nodes under $Main and index them
 
 	for node in _find_nodes_of_type($Main, "GrabbableObject"):
-		var obj := node as GrabbableObject
-		if obj and obj.item_id != "":
-			scene_objects[obj.item_id] = obj
-			print("[World] Registered scene object: %s" % obj.item_id)
+		if node is GrabbableObject and node.item_id != "":
+			scene_objects[node.item_id] = node
+			print("[World] Registered scene object: %s" % node.item_id)
+		elif node is InteractionPoint:
+			scene_objects[node.name] = node
+			print("[World] Registered interaction point: %s" % node.name)
 
 func _find_nodes_of_type(root: Node, type_name: String) -> Array:
 	var results := []
 	for child in root.get_children():
-		if child.get_class() == type_name or child is GrabbableObject:
+		if child.get_class() == type_name or child is GrabbableObject or child is InteractionPoint:
 			results.append(child)
 		results.append_array(_find_nodes_of_type(child, type_name))
 	return results
@@ -145,6 +149,7 @@ func _handle_player_update(sender_id: int, data: Dictionary) -> void:
 		elif not remote_walking and anim_player.is_playing():
 			anim_player.stop()
 
+
 func _handle_voice_data(data: Dictionary) -> void:
 	var voice_buffer: PackedByteArray = data.get("buffer", PackedByteArray())
 	if voice_buffer.size() > 0:
@@ -168,9 +173,41 @@ func _handle_player_action(sender_id: int, data: Dictionary) -> void:
 		"break_wall":
 			var pos := Vector3(data.get("px", 0.0), data.get("py", 0.0), data.get("pz", 0.0))
 			_handle_remote_break_wall(pos)
+		"enable_ragdoll":
+			var v := Vector3(data.get("vx", 0.0), data.get("vy", 0.0), data.get("vz", 0.0))
+			_handle_remote_ragdoll(sender_id, v)
+		"bookshelf_open":
+			var book_id: String = data.get("book_id", "")
+			_handle_remote_bookshelf_open(sender_id, item_id, book_id)
+		"replace_model":
+			var new_model_id: String = data.get("new_model_id", "")
+			_handle_remote_replace_model(sender_id, item_id, new_model_id)
+		"disable_ragdoll":
+			_handle_remote_disable_ragdoll(sender_id)
+		"reset_game":
+			_do_reset()
 		_:
 			print("[World] Unknown action: %s" % action)
+func _handle_remote_bookshelf_open(sender_id: int, item_id: String, book_id: String) -> void:
+	var obj: Node = scene_objects.get(item_id, null)
+	var book: Node = scene_objects.get(book_id, null)
 
+	if obj and is_instance_valid(obj) and obj.has_node("AnimationPlayer"):
+		var anim_player: AnimationPlayer = obj.get_node("AnimationPlayer")
+		anim_player.play("bookshelf_open")
+
+		if book and is_instance_valid(book) and obj.has_node("TargetPos"):
+			var target = obj.get_node("TargetPos")
+			if obj.has_method("move_to_point"):
+				obj.move_to_point(book, target.global_position, true)
+			book.reparent(obj, true)
+
+		print("[World] Remote player %s opened bookshelf %s" % [sender_id, item_id])
+func _handle_remote_replace_model(sender_id: int, item_id: String, new_model_id: String) -> void:
+	var obj: GrabbableObject = scene_objects.get(item_id, null)
+	if obj and is_instance_valid(obj):
+		obj.replace_model(obj.mesh, new_model_id)
+		print("[World] Remote player %s replaced model of %s with %s" % [sender_id, item_id, new_model_id])
 func _handle_remote_grab(sender_id: int, item_id: String) -> void:
 	var obj: GrabbableObject = scene_objects.get(item_id, null)
 	if obj and is_instance_valid(obj):
@@ -189,6 +226,19 @@ func _handle_remote_release(sender_id: int, item_id: String, pos: Vector3) -> vo
 		obj.freeze = false
 		obj.global_position = pos
 		print("[World] Remote player %s released %s at %s" % [sender_id, item_id, pos])
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_F6:
+		_on_debug_reset_pressed()
+
+func _on_debug_reset_pressed() -> void:
+	if GameNetwork.lobby_id > 0:
+		GameNetwork.send_p2p_packet(0, {"message": "player_action", "action": "reset_game"})
+	_do_reset()
+
+func _do_reset() -> void:
+	print("[World] Resetting game state...")
+	get_tree().reload_current_scene()
 
 func _handle_remote_place(sender_id: int, item_id: String, pos: Vector3) -> void:
 	remote_held_items.erase(sender_id)
@@ -209,6 +259,18 @@ func _handle_remote_place(sender_id: int, item_id: String, pos: Vector3) -> void
 			.set_trans(Tween.TRANS_SINE)\
 			.set_ease(Tween.EASE_OUT)
 		print("[World] Remote player %s placed %s at %s" % [sender_id, item_id, pos])
+
+func _handle_remote_ragdoll(sender_id: int, v: Vector3) -> void:
+	var remote = remote_players.get(sender_id, null)
+	if remote and is_instance_valid(remote) and remote.has_method("enable_ragdoll"):
+		remote.enable_ragdoll(v)
+		print("[World] Remote player %s ragdolled" % sender_id)
+
+func _handle_remote_disable_ragdoll(sender_id: int) -> void:
+	var remote = remote_players.get(sender_id, null)
+	if remote and is_instance_valid(remote) and remote.has_method("disable_ragdoll"):
+		remote.disable_ragdoll()
+		print("[World] Remote player %s disabled ragdoll" % sender_id)
 
 func _handle_remote_break_wall(impact_pos: Vector3) -> void:
 	var wall = $Main/breakablewall
@@ -245,7 +307,7 @@ func _spawn_remote_player(peer_steam_id: int, peer_name: String) -> void:
 
 	# Default spawn position (same as local player start)
 
-	remote.call_deferred("set_global_transform", Transform3D(Basis(), Vector3(5, 0, 0)))
+	remote.call_deferred("set_global_transform", Transform3D(Basis(), Vector3(3, 2.3, 0)))
 	remote.connect("ready", func():
 		remote.set_physics_process(false)
 		remote.set_process(false)
