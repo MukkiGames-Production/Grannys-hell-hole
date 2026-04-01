@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://5qvfrnaeggl6"]
+
+[ext_resource type="Script" uid="uid://cmqj67iidwo16" path="res://scripts/objects/ending_zone.gd" id="1_dq4je"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0lq6c"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_0lq6c"]
+
+[node name="EndingZone" type="Node3D" unique_id=9653937]
+script = ExtResource("1_dq4je")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1337185771]
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=868553951]
+shape = SubResource("BoxShape3D_0lq6c")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D" unique_id=1436585800]
+mesh = SubResource("BoxMesh_0lq6c")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

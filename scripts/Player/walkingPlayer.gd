@@ -66,3 +66,14 @@ func _physics_process(delta: float) -> void:
 		"is_walking": is_walking
 	}
 	GameNetwork.send_p2p_packet(0, player_data, Steam.P2P_SEND_RELIABLE)
+	
+func reach_ending():
+	self.visible = false
+	set_process_input(false)
+	set_process_unhandled_input(false)
+	set_physics_process(false)
+	stu_camera.camera.current = false
+	
+	remove_from_group("players")
+	
+	spectator_camera.activate()

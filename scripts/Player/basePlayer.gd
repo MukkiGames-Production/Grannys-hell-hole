@@ -4,6 +4,7 @@ class_name BasePlayer
 const gravity = 20
 @export var mouse_sensitivity := 0.002
 @export var stu_camera: StuCamera
+@export var spectator_camera: SpectatorCamera
 @export var max_throw_force := 20.0
 @export var max_charge_time := 1.5  # seconds to reach full power
 @export var ragdoll_time := 3.5 # seconds the player will not have control after entering ragdoll
@@ -269,4 +270,3 @@ func set_third_person_cam_pos():
 	else:
 		# No collision → full distance
 		stu_camera.pivot.global_transform.origin = target_position
-	
