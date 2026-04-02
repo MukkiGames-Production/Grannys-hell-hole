@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://1gf3ial0ymox"]
+
+[ext_resource type="Script" path="res://scripts/UI/player_ui.gd" id="1_xxxx"]
+
+[node name="PlayerUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xxxx")
+
+[node name="TimeLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 150.0
+offset_bottom = 42.0
+text = "Time: 00:00"
+
+[node name="ScheduleLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 46.0
+offset_right = 150.0
+offset_bottom = 72.0
+text = "Schedule: NONE"

@@ -20,7 +20,8 @@
 [ext_resource type="PackedScene" uid="uid://xl74pfdkcihd" path="res://scenes/Objects/Mirror.tscn" id="19_yc10j"]
 [ext_resource type="PackedScene" uid="uid://bvf3xx8tld6ip" path="res://scenes/warden.tscn" id="20_gqmmt"]
 [ext_resource type="PackedScene" uid="uid://di85bl0mj8xfo" path="res://scenes/Objects/Board.tscn" id="20_yc10j"]
-[ext_resource type="PackedScene" uid="uid://custmxyuudvf6" path="res://scenes/Objects/rpg.tscn" id="21_yc10j"]
+[ext_resource type="PackedScene" uid="uid://bh1lmq143icag" path="res://scenes/Objects/rpg.tscn" id="21_yc10j"]
+[ext_resource type="PackedScene" uid="uid://bcskmit1xf54o" path="res://scenes/Door.tscn" id="22_jscy8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_85g3d"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -123,17 +124,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.845158, 2.5912304, 0)
 collision_layer = 10
 collision_mask = 9
 
-[node name="NPC2" parent="." unique_id=321508815 node_paths=PackedStringArray("chase_target", "map") instance=ExtResource("9_85g3d")]
+[node name="NPC2" parent="." unique_id=321508815 node_paths=PackedStringArray("map") instance=ExtResource("9_85g3d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.463314, 0.05524683, -49.07776)
-visible = false
-chase_target = NodePath("../Stu")
 map = NodePath("../Map")
 patrol_route = "b"
 
-[node name="NPC" parent="." unique_id=1609349030 node_paths=PackedStringArray("chase_target", "map") instance=ExtResource("9_85g3d")]
+[node name="NPC" parent="." unique_id=1609349030 node_paths=PackedStringArray("map") instance=ExtResource("9_85g3d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.231657, -0.19916272, -7.8431396)
-visible = false
-chase_target = NodePath("../Stu")
 map = NodePath("../Map")
 
 [node name="Outlet" parent="." unique_id=526045756 instance=ExtResource("12_eb6dy")]
@@ -181,10 +178,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.575846, 0.5324971, 16.737
 
 [node name="Mirror" parent="." unique_id=1049146003 instance=ExtResource("19_yc10j")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 11.781813, 3.5960085, 5.8488345)
-valid_objects = Array[String]([])
 
 [node name="Warden" parent="." unique_id=1734464095 instance=ExtResource("20_gqmmt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.872208, -0.0031895638, 4.5311546)
 
 [node name="Rocket" parent="." unique_id=845348862 instance=ExtResource("21_yc10j")]
 transform = Transform3D(6.605888e-05, 0, -0.0049995636, 0, 0.005, 0, 0.0049995636, 0, 6.605888e-05, -14.383461, 0, 4.57475)
+
+[node name="Lobby_Door" parent="." unique_id=304825365 instance=ExtResource("22_jscy8")]
+transform = Transform3D(-0.030747855, 0, 0.99952716, 0, 1, 0, -0.99952716, 0, -0.030747855, 5.1322756, 2.1554022, -0.050363183)

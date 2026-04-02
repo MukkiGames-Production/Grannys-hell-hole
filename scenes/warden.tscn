@@ -1,3 +1,4 @@
+
 [gd_scene format=3 uid="uid://bvf3xx8tld6ip"]
 
 [ext_resource type="Script" uid="uid://bnwcampub50bx" path="res://scripts/AI-Environment/warden.gd" id="1_wthw5"]
@@ -6,6 +7,7 @@
 [ext_resource type="Shader" uid="uid://qgwe03vp55xl" path="res://addons/rope_gen_mesh_3d/shaders/example_wind.gdshader" id="4_t1s11"]
 [ext_resource type="Texture2D" uid="uid://c3ikdfpgogbql" path="res://Assets/objects/Textures/wood_cabinet_worn_long_2k.gltf/textures/wood_cabinet_worn_long_diff_2k.jpg" id="5_ggq7t"]
 [ext_resource type="Script" uid="uid://q8kx0347laa3" path="res://addons/rope_gen_mesh_3d/rope_data.gd" id="5_uvufd"]
+
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_wthw5"]
 

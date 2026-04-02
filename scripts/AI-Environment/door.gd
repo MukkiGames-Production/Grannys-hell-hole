@@ -36,6 +36,8 @@ func toggle_door():
 		status = State.OPEN
 		# do door anim
 		animation_player.play("open_door")
+		if name == "Lobby_Door":
+			Scheduler.paused = false
 	else:
 		#close
 		status = State.CLOSED

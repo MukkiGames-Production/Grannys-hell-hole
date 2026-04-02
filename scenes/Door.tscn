@@ -145,6 +145,8 @@ _data = {
 
 [node name="Door" type="Node3D" unique_id=304825365]
 script = ExtResource("1_yfgsh")
+status = 0
+okay_status = 0
 
 [node name="DebugText" type="Label3D" parent="." unique_id=129029945]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.64777875, 2.7397358, 0)
