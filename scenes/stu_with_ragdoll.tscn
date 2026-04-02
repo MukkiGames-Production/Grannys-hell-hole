@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://7kbpxwjpibwk" path="res://Assets/Players/Stu_mouth.png" id="2_pfi4u"]
 [ext_resource type="Texture2D" uid="uid://b0nwljqmretrm" path="res://Assets/Players/Stu_BakedBase.png" id="3_dx11c"]
 [ext_resource type="Texture2D" uid="uid://bh4rb7hqdn5y3" path="res://Assets/Players/Stu_EyeBase.png" id="4_rhvyi"]
+[ext_resource type="PackedScene" uid="uid://1gf3ial0ymox" path="res://scenes/UI/player_ui.tscn" id="5_b0mr0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mimdw"]
 height = 1.585
@@ -387,7 +388,7 @@ height = 0.41863525
 radius = 0.039090782
 height = 0.39090782
 
-[node name="Stu" type="CharacterBody3D" unique_id=1959823504 node_paths=PackedStringArray("camera_pivot", "camera", "ragdoll_skeleton", "stus_bone_simulator", "stus_root_bone", "stu_mesh_normal", "stu_mesh_ragdoll", "animation") groups=["players"]]
+[node name="Stu2" type="CharacterBody3D" unique_id=1959823504 node_paths=PackedStringArray("camera_pivot", "camera", "ragdoll_skeleton", "stus_bone_simulator", "stus_root_bone", "stu_mesh_normal", "stu_mesh_ragdoll", "animation") groups=["players"]]
 collision_layer = 2
 script = ExtResource("1_v72kc")
 camera_pivot = NodePath("CameraPivot")
@@ -720,10 +721,10 @@ skeleton = NodePath("..")
 [node name="PhysicalBoneSimulator3D" type="PhysicalBoneSimulator3D" parent="Rag Bones" unique_id=532397335]
 
 [node name="Physical Bone Root" type="PhysicalBone3D" parent="Rag Bones/PhysicalBoneSimulator3D" unique_id=199636501]
-transform = Transform3D(-1, -1.1689293e-08, 5.6747556e-08, -5.7938973e-08, 0.20175186, -0.9794367, -3.0710217e-15, -0.97943676, -0.20175184, -2.0069312e-08, 0.4951667, 0.074718714)
+transform = Transform3D(-1, -1.1683249e-08, 5.6734542e-08, -5.792501e-08, 0.20169616, -0.97944814, -3.071854e-15, -0.9794482, -0.20169614, -2.006233e-08, 0.4951667, 0.074718714)
 collision_layer = 4
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.48715e-10, 0.002431944, 0.3585433)
-body_offset = Transform3D(3.1703035e-15, 0.9794368, 0.20175183, 1.6656685e-09, 0.20175184, -0.97943693, -1.0000001, 3.3605127e-10, -1.6314174e-09, -0.0747187, 0.35067987, 8.328316e-10)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5079938e-10, 0.0024523288, 0.35854313)
+body_offset = Transform3D(3.171968e-15, 0.97944826, 0.20169613, 1.6796307e-09, 0.20169614, -0.9794484, -1.0000001, 3.3877443e-10, -1.6451132e-09, -0.0747187, 0.35067987, 8.3981266e-10)
 bone_name = "Root"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Rag Bones/PhysicalBoneSimulator3D/Physical Bone Root" unique_id=514665882]
@@ -746,11 +747,11 @@ transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_pfi4u")
 
 [node name="Physical Bone Chest" type="PhysicalBone3D" parent="Rag Bones/PhysicalBoneSimulator3D" unique_id=1791211747]
-transform = Transform3D(-4.4549603e-07, 1, -8.2206924e-08, -0.63956386, -3.4811876e-07, -0.768738, -0.7687379, -2.8989314e-07, 0.63956386, -4.424148e-08, 0.91799253, -0.012704439)
+transform = Transform3D(-4.4560772e-07, 1, -8.2038625e-08, -0.63956386, -3.480608e-07, -0.768738, -0.7687379, -2.9008663e-07, 0.63956386, -4.435318e-08, 0.91799253, -0.012704439)
 collision_layer = 4
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2805646e-08, 1.0604024e-08, 0.13106683)
-body_offset = Transform3D(1.0000002, 1.3202737e-08, 5.066395e-07, 4.172325e-07, 1.9828448e-08, -1.0000002, -1.3202708e-08, 1.0000001, 1.9828462e-08, -1.1920929e-07, 0.13106686, -1.3202879e-08)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2805646e-08, 1.0693661e-08, 0.13106683)
+body_offset = Transform3D(1.0000002, 1.3314434e-08, 5.066395e-07, 4.172325e-07, 1.9996762e-08, -1.0000002, -1.3314406e-08, 1.0000001, 1.9996776e-08, -1.1920929e-07, 0.13106686, -1.3314576e-08)
 bone_name = "Chest"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -961,3 +962,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3643394, -0.6374559)
 [node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=715171785]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.009893775)
 current = true
+
+[node name="PlayerUI" parent="." unique_id=1140314617 instance=ExtResource("5_b0mr0")]
