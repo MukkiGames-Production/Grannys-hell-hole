@@ -50,7 +50,7 @@ signal new_day(day_number: int)
 @export var start_hour: float = 6.0
 
 ## Pause the clock (useful for cutscenes / menus).
-@export var paused: bool = false
+@export var paused: bool = true
 
 # ---------------------------------------------------------------------------
 # Built-in day blocks
