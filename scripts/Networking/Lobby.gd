@@ -162,7 +162,6 @@ func join_lobby(this_lobby_id: int) -> void:
 
 	# Make the lobby join request to Steam
 	Steam.joinLobby(this_lobby_id)
-	GameNetwork.connect_to_host(Steam.getLobbyOwner(this_lobby_id))
 @rpc("call_local", "any_peer")
 func _on_lobby_joined(this_lobby_id: int, _permissions: int, _locked: bool, response: int) -> void:
 	# If joining was successful
@@ -450,6 +449,7 @@ func process_p2p_packet(sender_id: int, data: Dictionary) -> void:
 		"start_game":
 			print("Received start game signal from host!")
 			GameNetwork.set_lobby(lobby_id, lobby_members.duplicate(true), false)
+			GameNetwork.connect_to_host(sender_id)
 			get_tree().change_scene_to_file(ReturnScene.resource_path)
 		"accept_game":
 			print("Received accept game from: %s" % sender_id)
@@ -566,6 +566,10 @@ func start_game() -> void:
 		print("Starting game...")
 		# Save lobby state to the persistent singleton before scene change
 		GameNetwork.set_lobby(lobby_id, lobby_members.duplicate(true), true)
+		GameNetwork.create_steam_socket()
+
+		# Give the socket a brief moment to initialize before telling clients to connect
+		await get_tree().create_timer(0.5).timeout
 
 		# Send start game message to all players
 		send_p2p_packet(0, {"message": "start_game"})

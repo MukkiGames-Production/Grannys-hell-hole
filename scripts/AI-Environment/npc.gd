@@ -3,7 +3,7 @@ class_name NPC
 @export var speed := 6.0
 @export var chase_target: CharacterBody3D
 @export var status : State = State.IDLE
-@export var map : Node3D 
+@export var map : Node3D
 #var patrols : Dictionary[Node3D, int] = {}
 var patrola : Node3D
 var patrolb : Node3D
@@ -281,7 +281,7 @@ func _physics_process(delta: float) -> void:
 		"vy": velocity.y,
 		"vz": velocity.z
 	}
-	Scheduler.debug_print_all_schedules()
+	# Scheduler.debug_print_all_schedules()
 	GameNetwork.send_p2p_packet(0, data, 0)
 
 func _on_update_timer_timeout() -> void:
@@ -399,26 +399,26 @@ func _on_eyes_body_entered(body: Node3D) -> void:
 	if not _has_line_of_sight_to(player):
 		return
 
-	# check the players suspicion level, The players suspicion level should be always updated within the baseplayer 
-	# player script to maintain a suspicion level . 
+	# check the players suspicion level, The players suspicion level should be always updated within the baseplayer
+	# player script to maintain a suspicion level .
 	# If we're investigating or patrolling we should chase high suspicion players if we fully detect them
-	#      (possibly focus player who's most recently done a suspicious activity like break something/drop 
-	#       contraband/etc) 
-	# 
+	#      (possibly focus player who's most recently done a suspicious activity like break something/drop
+	#       contraband/etc)
+	#
 	# If the investigate is triggered, we need to add this event to a list somewhere and return to it so
 	# if we get distracted and chase someone, we should return to investigating. Things that trigger investigations
 	# may have a "fix". Like sweep up broken vase, close door that should be closed that was open, pick up contraband
-	
+
 	# Scripted movement State should run priority over everything else, if chasing when scripted movement takes over
-	# we should do nothing for now and just let that player go. 
-	
+	# we should do nothing for now and just let that player go.
+
 	# each Marker3D in a patrol should be able to hold @export metadata for how long to wait, string of animation
 	# to play while waiting at this Marker
-	
+
 	# each state should have a different customizable speed for the NPC
 
 	# If the player is ragdolled and we're chasing them, stop moving, stop updating target position, wait for player to return to normal state
-	# 
+	#
 	detect_candidate = player
 	detect_timer.start(1.8)
 

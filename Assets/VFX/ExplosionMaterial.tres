@@ -1,9 +1,9 @@
-[gd_resource type="ShaderMaterial" format=3 uid="uid://crmyy64nymlfh"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://cxhaa6i7bto07"]
 
-[ext_resource type="Shader" uid="uid://mp0pjj0agg28" path="res://Assets/VFX/ExplosionShader.tres" id="1_c4nbu"]
-[ext_resource type="Texture2D" path="res://Assets/VFX/normal+.png" id="2_b2ebq"]
-[ext_resource type="Texture2D" path="res://Assets/VFX/normal-.png" id="3_rbvhi"]
-[ext_resource type="Texture2D" path="res://Assets/VFX/smokesprite.png" id="4_254cs"]
+[ext_resource type="Shader" uid="uid://bfrlkbjyfakqt" path="res://Assets/VFX/ExplosionShader.tres" id="1_c4nbu"]
+[ext_resource type="Texture2D" uid="uid://cw6xxux2tlvs" path="res://Assets/VFX/normal+.png" id="2_b2ebq"]
+[ext_resource type="Texture2D" uid="uid://b0ft0almrusvw" path="res://Assets/VFX/normal-.png" id="3_rbvhi"]
+[ext_resource type="Texture2D" uid="uid://ddhmohyds3w8x" path="res://Assets/VFX/smokesprite.png" id="4_254cs"]
 
 [sub_resource type="Gradient" id="Gradient_3pf84"]
 offsets = PackedFloat32Array(0.13, 0.448, 0.724)

@@ -1,12 +1,12 @@
 extends CharacterBody3D
 class_name BasePlayer
 
-@export var gravity = 20
+const gravity = 20
 @export var mouse_sensitivity := 0.002
-@export var camera_pivot: Node3D
-@export var camera: Camera3D
+@export var stu_camera: StuCamera
+@export var spectator_camera: SpectatorCamera
 @export var max_throw_force := 20.0
-@export var max_charge_time := 1.5  # seconds to reach full power
+@export var max_charge_time := .75  # seconds to reach full power
 @export var ragdoll_time := 3.5 # seconds the player will not have control after entering ragdoll
 @export var ragdoll_skeleton: Skeleton3D
 @export var stus_bone_simulator: PhysicalBoneSimulator3D
@@ -29,37 +29,48 @@ var root_bone_idx: int = -1
 signal look_at_interactable(can_see: bool)  # for reticle/UI feedback
 const INTERACTION_LAYER_8_MASK := 1 << 7
 
+enum CameraMode {
+	FIRST_PERSON,
+	THIRD_PERSON
+}
+
+var camera_mode = CameraMode.FIRST_PERSON
+var in_customization := false  #Player is using character customization
+
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	
+
 	#initialize ragdoll timer
 	ragdoll_timer.wait_time = ragdoll_time
 	ragdoll_timer.one_shot = true
 	ragdoll_timer.timeout.connect(_on_ragdoll_timer_timeout)
-	root_bone_idx = ragdoll_skeleton.find_bone("Root")  # or "Hips", "pelvis", "Spine", whatever your rig's main/root bone is
-	print(root_bone_idx)
 	add_child(ragdoll_timer)
 	
+	#mark root bone to knock it back farther later
+	root_bone_idx = ragdoll_skeleton.find_bone("Root")  # or "Hips", "pelvis", "Spine", whatever your rig's main/root bone is
+	
+
 	#make ragdoll body invis
 	stu_mesh_ragdoll.visible = false
-	
+
 	for child in stus_bone_simulator.get_children():
 		if child is PhysicalBone3D:
 			bones.append(child)
 			child.angular_damp = 10
 
 func _unhandled_input(event: InputEvent) -> void:
-	# Toggle mouse capture with Escape
+	# Always allow escape
 	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		# Early return so mouse motion doesn't process while menu is open
 		return
 
-	# Ignore mouse input when menu visible
-	if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
+	if in_customization:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+	if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED: ##stop looking around
 		return
 
 	if event is InputEventMouseMotion:
@@ -79,13 +90,23 @@ func _unhandled_input(event: InputEvent) -> void:
 			else:
 				try_interact()
 		else:
-			# Mouse released → throw
 			if is_charging_throw and held_object:
 				if throw_charge > 0.25:
 					_throw_held_object()
 				else:
 					try_interact()
 				is_charging_throw = false
+	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
+		if event.pressed and held_object:
+			try_special()
+		elif not event.pressed and held_object:
+			try_special_released()
+
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
+		if event.pressed:
+			print("Right click", held_object.has_method("use"))
+			if held_object and held_object.has_method("use"):
+				held_object.use()
 
 # Virtual method — child classes override this for yaw/pitch handling
 func _handle_mouse_look(event: InputEventMouseMotion) -> void:
@@ -96,7 +117,7 @@ func _process(delta: float) -> void:
 	if is_charging_throw:
 		throw_charge += delta
 		throw_charge = clamp(throw_charge, 0.0, max_charge_time)
-		
+
 func _throw_held_object() -> void:
 	if not held_object:
 		return
@@ -104,7 +125,7 @@ func _throw_held_object() -> void:
 	var power_ratio = throw_charge / max_charge_time
 	var force = power_ratio * max_throw_force
 
-	var throw_dir = (-camera.global_transform.basis.z + Vector3.UP * 0.2).normalized()
+	var throw_dir = (-stu_camera.camera.global_transform.basis.z + Vector3.UP * 0.2).normalized()
 
 	var obj := held_object
 	held_object = null
@@ -126,8 +147,8 @@ func _throw_held_object() -> void:
 
 func _update_interaction_raycast() -> void:
 	var space_state = get_world_3d().direct_space_state
-	var from = camera.global_position
-	var to = from + camera.global_transform.basis.z * -5.0  # 5 units forward
+	var from = stu_camera.camera.global_position
+	var to = from + stu_camera.camera.global_transform.basis.z * -5.0  # 5 units forward
 
 	var query = PhysicsRayQueryParameters3D.create(from, to)
 	query.exclude = [self]
@@ -151,7 +172,7 @@ func try_interact() -> void:
 	var target = null
 	if object_in_sight:
 		target = object_in_sight.collider
-	
+
 	print("collider clicked: ", target)
 
 	# Case 1: Holding something → try place or drop
@@ -169,10 +190,19 @@ func try_interact() -> void:
 	# Case 2: Not holding → pick up or empty interact
 	if target is GrabbableObject and target.is_grabbable:
 		held_object = target
-		held_object.grab(camera)
+		held_object.grab(stu_camera.camera)
 		print("Picked up ", held_object)
 	elif target is InteractionPoint:
 		target.empty_interact()
+		
+func try_special() -> void:
+	if held_object:
+		held_object.special()
+	return
+func try_special_released() -> void:
+	if held_object:
+		held_object.special_released()
+	return
 
 
 func try_door_interact() -> void:
@@ -192,10 +222,10 @@ func _find_door_controller(start: Object) -> Node:
 			return node
 		node = node.get_parent()
 	return null
-		
+
 func boom_ragdoll(origin: Vector3, strength: float):
 	# Horizontal direction only (ignore Y difference)
-	
+
 	var horizontal = global_transform.origin - origin
 	horizontal.y = 0.0
 	horizontal = horizontal.normalized()
@@ -207,10 +237,10 @@ func boom_ragdoll(origin: Vector3, strength: float):
 	var final_dir = (horizontal + up_force).normalized()
 
 	velocity += final_dir * strength
-			
+
 	ragdoll_state = true
-	ragdoll_timer.start()	
-	
+	ragdoll_timer.start()
+
 	enable_ragdoll(final_dir * strength)
 
 func _on_ragdoll_timer_timeout():
@@ -222,13 +252,60 @@ func enable_ragdoll(v) -> void:
 	stu_mesh_normal.visible = false
 	stu_mesh_ragdoll.visible = true
 	stus_bone_simulator.physical_bones_start_simulation()
-	
+
 	bones[0].apply_central_impulse(1.2 * v)
 	for i in range(1, bones.size()):
 		bones[i].apply_central_impulse(v)
 		
-		
+	#also the camera
+	camera_mode = CameraMode.THIRD_PERSON
+	set_third_person_cam_pos()
+	
+
+	if GameNetwork.lobby_id > 0:
+		GameNetwork.send_p2p_packet(0, {
+			"message": "player_action",
+			"action": "enable_ragdoll",
+			"vx": v.x,
+			"vy": v.y,
+			"vz": v.z
+		}, Steam.P2P_SEND_RELIABLE)
+
+
 func disable_ragdoll() -> void:
 	stu_mesh_normal.visible = true
 	stu_mesh_ragdoll.visible = false
 	stus_bone_simulator.physical_bones_stop_simulation()
+	
+	#put cam back
+	camera_mode = CameraMode.FIRST_PERSON
+	stu_camera.pivot.global_position = stu_camera.root.global_position
+	
+func set_third_person_cam_pos():
+	var origin = stu_camera.root.global_transform.origin
+	
+	# Direction backwards from player
+	var direction = stu_camera.root.global_transform.basis.z.normalized()
+	
+	var max_distance = 4.0
+	var target_position = origin + direction * max_distance
+
+	# Raycast
+	var space_state = get_world_3d().direct_space_state
+	var query = PhysicsRayQueryParameters3D.create(origin, target_position)
+	query.exclude = [self]  # avoid hitting the player
+	
+	var result = space_state.intersect_ray(query)
+
+	if result:
+		# Move camera to hit point (slightly forward to avoid clipping)
+		stu_camera.pivot.global_transform.origin = result.position + result.normal * 0.2
+	else:
+		# No collision → full distance
+		stu_camera.pivot.global_transform.origin = target_position
+
+	if GameNetwork.lobby_id > 0:
+		GameNetwork.send_p2p_packet(0, {
+			"message": "player_action",
+			"action": "disable_ragdoll"
+		}, Steam.P2P_SEND_RELIABLE)

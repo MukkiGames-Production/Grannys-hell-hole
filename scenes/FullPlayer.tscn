@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://b2ehtvqw6j6fl"]
+
+[ext_resource type="PackedScene" uid="uid://h5sep0m58vfb" path="res://scenes/stu_with_ragdoll.tscn" id="1_usycb"]
+[ext_resource type="Script" uid="uid://dhugeb3gshqor" path="res://scripts/Player/spectator_camera.gd" id="2_xoyaw"]
+
+[node name="FullPlayer" type="Node3D" unique_id=1486002308]
+
+[node name="Stu" parent="." unique_id=1959823504 node_paths=PackedStringArray("spectator_camera") instance=ExtResource("1_usycb")]
+spectator_camera = NodePath("../SpectatorCameraRoot")
+
+[node name="SpectatorCameraRoot" type="Node3D" parent="." unique_id=758604895 node_paths=PackedStringArray("pivot", "camera")]
+script = ExtResource("2_xoyaw")
+pivot = NodePath("CameraPivot")
+camera = NodePath("CameraPivot/Camera3D")
+
+[node name="CameraPivot" type="Node3D" parent="SpectatorCameraRoot" unique_id=1990442116]
+
+[node name="Camera3D" type="Camera3D" parent="SpectatorCameraRoot/CameraPivot" unique_id=1436261604]
