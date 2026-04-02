@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://1bjldkdyo4fe" path="res://scenes/Objects/Large_Key.tscn" id="19_0ld40"]
 [ext_resource type="PackedScene" uid="uid://danjd6fb1nulr" path="res://scenes/Objects/Crowbar.tscn" id="19_gqmmt"]
 [ext_resource type="PackedScene" uid="uid://xl74pfdkcihd" path="res://scenes/Objects/Mirror.tscn" id="19_yc10j"]
+[ext_resource type="PackedScene" uid="uid://bcskmit1xf54o" path="res://scenes/Door.tscn" id="20_gqmmt"]
 [ext_resource type="PackedScene" uid="uid://di85bl0mj8xfo" path="res://scenes/Objects/Board.tscn" id="20_yc10j"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_85g3d"]
@@ -176,3 +177,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.575846, 0.5324971, 16.737
 [node name="Mirror" parent="." unique_id=1049146003 instance=ExtResource("19_yc10j")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 11.781813, 3.5960085, 5.8488345)
 valid_objects = Array[String]([])
+
+[node name="Lobby_Door" parent="." unique_id=304825365 instance=ExtResource("20_gqmmt")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 4.9020596, 2.141339, -0.050857306)
