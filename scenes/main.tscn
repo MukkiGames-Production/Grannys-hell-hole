@@ -22,6 +22,10 @@
 [ext_resource type="PackedScene" uid="uid://di85bl0mj8xfo" path="res://scenes/Objects/Board.tscn" id="20_yc10j"]
 [ext_resource type="PackedScene" uid="uid://bh1lmq143icag" path="res://scenes/Objects/rpg.tscn" id="21_yc10j"]
 [ext_resource type="PackedScene" uid="uid://bcskmit1xf54o" path="res://scenes/Door.tscn" id="22_jscy8"]
+[ext_resource type="PackedScene" uid="uid://c3dga353364ch" path="res://scenes/infirmary.tscn" id="23_pm3ni"]
+[ext_resource type="ArrayMesh" uid="uid://jtgjfkeqeuse" path="res://Assets/Blender/cornhole_Plane_004.res" id="24_og1vs"]
+[ext_resource type="ArrayMesh" uid="uid://bubcw3ok6845v" path="res://Assets/Blender/cornhole_Plane_005.res" id="25_2wyq8"]
+[ext_resource type="PackedScene" uid="uid://cse5f2scyb4vw" path="res://Assets/Blender/sandbag_low_poly_realist.glb" id="26_2wyq8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_85g3d"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -187,3 +191,19 @@ transform = Transform3D(6.605888e-05, 0, -0.0049995636, 0, 0.005, 0, 0.004999563
 
 [node name="Lobby_Door" parent="." unique_id=304825365 instance=ExtResource("22_jscy8")]
 transform = Transform3D(-0.030747855, 0, 0.99952716, 0, 1, 0, -0.99952716, 0, -0.030747855, 5.1322756, 2.1554022, -0.050363183)
+
+[node name="Infirmary" parent="." unique_id=1093174769 instance=ExtResource("23_pm3ni")]
+
+[node name="cornhole" type="Node3D" parent="." unique_id=1785017555]
+transform = Transform3D(1, 0, 0, 0, -0.9999932, 0.003682673, 0, -0.003682673, -0.9999932, -11.627803, 0.03908086, -35.214455)
+
+[node name="Plane" type="MeshInstance3D" parent="cornhole" unique_id=228422027]
+transform = Transform3D(2.4, 0, 0, 0, 1, 0, 0, 0, 1.2, -0.43559837, -5.9843063e-05, -0.5140387)
+mesh = ExtResource("24_og1vs")
+
+[node name="Plane_001" type="MeshInstance3D" parent="cornhole" unique_id=732076950]
+transform = Transform3D(2.4, 0, 0, 0, 1, 0, 0, 0, 1.2, -0.43559837, -5.9843063e-05, -0.5140387)
+mesh = ExtResource("25_2wyq8")
+
+[node name="SandBag" parent="." unique_id=1119725117 instance=ExtResource("26_2wyq8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.805236, 0.10810692, -36.92269)
