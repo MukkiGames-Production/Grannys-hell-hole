@@ -22,6 +22,24 @@
 [ext_resource type="PackedScene" uid="uid://di85bl0mj8xfo" path="res://scenes/Objects/Board.tscn" id="20_yc10j"]
 [ext_resource type="PackedScene" uid="uid://bh1lmq143icag" path="res://scenes/Objects/rpg.tscn" id="21_yc10j"]
 [ext_resource type="PackedScene" uid="uid://bcskmit1xf54o" path="res://scenes/Door.tscn" id="22_jscy8"]
+[ext_resource type="ArrayMesh" uid="uid://cg7ojdbc6fhsm" path="res://Assets/objects/LAB_STUFF/medical_room_assets/clock/clock.obj" id="23_5he1u"]
+[ext_resource type="ArrayMesh" uid="uid://dwdn5nxfdxwbs" path="res://Assets/objects/LAB_STUFF/medical_room_assets/operating_table/operating_table.obj" id="24_5poiv"]
+[ext_resource type="ArrayMesh" uid="uid://c2lhi0c6go04f" path="res://Assets/objects/LAB_STUFF/medical_room_assets/round_chair/round_chair.obj" id="25_2cjbq"]
+[ext_resource type="ArrayMesh" uid="uid://crjoqivr4k0gr" path="res://Assets/objects/LAB_STUFF/medical_room_assets/stand/stand.obj" id="26_chjal"]
+[ext_resource type="ArrayMesh" uid="uid://d4lvuq6psfb2e" path="res://Assets/objects/LAB_STUFF/medical_room_assets/medical_tray/medical_tray.obj" id="27_cjqg0"]
+[ext_resource type="ArrayMesh" uid="uid://cdyl0nqeuwksb" path="res://Assets/objects/LAB_STUFF/Sketchfab_Scene_CurtainRailing_Curtain_0.res" id="28_vchkt"]
+[ext_resource type="ArrayMesh" uid="uid://bd66w0fui7mfh" path="res://Assets/objects/LAB_STUFF/Sketchfab_Scene_BathCurtain_Curtain_0.res" id="29_txyw0"]
+[ext_resource type="ArrayMesh" uid="uid://dc438v3652dvn" path="res://Assets/objects/LAB_STUFF/medical_room_assets/medical_counter/medical_counter.obj" id="30_vc5cj"]
+[ext_resource type="PackedScene" uid="uid://by2su30xe4ghw" path="res://Assets/objects/LAB_STUFF/DEMO_HealingItems_3Dexter/DEMO/Mesh/GLB (Godot)/MedKit_Gdt.glb" id="31_nvyfr"]
+[ext_resource type="ArrayMesh" uid="uid://78kpar3ggpg3" path="res://Assets/objects/LAB_STUFF/medical_room_assets/bedside_table/bedside_table.obj" id="32_ty1g6"]
+[ext_resource type="ArrayMesh" uid="uid://ja8g2sf0joax" path="res://Assets/objects/LAB_STUFF/medical_room_assets/table/table.obj" id="33_j2jfr"]
+[ext_resource type="ArrayMesh" uid="uid://dswq8hupwuj82" path="res://Assets/objects/LAB_STUFF/medical_room_assets/thermostat/thermostat.obj" id="34_bjg73"]
+[ext_resource type="ArrayMesh" uid="uid://24dw1vicpnne" path="res://Assets/objects/LAB_STUFF/DEMO_HealingItems_3Dexter/DEMO/Mesh/GLB (Godot)/PillBottle_Gdt_Cylinder_042.res" id="35_bu4jf"]
+[ext_resource type="ArrayMesh" uid="uid://ttofvt4q86ud" path="res://Assets/objects/LAB_STUFF/DEMO_HealingItems_3Dexter/DEMO/Mesh/GLB (Godot)/PillBottle_Gdt_Cylinder_043.res" id="36_o7ddy"]
+[ext_resource type="ArrayMesh" uid="uid://c1dx8rbspv8sg" path="res://Assets/objects/LAB_STUFF/medical_room_assets/bin/bin.obj" id="37_0loja"]
+[ext_resource type="ArrayMesh" uid="uid://bekujxrv330yh" path="res://Assets/objects/LAB_STUFF/medical_room_assets/blue_stand/blue_stand.obj" id="38_ids8r"]
+[ext_resource type="PackedScene" uid="uid://jxhrw4takepb" path="res://Assets/objects/LAB_STUFF/surgical_instrument.glb" id="39_dnhof"]
+[ext_resource type="ArrayMesh" uid="uid://bn7wnvbu53i6m" path="res://Assets/objects/LAB_STUFF/medical_room_assets/locker/locker.obj" id="40_1v6qk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_85g3d"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -187,3 +205,272 @@ transform = Transform3D(6.605888e-05, 0, -0.0049995636, 0, 0.005, 0, 0.004999563
 
 [node name="Lobby_Door" parent="." unique_id=304825365 instance=ExtResource("22_jscy8")]
 transform = Transform3D(-0.030747855, 0, 0.99952716, 0, 1, 0, -0.99952716, 0, -0.030747855, 5.1322756, 2.1554022, -0.050363183)
+
+[node name="Infirmary" type="Node3D" parent="." unique_id=76947031]
+
+[node name="Clock" type="MeshInstance3D" parent="Infirmary" unique_id=2052028503]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -41.613464, 2.8876338, -53.11902)
+mesh = ExtResource("23_5he1u")
+
+[node name="OperatingTable" type="MeshInstance3D" parent="Infirmary" unique_id=147522830]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.734085, 0.1284852, -46.909542)
+mesh = ExtResource("24_5poiv")
+
+[node name="OperatingTable2" type="MeshInstance3D" parent="Infirmary" unique_id=702339004]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.34839, 0.1284852, -49.08487)
+mesh = ExtResource("24_5poiv")
+
+[node name="OperatingTable3" type="MeshInstance3D" parent="Infirmary" unique_id=1129263305]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.34839, 0.1284852, -44.85592)
+mesh = ExtResource("24_5poiv")
+
+[node name="OperatingTable4" type="MeshInstance3D" parent="Infirmary" unique_id=175042359]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.34839, 0.1284852, -42.227398)
+mesh = ExtResource("24_5poiv")
+
+[node name="OperatingTable5" type="MeshInstance3D" parent="Infirmary" unique_id=1963470293]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.34839, 0.1284852, -38.66925)
+mesh = ExtResource("24_5poiv")
+
+[node name="OperatingTable6" type="MeshInstance3D" parent="Infirmary" unique_id=1409070210]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.666603, 0.1284852, -38.66925)
+mesh = ExtResource("24_5poiv")
+
+[node name="OperatingTable7" type="MeshInstance3D" parent="Infirmary" unique_id=902467079]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.666603, 0.1284852, -35.365982)
+mesh = ExtResource("24_5poiv")
+
+[node name="RoundChair" type="MeshInstance3D" parent="Infirmary" unique_id=1650351975]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.88794, 0.12897477, -45.644962)
+mesh = ExtResource("25_2cjbq")
+
+[node name="Stand" type="MeshInstance3D" parent="Infirmary" unique_id=1386668397]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -41.08536, 1.3605127, -44.04208)
+mesh = ExtResource("26_chjal")
+
+[node name="MedicalTray" type="MeshInstance3D" parent="Infirmary" unique_id=939149154]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.57642, 1.3783156, -44.667156)
+mesh = ExtResource("27_cjqg0")
+
+[node name="MedicalTray2" type="MeshInstance3D" parent="Infirmary" unique_id=1411979954]
+transform = Transform3D(0.024189912, 0, -4.531802, 0, 3, 0, 2.9999025, 0, 0.036542483, -34.409164, 1.0932149, -55.84457)
+mesh = ExtResource("27_cjqg0")
+
+[node name="Curtain" type="Node3D" parent="Infirmary" unique_id=839856412]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -25.992899, 0.78659296, -37.078793)
+
+[node name="SketchfabSceneCurtainRailingCurtain2" type="MeshInstance3D" parent="Infirmary/Curtain" unique_id=1885730045]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.5714605e-07, 1.2836235, 1.7975413)
+mesh = ExtResource("28_vchkt")
+
+[node name="SketchfabSceneBathCurtainCurtain0" type="MeshInstance3D" parent="Infirmary/Curtain" unique_id=1992457606]
+transform = Transform3D(-0.997276, -0.07376037, -1.1641532e-10, -0.0015408593, 0.020833174, 0.99978185, -0.073744275, 0.99705845, -0.020890078, 0.01597304, -0.022934003, 0.05653292)
+mesh = ExtResource("29_txyw0")
+
+[node name="Curtain2" type="Node3D" parent="Infirmary" unique_id=389272582]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -25.992899, 0.78659296, -40.81087)
+
+[node name="SketchfabSceneCurtainRailingCurtain2" type="MeshInstance3D" parent="Infirmary/Curtain2" unique_id=1938027239]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.5714605e-07, 1.2836235, 1.7975413)
+mesh = ExtResource("28_vchkt")
+
+[node name="SketchfabSceneBathCurtainCurtain0" type="MeshInstance3D" parent="Infirmary/Curtain2" unique_id=1911236081]
+transform = Transform3D(-0.997276, -0.07376037, -1.1641532e-10, -0.0015408593, 0.020833174, 0.99978185, -0.073744275, 0.99705845, -0.020890078, 0.01597304, -0.022934003, 0.05653292)
+mesh = ExtResource("29_txyw0")
+
+[node name="Curtain3" type="Node3D" parent="Infirmary" unique_id=896393351]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -25.992899, 0.78659296, -44.27996)
+
+[node name="SketchfabSceneCurtainRailingCurtain2" type="MeshInstance3D" parent="Infirmary/Curtain3" unique_id=221965201]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.5714605e-07, 1.2836235, 1.7975413)
+mesh = ExtResource("28_vchkt")
+
+[node name="SketchfabSceneBathCurtainCurtain0" type="MeshInstance3D" parent="Infirmary/Curtain3" unique_id=2058381538]
+transform = Transform3D(-0.997276, -0.07376037, -1.1641532e-10, -0.0015408593, 0.020833174, 0.99978185, -0.073744275, 0.99705845, -0.020890078, 0.01597304, -0.022934003, 0.05653292)
+mesh = ExtResource("29_txyw0")
+
+[node name="Curtain4" type="Node3D" parent="Infirmary" unique_id=1655217045]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -25.992899, 0.78659296, -48.05378)
+
+[node name="SketchfabSceneCurtainRailingCurtain2" type="MeshInstance3D" parent="Infirmary/Curtain4" unique_id=151727619]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.5714605e-07, 1.2836235, 1.7975413)
+mesh = ExtResource("28_vchkt")
+
+[node name="SketchfabSceneBathCurtainCurtain0" type="MeshInstance3D" parent="Infirmary/Curtain4" unique_id=2049682135]
+transform = Transform3D(-0.997276, -0.07376037, -1.1641532e-10, -0.0015408593, 0.020833174, 0.99978185, -0.073744275, 0.99705845, -0.020890078, 0.01597304, -0.022934003, 0.05653292)
+mesh = ExtResource("29_txyw0")
+
+[node name="Curtain5" type="Node3D" parent="Infirmary" unique_id=1743723949]
+transform = Transform3D(-1.9941616, 0, -0.15270694, 0, 2, 0, 0.15270694, 0, -1.9941616, -40.07725, 0.78659296, -47.608776)
+
+[node name="SketchfabSceneCurtainRailingCurtain2" type="MeshInstance3D" parent="Infirmary/Curtain5" unique_id=1524465200]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.5714605e-07, 1.2836235, 1.7975413)
+mesh = ExtResource("28_vchkt")
+
+[node name="SketchfabSceneBathCurtainCurtain0" type="MeshInstance3D" parent="Infirmary/Curtain5" unique_id=2021778518]
+transform = Transform3D(-0.997276, -0.07376037, -1.1641532e-10, -0.0015408593, 0.020833174, 0.99978185, -0.073744275, 0.99705845, -0.020890078, 0.01597304, -0.022934003, 0.05653292)
+mesh = ExtResource("29_txyw0")
+
+[node name="Curtain6" type="Node3D" parent="Infirmary" unique_id=1976154263]
+transform = Transform3D(-1.9941616, 0, -0.15270694, 0, 2, 0, 0.15270694, 0, -1.9941616, -40.043385, 0.78659296, -40.236324)
+
+[node name="SketchfabSceneCurtainRailingCurtain2" type="MeshInstance3D" parent="Infirmary/Curtain6" unique_id=161961426]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.5714605e-07, 1.2836235, 1.7975413)
+mesh = ExtResource("28_vchkt")
+
+[node name="SketchfabSceneBathCurtainCurtain0" type="MeshInstance3D" parent="Infirmary/Curtain6" unique_id=842923008]
+transform = Transform3D(-0.997276, -0.07376037, -1.1641532e-10, -0.0015408593, 0.020833174, 0.99978185, -0.073744275, 0.99705845, -0.020890078, 0.01597304, -0.022934003, 0.05653292)
+mesh = ExtResource("29_txyw0")
+
+[node name="Curtain7" type="Node3D" parent="Infirmary" unique_id=156823216]
+transform = Transform3D(-1.9941616, 0, -0.15270694, 0, 2, 0, 0.15270694, 0, -1.9941616, -40.044502, 0.78659296, -36.29753)
+
+[node name="SketchfabSceneCurtainRailingCurtain2" type="MeshInstance3D" parent="Infirmary/Curtain7" unique_id=143016606]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.5714605e-07, 1.2836235, 1.7975413)
+mesh = ExtResource("28_vchkt")
+
+[node name="SketchfabSceneBathCurtainCurtain0" type="MeshInstance3D" parent="Infirmary/Curtain7" unique_id=1549418205]
+transform = Transform3D(-0.997276, -0.07376037, -1.1641532e-10, -0.0015408593, 0.020833174, 0.99978185, -0.073744275, 0.99705845, -0.020890078, 0.01597304, -0.022934003, 0.05653292)
+mesh = ExtResource("29_txyw0")
+
+[node name="MedTray" type="Node3D" parent="Infirmary" unique_id=1909909741]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -24.741777, 0, -51.35576)
+
+[node name="MedicalCounter" type="MeshInstance3D" parent="Infirmary/MedTray" unique_id=1884466205]
+transform = Transform3D(-0.99904287, 0, 0.043741483, 0, 1, 0, -0.043741483, 0, -0.99904287, 0, 0, 0)
+mesh = ExtResource("30_vc5cj")
+
+[node name="MedKit_Gdt" parent="Infirmary/MedTray" unique_id=204583298 instance=ExtResource("31_nvyfr")]
+transform = Transform3D(-0.00031834442, 0, 0.039998733, 0, 0.04, 0, -0.039998733, 0, -0.00031834442, -0.00022340346, 0.2630293, -0.02806977)
+
+[node name="MedKit_Gdt2" parent="Infirmary/MedTray" unique_id=492871318 instance=ExtResource("31_nvyfr")]
+transform = Transform3D(-0.00031834442, 0, 0.039998733, 0, 0.04, 0, -0.039998733, 0, -0.00031834442, -0.0006124399, 0.64137, -0.07695067)
+
+[node name="MedKit_Gdt3" parent="Infirmary/MedTray" unique_id=8767607 instance=ExtResource("31_nvyfr")]
+transform = Transform3D(-0.00031834442, 0, 0.039998733, 0, 0.04, 0, -0.039998733, 0, -0.00031834442, -0.0004501909, 1.0207006, -0.056564726)
+
+[node name="MedTray2" type="Node3D" parent="Infirmary" unique_id=1783221778]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -24.741777, 0, -53.72127)
+
+[node name="MedicalCounter" type="MeshInstance3D" parent="Infirmary/MedTray2" unique_id=705058544]
+transform = Transform3D(-0.99904287, 0, 0.043741483, 0, 1, 0, -0.043741483, 0, -0.99904287, 0, 0, 0)
+mesh = ExtResource("30_vc5cj")
+
+[node name="MedKit_Gdt" parent="Infirmary/MedTray2" unique_id=293525022 instance=ExtResource("31_nvyfr")]
+transform = Transform3D(-0.00031834442, 0, 0.039998733, 0, 0.04, 0, -0.039998733, 0, -0.00031834442, -0.00022340346, 0.2630293, -0.02806977)
+
+[node name="MedKit_Gdt2" parent="Infirmary/MedTray2" unique_id=371359195 instance=ExtResource("31_nvyfr")]
+transform = Transform3D(-0.00031834442, 0, 0.039998733, 0, 0.04, 0, -0.039998733, 0, -0.00031834442, -0.0006124399, 0.64137, -0.07695067)
+
+[node name="MedKit_Gdt3" parent="Infirmary/MedTray2" unique_id=1869020846 instance=ExtResource("31_nvyfr")]
+transform = Transform3D(-0.00031834442, 0, 0.039998733, 0, 0.04, 0, -0.039998733, 0, -0.00031834442, -0.0004501909, 1.0207006, -0.056564726)
+
+[node name="MedTray3" type="Node3D" parent="Infirmary" unique_id=1588766145]
+transform = Transform3D(0.0064141303, 0, -1.4999863, 0, 1.5, 0, 1.4999863, 0, 0.0064141303, -28.431553, 0, -55.843204)
+
+[node name="MedicalCounter" type="MeshInstance3D" parent="Infirmary/MedTray3" unique_id=697978722]
+transform = Transform3D(-0.99904287, 0, 0.043741483, 0, 1, 0, -0.043741483, 0, -0.99904287, 0, 0, 0)
+mesh = ExtResource("30_vc5cj")
+
+[node name="MedKit_Gdt" parent="Infirmary/MedTray3" unique_id=1956944430 instance=ExtResource("31_nvyfr")]
+transform = Transform3D(-0.00031834442, 0, 0.039998733, 0, 0.04, 0, -0.039998733, 0, -0.00031834442, -0.00022340346, 0.2630293, -0.02806977)
+
+[node name="MedKit_Gdt2" parent="Infirmary/MedTray3" unique_id=472084423 instance=ExtResource("31_nvyfr")]
+transform = Transform3D(-0.00031834442, 0, 0.039998733, 0, 0.04, 0, -0.039998733, 0, -0.00031834442, -0.0006124399, 0.64137, -0.07695067)
+
+[node name="MedKit_Gdt3" parent="Infirmary/MedTray3" unique_id=995648108 instance=ExtResource("31_nvyfr")]
+transform = Transform3D(-0.00031834442, 0, 0.039998733, 0, 0.04, 0, -0.039998733, 0, -0.00031834442, -0.0004501909, 1.0207006, -0.056564726)
+
+[node name="BedsideTable" type="MeshInstance3D" parent="Infirmary" unique_id=874774938]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.027367, 0.12848568, -49.22506)
+mesh = ExtResource("32_ty1g6")
+
+[node name="Table" type="MeshInstance3D" parent="Infirmary" unique_id=922473040]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.836117, 0.1284852, -43.77674)
+mesh = ExtResource("33_j2jfr")
+
+[node name="Thermostat" type="MeshInstance3D" parent="Infirmary" unique_id=1081992235]
+transform = Transform3D(-2.1855695e-07, 0, 5, 0, 5, 0, -5, 0, -2.1855695e-07, -41.485382, 1.276657, -51.918213)
+mesh = ExtResource("34_bjg73")
+
+[node name="Meds" type="Node3D" parent="Infirmary" unique_id=807242334]
+transform = Transform3D(0.99948996, 0, 0.031934094, 0, 1, 0, -0.031934094, 0, 0.99948996, -38.31746, 1.1901175, -55.76782)
+
+[node name="Cylinder_025" type="MeshInstance3D" parent="Infirmary/Meds" unique_id=250893625]
+transform = Transform3D(0.0009623468, 0, 0, 0, 3.4416198e-10, -0.0009623466, 0, 0.0009623466, 3.4416198e-10, 0, 0, 0)
+mesh = ExtResource("35_bu4jf")
+
+[node name="Cylinder_026" type="MeshInstance3D" parent="Infirmary/Meds" unique_id=725254731]
+transform = Transform3D(0.0009623468, 0, 0, 0, 3.4416198e-10, -0.0009623466, 0, 0.0009623466, 3.4416198e-10, 0, 0, 0)
+mesh = ExtResource("36_o7ddy")
+
+[node name="Bin" type="MeshInstance3D" parent="Infirmary" unique_id=1615117089]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -40.130898, 0.026343822, -31.861063)
+mesh = ExtResource("37_0loja")
+
+[node name="BlueStand" type="MeshInstance3D" parent="Infirmary" unique_id=1788612674]
+transform = Transform3D(0.03666111, 0, -0.9993278, 0, 1, 0, 0.9993278, 0, 0.03666111, -38.275463, 0.1284852, -55.75399)
+mesh = ExtResource("38_ids8r")
+
+[node name="BlueStand2" type="MeshInstance3D" parent="Infirmary" unique_id=1770347330]
+transform = Transform3D(0.03666111, 0, -1.9204532, 0, 1, 0, 0.9993278, 0, 0.07045331, -34.380165, 0.1284852, -55.896893)
+mesh = ExtResource("38_ids8r")
+
+[node name="Sketchfab_Scene" parent="Infirmary" unique_id=665794113 instance=ExtResource("39_dnhof")]
+transform = Transform3D(0.001, 0, 0, 0, 1.0942978e-05, 0.0009999402, 0, -0.0009999402, 1.0942978e-05, -34.40157, 1.2005923, -55.931824)
+
+[node name="Locker" type="MeshInstance3D" parent="Infirmary" unique_id=1653600863]
+transform = Transform3D(3.9998446, 0, 0.035255194, 0, 4, 0, -0.035255194, 0, 3.9998446, -41.21861, 0.1284852, -54.77021)
+mesh = ExtResource("40_1v6qk")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Infirmary" unique_id=718305630]
+transform = Transform3D(1, 0, 0, 0, -0.53778535, 0.843082, 0, -0.843082, -0.53778535, -27.646204, 3.927376, -56.01449)
+light_color = Color(0.74078286, 0.21603256, 0.302807, 1)
+spot_range = 7.8981647
+spot_angle = 30.9375
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="Infirmary" unique_id=234004841]
+transform = Transform3D(0.9998812, -0.0077188313, -0.013338207, 0.015389667, 0.5452822, 0.8381116, 0.0008038451, -0.83821726, 0.54533625, -27.655201, 4.4891787, -30.270489)
+light_color = Color(0.74078286, 0.21603256, 0.302807, 1)
+spot_range = 7.8981647
+spot_angle = 30.9375
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Infirmary" unique_id=380125171]
+transform = Transform3D(1, 0, 0, 0, -0.53778535, 0.843082, 0, -0.843082, -0.53778535, -38.361412, 3.927376, -56.01449)
+light_color = Color(0.96388155, 0.34518266, 0.49619794, 1)
+light_energy = 1.46
+light_indirect_energy = 4.467
+spot_range = 8.707793
+
+[node name="SpotLight3D5" type="SpotLight3D" parent="Infirmary" unique_id=88621427]
+transform = Transform3D(1, 0, 0, 0, 0.14587587, 0.98930293, 0, -0.98930293, 0.14587589, -38.361412, 4.51602, -40.693542)
+light_color = Color(0.96388155, 0.34518266, 0.49619794, 1)
+light_energy = 1.46
+light_indirect_energy = 4.467
+spot_range = 8.707793
+
+[node name="SpotLight3D6" type="SpotLight3D" parent="Infirmary" unique_id=1901013096]
+transform = Transform3D(1, 0, 0, 0, 0.14587587, 0.98930293, 0, -0.98930293, 0.14587587, -25.895157, 4.51602, -43.81961)
+light_color = Color(0.96388155, 0.34518266, 0.49619794, 1)
+light_energy = 1.46
+light_indirect_energy = 4.467
+spot_range = 8.707793
+
+[node name="SpotLight3D7" type="SpotLight3D" parent="Infirmary" unique_id=48125466]
+transform = Transform3D(1, 0, 0, 0, 0.14587587, 0.98930293, 0, -0.98930293, 0.14587587, -25.895157, 4.51602, -36.5063)
+light_color = Color(0.96388155, 0.34518266, 0.49619794, 1)
+light_energy = 1.46
+light_indirect_energy = 4.467
+spot_range = 8.707793
+
+[node name="SpotLight3D8" type="SpotLight3D" parent="Infirmary" unique_id=120076719]
+transform = Transform3D(1, 0, 0, 0, 0.14587587, 0.98930293, 0, -0.98930293, 0.14587587, -39.44582, 4.51602, -36.5063)
+light_color = Color(0.96388155, 0.34518266, 0.49619794, 1)
+light_energy = 1.46
+light_indirect_energy = 4.467
+spot_range = 8.707793
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="Infirmary" unique_id=247765861]
+transform = Transform3D(1, 0, 0, 0, 0.38468212, 0.92304933, 0, -0.92304933, 0.38468212, -38.361412, 4.125151, -30.238546)
+light_color = Color(0.96388155, 0.34518266, 0.49619794, 1)
+spot_range = 8.596349

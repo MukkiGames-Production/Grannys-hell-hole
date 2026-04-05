@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://c3dga353364ch"]
+
+[ext_resource type="ArrayMesh" uid="uid://78kpar3ggpg3" path="res://Assets/objects/LAB_STUFF/medical_room_assets/bedside_table/bedside_table.obj" id="1_q82yu"]
+[ext_resource type="ArrayMesh" uid="uid://ja8g2sf0joax" path="res://Assets/objects/LAB_STUFF/medical_room_assets/table/table.obj" id="2_5vqxx"]
+[ext_resource type="ArrayMesh" uid="uid://dswq8hupwuj82" path="res://Assets/objects/LAB_STUFF/medical_room_assets/thermostat/thermostat.obj" id="3_utf4n"]
+[ext_resource type="ArrayMesh" uid="uid://24dw1vicpnne" path="res://Assets/objects/LAB_STUFF/DEMO_HealingItems_3Dexter/DEMO/Mesh/GLB (Godot)/PillBottle_Gdt_Cylinder_042.res" id="4_62rnr"]
+[ext_resource type="ArrayMesh" uid="uid://ttofvt4q86ud" path="res://Assets/objects/LAB_STUFF/DEMO_HealingItems_3Dexter/DEMO/Mesh/GLB (Godot)/PillBottle_Gdt_Cylinder_043.res" id="5_8mvwp"]
+
+[node name="Node3D" type="Node3D" unique_id=1767305118]
+
+[node name="BedsideTable" type="MeshInstance3D" parent="." unique_id=1455312182]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.388786, 0.12848568, -49.22506)
+mesh = ExtResource("1_q82yu")
+
+[node name="Table" type="MeshInstance3D" parent="." unique_id=1629713417]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.377922, 0.1284852, -43.77674)
+mesh = ExtResource("2_5vqxx")
+
+[node name="Thermostat" type="MeshInstance3D" parent="." unique_id=1702234048]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -41.60349, 1.276657, -51.918213)
+mesh = ExtResource("3_utf4n")
+
+[node name="Meds" type="Node3D" parent="." unique_id=1997188381]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.766968, 0, -53.14315)
+
+[node name="Cylinder_025" type="MeshInstance3D" parent="Meds" unique_id=454708290]
+transform = Transform3D(0.0009623468, 0, 0, 0, 3.4416198e-10, -0.0009623466, 0, 0.0009623466, 3.4416198e-10, 0, 0, 0)
+mesh = ExtResource("4_62rnr")
+
+[node name="Cylinder_026" type="MeshInstance3D" parent="Meds" unique_id=369836860]
+transform = Transform3D(0.0009623468, 0, 0, 0, 3.4416198e-10, -0.0009623466, 0, 0.0009623466, 3.4416198e-10, 0, 0, 0)
+mesh = ExtResource("5_8mvwp")
