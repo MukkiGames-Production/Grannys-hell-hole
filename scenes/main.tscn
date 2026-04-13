@@ -29,6 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://cse5f2scyb4vw" path="res://assets/Blender/sandbag_low_poly_realist.glb" id="26_2wyq8"]
 [ext_resource type="PackedScene" uid="uid://c0yblmcogs3b5" path="res://scenes/Objects/bananaPeel.tscn" id="27_vxglm"]
 [ext_resource type="PackedScene" uid="uid://c3o8fwan1pgb2" path="res://scenes/DummyStu.tscn" id="28_2f3dj"]
+[ext_resource type="PackedScene" uid="uid://x5qfjf3v2grw" path="res://scenes/Objects/Plunger.tscn" id="30_fv21b"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_85g3d"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -70,11 +71,15 @@ properties/5/spawn = true
 properties/5/replication_mode = 1
 
 [sub_resource type="Gradient" id="Gradient_yq6so"]
-offsets = PackedFloat32Array(0, 0.77547497, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.8283334, 0.060924903, 0.27746513, 1, 1, 1, 1, 1)
+offsets = PackedFloat32Array(0, 0.5164076, 0.9671848, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.99874717, 0.7924279, 0.8011037, 1, 0.01872862, 0.00012712817, 0.0018057231, 1, 1, 1, 1, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_fv21b"]
 noise_type = 2
+fractal_type = 2
+fractal_lacunarity = 2.08
+fractal_gain = 0.92
+fractal_weighted_strength = 0.2
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tel4y"]
 noise = SubResource("FastNoiseLite_fv21b")
@@ -91,6 +96,19 @@ frequency = 0.0566
 noise = SubResource("FastNoiseLite_5q0nq")
 color_ramp = SubResource("Gradient_qkpxi")
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tel4y"]
+noise_type = 5
+seed = 65
+frequency = 0.0476
+offset = Vector3(153.85, 0, 0)
+fractal_type = 3
+fractal_weighted_strength = 0.45
+fractal_ping_pong_strength = 2.45
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qkpxi"]
+noise = SubResource("FastNoiseLite_tel4y")
+
 [sub_resource type="Gradient" id="Gradient_j8jky"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_kmb1v"]
@@ -106,15 +124,16 @@ invert = true
 render_priority = 0
 shader = ExtResource("6_yq6so")
 shader_parameter/surface_color = Color(0.2, 1, 0.8, 1)
-shader_parameter/depth_color = Color(0.74315286, 0.10831956, 0.29932162, 1)
+shader_parameter/depth_color = Color(0.49664956, 0.39038318, 0.293003, 1)
 shader_parameter/foam_color = Color(0.43529412, 1, 1, 1)
-shader_parameter/depth_size = 12.0
-shader_parameter/surface_roughness = 0.05
-shader_parameter/foam_roughness = 0.05
+shader_parameter/depth_size = 8.61
+shader_parameter/surface_roughness = 0.36999999172976
+shader_parameter/foam_roughness = 0.499999988824
 shader_parameter/caustics_texture = SubResource("NoiseTexture2D_tel4y")
 shader_parameter/caustics_strength = 2.0
 shader_parameter/caustics_scale = Vector2(0.5, 0.5)
 shader_parameter/wave_texture = SubResource("NoiseTexture2D_fuf3a")
+shader_parameter/wave_normal_texture = SubResource("NoiseTexture2D_qkpxi")
 shader_parameter/wave_softness = 5.40000008046648
 shader_parameter/wave_scale = Vector2(0.175, 0.215)
 shader_parameter/wave_layer_scale = Vector2(0.82, 1.5)
@@ -191,12 +210,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.29364634, 1.0581315, -5.18
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0044164658, 0.012020826, -0.0076828003)
 
 [node name="water" type="MeshInstance3D" parent="Map" unique_id=872995191]
-transform = Transform3D(-0.39320296, 0.033285804, 0.011885581, -0.14286755, -0.09166467, -0.014274146, 0.0034790188, -0.0022506246, 0.7571482, -19.254303, 0.90647024, -4.7700634)
+transform = Transform3D(-0.39320296, 0.033285804, 0.011885581, -0.14286755, -0.09166467, -0.014274146, 0.0034790188, -0.0022506246, 0.7571482, -19.172934, 0.935606, -4.7533045)
 material_override = SubResource("ShaderMaterial_fv21b")
 mesh = SubResource("BoxMesh_pibwh")
 
 [node name="water2" type="MeshInstance3D" parent="Map" unique_id=664006385]
-transform = Transform3D(-0.39320296, 0.033285804, 0.011885581, -0.14286755, -0.09166467, -0.014274146, 0.0034790188, -0.0022506246, 0.7571482, -19.281162, 0.9387271, -6.481075)
+transform = Transform3D(-0.39320296, 0.033285804, 0.011885581, -0.14286755, -0.09166467, -0.014274146, 0.0034790188, -0.0022506246, 0.7571482, -19.280653, 0.93811595, -6.448659)
 material_override = SubResource("ShaderMaterial_fv21b")
 mesh = SubResource("BoxMesh_pibwh")
 
@@ -300,3 +319,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.4980927, 0.5444516, 2.4875
 
 [node name="Stu3" parent="." unique_id=609003580 instance=ExtResource("28_2f3dj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6119661, 0.011987507, 4.645267)
+
+[node name="Plunger" parent="." unique_id=855526578 instance=ExtResource("30_fv21b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7574263, 0.6226706, -1.0641456)

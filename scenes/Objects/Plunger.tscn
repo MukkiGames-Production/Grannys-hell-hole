@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://x5qfjf3v2grw"]
+
+[ext_resource type="Script" uid="uid://ctmm4ngx6nebm" path="res://scripts/objects/Plunger.gd" id="1_o00w3"]
+[ext_resource type="ArrayMesh" uid="uid://iisbtvegi48d" path="res://assets/Blender/Grabbables/StuItems_Plunger.res" id="2_tdqhe"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_i4pmr"]
+height = 1.3164063
+
+[node name="Plunger" type="Node3D" unique_id=855526578]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=11044713]
+script = ExtResource("1_o00w3")
+
+[node name="Plunger" type="MeshInstance3D" parent="RigidBody3D" unique_id=1084225105]
+mesh = ExtResource("2_tdqhe")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=1317874361]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.123046875, 0)
+shape = SubResource("CapsuleShape3D_i4pmr")
