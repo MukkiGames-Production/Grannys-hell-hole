@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://c0yblmcogs3b5"]
+
+[ext_resource type="Script" uid="uid://dhlkjmfatnkiw" path="res://scripts/objects/explodingObject.gd" id="1_tg6aj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c3qii"]
+albedo_color = Color(0.013887111, 0.059999168, 2.1057204e-08, 0)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_djkya"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8jkyl"]
+size = Vector3(1.3374023, 0.19744873, 1)
+
+[node name="BananaPeel" type="Node3D" unique_id=1023689993]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=1241538017]
+script = ExtResource("1_tg6aj")
+item_id = "Banana"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D" unique_id=2069119429]
+material_override = SubResource("StandardMaterial3D_c3qii")
+mesh = SubResource("PlaneMesh_djkya")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=642473127]
+shape = SubResource("BoxShape3D_8jkyl")
+debug_color = Color(0.9104338, 0.110806994, 0.6719542, 1)
