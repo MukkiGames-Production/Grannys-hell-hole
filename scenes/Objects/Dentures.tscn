@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://buya8oxln125x"]
 
-[ext_resource type="Script" uid="uid://dlfa4844hulox" path="res://scripts/objects/grabbableObject.gd" id="1_11lhf"]
+[ext_resource type="Script" uid="uid://ddlaltmquprwu" path="res://scripts/objects/dentures.gd" id="1_11lhf"]
 [ext_resource type="ArrayMesh" uid="uid://x0ox26v4djd0" path="res://Assets/Blender/Grabbables/StuItems_Book.res" id="2_0t76j"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_y3g45"]
