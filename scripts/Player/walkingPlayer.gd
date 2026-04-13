@@ -32,6 +32,8 @@ func _physics_process(delta: float) -> void:
 	if ragdoll_state:
 		global_position = stus_root_bone.global_position
 		return
+	elif trap_state:
+		return
 
 	if direction:
 		velocity.x = direction.x * SPEED

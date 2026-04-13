@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://dlv3b8hxyxp0x"]
+
+[ext_resource type="Script" uid="uid://dllpfocnmd7tt" path="res://scripts/objects/active_dentures.gd" id="1_5qbas"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2b0r2"]
+radius = 0.001
+
+[sub_resource type="SphereMesh" id="SphereMesh_nrd0c"]
+
+[node name="ActiveDentures" type="Node3D" unique_id=2050533109]
+script = ExtResource("1_5qbas")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=118115660]
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1876880816]
+shape = SubResource("SphereShape3D_2b0r2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D" unique_id=435440329]
+mesh = SubResource("SphereMesh_nrd0c")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
