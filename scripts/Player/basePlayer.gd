@@ -8,6 +8,7 @@ const gravity = 20
 @export var max_throw_force := 20.0
 @export var max_charge_time := .75  # seconds to reach full power
 @export var ragdoll_time := 3.5 # seconds the player will not have control after entering ragdoll
+@export var trap_time_max := 30.0
 @export var ragdoll_skeleton: Skeleton3D
 @export var stus_bone_simulator: PhysicalBoneSimulator3D
 @export var stus_root_bone: PhysicalBone3D
@@ -23,6 +24,8 @@ var held_object: GrabbableObject = null
 var sees_interactable: bool = false
 var ragdoll_timer: Timer = Timer.new()
 var ragdoll_state = false
+var trap_timer := trap_time_max
+var trap_state = false
 
 var root_bone_idx: int = -1
 
@@ -223,6 +226,9 @@ func _find_door_controller(start: Object) -> Node:
 		node = node.get_parent()
 	return null
 
+#########
+#RAGDOLL#
+#########
 func boom_ragdoll(origin: Vector3, strength: float):
 	# Horizontal direction only (ignore Y difference)
 
@@ -309,3 +315,16 @@ func set_third_person_cam_pos():
 			"message": "player_action",
 			"action": "disable_ragdoll"
 		}, Steam.P2P_SEND_RELIABLE)
+		
+######
+#TRAP#
+######
+signal trap_free
+func snap_trap():
+	trap_timer = trap_time_max
+	trap_state = true
+	
+func _on_trap_timer_timeout():
+	trap_state = false
+	trap_free.emit()
+	print("got out of trap")

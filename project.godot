@@ -34,7 +34,7 @@ settings/addon_root_folder="res://addons/debug_draw_3d"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/rope_gen_mesh_3d/plugin.cfg")
+enabled=PackedStringArray()
 
 [file_customization]
 
