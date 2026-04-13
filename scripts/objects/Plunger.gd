@@ -1,5 +1,5 @@
 extends GrabbableObject
-@onready var Plunger:MeshInstance3D = $Plunger
+@export var Plunger: Mesh
 
 func on_fast_hit(body: Node3D) -> void:
-	replace_model(Plunger.mesh, "Plunger")
+	replace_model(Plunger, "Plunger")

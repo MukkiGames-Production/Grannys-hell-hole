@@ -10,8 +10,10 @@ height = 1.3164063
 
 [node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=11044713]
 script = ExtResource("1_o00w3")
+Plunger = ExtResource("2_tdqhe")
+item_id = "Plunger"
 
-[node name="Plunger" type="MeshInstance3D" parent="RigidBody3D" unique_id=1084225105]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D" unique_id=1084225105]
 mesh = ExtResource("2_tdqhe")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=1317874361]
