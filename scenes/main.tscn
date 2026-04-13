@@ -30,6 +30,7 @@
 [ext_resource type="PackedScene" uid="uid://c0yblmcogs3b5" path="res://scenes/Objects/bananaPeel.tscn" id="27_vxglm"]
 [ext_resource type="PackedScene" uid="uid://c3o8fwan1pgb2" path="res://scenes/DummyStu.tscn" id="28_2f3dj"]
 [ext_resource type="PackedScene" uid="uid://x5qfjf3v2grw" path="res://scenes/Objects/Plunger.tscn" id="30_fv21b"]
+[ext_resource type="AudioStream" uid="uid://cs2nktk40wcau" path="res://assets/AudioEffects/BingoRoom.wav" id="31_tel4y"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_85g3d"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -322,3 +323,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6119661, 0.011987507, 4.64
 
 [node name="Plunger" parent="." unique_id=855526578 instance=ExtResource("30_fv21b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7574263, 0.6226706, -1.0641456)
+
+[node name="BingoRoom" type="AudioStreamPlayer3D" parent="." unique_id=116770306]
+transform = Transform3D(-0.9990889, 0, -0.0426777, 0, 1, 0, 0.0426777, 0, -0.9990889, -42.48452, 4.182099, -19.417843)
+stream = ExtResource("31_tel4y")
+unit_size = 35.19
+autoplay = true
+max_distance = 25.0
+bus = &"Ambiene"
