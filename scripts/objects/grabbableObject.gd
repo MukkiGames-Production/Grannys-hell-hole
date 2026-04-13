@@ -128,6 +128,36 @@ func replace_model(model: Mesh, new_id: String = item_id):
 		"id": Steam.getSteamID(),
 	}, Steam.P2P_SEND_RELIABLE)
 
+func get_holder_look_point(max_distance: float = 100.0) -> Vector3:
+	if holder == null:
+		return global_position
+
+	var from = holder.global_position
+	var to = from + (-holder.global_basis.z) * max_distance
+
+	var space_state = get_world_3d().direct_space_state
+	var query = PhysicsRayQueryParameters3D.create(from, to)
+	query.exclude = [self]
+
+	var result = space_state.intersect_ray(query)
+	if result:
+		return result.position
+
+	return to
+
+func get_holder_look_hit(max_distance: float = 100.0) -> Dictionary:
+	if holder == null:
+		return {}
+
+	var from = holder.global_position
+	var to = from + (-holder.global_basis.z) * max_distance
+
+	var space_state = get_world_3d().direct_space_state
+	var query = PhysicsRayQueryParameters3D.create(from, to)
+	query.exclude = [self]
+
+	return space_state.intersect_ray(query)
+
 func _check_fast_hit(body: Node3D, threshold: float = 10.0) -> void:
 	if _last_velocity.length() >= threshold:
 		on_fast_hit(body)

@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" path="res://scenes/Objects/rpg.tscn" id="21_yc10j"]
 [ext_resource type="PackedScene" uid="uid://bcskmit1xf54o" path="res://scenes/Door.tscn" id="22_jscy8"]
 [ext_resource type="PackedScene" path="res://scenes/infirmary.tscn" id="23_pm3ni"]
+[ext_resource type="PackedScene" uid="uid://dcscx1lceptd2" path="res://scenes/Objects/Tripwire.tscn" id="27_vxglm"]
 [ext_resource type="ArrayMesh" path="res://Assets/Blender/cornhole_Plane_004.res" id="24_og1vs"]
 [ext_resource type="ArrayMesh" path="res://Assets/Blender/cornhole_Plane_005.res" id="25_2wyq8"]
 [ext_resource type="PackedScene" uid="uid://cse5f2scyb4vw" path="res://assets/Blender/sandbag_low_poly_realist.glb" id="26_2wyq8"]
@@ -292,6 +293,7 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 11.7
 
 [node name="Warden" parent="." unique_id=1734464095 instance=ExtResource("20_gqmmt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.872208, -0.0031895638, 4.5311546)
+is_disabled = true
 
 [node name="Rocket" parent="." unique_id=845348862 instance=ExtResource("21_yc10j")]
 transform = Transform3D(6.605888e-05, 0, -0.0049995636, 0, 0.005, 0, 0.0049995636, 0, 6.605888e-05, -14.383461, 1.3948137, 4.57475)
