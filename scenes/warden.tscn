@@ -1,13 +1,11 @@
+[gd_scene format=3 uid="uid://d8klc71sw054"]
 
-[gd_scene format=3 uid="uid://bvf3xx8tld6ip"]
-
-[ext_resource type="Script" uid="uid://bnwcampub50bx" path="res://scripts/AI-Environment/warden.gd" id="1_wthw5"]
+[ext_resource type="Script" path="res://scripts/AI-Environment/warden.gd" id="1_wthw5"]
 [ext_resource type="Shader" uid="uid://im65mxkv3lyh" path="res://scripts/shaders/highlight.gdshader" id="2_3gffh"]
 [ext_resource type="Script" uid="uid://dvaah6wtme7fe" path="res://addons/rope_gen_mesh_3d/rope_gen_mesh_3d.gd" id="3_t1s11"]
 [ext_resource type="Shader" uid="uid://qgwe03vp55xl" path="res://addons/rope_gen_mesh_3d/shaders/example_wind.gdshader" id="4_t1s11"]
-[ext_resource type="Texture2D" uid="uid://c3ikdfpgogbql" path="res://Assets/objects/Textures/wood_cabinet_worn_long_2k.gltf/textures/wood_cabinet_worn_long_diff_2k.jpg" id="5_ggq7t"]
+[ext_resource type="Texture2D" uid="uid://c3ikdfpgogbql" path="res://assets/objects/Textures/wood_cabinet_worn_long_2k.gltf/textures/wood_cabinet_worn_long_diff_2k.jpg" id="5_ggq7t"]
 [ext_resource type="Script" uid="uid://q8kx0347laa3" path="res://addons/rope_gen_mesh_3d/rope_data.gd" id="5_uvufd"]
-
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_wthw5"]
 
@@ -42,7 +40,7 @@ material = SubResource("ShaderMaterial_ggq7t")
 single_mesh = false
 mesh_type = 0
 ext_radius = 0.01
-ext_u_segments = 13
+ext_u_segments = 28
 ext_v_segments = 8
 tex_uv_translation = Vector2(0, 0)
 tex_uv_rotation_origin = Vector2(0.5, 0.5)
@@ -55,7 +53,7 @@ lod_bias = 0.02
 lod_level1_distance = 2.0
 lod_level2_distance = 10.0
 lod_level3_distance = 40.0
-points = PackedVector3Array(0.58074045, -0.98623455, -0.22010624, -0.8166523, 0.26411277, 1.7956055, -0.2485399, -0.21122456, 1.9182041, -0.18459871, -0.64083266, 1.2801576, -0.28311875, -0.29969072, 1.0126352)
+points = PackedVector3Array(0.58074045, -0.98623455, -0.22010624, -0.8166523, 0.26411277, 1.7956055, -0.2485399, -0.21122456, 1.9182041, -0.18459871, -0.64083266, 1.2801576, -0.44253802, -0.472682, 1.0064301)
 visibility_layers = 1
 metadata/_custom_type_script = "uid://q8kx0347laa3"
 
@@ -79,7 +77,7 @@ mesh = SubResource("CylinderMesh_wthw5")
 surface_material_override/0 = SubResource("ShaderMaterial_6w4ry")
 
 [node name="Lasso" type="Node3D" parent="." unique_id=375421112]
-transform = Transform3D(0.96429497, -0.26287892, 0.03209117, 0.26301438, 0.96479195, 6.6549095e-09, -0.030961245, 0.00844042, 0.9994851, -0.6073131, 2.8303845, 0.46259928)
+transform = Transform3D(0.96429497, -0.26287892, 0.03209117, 0.26301438, 0.96479195, 6.6549095e-09, -0.030961245, 0.00844042, 0.9994851, -0.54368526, 2.596864, 0.46055633)
 visible = false
 script = ExtResource("3_t1s11")
 rope_data = SubResource("Resource_r53ma")

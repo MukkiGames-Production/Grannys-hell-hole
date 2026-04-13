@@ -1,9 +1,10 @@
-[gd_scene format=3 uid="uid://dd0ndre6k7joq"]
+[gd_scene format=3 uid="uid://ctcpaobx3sw3r"]
 
 [ext_resource type="Script" uid="uid://bys1cfmdwhnv5" path="res://scripts/AI-Environment/scheduler.gd" id="1_choun"]
-[ext_resource type="Texture2D" uid="uid://cxsqe1ml8nmyh" path="res://Assets/reticleEmpty.tres" id="3_sugp2"]
+[ext_resource type="Texture2D" uid="uid://cxsqe1ml8nmyh" path="res://assets/reticleEmpty.tres" id="3_sugp2"]
 [ext_resource type="Script" uid="uid://d0co7xxx1604o" path="res://scripts/Player/swapReticle.gd" id="4_tbgi4"]
-[ext_resource type="Texture2D" uid="uid://dhu4lf3trb2sp" path="res://Assets/reticleFull.tres" id="5_tefeu"]
+[ext_resource type="Texture2D" uid="uid://dhu4lf3trb2sp" path="res://assets/reticleFull.tres" id="5_tefeu"]
+[ext_resource type="Shader" uid="uid://cy364xpdn0tel" path="res://scripts/shaders/water.gdshader" id="6_yq6so"]
 [ext_resource type="PackedScene" uid="uid://h5sep0m58vfb" path="res://scenes/stu_with_ragdoll.tscn" id="8_85g3d"]
 [ext_resource type="PackedScene" uid="uid://bkngoexmlkto3" path="res://scenes/Patrolmap.tscn" id="8_tipki"]
 [ext_resource type="PackedScene" uid="uid://bnbggqkcgb1wp" path="res://scenes/NPC.tscn" id="9_85g3d"]
@@ -18,15 +19,19 @@
 [ext_resource type="PackedScene" uid="uid://1bjldkdyo4fe" path="res://scenes/Objects/Large_Key.tscn" id="19_0ld40"]
 [ext_resource type="PackedScene" uid="uid://danjd6fb1nulr" path="res://scenes/Objects/Crowbar.tscn" id="19_gqmmt"]
 [ext_resource type="PackedScene" uid="uid://xl74pfdkcihd" path="res://scenes/Objects/Mirror.tscn" id="19_yc10j"]
-[ext_resource type="PackedScene" uid="uid://bvf3xx8tld6ip" path="res://scenes/warden.tscn" id="20_gqmmt"]
+[ext_resource type="PackedScene" uid="uid://d8klc71sw054" path="res://scenes/warden.tscn" id="20_gqmmt"]
 [ext_resource type="PackedScene" uid="uid://di85bl0mj8xfo" path="res://scenes/Objects/Board.tscn" id="20_yc10j"]
-[ext_resource type="PackedScene" uid="uid://bh1lmq143icag" path="res://scenes/Objects/rpg.tscn" id="21_yc10j"]
+[ext_resource type="PackedScene" path="res://scenes/Objects/rpg.tscn" id="21_yc10j"]
 [ext_resource type="PackedScene" uid="uid://bcskmit1xf54o" path="res://scenes/Door.tscn" id="22_jscy8"]
-[ext_resource type="PackedScene" uid="uid://c3dga353364ch" path="res://scenes/Infirmary.tscn" id="23_pm3ni"]
-[ext_resource type="ArrayMesh" uid="uid://ce3ibvqo8dl6v" path="res://Assets/Blender/cornhole_Plane_004.res" id="24_og1vs"]
-[ext_resource type="ArrayMesh" uid="uid://deeu5nhl7ybsi" path="res://Assets/Blender/cornhole_Plane_005.res" id="25_2wyq8"]
-[ext_resource type="PackedScene" uid="uid://cse5f2scyb4vw" path="res://Assets/Blender/sandbag_low_poly_realist.glb" id="26_2wyq8"]
+[ext_resource type="PackedScene" path="res://scenes/infirmary.tscn" id="23_pm3ni"]
 [ext_resource type="PackedScene" uid="uid://dcscx1lceptd2" path="res://scenes/Objects/Tripwire.tscn" id="27_vxglm"]
+[ext_resource type="ArrayMesh" path="res://Assets/Blender/cornhole_Plane_004.res" id="24_og1vs"]
+[ext_resource type="ArrayMesh" path="res://Assets/Blender/cornhole_Plane_005.res" id="25_2wyq8"]
+[ext_resource type="PackedScene" uid="uid://cse5f2scyb4vw" path="res://assets/Blender/sandbag_low_poly_realist.glb" id="26_2wyq8"]
+[ext_resource type="PackedScene" uid="uid://c0yblmcogs3b5" path="res://scenes/Objects/bananaPeel.tscn" id="27_vxglm"]
+[ext_resource type="PackedScene" uid="uid://c3o8fwan1pgb2" path="res://scenes/DummyStu.tscn" id="28_2f3dj"]
+[ext_resource type="PackedScene" uid="uid://x5qfjf3v2grw" path="res://scenes/Objects/Plunger.tscn" id="30_fv21b"]
+[ext_resource type="AudioStream" uid="uid://cs2nktk40wcau" path="res://assets/AudioEffects/BingoRoom.wav" id="31_tel4y"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_85g3d"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -66,6 +71,87 @@ properties/4/replication_mode = 1
 properties/5/path = NodePath("GrabbableCube:is_grabbable")
 properties/5/spawn = true
 properties/5/replication_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_yq6so"]
+offsets = PackedFloat32Array(0, 0.5164076, 0.9671848, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.99874717, 0.7924279, 0.8011037, 1, 0.01872862, 0.00012712817, 0.0018057231, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fv21b"]
+noise_type = 2
+fractal_type = 2
+fractal_lacunarity = 2.08
+fractal_gain = 0.92
+fractal_weighted_strength = 0.2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tel4y"]
+noise = SubResource("FastNoiseLite_fv21b")
+color_ramp = SubResource("Gradient_yq6so")
+
+[sub_resource type="Gradient" id="Gradient_qkpxi"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5q0nq"]
+noise_type = 5
+seed = 18
+frequency = 0.0566
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dgi5k"]
+noise = SubResource("FastNoiseLite_5q0nq")
+color_ramp = SubResource("Gradient_qkpxi")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tel4y"]
+noise_type = 5
+seed = 65
+frequency = 0.0476
+offset = Vector3(153.85, 0, 0)
+fractal_type = 3
+fractal_weighted_strength = 0.45
+fractal_ping_pong_strength = 2.45
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qkpxi"]
+noise = SubResource("FastNoiseLite_tel4y")
+
+[sub_resource type="Gradient" id="Gradient_j8jky"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_kmb1v"]
+noise_type = 3
+frequency = 0.0142
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fuf3a"]
+noise = SubResource("FastNoiseLite_kmb1v")
+color_ramp = SubResource("Gradient_j8jky")
+invert = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fv21b"]
+render_priority = 0
+shader = ExtResource("6_yq6so")
+shader_parameter/surface_color = Color(0.2, 1, 0.8, 1)
+shader_parameter/depth_color = Color(0.49664956, 0.39038318, 0.293003, 1)
+shader_parameter/foam_color = Color(0.43529412, 1, 1, 1)
+shader_parameter/depth_size = 8.61
+shader_parameter/surface_roughness = 0.36999999172976
+shader_parameter/foam_roughness = 0.499999988824
+shader_parameter/caustics_texture = SubResource("NoiseTexture2D_tel4y")
+shader_parameter/caustics_strength = 2.0
+shader_parameter/caustics_scale = Vector2(0.5, 0.5)
+shader_parameter/wave_texture = SubResource("NoiseTexture2D_fuf3a")
+shader_parameter/wave_normal_texture = SubResource("NoiseTexture2D_qkpxi")
+shader_parameter/wave_softness = 5.40000008046648
+shader_parameter/wave_scale = Vector2(0.175, 0.215)
+shader_parameter/wave_layer_scale = Vector2(0.82, 1.5)
+shader_parameter/wave_highlight = 1.0
+shader_parameter/wave_velocity = Vector2(0.045, 0.02)
+shader_parameter/foam_texture = SubResource("NoiseTexture2D_dgi5k")
+shader_parameter/edge_foam_depth_size = 1.0
+shader_parameter/wave_foam_amount = 0.8
+shader_parameter/foam_start = 0.35000000521542
+shader_parameter/foam_end = 0.30000000447036
+shader_parameter/foam_exponent = 0.425
+shader_parameter/refraction_amount = 0.5
+shader_parameter/refraction_exponent = 0.5
+shader_parameter/displacement_amount = 0.3
+
+[sub_resource type="BoxMesh" id="BoxMesh_pibwh"]
 
 [node name="Main" type="Node3D" unique_id=421424765]
 script = ExtResource("1_choun")
@@ -123,6 +209,27 @@ visibility_update_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.29364634, 1.0581315, -5.182123)
 
 [node name="Map" parent="." unique_id=2041657041 instance=ExtResource("8_tipki")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0044164658, 0.012020826, -0.0076828003)
+
+[node name="water" type="MeshInstance3D" parent="Map" unique_id=872995191]
+transform = Transform3D(-0.39320296, 0.033285804, 0.011885581, -0.14286755, -0.09166467, -0.014274146, 0.0034790188, -0.0022506246, 0.7571482, -19.172934, 0.935606, -4.7533045)
+material_override = SubResource("ShaderMaterial_fv21b")
+mesh = SubResource("BoxMesh_pibwh")
+
+[node name="water2" type="MeshInstance3D" parent="Map" unique_id=664006385]
+transform = Transform3D(-0.39320296, 0.033285804, 0.011885581, -0.14286755, -0.09166467, -0.014274146, 0.0034790188, -0.0022506246, 0.7571482, -19.280653, 0.93811595, -6.448659)
+material_override = SubResource("ShaderMaterial_fv21b")
+mesh = SubResource("BoxMesh_pibwh")
+
+[node name="water3" type="MeshInstance3D" parent="Map" unique_id=697326711]
+transform = Transform3D(-0.39320296, 0.033285804, 0.011885581, -0.14286755, -0.09166467, -0.014274146, 0.0034790188, -0.0022506246, 0.7571482, -19.226858, 0.8735103, -3.0217586)
+material_override = SubResource("ShaderMaterial_fv21b")
+mesh = SubResource("BoxMesh_pibwh")
+
+[node name="water4" type="MeshInstance3D" parent="Map" unique_id=662682512]
+transform = Transform3D(-0.39320296, 0.033285804, 0.011885581, -0.14286755, -0.09166467, -0.014274146, 0.0034790188, -0.0022506246, 0.7571482, -19.199911, 0.8411482, -1.3051643)
+material_override = SubResource("ShaderMaterial_fv21b")
+mesh = SubResource("BoxMesh_pibwh")
 
 [node name="Stu" parent="." unique_id=1959823504 instance=ExtResource("8_85g3d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.845158, 2.5912304, 0)
@@ -189,7 +296,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.872208, -0.0031895638, 4.
 is_disabled = true
 
 [node name="Rocket" parent="." unique_id=845348862 instance=ExtResource("21_yc10j")]
-transform = Transform3D(6.605888e-05, 0, -0.0049995636, 0, 0.005, 0, 0.0049995636, 0, 6.605888e-05, -14.383461, 0, 4.57475)
+transform = Transform3D(6.605888e-05, 0, -0.0049995636, 0, 0.005, 0, 0.0049995636, 0, 6.605888e-05, -14.383461, 1.3948137, 4.57475)
 
 [node name="Lobby_Door" parent="." unique_id=304825365 instance=ExtResource("22_jscy8")]
 transform = Transform3D(-0.030747855, 0, 0.99952716, 0, 1, 0, -0.99952716, 0, -0.030747855, 5.1322756, 2.1554022, -0.050363183)
@@ -210,5 +317,19 @@ mesh = ExtResource("25_2wyq8")
 [node name="SandBag" parent="." unique_id=1119725117 instance=ExtResource("26_2wyq8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.805236, 0.10810692, -36.92269)
 
-[node name="Tripwire" parent="." unique_id=1186370731 instance=ExtResource("27_vxglm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9426296, 1.3404169, 0)
+[node name="BananaPeel" parent="." unique_id=1023689993 instance=ExtResource("27_vxglm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.4980927, 0.5444516, 2.487574)
+
+[node name="Stu3" parent="." unique_id=609003580 instance=ExtResource("28_2f3dj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6119661, 0.011987507, 4.645267)
+
+[node name="Plunger" parent="." unique_id=855526578 instance=ExtResource("30_fv21b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7574263, 0.6226706, -1.0641456)
+
+[node name="BingoRoom" type="AudioStreamPlayer3D" parent="." unique_id=116770306]
+transform = Transform3D(-0.9990889, 0, -0.0426777, 0, 1, 0, 0.0426777, 0, -0.9990889, -42.48452, 4.182099, -19.417843)
+stream = ExtResource("31_tel4y")
+unit_size = 35.19
+autoplay = true
+max_distance = 25.0
+bus = &"Ambiene"

@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://w8wxgyyoxupy"]
 
-[ext_resource type="PackedScene" uid="uid://bf1ndswf745ew" path="res://Assets/Blender/StuMap_GODOT.blend" id="1_4xfga"]
+[ext_resource type="PackedScene" uid="uid://bf1ndswf745ew" path="res://assets/Blender/StuMap_GODOT.blend" id="1_4xfga"]
 [ext_resource type="PackedScene" uid="uid://b4y3txrunrrya" path="res://scenes/stu.tscn" id="2_gldc4"]
 [ext_resource type="PackedScene" uid="uid://bnbggqkcgb1wp" path="res://scenes/NPC.tscn" id="2_paxxb"]
-[ext_resource type="Texture2D" uid="uid://cxsqe1ml8nmyh" path="res://Assets/reticleEmpty.tres" id="4_2lpho"]
+[ext_resource type="Texture2D" uid="uid://cxsqe1ml8nmyh" path="res://assets/reticleEmpty.tres" id="4_2lpho"]
 [ext_resource type="Script" uid="uid://d0co7xxx1604o" path="res://scripts/Player/swapReticle.gd" id="5_nakos"]
-[ext_resource type="Texture2D" uid="uid://dhu4lf3trb2sp" path="res://Assets/reticleFull.tres" id="6_jh32y"]
+[ext_resource type="Texture2D" uid="uid://dhu4lf3trb2sp" path="res://assets/reticleFull.tres" id="6_jh32y"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gldc4"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -80,17 +80,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9205742, 0.17367256, -2.48
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.65931, 0, -28.767857)
 navigation_mesh = SubResource("NavigationMesh_4xfga")
 
-[node name="Plane_001" parent="." index="4" unique_id=174460900 groups=["mesh"]]
+[node name="Plane_001" parent="." index="4" unique_id=1932178125 groups=["mesh"]]
 
-[node name="Rec Floor" parent="." index="5" unique_id=947187449 groups=["mesh"]]
+[node name="Rec Floor" parent="." index="5" unique_id=743017719 groups=["mesh"]]
 
-[node name="Entrance Floor" parent="." index="6" unique_id=1891820420 groups=["mesh"]]
+[node name="Entrance Floor" parent="." index="6" unique_id=1623768433 groups=["mesh"]]
 
-[node name="Dining Area" parent="." index="7" unique_id=709290794 groups=["mesh"]]
+[node name="Dining Area" parent="." index="7" unique_id=1800620535 groups=["mesh"]]
 
-[node name="Bathroom Floor" parent="." index="11" unique_id=1802811877 groups=["mesh"]]
+[node name="Bathroom Floor" parent="." index="11" unique_id=2063575531 groups=["mesh"]]
 
-[node name="Plane_014" parent="." index="19" unique_id=513845098 groups=["mesh"]]
+[node name="Plane_014" parent="." index="19" unique_id=1478722918 groups=["mesh"]]
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." index="139" unique_id=837351515]
 navigation_mesh = SubResource("NavigationMesh_paxxb")

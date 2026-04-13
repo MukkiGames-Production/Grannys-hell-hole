@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://csd6mw1abb31t"]
 
 [ext_resource type="Script" uid="uid://cwfrabe3emd5g" path="res://scripts/objects/Pot.gd" id="1_qv0rk"]
-[ext_resource type="ArrayMesh" uid="uid://duvvxoiefpen7" path="res://Assets/Blender/Grabbables/StuItems_Hot Ladle.res" id="2_g87nl"]
+[ext_resource type="ArrayMesh" uid="uid://duvvxoiefpen7" path="res://assets/Blender/Grabbables/StuItems_Hot Ladle.res" id="2_g87nl"]
 [ext_resource type="PackedScene" uid="uid://brxe1qi1uvucs" path="res://scenes/Objects/Carrot.tscn" id="3_evays"]
-[ext_resource type="ArrayMesh" uid="uid://dupwh0xci5ox0" path="res://Assets/Blender/Interactables/StuInteractables_Pot.res" id="4_dwba8"]
-[ext_resource type="ArrayMesh" uid="uid://b0qmlkne4hols" path="res://Assets/Blender/Interactables/StuInteractables_Stew.res" id="5_fjlj7"]
+[ext_resource type="ArrayMesh" uid="uid://dupwh0xci5ox0" path="res://assets/Blender/Interactables/StuInteractables_Pot.res" id="4_dwba8"]
+[ext_resource type="ArrayMesh" uid="uid://b0qmlkne4hols" path="res://assets/Blender/Interactables/StuInteractables_Stew.res" id="5_fjlj7"]
+[ext_resource type="AudioStream" uid="uid://xaivc8ilcqea" path="res://assets/AudioEffects/Objects/soup.mp3" id="6_g2jgw"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_33163"]
 height = 0.6883119
@@ -32,3 +33,6 @@ shape = SubResource("CylinderShape3D_33163")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1579440407]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.038591772, 0)
 shape = SubResource("CylinderShape3D_33163")
+
+[node name="Audio" type="AudioStreamPlayer3D" parent="." unique_id=1594472710]
+stream = ExtResource("6_g2jgw")
