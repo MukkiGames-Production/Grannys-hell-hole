@@ -33,6 +33,11 @@ func _physics_process(delta: float) -> void:
 		global_position = stus_root_bone.global_position
 		return
 	elif trap_state:
+		trap_timer -= delta
+		if Input.is_action_just_pressed("ui_accept"):
+			trap_timer -= 3.0
+		if trap_timer <= 0:
+			_on_trap_timer_timeout()
 		return
 
 	if direction:

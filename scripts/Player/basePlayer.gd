@@ -8,7 +8,7 @@ const gravity = 20
 @export var max_throw_force := 20.0
 @export var max_charge_time := .75  # seconds to reach full power
 @export var ragdoll_time := 3.5 # seconds the player will not have control after entering ragdoll
-@export var trap_time := 5.0
+@export var trap_time_max := 30.0
 @export var ragdoll_skeleton: Skeleton3D
 @export var stus_bone_simulator: PhysicalBoneSimulator3D
 @export var stus_root_bone: PhysicalBone3D
@@ -24,7 +24,7 @@ var held_object: GrabbableObject = null
 var sees_interactable: bool = false
 var ragdoll_timer: Timer = Timer.new()
 var ragdoll_state = false
-var trap_timer: Timer = Timer.new()
+var trap_timer := trap_time_max
 var trap_state = false
 
 var root_bone_idx: int = -1
@@ -48,11 +48,6 @@ func _ready() -> void:
 	ragdoll_timer.one_shot = true
 	ragdoll_timer.timeout.connect(_on_ragdoll_timer_timeout)
 	add_child(ragdoll_timer)
-	
-	trap_timer.wait_time = trap_time
-	trap_timer.one_shot = true
-	trap_timer.timeout.connect(_on_trap_timer_timeout)
-	add_child(trap_timer)
 	
 	#mark root bone to knock it back farther later
 	root_bone_idx = ragdoll_skeleton.find_bone("Root")  # or "Hips", "pelvis", "Spine", whatever your rig's main/root bone is
@@ -326,8 +321,8 @@ func set_third_person_cam_pos():
 ######
 signal trap_free
 func snap_trap():
+	trap_timer = trap_time_max
 	trap_state = true
-	trap_timer.start()
 	
 func _on_trap_timer_timeout():
 	trap_state = false
