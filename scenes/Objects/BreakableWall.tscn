@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://vstcpsixd6dw"]
+
+[ext_resource type="Script" uid="uid://cb13ovsfrqbr1" path="res://scripts/objects/StuWall.gd" id="1_jf18p"]
+[ext_resource type="ArrayMesh" uid="uid://c1ddgax0bhl26" path="res://Assets/Blender/Interactables/StuInteractables_Wall_Broken.res" id="2_4ukx2"]
+[ext_resource type="ArrayMesh" uid="uid://bph7lnumnvqlj" path="res://Assets/Blender/Interactables/StuInteractables_Wall_Unbroken.res" id="2_jf18p"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h267t"]
+size = Vector3(7.9091797, 4.6486664, 2.0019226)
+
+[node name="Wall" type="Area3D" unique_id=913797376]
+script = ExtResource("1_jf18p")
+wall_broken = ExtResource("2_4ukx2")
+metadata/_custom_type_script = "uid://d0uhvbq4j1buf"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=899464032]
+mesh = ExtResource("2_jf18p")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1579440407]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18823242, 0.009954095, 0.009933472)
+shape = SubResource("BoxShape3D_h267t")
