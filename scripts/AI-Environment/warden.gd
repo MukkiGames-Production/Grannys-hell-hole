@@ -4,6 +4,7 @@ class_name Warden
 @export var lasso_range: float = 10.0
 @export var lasso_cooldown: float = 5.0
 @export var lasso_speed: float = 5.0
+@export var is_disabled: bool = false
 
 @onready var lasso_node: RopeGenMesh3D  = $Lasso
 
@@ -23,6 +24,8 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
+	if is_disabled:
+		return
 
 	if status == State.CHASE and is_instance_valid(chase_target) and can_throw_lasso and not is_throwing_lasso:
 		var dist = global_position.distance_to(chase_target.global_position)

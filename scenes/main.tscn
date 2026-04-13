@@ -22,10 +22,11 @@
 [ext_resource type="PackedScene" uid="uid://di85bl0mj8xfo" path="res://scenes/Objects/Board.tscn" id="20_yc10j"]
 [ext_resource type="PackedScene" uid="uid://bh1lmq143icag" path="res://scenes/Objects/rpg.tscn" id="21_yc10j"]
 [ext_resource type="PackedScene" uid="uid://bcskmit1xf54o" path="res://scenes/Door.tscn" id="22_jscy8"]
-[ext_resource type="PackedScene" uid="uid://c3dga353364ch" path="res://scenes/infirmary.tscn" id="23_pm3ni"]
-[ext_resource type="ArrayMesh" uid="uid://jtgjfkeqeuse" path="res://Assets/Blender/cornhole_Plane_004.res" id="24_og1vs"]
-[ext_resource type="ArrayMesh" uid="uid://bubcw3ok6845v" path="res://Assets/Blender/cornhole_Plane_005.res" id="25_2wyq8"]
+[ext_resource type="PackedScene" uid="uid://c3dga353364ch" path="res://scenes/Infirmary.tscn" id="23_pm3ni"]
+[ext_resource type="ArrayMesh" uid="uid://ce3ibvqo8dl6v" path="res://Assets/Blender/cornhole_Plane_004.res" id="24_og1vs"]
+[ext_resource type="ArrayMesh" uid="uid://deeu5nhl7ybsi" path="res://Assets/Blender/cornhole_Plane_005.res" id="25_2wyq8"]
 [ext_resource type="PackedScene" uid="uid://cse5f2scyb4vw" path="res://Assets/Blender/sandbag_low_poly_realist.glb" id="26_2wyq8"]
+[ext_resource type="PackedScene" uid="uid://dcscx1lceptd2" path="res://scenes/Objects/Tripwire.tscn" id="27_vxglm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_85g3d"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -185,6 +186,7 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 11.7
 
 [node name="Warden" parent="." unique_id=1734464095 instance=ExtResource("20_gqmmt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.872208, -0.0031895638, 4.5311546)
+is_disabled = true
 
 [node name="Rocket" parent="." unique_id=845348862 instance=ExtResource("21_yc10j")]
 transform = Transform3D(6.605888e-05, 0, -0.0049995636, 0, 0.005, 0, 0.0049995636, 0, 6.605888e-05, -14.383461, 0, 4.57475)
@@ -207,3 +209,6 @@ mesh = ExtResource("25_2wyq8")
 
 [node name="SandBag" parent="." unique_id=1119725117 instance=ExtResource("26_2wyq8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.805236, 0.10810692, -36.92269)
+
+[node name="Tripwire" parent="." unique_id=1186370731 instance=ExtResource("27_vxglm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9426296, 1.3404169, 0)

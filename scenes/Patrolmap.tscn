@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bkngoexmlkto3"]
 
-[ext_resource type="PackedScene" uid="uid://b2bd27pkvtywj" path="res://Assets/Blender/StuMap_GODOT.blend" id="1_4xfga"]
 [ext_resource type="Script" uid="uid://bys1cfmdwhnv5" path="res://scripts/AI-Environment/scheduler.gd" id="1_2t1ik"]
+[ext_resource type="PackedScene" uid="uid://bf1ndswf745ew" path="res://Assets/Blender/StuMap_GODOT.blend" id="1_4xfga"]
 [ext_resource type="PackedScene" uid="uid://bcskmit1xf54o" path="res://scenes/Door.tscn" id="2_paxxb"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4xfga"]
