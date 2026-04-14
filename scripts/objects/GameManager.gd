@@ -315,10 +315,10 @@ func _spawn_remote_player(peer_steam_id: int, peer_name: String) -> void:
 		remote.set_process_unhandled_input(false)
 	)
 
-	# var cam = remote.get_node_or_null("CameraPivot/Camera3D")
-	# # if cam:
-	# # 	cam.current = false
-	# # 	cam.queue_free()
+	var cam = remote.get_node_or_null("CameraRoot/CameraPivot/Camera3D")
+	if cam:
+		cam.current = false
+		cam.queue_free()
 
 	if (peer_steam_id == Steam.getSteamID() or peer_name == Steam.getPersonaName()):
 		return
