@@ -213,7 +213,11 @@ func _handle_remote_grab(sender_id: int, item_id: String) -> void:
 	if obj and is_instance_valid(obj):
 		obj.freeze = true
 		obj.is_held = true
-		# Don't set holder — the local _physics_process on world.gd moves it
+
+		# set the holder to the remote player node so it can follow their movement
+		var holder: Node3D = remote_players.get(sender_id, null)
+		if holder and is_instance_valid(holder):
+			obj.holder = holder
 		remote_held_items[sender_id] = item_id
 		print("[World] Remote player %s grabbed %s" % [sender_id, item_id])
 
