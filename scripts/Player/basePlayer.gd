@@ -48,10 +48,10 @@ func _ready() -> void:
 	ragdoll_timer.one_shot = true
 	ragdoll_timer.timeout.connect(_on_ragdoll_timer_timeout)
 	add_child(ragdoll_timer)
-	
+
 	#mark root bone to knock it back farther later
 	root_bone_idx = ragdoll_skeleton.find_bone("Root")  # or "Hips", "pelvis", "Spine", whatever your rig's main/root bone is
-	
+
 
 	#make ragdoll body invis
 	stu_mesh_ragdoll.visible = false
@@ -107,8 +107,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
 		if event.pressed:
-			print("Right click", held_object.has_method("use"))
+
+
 			if held_object and held_object.has_method("use"):
+
 				held_object.use()
 
 # Virtual method — child classes override this for yaw/pitch handling
@@ -197,7 +199,7 @@ func try_interact() -> void:
 		print("Picked up ", held_object)
 	elif target is InteractionPoint:
 		target.empty_interact()
-		
+
 func try_special() -> void:
 	if held_object:
 		held_object.special()
@@ -262,11 +264,11 @@ func enable_ragdoll(v) -> void:
 	bones[0].apply_central_impulse(1.2 * v)
 	for i in range(1, bones.size()):
 		bones[i].apply_central_impulse(v)
-		
+
 	#also the camera
 	camera_mode = CameraMode.THIRD_PERSON
 	set_third_person_cam_pos()
-	
+
 
 	if GameNetwork.lobby_id > 0:
 		GameNetwork.send_p2p_packet(0, {
@@ -282,17 +284,17 @@ func disable_ragdoll() -> void:
 	stu_mesh_normal.visible = true
 	stu_mesh_ragdoll.visible = false
 	stus_bone_simulator.physical_bones_stop_simulation()
-	
+
 	#put cam back
 	camera_mode = CameraMode.FIRST_PERSON
 	stu_camera.pivot.global_position = stu_camera.root.global_position
-	
+
 func set_third_person_cam_pos():
 	var origin = stu_camera.root.global_transform.origin
-	
+
 	# Direction backwards from player
 	var direction = stu_camera.root.global_transform.basis.z.normalized()
-	
+
 	var max_distance = 4.0
 	var target_position = origin + direction * max_distance
 
@@ -300,7 +302,7 @@ func set_third_person_cam_pos():
 	var space_state = get_world_3d().direct_space_state
 	var query = PhysicsRayQueryParameters3D.create(origin, target_position)
 	query.exclude = [self]  # avoid hitting the player
-	
+
 	var result = space_state.intersect_ray(query)
 
 	if result:
@@ -315,7 +317,7 @@ func set_third_person_cam_pos():
 			"message": "player_action",
 			"action": "disable_ragdoll"
 		}, Steam.P2P_SEND_RELIABLE)
-		
+
 ######
 #TRAP#
 ######
@@ -323,7 +325,7 @@ signal trap_free
 func snap_trap():
 	trap_timer = trap_time_max
 	trap_state = true
-	
+
 func _on_trap_timer_timeout():
 	trap_state = false
 	trap_free.emit()

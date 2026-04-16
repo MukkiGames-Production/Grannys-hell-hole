@@ -31,10 +31,11 @@ func fire() -> void:
 	print("Firing rocket with velocity ", rocket_velocity)
 
 	# Match the launcher's position and rotation without non-uniform scale
-	var spawn_xform = global_transform
-	spawn_xform.basis = spawn_xform.basis.orthonormalized()
-	rocket_instance.global_transform = spawn_xform
-	rocket_instance.scale = Vector3(0.05, 0.05, 0.05)
+	var spawn_zform = global_transform
+	spawn_zform.basis = spawn_zform.basis
+	rocket_instance.global_transform = spawn_zform
+
+	# rocket_instance.scale = Vector3(0.05, 0.05, 0.05)
 
 	# Since the new rocket scene uses a RigidBody3D child for physics,
 	# we can just apply velocity to it directly so it flies naturally!

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cxsqe1ml8nmyh" path="res://assets/reticleEmpty.tres" id="3_sugp2"]
 [ext_resource type="Script" uid="uid://d0co7xxx1604o" path="res://scripts/Player/swapReticle.gd" id="4_tbgi4"]
 [ext_resource type="Texture2D" uid="uid://dhu4lf3trb2sp" path="res://assets/reticleFull.tres" id="5_tefeu"]
-[ext_resource type="Shader" uid="uid://cy364xpdn0tel" path="res://scripts/shaders/water.gdshader" id="6_yq6so"]
+[ext_resource type="Shader" uid="uid://dw84gnrgsmovk" path="res://scripts/shaders/water.gdshader" id="6_yq6so"]
 [ext_resource type="PackedScene" uid="uid://h5sep0m58vfb" path="res://scenes/stu_with_ragdoll.tscn" id="8_85g3d"]
 [ext_resource type="PackedScene" uid="uid://bkngoexmlkto3" path="res://scenes/Patrolmap.tscn" id="8_tipki"]
 [ext_resource type="PackedScene" uid="uid://bnbggqkcgb1wp" path="res://scenes/NPC.tscn" id="9_85g3d"]
@@ -21,15 +21,13 @@
 [ext_resource type="PackedScene" uid="uid://xl74pfdkcihd" path="res://scenes/Objects/Mirror.tscn" id="19_yc10j"]
 [ext_resource type="PackedScene" uid="uid://d8klc71sw054" path="res://scenes/warden.tscn" id="20_gqmmt"]
 [ext_resource type="PackedScene" uid="uid://di85bl0mj8xfo" path="res://scenes/Objects/Board.tscn" id="20_yc10j"]
-[ext_resource type="PackedScene" path="res://scenes/Objects/rpg.tscn" id="21_yc10j"]
+[ext_resource type="PackedScene" uid="uid://cp5bqyw00am3x" path="res://scenes/Objects/rpg.tscn" id="21_yc10j"]
 [ext_resource type="PackedScene" uid="uid://bcskmit1xf54o" path="res://scenes/Door.tscn" id="22_jscy8"]
 [ext_resource type="PackedScene" path="res://scenes/infirmary.tscn" id="23_pm3ni"]
-[ext_resource type="PackedScene" uid="uid://dcscx1lceptd2" path="res://scenes/Objects/Tripwire.tscn" id="27_vxglm"]
 [ext_resource type="ArrayMesh" path="res://Assets/Blender/cornhole_Plane_004.res" id="24_og1vs"]
 [ext_resource type="ArrayMesh" path="res://Assets/Blender/cornhole_Plane_005.res" id="25_2wyq8"]
 [ext_resource type="PackedScene" uid="uid://cse5f2scyb4vw" path="res://assets/Blender/sandbag_low_poly_realist.glb" id="26_2wyq8"]
 [ext_resource type="PackedScene" uid="uid://c0yblmcogs3b5" path="res://scenes/Objects/bananaPeel.tscn" id="27_vxglm"]
-[ext_resource type="PackedScene" uid="uid://c3o8fwan1pgb2" path="res://scenes/DummyStu.tscn" id="28_2f3dj"]
 [ext_resource type="PackedScene" uid="uid://x5qfjf3v2grw" path="res://scenes/Objects/Plunger.tscn" id="30_fv21b"]
 [ext_resource type="AudioStream" uid="uid://cs2nktk40wcau" path="res://assets/AudioEffects/BingoRoom.wav" id="31_tel4y"]
 
@@ -296,7 +294,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.872208, -0.0031895638, 4.
 is_disabled = true
 
 [node name="Rocket" parent="." unique_id=845348862 instance=ExtResource("21_yc10j")]
-transform = Transform3D(6.605888e-05, 0, -0.0049995636, 0, 0.005, 0, 0.0049995636, 0, 6.605888e-05, -14.383461, 1.3948137, 4.57475)
+transform = Transform3D(0.013211776, 0, -0.99991274, 0, 1, 0, 0.99991274, 0, 0.013211776, -14.383461, 1.3948137, 4.57475)
 
 [node name="Lobby_Door" parent="." unique_id=304825365 instance=ExtResource("22_jscy8")]
 transform = Transform3D(-0.030747855, 0, 0.99952716, 0, 1, 0, -0.99952716, 0, -0.030747855, 5.1322756, 2.1554022, -0.050363183)
@@ -320,11 +318,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.805236, 0.10810692, -36.9
 [node name="BananaPeel" parent="." unique_id=1023689993 instance=ExtResource("27_vxglm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.4980927, 0.5444516, 2.487574)
 
-[node name="Stu3" parent="." unique_id=609003580 instance=ExtResource("28_2f3dj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6119661, 0.011987507, 4.645267)
-
 [node name="Plunger" parent="." unique_id=855526578 instance=ExtResource("30_fv21b")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7574263, 0.6226706, -1.0641456)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.936901, 0.6226706, 1.4460254)
 
 [node name="BingoRoom" type="AudioStreamPlayer3D" parent="." unique_id=116770306]
 transform = Transform3D(-0.9990889, 0, -0.0426777, 0, 1, 0, 0.0426777, 0, -0.9990889, -42.48452, 4.182099, -19.417843)
@@ -332,4 +327,3 @@ stream = ExtResource("31_tel4y")
 unit_size = 35.19
 autoplay = true
 max_distance = 25.0
-bus = &"Ambiene"
