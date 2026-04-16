@@ -1,16 +1,24 @@
 [gd_scene format=3 uid="uid://dcscx1lceptd2"]
 
 [ext_resource type="Script" uid="uid://b2mrxfecu5t0u" path="res://scripts/objects/Tripwire.gd" id="1_s3txp"]
+[ext_resource type="PrismMesh" uid="uid://c7fx2qjm5274j" path="res://Assets/objects/Tripwire/test_armed_tripwire_mesh.tres" id="2_0qvqi"]
 [ext_resource type="Material" uid="uid://33fnuc4co43y" path="res://Assets/objects/transparent_override.tres" id="2_o2sjv"]
 [ext_resource type="Script" uid="uid://bvw0kqi3vl26o" path="res://scripts/objects/phantomMesh.gd" id="2_s3txp"]
+[ext_resource type="Shader" uid="uid://cme4tf0sxyx2n" path="res://scripts/shaders/tripwire_preview.gdshader" id="5_cqrok"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_o2sjv"]
 size = Vector3(0.42358398, 0.29431152, 0.37487793)
 
-[sub_resource type="PrismMesh" id="PrismMesh_u43el"]
-size = Vector3(0.23, 0.19, 0.185)
-
 [sub_resource type="PlaceholderMesh" id="PlaceholderMesh_o2sjv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cqrok"]
+render_priority = 0
+shader = ExtResource("5_cqrok")
+shader_parameter/line_color = Color(0, 0, 0, 1)
+shader_parameter/emission_strength = 100.0
+shader_parameter/alpha_multiplier = 10.0
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_0qvqi"]
 
 [node name="Tripwire" type="Node3D" unique_id=1186370731]
 
@@ -25,10 +33,16 @@ shape = SubResource("BoxShape3D_o2sjv")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="GrabbableObject" unique_id=335278691]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0025399774, 0, -0.0046494007)
-mesh = SubResource("PrismMesh_u43el")
+mesh = ExtResource("2_0qvqi")
 
 [node name="PhantomMesh" type="MeshInstance3D" parent="GrabbableObject/MeshInstance3D" unique_id=1387949858]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.755, 0.28)
 material_override = ExtResource("2_o2sjv")
 mesh = SubResource("PlaceholderMesh_o2sjv")
 script = ExtResource("2_s3txp")
+
+[node name="Sides" type="Node3D" parent="." unique_id=643750429]
+
+[node name="LineDrawer" type="MeshInstance3D" parent="." unique_id=974295605]
+material_override = SubResource("ShaderMaterial_cqrok")
+mesh = SubResource("ImmediateMesh_0qvqi")
