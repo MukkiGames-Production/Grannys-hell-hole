@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://boryvexd4ks3l"]
+[gd_scene format=3 uid="uid://0jb3a485dc7e"]
 
-[ext_resource type="ArrayMesh" uid="uid://dv0oj4unl2x8p" path="res://assets/Blender/Interactables/StuInteractables_Toilet.res" id="1_1ygeh"]
+[ext_resource type="ArrayMesh" uid="uid://b5rx2crtby5ua" path="res://Assets/Blender/StuInteractables_Tiolet.res" id="1_1ygeh"]
 [ext_resource type="Script" uid="uid://d0uhvbq4j1buf" path="res://scripts/objects/interactionPoint.gd" id="1_o56rn"]
 [ext_resource type="Shader" uid="uid://dw84gnrgsmovk" path="res://scripts/shaders/water.gdshader" id="2_o56rn"]
 
