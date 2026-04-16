@@ -1,0 +1,116 @@
+[gd_scene format=3 uid="uid://boryvexd4ks3l"]
+
+[ext_resource type="ArrayMesh" uid="uid://dv0oj4unl2x8p" path="res://assets/Blender/Interactables/StuInteractables_Toilet.res" id="1_1ygeh"]
+[ext_resource type="Shader" uid="uid://dw84gnrgsmovk" path="res://scripts/shaders/water.gdshader" id="2_o56rn"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_punys"]
+
+[sub_resource type="Gradient" id="Gradient_vo77h"]
+offsets = PackedFloat32Array(0.19064125, 0.96707106, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.9064125, 0.9064125, 0.9064125, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_dc54m"]
+noise_type = 3
+frequency = 0.0723
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yrghp"]
+noise = SubResource("FastNoiseLite_dc54m")
+color_ramp = SubResource("Gradient_vo77h")
+seamless = true
+
+[sub_resource type="Gradient" id="Gradient_frkdp"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_3xre2"]
+noise_type = 4
+frequency = 0.001
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ujvov"]
+noise = SubResource("FastNoiseLite_3xre2")
+color_ramp = SubResource("Gradient_frkdp")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_uopuj"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xqv5v"]
+noise = SubResource("FastNoiseLite_uopuj")
+
+[sub_resource type="Gradient" id="Gradient_38yqe"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_r04k5"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jmb3x"]
+noise = SubResource("FastNoiseLite_r04k5")
+color_ramp = SubResource("Gradient_38yqe")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_odc02"]
+render_priority = 0
+shader = ExtResource("2_o56rn")
+shader_parameter/surface_color = Color(0.2, 1, 0.8, 1)
+shader_parameter/depth_color = Color(0.08, 0.2, 0.4, 1)
+shader_parameter/foam_color = Color(0.47058824, 1, 1, 1)
+shader_parameter/depth_size = 12.0
+shader_parameter/surface_roughness = 0.05
+shader_parameter/foam_roughness = 0.05
+shader_parameter/caustics_texture = SubResource("NoiseTexture2D_yrghp")
+shader_parameter/caustics_strength = 2.0
+shader_parameter/caustics_scale = Vector2(0.5, 0.5)
+shader_parameter/wave_texture = SubResource("NoiseTexture2D_jmb3x")
+shader_parameter/wave_normal_texture = SubResource("NoiseTexture2D_xqv5v")
+shader_parameter/wave_softness = 3.0
+shader_parameter/wave_scale = Vector2(0.2, 0.2)
+shader_parameter/wave_layer_scale = Vector2(1.5, 1.5)
+shader_parameter/wave_highlight = 0.5
+shader_parameter/wave_velocity = Vector2(0.12, 0.08)
+shader_parameter/foam_texture = SubResource("NoiseTexture2D_ujvov")
+shader_parameter/edge_foam_depth_size = 1.0
+shader_parameter/wave_foam_amount = 0.8
+shader_parameter/foam_start = 0.15
+shader_parameter/foam_end = 0.3
+shader_parameter/foam_exponent = 2.0
+shader_parameter/refraction_amount = 0.5
+shader_parameter/refraction_exponent = 0.5
+shader_parameter/displacement_amount = 0.3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1ygeh"]
+render_priority = 0
+shader = ExtResource("2_o56rn")
+shader_parameter/surface_color = Color(0.6281703, 0.3853718, 0.16022283, 1)
+shader_parameter/depth_color = Color(0.08, 0.2, 0.4, 1)
+shader_parameter/foam_color = Color(0.77545077, 0.33434904, 0.13158253, 1)
+shader_parameter/depth_size = 12.0
+shader_parameter/surface_roughness = 0.05
+shader_parameter/foam_roughness = 0.05
+shader_parameter/caustics_texture = SubResource("NoiseTexture2D_yrghp")
+shader_parameter/caustics_strength = 2.0
+shader_parameter/caustics_scale = Vector2(0.5, 0.5)
+shader_parameter/wave_texture = SubResource("NoiseTexture2D_jmb3x")
+shader_parameter/wave_normal_texture = SubResource("NoiseTexture2D_xqv5v")
+shader_parameter/wave_softness = 3.0
+shader_parameter/wave_scale = Vector2(0.2, 0.2)
+shader_parameter/wave_layer_scale = Vector2(1.5, 1.5)
+shader_parameter/wave_highlight = 0.5
+shader_parameter/wave_velocity = Vector2(0.12, 0.08)
+shader_parameter/foam_texture = SubResource("NoiseTexture2D_ujvov")
+shader_parameter/edge_foam_depth_size = 1.0
+shader_parameter/wave_foam_amount = 0.8
+shader_parameter/foam_start = 0.15
+shader_parameter/foam_end = 0.3
+shader_parameter/foam_exponent = 2.0
+shader_parameter/refraction_amount = 0.5
+shader_parameter/refraction_exponent = 0.5
+shader_parameter/displacement_amount = 0.3
+
+[node name="Tiolet" type="Node3D" unique_id=401155297]
+
+[node name="Tiolet" type="MeshInstance3D" parent="." unique_id=197757197]
+mesh = ExtResource("1_1ygeh")
+
+[node name="CleanWater" type="MeshInstance3D" parent="Tiolet" unique_id=1529838661]
+transform = Transform3D(1.3527384, 0, 0, 0, 0.22364666, 0, 0, 0, 1.5159168, 0, 0.51338375, 0)
+mesh = SubResource("CylinderMesh_punys")
+surface_material_override/0 = SubResource("ShaderMaterial_odc02")
+
+[node name="CleanWater2" type="MeshInstance3D" parent="Tiolet" unique_id=1582174221]
+transform = Transform3D(1.3527384, 0, 0, 0, 0.22364666, 0, 0, 0, 1.5159168, 0, 0.51338375, 0)
+mesh = SubResource("CylinderMesh_punys")
+surface_material_override/0 = SubResource("ShaderMaterial_1ygeh")
