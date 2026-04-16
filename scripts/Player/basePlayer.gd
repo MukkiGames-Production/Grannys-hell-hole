@@ -195,7 +195,7 @@ func try_interact() -> void:
 	# Case 2: Not holding → pick up or empty interact
 	if target is GrabbableObject and target.is_grabbable:
 		held_object = target
-		held_object.grab(stu_camera.camera)
+		held_object.grab(stu_camera.camera, self as BasePlayer)
 		print("Picked up ", held_object)
 	elif target is InteractionPoint:
 		target.empty_interact()
@@ -209,6 +209,8 @@ func try_special_released() -> void:
 		held_object.special_released()
 	return
 
+func held_object_consumed():
+	held_object = null
 
 func try_door_interact() -> void:
 	if not object_in_sight:

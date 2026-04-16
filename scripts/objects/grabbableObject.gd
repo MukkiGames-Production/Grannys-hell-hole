@@ -12,6 +12,7 @@ class_name GrabbableObject
 
 var is_held := false
 var holder: Node3D = null
+var holding_player: BasePlayer = null
 var _last_velocity := Vector3.ZERO
 
 
@@ -58,9 +59,10 @@ func try_ragdoll(body):
 
 
 
-func grab(camera: Node3D):
+func grab(camera: Node3D, stu: BasePlayer):
 	is_held = true
 	holder = camera
+	holding_player = stu
 	freeze = true
 	set_collision_layer_value(1, false)
 	set_collision_mask_value(1, false)
@@ -164,3 +166,40 @@ func _check_fast_hit(body: Node3D, threshold: float = 10.0) -> void:
 
 func on_fast_hit(body: Node3D) -> void:
 	pass
+
+func consume(except: Array[Node3D], reparent_target: Node3D) -> void:
+	if holding_player != null:
+		holding_player.held_object_consumed()
+
+	is_held = false
+	holder = null
+	holding_player = null
+	var except_set := {}
+
+	for node in except:
+		if node == null:
+			continue
+		if node == self:
+			continue
+		if not is_ancestor_of(node):
+			continue
+
+		except_set[node] = true
+
+	var top_level_excepts: Array[Node3D] = []
+	for node in except_set.keys():
+		var parent = node.get_parent()
+		var covered_by_except_ancestor := false
+
+		while parent != null and parent != self:
+			if except_set.has(parent):
+				covered_by_except_ancestor = true
+				break
+			parent = parent.get_parent()
+
+		if not covered_by_except_ancestor:
+			top_level_excepts.append(node)
+	for node in top_level_excepts:
+		node.reparent(reparent_target, true)
+
+	queue_free()
