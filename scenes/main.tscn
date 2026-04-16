@@ -29,6 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://cse5f2scyb4vw" path="res://assets/Blender/sandbag_low_poly_realist.glb" id="26_2wyq8"]
 [ext_resource type="PackedScene" uid="uid://c0yblmcogs3b5" path="res://scenes/Objects/bananaPeel.tscn" id="27_vxglm"]
 [ext_resource type="PackedScene" uid="uid://x5qfjf3v2grw" path="res://scenes/Objects/Plunger.tscn" id="30_fv21b"]
+[ext_resource type="PackedScene" uid="uid://boryvexd4ks3l" path="res://scenes/Objects/Tiolet.tscn" id="31_qkpxi"]
 [ext_resource type="AudioStream" uid="uid://cs2nktk40wcau" path="res://assets/AudioEffects/BingoRoom.wav" id="31_tel4y"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_85g3d"]
@@ -327,3 +328,12 @@ stream = ExtResource("31_tel4y")
 unit_size = 35.19
 autoplay = true
 max_distance = 25.0
+
+[node name="Tiolet" parent="." unique_id=401155297 instance=ExtResource("31_qkpxi")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -20.4074, 0.73360175, -14.913934)
+
+[node name="Tiolet2" parent="." unique_id=27554965 instance=ExtResource("31_qkpxi")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -20.4074, 0.73360175, -11.895759)
+
+[node name="Tiolet3" parent="." unique_id=2087887967 instance=ExtResource("31_qkpxi")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -20.4074, 0.73360175, -9.115572)
