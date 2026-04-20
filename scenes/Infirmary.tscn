@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://c3dga353364ch"]
+[gd_scene format=3 uid="uid://cbc08k4yciybt"]
 
 [ext_resource type="ArrayMesh" uid="uid://cg7ojdbc6fhsm" path="res://Assets/objects/LAB_STUFF/medical_room_assets/clock/clock.obj" id="1_mr5gq"]
 [ext_resource type="ArrayMesh" uid="uid://dwdn5nxfdxwbs" path="res://Assets/objects/LAB_STUFF/medical_room_assets/operating_table/operating_table.obj" id="2_p7my5"]
