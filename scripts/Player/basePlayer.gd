@@ -90,15 +90,17 @@ func _unhandled_input(event: InputEvent) -> void:
 			if held_object:
 				is_charging_throw = true
 				throw_charge = 0.0
+				held_object.start_moving_to_center() #move object to center when charging starts
 			else:
 				try_interact()
-		else:
+		else: # released
 			if is_charging_throw and held_object:
 				if throw_charge > 0.25:
 					_throw_held_object()
 				else:
 					try_interact()
 				is_charging_throw = false
+					
 	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
 		if event.pressed and held_object:
 			try_special()
@@ -107,10 +109,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
 		if event.pressed:
-
-
 			if held_object and held_object.has_method("use"):
-
 				held_object.use()
 
 # Virtual method — child classes override this for yaw/pitch handling
