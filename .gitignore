@@ -4,6 +4,7 @@
 /android/
 =======
 .nomedia
+*.tmp
 
 # Godot-specific ignores
 .import/

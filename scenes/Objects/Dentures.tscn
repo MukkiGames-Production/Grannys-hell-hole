@@ -1,15 +1,23 @@
 [gd_scene format=3 uid="uid://buya8oxln125x"]
 
 [ext_resource type="Script" uid="uid://ddlaltmquprwu" path="res://scripts/objects/dentures.gd" id="1_11lhf"]
-[ext_resource type="ArrayMesh" uid="uid://x0ox26v4djd0" path="res://Assets/Blender/Grabbables/StuItems_Book.res" id="2_0t76j"]
+[ext_resource type="Material" uid="uid://33fnuc4co43y" path="res://Assets/objects/transparent_override.tres" id="3_y3g45"]
+[ext_resource type="Script" path="res://scripts/objects/phantomMesh.gd" id="4_tqv7r"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_y3g45"]
 size = Vector3(0.36843872, 0.51516724, 0.10845947)
 
+[sub_resource type="BoxMesh" id="BoxMesh_0t76j"]
+size = Vector3(0.2, 0.2, 0.2)
+
+[sub_resource type="PlaceholderMesh" id="PlaceholderMesh_apqr8"]
+
 [node name="Dentures" type="Node3D" unique_id=914737394]
 
-[node name="GrabbableObject" type="RigidBody3D" parent="." unique_id=84438199]
+[node name="GrabbableObject" type="RigidBody3D" parent="." unique_id=84438199 node_paths=PackedStringArray("phantom_mesh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38078153, 0)
 script = ExtResource("1_11lhf")
+phantom_mesh = NodePath("MeshInstance3D/PhantomMesh")
 item_id = "Book"
 metadata/_custom_type_script = "uid://dlfa4844hulox"
 
@@ -18,4 +26,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03074646, -0.08076477, 0.05
 shape = SubResource("BoxShape3D_y3g45")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="GrabbableObject" unique_id=2048578849]
-mesh = ExtResource("2_0t76j")
+mesh = SubResource("BoxMesh_0t76j")
+
+[node name="PhantomMesh" type="MeshInstance3D" parent="GrabbableObject/MeshInstance3D" unique_id=1953932982]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0025399774, 0.755, 0.2753506)
+material_override = ExtResource("3_y3g45")
+mesh = SubResource("PlaceholderMesh_apqr8")
+script = ExtResource("4_tqv7r")

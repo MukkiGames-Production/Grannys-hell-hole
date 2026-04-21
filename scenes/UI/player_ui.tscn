@@ -1,8 +1,11 @@
 [gd_scene format=3 uid="uid://1gf3ial0ymox"]
 
 [ext_resource type="Script" uid="uid://brho7yrmm837g" path="res://scripts/UI/player_ui.gd" id="1_xxxx"]
+[ext_resource type="Script" uid="uid://vqv3kn1h23m2" path="res://scenes/UI/run_dialogue.gd" id="2_50a1s"]
+[ext_resource type="AudioStream" uid="uid://ddd1cfxt10c0m" path="res://Assets/AudioEffects/StuVoice.mp3" id="3_hxbk0"]
+[ext_resource type="AudioStream" uid="uid://c47x0mvuwe03q" path="res://Assets/AudioEffects/NPCVoice.mp3" id="4_8xbeg"]
 
-[node name="PlayerUI" type="Control" unique_id=573476962]
+[node name="PlayerUI" type="Control" unique_id=573476962 node_paths=PackedStringArray("dialogue_text")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,6 +14,7 @@ offset_left = 948.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xxxx")
+dialogue_text = NodePath("DialogueBox/RichTextLabel")
 
 [node name="TimeLabel" type="Label" parent="." unique_id=1679226878]
 layout_mode = 0
@@ -27,3 +31,27 @@ offset_top = 46.0
 offset_right = 150.0
 offset_bottom = 72.0
 text = "Schedule: NONE"
+
+[node name="DialogueBox" type="PanelContainer" parent="." unique_id=1966167454]
+layout_mode = 0
+offset_left = -915.0
+offset_top = 415.0
+offset_right = 172.0
+offset_bottom = 616.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="DialogueBox" unique_id=1919027058 node_paths=PackedStringArray("dialogue_box", "stu_voice", "npc_voice")]
+layout_mode = 2
+script = ExtResource("2_50a1s")
+dialogue_box = NodePath("..")
+stu_voice = NodePath("../StuVoice")
+npc_voice = NodePath("../NPCVoice")
+
+[node name="StuVoice" type="AudioStreamPlayer" parent="DialogueBox" unique_id=313781862]
+stream = ExtResource("3_hxbk0")
+max_polyphony = 10
+
+[node name="NPCVoice" type="AudioStreamPlayer" parent="DialogueBox" unique_id=1141165906]
+stream = ExtResource("4_8xbeg")
+max_polyphony = 10
+
+[connection signal="advance_requested" from="DialogueBox/RichTextLabel" to="DialogueBox/RichTextLabel" method="_on_advance_requested"]

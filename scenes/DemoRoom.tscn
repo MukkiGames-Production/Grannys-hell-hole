@@ -5,6 +5,7 @@
 [ext_resource type="Shader" uid="uid://im65mxkv3lyh" path="res://scripts/shaders/highlight.gdshader" id="3_o6xl0"]
 [ext_resource type="Texture2D" uid="uid://cxsqe1ml8nmyh" path="res://Assets/reticleEmpty.tres" id="3_sugp2"]
 [ext_resource type="Script" uid="uid://mklkxcpb5cmv" path="res://scripts/objects/pillar.gd" id="3_tefeu"]
+[ext_resource type="PackedScene" uid="uid://buya8oxln125x" path="res://scenes/Objects/Dentures.tscn" id="4_f2mq5"]
 [ext_resource type="Script" uid="uid://d0co7xxx1604o" path="res://scripts/Player/swapReticle.gd" id="4_tbgi4"]
 [ext_resource type="Material" uid="uid://cdvkbhmcfxfug" path="res://Assets/objects/Textures/laminate_floor_02_2k.gltf/textures/laminate_floor_02.tres" id="5_kxs5y"]
 [ext_resource type="Texture2D" uid="uid://dhu4lf3trb2sp" path="res://Assets/reticleFull.tres" id="5_tefeu"]
@@ -13,7 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://c3o8fwan1pgb2" path="res://scenes/DummyStu.tscn" id="12_gwiwm"]
 [ext_resource type="PackedScene" uid="uid://b2ehtvqw6j6fl" path="res://scenes/FullPlayer.tscn" id="13_aml04"]
 [ext_resource type="PackedScene" uid="uid://5qvfrnaeggl6" path="res://scenes/EndingZone.tscn" id="13_uam6i"]
-[ext_resource type="PackedScene" uid="uid://dlv3b8hxyxp0x" path="res://scenes/ActiveDentures.tscn" id="14_aml04"]
+[ext_resource type="PackedScene" uid="uid://bwb4kls7xcbjn" path="res://scenes/DialogueNPC.tscn" id="15_f2mq5"]
+[ext_resource type="PackedScene" uid="uid://bcskmit1xf54o" path="res://scenes/Door.tscn" id="16_5ui13"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_85g3d"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -157,6 +159,9 @@ shape = SubResource("BoxShape3D_o6xl0")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Objects/GrabbableCube" unique_id=1100484109]
 material_overlay = SubResource("ShaderMaterial_85g3d")
 mesh = SubResource("BoxMesh_tipki")
+
+[node name="Dentures" parent="Objects" unique_id=914737394 instance=ExtResource("4_f2mq5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4490012, 0)
 
 [node name="Places" type="Node3D" parent="." unique_id=1907244790]
 
@@ -331,8 +336,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0037607, 0.9705572, 5.0888
 [node name="SpectatorCameraRoot" parent="Stu" index="1" unique_id=758604895 node_paths=PackedStringArray("valid_players")]
 valid_players = [NodePath("../../DummyStu"), NodePath("../../DummyStu2")]
 
-[node name="ActiveDentures" parent="." unique_id=2050533109 instance=ExtResource("14_aml04")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4941263, 1.0648675, -1.2119515)
+[node name="DialogueNpc" parent="." unique_id=1425818346 instance=ExtResource("15_f2mq5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25067163, 0.50800896, 0.50899506)
+
+[node name="Door" parent="." unique_id=304825365 instance=ExtResource("16_5ui13")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.2102942, 0.5080085, 2.975524)
 
 [connection signal="body_entered" from="Objects/GrabbableSphere" to="Objects/GrabbableSphere" method="_on_body_entered"]
 [connection signal="body_entered" from="Objects/GrabbableCube" to="Objects/GrabbableCube" method="_on_body_entered"]

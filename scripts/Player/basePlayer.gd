@@ -16,6 +16,7 @@ const gravity = 20
 @export var stu_mesh_ragdoll: MeshInstance3D
 
 @export var animation: AnimationPlayer
+@export var UI: Control
 
 var is_charging_throw := false
 var throw_charge := 0.0
@@ -26,6 +27,7 @@ var ragdoll_timer: Timer = Timer.new()
 var ragdoll_state = false
 var trap_timer := trap_time_max
 var trap_state = false
+var dialogue_state = false
 
 var root_bone_idx: int = -1
 
@@ -52,7 +54,6 @@ func _ready() -> void:
 	#mark root bone to knock it back farther later
 	root_bone_idx = ragdoll_skeleton.find_bone("Root")  # or "Hips", "pelvis", "Spine", whatever your rig's main/root bone is
 
-
 	#make ragdoll body invis
 	stu_mesh_ragdoll.visible = false
 
@@ -60,6 +61,13 @@ func _ready() -> void:
 		if child is PhysicalBone3D:
 			bones.append(child)
 			child.angular_damp = 10
+			
+	#set signal to know when dialogue is done and return normal behavior
+	UI.dialogue_text.dialogue_finished.connect(_on_dialogue_finished)
+
+func _on_dialogue_finished() -> void:
+	dialogue_state = false
+	# You can also do other things here: re-enable player movement, etc.
 
 func _unhandled_input(event: InputEvent) -> void:
 	# Always allow escape
@@ -82,7 +90,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact"):
 		if event is InputEventKey and event.echo:
 			return
-		try_door_interact()
+		try_special_interact()
 		return
 
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -90,15 +98,17 @@ func _unhandled_input(event: InputEvent) -> void:
 			if held_object:
 				is_charging_throw = true
 				throw_charge = 0.0
+				held_object.start_moving_to_center() #move object to center when charging starts
 			else:
 				try_interact()
-		else:
+		else: # released
 			if is_charging_throw and held_object:
 				if throw_charge > 0.25:
 					_throw_held_object()
 				else:
 					try_interact()
 				is_charging_throw = false
+					
 	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
 		if event.pressed and held_object:
 			try_special()
@@ -107,10 +117,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
 		if event.pressed:
-
-
 			if held_object and held_object.has_method("use"):
-
 				held_object.use()
 
 # Virtual method — child classes override this for yaw/pitch handling
@@ -166,7 +173,7 @@ func _update_interaction_raycast() -> void:
 	if object_in_sight:
 		var collider = object_in_sight.collider
 		if collider != held_object:
-			if (collider is GrabbableObject and collider.is_grabbable) or collider is InteractionPoint or collider is DoorInteractionArea:
+			if (collider is GrabbableObject and collider.is_grabbable) or collider is InteractionPoint or collider is SpecialInteractionPoint:
 				currently_sees = true
 
 	if currently_sees != sees_interactable:
@@ -212,20 +219,28 @@ func try_special_released() -> void:
 func held_object_consumed():
 	held_object = null
 
-func try_door_interact() -> void:
+func try_special_interact() -> void:
+	if dialogue_state:
+		UI.dialogue_text.request_advance()
+		return
+	
 	if not object_in_sight:
 		return
-
+		
 	var target = object_in_sight.collider
-	var door = _find_door_controller(target)
-	if door:
-		door.toggle_door()
+	var special = _find_special_controller(target)
+	if special:
+		var special_result = special.activate()
+		if special_result:
+			dialogue_state = true
+			UI.dialogue_text.run_dialogue(special_result)
+		
 
 
-func _find_door_controller(start: Object) -> Node:
+func _find_special_controller(start: Object) -> Node:
 	var node := start as Node
 	while node:
-		if node.has_method("toggle_door"):
+		if node.has_method("activate"):
 			return node
 		node = node.get_parent()
 	return null

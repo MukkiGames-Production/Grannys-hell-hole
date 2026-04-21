@@ -8,6 +8,10 @@ class_name GrabbableObject
 @export var hold_rotation_offset := Vector3.ZERO
 @export var is_grabbable := true
 
+#for holding item in center
+@export var center_position: Vector3 = Vector3(0, 0, 0) 
+@export var center_rotation: Vector3 = Vector3(0, 0, 0)
+
 @onready var explosion: PackedScene = preload("res://scenes/BigBoom.tscn")
 
 var is_held := false
@@ -15,6 +19,7 @@ var holder: Node3D = null
 var holding_player: BasePlayer = null
 var _last_velocity := Vector3.ZERO
 
+var is_charging = false #used to determine if object position is
 
 func _ready():
 	contact_monitor = true
@@ -26,7 +31,12 @@ func _physics_process(delta):
 		_last_velocity = linear_velocity
 		return
 	freeze = true  # keep frozen while held so gravity never kicks in
-	var target_pos = holder.global_transform.origin + holder.global_transform.basis.z * -hold_distance + holder.global_transform.basis.x * 0.6 + holder.global_transform.basis.y * -0.3
+	var target_pos
+	if is_charging:
+		target_pos = holder.global_transform.origin + holder.global_transform.basis.z * -hold_distance + holder.global_transform.basis.y * -0.3 #no x when chargingw
+	else:
+		target_pos = holder.global_transform.origin + holder.global_transform.basis.z * -hold_distance + holder.global_transform.basis.x * 0.6 + holder.global_transform.basis.y * -0.3
+	
 	global_position = global_position.lerp(target_pos, follow_speed * delta)
 
 	var current_scale = scale
@@ -60,6 +70,7 @@ func try_ragdoll(body):
 
 
 func grab(camera: Node3D, stu: BasePlayer):
+	is_charging = false
 	is_held = true
 	holder = camera
 	holding_player = stu
@@ -203,3 +214,6 @@ func consume(except: Array[Node3D], reparent_target: Node3D) -> void:
 		node.reparent(reparent_target, true)
 
 	queue_free()
+	
+func start_moving_to_center() -> void:
+	is_charging = true
