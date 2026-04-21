@@ -14,6 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://c3o8fwan1pgb2" path="res://scenes/DummyStu.tscn" id="12_gwiwm"]
 [ext_resource type="PackedScene" uid="uid://b2ehtvqw6j6fl" path="res://scenes/FullPlayer.tscn" id="13_aml04"]
 [ext_resource type="PackedScene" uid="uid://5qvfrnaeggl6" path="res://scenes/EndingZone.tscn" id="13_uam6i"]
+[ext_resource type="PackedScene" uid="uid://bwb4kls7xcbjn" path="res://scenes/DialogueNPC.tscn" id="15_f2mq5"]
+[ext_resource type="PackedScene" uid="uid://bcskmit1xf54o" path="res://scenes/Door.tscn" id="16_5ui13"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_85g3d"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -333,6 +335,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0037607, 0.9705572, 5.0888
 
 [node name="SpectatorCameraRoot" parent="Stu" index="1" unique_id=758604895 node_paths=PackedStringArray("valid_players")]
 valid_players = [NodePath("../../DummyStu"), NodePath("../../DummyStu2")]
+
+[node name="DialogueNpc" parent="." unique_id=1425818346 instance=ExtResource("15_f2mq5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25067163, 0.50800896, 0.50899506)
+
+[node name="Door" parent="." unique_id=304825365 instance=ExtResource("16_5ui13")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.2102942, 0.5080085, 2.975524)
 
 [connection signal="body_entered" from="Objects/GrabbableSphere" to="Objects/GrabbableSphere" method="_on_body_entered"]
 [connection signal="body_entered" from="Objects/GrabbableCube" to="Objects/GrabbableCube" method="_on_body_entered"]

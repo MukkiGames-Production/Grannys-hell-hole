@@ -2,6 +2,7 @@ extends Control
 
 @export var time_label: Label
 @export var schedule_label: Label
+@export var dialogue_text: RichTextLabel
 
 func _ready() -> void:
 	# If labels aren't assigned via inspector, try finding them by expected names

@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://bcskmit1xf54o"]
 
 [ext_resource type="Script" uid="uid://ct0qkvoglnfol" path="res://scripts/AI-Environment/door.gd" id="1_yfgsh"]
-[ext_resource type="Script" uid="uid://l7egliu21idv" path="res://scripts/objects/doorInteractionPoint.gd" id="2_q8f3x"]
+[ext_resource type="Script" uid="uid://l7egliu21idv" path="res://scripts/objects/SpecialInteractionPoint.gd" id="2_eyv6f"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yfgsh"]
 size = Vector3(2.0214355, 3.1428466, 0.23659667)
@@ -145,7 +145,6 @@ _data = {
 
 [node name="Door" type="Node3D" unique_id=304825365]
 script = ExtResource("1_yfgsh")
-status = 0
 okay_status = 0
 
 [node name="DebugText" type="Label3D" parent="." unique_id=129029945]
@@ -170,7 +169,7 @@ mesh = SubResource("ArrayMesh_yt5s5")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.41026092, 0, 0)
 collision_layer = 128
 collision_mask = 0
-script = ExtResource("2_q8f3x")
+script = ExtResource("2_eyv6f")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DoorModel/AnimatableBody3D/InteractArea" unique_id=1325624430]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.41071773, 1.5714233, -0.002307132)

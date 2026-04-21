@@ -5,8 +5,9 @@
 
 [node name="FullPlayer" type="Node3D" unique_id=1486002308]
 
-[node name="Stu" parent="." unique_id=1959823504 node_paths=PackedStringArray("spectator_camera") instance=ExtResource("1_usycb")]
+[node name="Stu" parent="." unique_id=1959823504 node_paths=PackedStringArray("spectator_camera", "UI") instance=ExtResource("1_usycb")]
 spectator_camera = NodePath("../SpectatorCameraRoot")
+UI = NodePath("PlayerUI")
 
 [node name="SpectatorCameraRoot" type="Node3D" parent="." unique_id=758604895 node_paths=PackedStringArray("pivot", "camera")]
 script = ExtResource("2_xoyaw")

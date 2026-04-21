@@ -22,12 +22,7 @@ func _ready() -> void:
 	animation_player.callback_mode_process = AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_PHYSICS
 	door_body.sync_to_physics = true
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-func toggle_door():
+func activate():
 	if animation_player.is_playing():
 		return
 
@@ -45,7 +40,6 @@ func toggle_door():
 		animation_player.play_backwards("open_door")
 
 	_update_debug_text()
-
 
 func _update_debug_text() -> void:
 	if not debug_text:
