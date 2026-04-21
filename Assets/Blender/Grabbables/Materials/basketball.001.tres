@@ -3,4 +3,5 @@
 [resource]
 resource_name = "basketball.001"
 cull_mode = 2
+albedo_color = Color(0.72077656, 0.17585108, 0.008396121, 1)
 roughness = 0.5

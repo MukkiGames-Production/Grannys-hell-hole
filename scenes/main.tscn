@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://dd0ndre6k7joq"]
 
 [ext_resource type="Script" uid="uid://bys1cfmdwhnv5" path="res://scripts/AI-Environment/scheduler.gd" id="1_choun"]
-[ext_resource type="Texture2D" uid="uid://cxsqe1ml8nmyh" path="res://Assets/reticleEmpty.tres" id="3_sugp2"]
+[ext_resource type="Texture2D" uid="uid://cxsqe1ml8nmyh" path="res://assets/reticleEmpty.tres" id="3_sugp2"]
 [ext_resource type="Script" uid="uid://d0co7xxx1604o" path="res://scripts/Player/swapReticle.gd" id="4_tbgi4"]
-[ext_resource type="Texture2D" uid="uid://dhu4lf3trb2sp" path="res://Assets/reticleFull.tres" id="5_tefeu"]
+[ext_resource type="Texture2D" uid="uid://dhu4lf3trb2sp" path="res://assets/reticleFull.tres" id="5_tefeu"]
 [ext_resource type="Shader" uid="uid://dw84gnrgsmovk" path="res://scripts/shaders/water.gdshader" id="6_yq6so"]
 [ext_resource type="PackedScene" uid="uid://h5sep0m58vfb" path="res://scenes/stu_with_ragdoll.tscn" id="8_85g3d"]
 [ext_resource type="PackedScene" uid="uid://bkngoexmlkto3" path="res://scenes/Patrolmap.tscn" id="8_tipki"]
@@ -24,32 +24,34 @@
 [ext_resource type="PackedScene" uid="uid://cp5bqyw00am3x" path="res://scenes/Objects/rpg.tscn" id="21_yc10j"]
 [ext_resource type="PackedScene" uid="uid://bcskmit1xf54o" path="res://scenes/Door.tscn" id="22_jscy8"]
 [ext_resource type="PackedScene" path="res://scenes/infirmary.tscn" id="23_pm3ni"]
-[ext_resource type="ArrayMesh" uid="uid://ce3ibvqo8dl6v" path="res://Assets/Blender/cornhole_Plane_004.res" id="24_og1vs"]
-[ext_resource type="ArrayMesh" uid="uid://deeu5nhl7ybsi" path="res://Assets/Blender/cornhole_Plane_005.res" id="25_2wyq8"]
-[ext_resource type="PackedScene" uid="uid://cse5f2scyb4vw" path="res://Assets/Blender/sandbag_low_poly_realist.glb" id="26_2wyq8"]
+[ext_resource type="ArrayMesh" path="res://Assets/Blender/cornhole_Plane_004.res" id="24_og1vs"]
+[ext_resource type="ArrayMesh" path="res://Assets/Blender/cornhole_Plane_005.res" id="25_2wyq8"]
+[ext_resource type="PackedScene" uid="uid://cse5f2scyb4vw" path="res://assets/Blender/sandbag_low_poly_realist.glb" id="26_2wyq8"]
 [ext_resource type="PackedScene" uid="uid://c0yblmcogs3b5" path="res://scenes/Objects/bananaPeel.tscn" id="27_vxglm"]
 [ext_resource type="PackedScene" uid="uid://x5qfjf3v2grw" path="res://scenes/Objects/Plunger.tscn" id="30_fv21b"]
 [ext_resource type="PackedScene" uid="uid://0jb3a485dc7e" path="res://scenes/Objects/Tiolet.tscn" id="31_qkpxi"]
-[ext_resource type="AudioStream" uid="uid://ca7vjiogifw2b" path="res://assets/AudioEffects/BingoRoom.wav" id="31_tel4y"]
-[ext_resource type="PackedScene" uid="uid://by0m4cwi3e7a5" path="res://Assets/objects/map_decor/Small Props/ashtray_1.glb" id="32_j2jfr"]
-[ext_resource type="PackedScene" uid="uid://dpqnfle17jioc" path="res://Assets/objects/map_decor/Small Props/cig_2.glb" id="33_bjg73"]
-[ext_resource type="PackedScene" uid="uid://b8llpd8a4xc6" path="res://Assets/objects/map_decor/Small Props/cross_1.glb" id="34_bu4jf"]
-[ext_resource type="PackedScene" uid="uid://j3pr1s3wl5lt" path="res://Assets/objects/map_decor/Small Props/open_book_mp_1.glb" id="35_o7ddy"]
-[ext_resource type="PackedScene" uid="uid://jcf7otwm48fx" path="res://Assets/objects/map_decor/Small Props/plate_mp_1.glb" id="36_0loja"]
-[ext_resource type="PackedScene" uid="uid://gmw6cea52djy" path="res://Assets/objects/map_decor/Small Props/spoon_mp_1.glb" id="37_ids8r"]
-[ext_resource type="PackedScene" uid="uid://boajcivh766h" path="res://Assets/objects/map_decor/Small Props/tin_can_mp_1_rusty.glb" id="38_dnhof"]
-[ext_resource type="PackedScene" uid="uid://budwr3u6ys7o0" path="res://Assets/objects/map_decor/Furniture/bedside_table_1_3.glb" id="39_1v6qk"]
-[ext_resource type="PackedScene" uid="uid://cvixjr82fnmih" path="res://Assets/objects/map_decor/Furniture/chair_mp_2_2.glb" id="40_augu2"]
-[ext_resource type="PackedScene" uid="uid://nu0njegs3ecj" path="res://Assets/objects/map_decor/Furniture/chair_mp_3_3.glb" id="41_tm6hj"]
-[ext_resource type="PackedScene" uid="uid://cuxkv63aqu68w" path="res://Assets/objects/map_decor/Electronics & Misc/ceiling_fan_mp_1_1_light_on.glb" id="42_kf5aa"]
-[ext_resource type="PackedScene" uid="uid://ctj2e5f6jxd0s" path="res://Assets/objects/map_decor/Electronics & Misc/elevator_sign_1.glb" id="43_t5ykj"]
-[ext_resource type="PackedScene" uid="uid://de2o6ust2wg8j" path="res://Assets/objects/map_decor/Electronics & Misc/monitoring_screen_mp_1.glb" id="44_e755i"]
-[ext_resource type="PackedScene" uid="uid://60o0paabalww" path="res://Assets/objects/map_decor/Electronics & Misc/mouse_pad_mp_1.glb" id="45_ro3en"]
-[ext_resource type="PackedScene" uid="uid://civrltmbj7588" path="res://Assets/objects/map_decor/Electronics & Misc/pc_keyboard_mp_1.glb" id="46_od4ux"]
-[ext_resource type="PackedScene" uid="uid://u4a5nhrqdcqf" path="res://Assets/objects/map_decor/Electronics & Misc/pc_mouse_mp_1.glb" id="47_xhfw6"]
-[ext_resource type="PackedScene" uid="uid://cp5xtwwwlhkao" path="res://Assets/objects/map_decor/Electronics & Misc/pc_mp_1.glb" id="48_1epgm"]
-[ext_resource type="PackedScene" uid="uid://dj1laophhqran" path="res://Assets/objects/map_decor/Electronics & Misc/pc_monitor_mp_1.glb" id="49_152kg"]
-[ext_resource type="PackedScene" uid="uid://cg5i46ajmmy0s" path="res://Assets/objects/map_decor/Electronics & Misc/walkie_talkie_2.glb" id="50_r4e17"]
+[ext_resource type="AudioStream" uid="uid://cs2nktk40wcau" path="res://assets/AudioEffects/BingoRoom.wav" id="31_tel4y"]
+[ext_resource type="PackedScene" uid="uid://by0m4cwi3e7a5" path="res://assets/objects/map_decor/Small Props/ashtray_1.glb" id="32_j2jfr"]
+[ext_resource type="PackedScene" uid="uid://dpqnfle17jioc" path="res://assets/objects/map_decor/Small Props/cig_2.glb" id="33_bjg73"]
+[ext_resource type="PackedScene" uid="uid://b8llpd8a4xc6" path="res://assets/objects/map_decor/Small Props/cross_1.glb" id="34_bu4jf"]
+[ext_resource type="PackedScene" uid="uid://j3pr1s3wl5lt" path="res://assets/objects/map_decor/Small Props/open_book_mp_1.glb" id="35_o7ddy"]
+[ext_resource type="PackedScene" uid="uid://jcf7otwm48fx" path="res://assets/objects/map_decor/Small Props/plate_mp_1.glb" id="36_0loja"]
+[ext_resource type="PackedScene" uid="uid://gmw6cea52djy" path="res://assets/objects/map_decor/Small Props/spoon_mp_1.glb" id="37_ids8r"]
+[ext_resource type="PackedScene" uid="uid://boajcivh766h" path="res://assets/objects/map_decor/Small Props/tin_can_mp_1_rusty.glb" id="38_dnhof"]
+[ext_resource type="PackedScene" uid="uid://budwr3u6ys7o0" path="res://assets/objects/map_decor/Furniture/bedside_table_1_3.glb" id="39_1v6qk"]
+[ext_resource type="PackedScene" uid="uid://cvixjr82fnmih" path="res://assets/objects/map_decor/Furniture/chair_mp_2_2.glb" id="40_augu2"]
+[ext_resource type="PackedScene" uid="uid://nu0njegs3ecj" path="res://assets/objects/map_decor/Furniture/chair_mp_3_3.glb" id="41_tm6hj"]
+[ext_resource type="PackedScene" uid="uid://cuxkv63aqu68w" path="res://assets/objects/map_decor/Electronics & Misc/ceiling_fan_mp_1_1_light_on.glb" id="42_kf5aa"]
+[ext_resource type="PackedScene" uid="uid://ctj2e5f6jxd0s" path="res://assets/objects/map_decor/Electronics & Misc/elevator_sign_1.glb" id="43_t5ykj"]
+[ext_resource type="PackedScene" uid="uid://de2o6ust2wg8j" path="res://assets/objects/map_decor/Electronics & Misc/monitoring_screen_mp_1.glb" id="44_e755i"]
+[ext_resource type="PackedScene" uid="uid://60o0paabalww" path="res://assets/objects/map_decor/Electronics & Misc/mouse_pad_mp_1.glb" id="45_ro3en"]
+[ext_resource type="PackedScene" uid="uid://civrltmbj7588" path="res://assets/objects/map_decor/Electronics & Misc/pc_keyboard_mp_1.glb" id="46_od4ux"]
+[ext_resource type="PackedScene" uid="uid://u4a5nhrqdcqf" path="res://assets/objects/map_decor/Electronics & Misc/pc_mouse_mp_1.glb" id="47_xhfw6"]
+[ext_resource type="PackedScene" uid="uid://cp5xtwwwlhkao" path="res://assets/objects/map_decor/Electronics & Misc/pc_mp_1.glb" id="48_1epgm"]
+[ext_resource type="PackedScene" uid="uid://dj1laophhqran" path="res://assets/objects/map_decor/Electronics & Misc/pc_monitor_mp_1.glb" id="49_152kg"]
+[ext_resource type="PackedScene" uid="uid://cg5i46ajmmy0s" path="res://assets/objects/map_decor/Electronics & Misc/walkie_talkie_2.glb" id="50_r4e17"]
+[ext_resource type="PackedScene" uid="uid://b6pcg0euhyylr" path="res://scenes/basket_ball.tscn" id="51_bjg73"]
+[ext_resource type="Script" uid="uid://d0uhvbq4j1buf" path="res://scripts/objects/interactionPoint.gd" id="51_bu4jf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_85g3d"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -170,6 +172,11 @@ shader_parameter/refraction_exponent = 0.5
 shader_parameter/displacement_amount = 0.3
 
 [sub_resource type="BoxMesh" id="BoxMesh_pibwh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o7ddy"]
+size = Vector3(3.10437, 1, 3.1187744)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0loja"]
 
 [node name="Main" type="Node3D" unique_id=421424765]
 script = ExtResource("1_choun")
@@ -470,3 +477,21 @@ transform = Transform3D(0.0068939924, 0, -0.9999762, 0, 1, 0, 0.9999762, 0, 0.00
 
 [node name="walkie_talkie_22" parent="." unique_id=1821349535 instance=ExtResource("50_r4e17")]
 transform = Transform3D(-0.27691218, 0, -0.96089524, 0, 1, 0, 0.96089524, 0, -0.27691218, -5.58777, 1.0882524, -49.982983)
+
+[node name="InteractionPoint" type="Area3D" parent="." unique_id=1357162797]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.70439, 5.7459455, -51.9759)
+script = ExtResource("51_bu4jf")
+valid_objects = Array[String](["basketball"])
+metadata/_custom_type_script = "uid://d0uhvbq4j1buf"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionPoint" unique_id=348124598]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.052185, 0, 0.66688156)
+shape = SubResource("BoxShape3D_o7ddy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="InteractionPoint" unique_id=1588154286]
+transform = Transform3D(1.8947175, 0, 0, 0, 1, 0, 0, 0, 2.1084583, 1.052185, 0, 0.66688156)
+visible = false
+mesh = SubResource("BoxMesh_0loja")
+
+[node name="BasketBall" parent="." unique_id=6859675 instance=ExtResource("51_bjg73")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.816309, 0.42371798, -46.74353)

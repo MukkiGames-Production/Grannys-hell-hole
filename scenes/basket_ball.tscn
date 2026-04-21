@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://b6pcg0euhyylr"]
+
+[ext_resource type="Script" uid="uid://dlfa4844hulox" path="res://scripts/objects/grabbableObject.gd" id="1_mhs7u"]
+[ext_resource type="PackedScene" uid="uid://bvbg1jvk0ropu" path="res://scenes/basketball.tscn" id="2_mue8h"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_mhs7u"]
+radius = 0.26350006
+
+[node name="BasketBall" type="Node3D" unique_id=6859675]
+
+[node name="GrabbleObject" type="RigidBody3D" parent="." unique_id=107304470]
+script = ExtResource("1_mhs7u")
+item_id = "basketball"
+metadata/_custom_type_script = "uid://dlfa4844hulox"
+
+[node name="StuItemsBasketball" parent="GrabbleObject" unique_id=1972330568 instance=ExtResource("2_mue8h")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GrabbleObject" unique_id=1643504076]
+shape = SubResource("SphereShape3D_mhs7u")
