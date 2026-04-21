@@ -1,9 +1,9 @@
 [gd_scene format=4 uid="uid://dd0ndre6k7joq"]
 
 [ext_resource type="Script" uid="uid://bys1cfmdwhnv5" path="res://scripts/AI-Environment/scheduler.gd" id="1_choun"]
-[ext_resource type="Texture2D" uid="uid://cxsqe1ml8nmyh" path="res://assets/reticleEmpty.tres" id="3_sugp2"]
+[ext_resource type="Texture2D" uid="uid://cxsqe1ml8nmyh" path="res://Assets/reticleEmpty.tres" id="3_sugp2"]
 [ext_resource type="Script" uid="uid://d0co7xxx1604o" path="res://scripts/Player/swapReticle.gd" id="4_tbgi4"]
-[ext_resource type="Texture2D" uid="uid://dhu4lf3trb2sp" path="res://assets/reticleFull.tres" id="5_tefeu"]
+[ext_resource type="Texture2D" uid="uid://dhu4lf3trb2sp" path="res://Assets/reticleFull.tres" id="5_tefeu"]
 [ext_resource type="Shader" uid="uid://dw84gnrgsmovk" path="res://scripts/shaders/water.gdshader" id="6_yq6so"]
 [ext_resource type="PackedScene" uid="uid://h5sep0m58vfb" path="res://scenes/stu_with_ragdoll.tscn" id="8_85g3d"]
 [ext_resource type="PackedScene" uid="uid://bkngoexmlkto3" path="res://scenes/Patrolmap.tscn" id="8_tipki"]
@@ -24,36 +24,36 @@
 [ext_resource type="PackedScene" uid="uid://cp5bqyw00am3x" path="res://scenes/Objects/rpg.tscn" id="21_yc10j"]
 [ext_resource type="PackedScene" uid="uid://bcskmit1xf54o" path="res://scenes/Door.tscn" id="22_jscy8"]
 [ext_resource type="PackedScene" path="res://scenes/infirmary.tscn" id="23_pm3ni"]
-[ext_resource type="ArrayMesh" path="res://Assets/Blender/cornhole_Plane_004.res" id="24_og1vs"]
-[ext_resource type="ArrayMesh" path="res://Assets/Blender/cornhole_Plane_005.res" id="25_2wyq8"]
-[ext_resource type="Texture2D" uid="uid://6a85u6h3hkqm" path="res://assets/Blender/sandbag_low_poly_realist_0.png" id="27_0loja"]
+[ext_resource type="ArrayMesh" uid="uid://ce3ibvqo8dl6v" path="res://Assets/Blender/cornhole_Plane_004.res" id="24_og1vs"]
+[ext_resource type="ArrayMesh" uid="uid://deeu5nhl7ybsi" path="res://Assets/Blender/cornhole_Plane_005.res" id="25_2wyq8"]
+[ext_resource type="Texture2D" uid="uid://6a85u6h3hkqm" path="res://Assets/Blender/sandbag_low_poly_realist_0.png" id="27_0loja"]
 [ext_resource type="PackedScene" uid="uid://c0yblmcogs3b5" path="res://scenes/Objects/bananaPeel.tscn" id="27_vxglm"]
-[ext_resource type="Texture2D" uid="uid://b71c88x4gmr1i" path="res://assets/Blender/sandbag_low_poly_realist_1.png" id="28_ids8r"]
-[ext_resource type="Texture2D" uid="uid://d1lexl5itxi5v" path="res://assets/Blender/sandbag_low_poly_realist_2.png" id="29_dnhof"]
+[ext_resource type="Texture2D" uid="uid://b71c88x4gmr1i" path="res://Assets/Blender/sandbag_low_poly_realist_1.png" id="28_ids8r"]
+[ext_resource type="Texture2D" uid="uid://d1lexl5itxi5v" path="res://Assets/Blender/sandbag_low_poly_realist_2.png" id="29_dnhof"]
 [ext_resource type="PackedScene" uid="uid://x5qfjf3v2grw" path="res://scenes/Objects/Plunger.tscn" id="30_fv21b"]
 [ext_resource type="PackedScene" uid="uid://0jb3a485dc7e" path="res://scenes/Objects/Tiolet.tscn" id="31_qkpxi"]
-[ext_resource type="AudioStream" uid="uid://cs2nktk40wcau" path="res://assets/AudioEffects/BingoRoom.wav" id="31_tel4y"]
-[ext_resource type="PackedScene" uid="uid://by0m4cwi3e7a5" path="res://assets/objects/map_decor/Small Props/ashtray_1.glb" id="32_j2jfr"]
-[ext_resource type="PackedScene" uid="uid://dpqnfle17jioc" path="res://assets/objects/map_decor/Small Props/cig_2.glb" id="33_bjg73"]
-[ext_resource type="PackedScene" uid="uid://b8llpd8a4xc6" path="res://assets/objects/map_decor/Small Props/cross_1.glb" id="34_bu4jf"]
-[ext_resource type="PackedScene" uid="uid://j3pr1s3wl5lt" path="res://assets/objects/map_decor/Small Props/open_book_mp_1.glb" id="35_o7ddy"]
-[ext_resource type="PackedScene" uid="uid://jcf7otwm48fx" path="res://assets/objects/map_decor/Small Props/plate_mp_1.glb" id="36_0loja"]
-[ext_resource type="PackedScene" uid="uid://gmw6cea52djy" path="res://assets/objects/map_decor/Small Props/spoon_mp_1.glb" id="37_ids8r"]
-[ext_resource type="PackedScene" uid="uid://boajcivh766h" path="res://assets/objects/map_decor/Small Props/tin_can_mp_1_rusty.glb" id="38_dnhof"]
-[ext_resource type="PackedScene" uid="uid://budwr3u6ys7o0" path="res://assets/objects/map_decor/Furniture/bedside_table_1_3.glb" id="39_1v6qk"]
-[ext_resource type="PackedScene" uid="uid://cvixjr82fnmih" path="res://assets/objects/map_decor/Furniture/chair_mp_2_2.glb" id="40_augu2"]
-[ext_resource type="PackedScene" uid="uid://nu0njegs3ecj" path="res://assets/objects/map_decor/Furniture/chair_mp_3_3.glb" id="41_tm6hj"]
-[ext_resource type="PackedScene" uid="uid://cuxkv63aqu68w" path="res://assets/objects/map_decor/Electronics & Misc/ceiling_fan_mp_1_1_light_on.glb" id="42_kf5aa"]
-[ext_resource type="PackedScene" uid="uid://ctj2e5f6jxd0s" path="res://assets/objects/map_decor/Electronics & Misc/elevator_sign_1.glb" id="43_t5ykj"]
-[ext_resource type="PackedScene" uid="uid://de2o6ust2wg8j" path="res://assets/objects/map_decor/Electronics & Misc/monitoring_screen_mp_1.glb" id="44_e755i"]
-[ext_resource type="PackedScene" uid="uid://60o0paabalww" path="res://assets/objects/map_decor/Electronics & Misc/mouse_pad_mp_1.glb" id="45_ro3en"]
-[ext_resource type="PackedScene" uid="uid://civrltmbj7588" path="res://assets/objects/map_decor/Electronics & Misc/pc_keyboard_mp_1.glb" id="46_od4ux"]
-[ext_resource type="PackedScene" uid="uid://u4a5nhrqdcqf" path="res://assets/objects/map_decor/Electronics & Misc/pc_mouse_mp_1.glb" id="47_xhfw6"]
-[ext_resource type="PackedScene" uid="uid://cp5xtwwwlhkao" path="res://assets/objects/map_decor/Electronics & Misc/pc_mp_1.glb" id="48_1epgm"]
-[ext_resource type="PackedScene" uid="uid://dj1laophhqran" path="res://assets/objects/map_decor/Electronics & Misc/pc_monitor_mp_1.glb" id="49_152kg"]
-[ext_resource type="PackedScene" uid="uid://cg5i46ajmmy0s" path="res://assets/objects/map_decor/Electronics & Misc/walkie_talkie_2.glb" id="50_r4e17"]
+[ext_resource type="AudioStream" uid="uid://ca7vjiogifw2b" path="res://assets/AudioEffects/BingoRoom.wav" id="31_tel4y"]
+[ext_resource type="PackedScene" uid="uid://by0m4cwi3e7a5" path="res://Assets/objects/map_decor/Small Props/ashtray_1.glb" id="32_j2jfr"]
+[ext_resource type="PackedScene" uid="uid://dpqnfle17jioc" path="res://Assets/objects/map_decor/Small Props/cig_2.glb" id="33_bjg73"]
+[ext_resource type="PackedScene" uid="uid://b8llpd8a4xc6" path="res://Assets/objects/map_decor/Small Props/cross_1.glb" id="34_bu4jf"]
+[ext_resource type="PackedScene" uid="uid://j3pr1s3wl5lt" path="res://Assets/objects/map_decor/Small Props/open_book_mp_1.glb" id="35_o7ddy"]
+[ext_resource type="PackedScene" uid="uid://jcf7otwm48fx" path="res://Assets/objects/map_decor/Small Props/plate_mp_1.glb" id="36_0loja"]
+[ext_resource type="PackedScene" uid="uid://gmw6cea52djy" path="res://Assets/objects/map_decor/Small Props/spoon_mp_1.glb" id="37_ids8r"]
+[ext_resource type="PackedScene" uid="uid://boajcivh766h" path="res://Assets/objects/map_decor/Small Props/tin_can_mp_1_rusty.glb" id="38_dnhof"]
+[ext_resource type="PackedScene" uid="uid://budwr3u6ys7o0" path="res://Assets/objects/map_decor/Furniture/bedside_table_1_3.glb" id="39_1v6qk"]
+[ext_resource type="PackedScene" uid="uid://cvixjr82fnmih" path="res://Assets/objects/map_decor/Furniture/chair_mp_2_2.glb" id="40_augu2"]
+[ext_resource type="PackedScene" uid="uid://nu0njegs3ecj" path="res://Assets/objects/map_decor/Furniture/chair_mp_3_3.glb" id="41_tm6hj"]
+[ext_resource type="PackedScene" uid="uid://cuxkv63aqu68w" path="res://Assets/objects/map_decor/Electronics & Misc/ceiling_fan_mp_1_1_light_on.glb" id="42_kf5aa"]
+[ext_resource type="PackedScene" uid="uid://ctj2e5f6jxd0s" path="res://Assets/objects/map_decor/Electronics & Misc/elevator_sign_1.glb" id="43_t5ykj"]
+[ext_resource type="PackedScene" uid="uid://de2o6ust2wg8j" path="res://Assets/objects/map_decor/Electronics & Misc/monitoring_screen_mp_1.glb" id="44_e755i"]
+[ext_resource type="PackedScene" uid="uid://60o0paabalww" path="res://Assets/objects/map_decor/Electronics & Misc/mouse_pad_mp_1.glb" id="45_ro3en"]
+[ext_resource type="PackedScene" uid="uid://civrltmbj7588" path="res://Assets/objects/map_decor/Electronics & Misc/pc_keyboard_mp_1.glb" id="46_od4ux"]
+[ext_resource type="PackedScene" uid="uid://u4a5nhrqdcqf" path="res://Assets/objects/map_decor/Electronics & Misc/pc_mouse_mp_1.glb" id="47_xhfw6"]
+[ext_resource type="PackedScene" uid="uid://cp5xtwwwlhkao" path="res://Assets/objects/map_decor/Electronics & Misc/pc_mp_1.glb" id="48_1epgm"]
+[ext_resource type="PackedScene" uid="uid://dj1laophhqran" path="res://Assets/objects/map_decor/Electronics & Misc/pc_monitor_mp_1.glb" id="49_152kg"]
+[ext_resource type="PackedScene" uid="uid://cg5i46ajmmy0s" path="res://Assets/objects/map_decor/Electronics & Misc/walkie_talkie_2.glb" id="50_r4e17"]
 [ext_resource type="PackedScene" uid="uid://b6pcg0euhyylr" path="res://scenes/basket_ball.tscn" id="51_bjg73"]
-[ext_resource type="Script" uid="uid://y5victoqu18p" path="res://scripts/objects/basketballInteract.gd" id="51_bu4jf"]
+[ext_resource type="Script" uid="uid://bqtjc7g0vl6jv" path="res://scripts/objects/basketballInteract.gd" id="51_bu4jf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_85g3d"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -545,11 +545,12 @@ transform = Transform3D(-0.27691218, 0, -0.96089524, 0, 1, 0, 0.96089524, 0, -0.
 [node name="TNT2" parent="." unique_id=1485987105 instance=ExtResource("14_jkv2x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7615552, 6.148566, -51.1052)
 
-[node name="BasketBallInteract" type="Area3D" parent="." unique_id=1357162797 node_paths=PackedStringArray("tnt", "basketball")]
+[node name="BasketBallInteract" type="Area3D" parent="." unique_id=1357162797 node_paths=PackedStringArray("tnt", "basketball", "marker")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.70439, 5.7459455, -51.9759)
 script = ExtResource("51_bu4jf")
 tnt = NodePath("../TNT2")
 basketball = NodePath("../BasketBall")
+marker = NodePath("Marker3D")
 valid_objects = Array[String](["basketball"])
 metadata/_custom_type_script = "uid://d0uhvbq4j1buf"
 
@@ -563,7 +564,7 @@ visible = false
 mesh = SubResource("BoxMesh_0loja")
 
 [node name="Marker3D" type="Marker3D" parent="BasketBallInteract" unique_id=588722574]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.30931, -5.371311, 1.9541931)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.30931, -5.371311, 8.937576)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=781946183]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.70439, 6.823328, -51.9759)

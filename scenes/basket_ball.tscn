@@ -1,22 +1,22 @@
 [gd_scene format=3 uid="uid://b6pcg0euhyylr"]
 
 [ext_resource type="Script" uid="uid://dlfa4844hulox" path="res://scripts/objects/grabbableObject.gd" id="1_mhs7u"]
-[ext_resource type="ArrayMesh" uid="uid://c2me4mts2tlp5" path="res://assets/Blender/Grabbables/StuItems_basketball.res" id="2_mue8h"]
-[ext_resource type="Material" uid="uid://did7i7fkuiuos" path="res://assets/Blender/Grabbables/Materials/basketball.001.tres" id="3_52dyl"]
+[ext_resource type="ArrayMesh" uid="uid://c2me4mts2tlp5" path="res://Assets/Blender/Grabbables/StuItems_basketball.res" id="2_mue8h"]
+[ext_resource type="Material" uid="uid://did7i7fkuiuos" path="res://Assets/Blender/Grabbables/Materials/basketball.001.tres" id="3_52dyl"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_mhs7u"]
 radius = 0.26350006
 
 [node name="BasketBall" type="Node3D" unique_id=6859675]
 
-[node name="GrabbleObject" type="RigidBody3D" parent="." unique_id=107304470]
+[node name="GrabbableObject" type="RigidBody3D" parent="." unique_id=107304470]
 script = ExtResource("1_mhs7u")
 item_id = "basketball"
 metadata/_custom_type_script = "uid://dlfa4844hulox"
 
-[node name="StuItemsBasketball" type="MeshInstance3D" parent="GrabbleObject" unique_id=1972330568]
+[node name="StuItemsBasketball" type="MeshInstance3D" parent="GrabbableObject" unique_id=1972330568]
 mesh = ExtResource("2_mue8h")
 surface_material_override/0 = ExtResource("3_52dyl")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="GrabbleObject" unique_id=1643504076]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GrabbableObject" unique_id=1643504076]
 shape = SubResource("SphereShape3D_mhs7u")
