@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bb6u1stga68t6"]
+
+[resource]
+resource_name = "carrot"
+cull_mode = 2
+albedo_color = Color(0.9064224, 0.4145258, 0.26887915, 1)
+roughness = 0.5

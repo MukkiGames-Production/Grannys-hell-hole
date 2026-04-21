@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://broise2kl2os1"]
+
+[resource]
+resource_name = "Red"
+cull_mode = 2
+albedo_color = Color(0.9064302, 0.08277655, 0.10442121, 1)
+roughness = 0.5

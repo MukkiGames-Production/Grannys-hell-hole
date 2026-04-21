@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://celaar7fn22ge"]
+
+[resource]
+resource_name = "Base.001"
+cull_mode = 2
+roughness = 0.5

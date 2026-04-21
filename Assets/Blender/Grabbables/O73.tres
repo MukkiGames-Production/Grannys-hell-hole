@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dviqosjqljt5n"]
+
+[ext_resource type="Texture2D" uid="uid://gimj4t2hmv4p" path="res://assets/Blender/textures/O73 Base Color.png" id="1_mgo7h"]
+
+[resource]
+resource_name = "O73"
+cull_mode = 2
+albedo_texture = ExtResource("1_mgo7h")
+roughness = 0.5

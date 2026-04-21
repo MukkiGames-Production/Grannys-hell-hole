@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dgm2gna7rgt0f"]
+
+[resource]
+resource_name = "mouth.001"
+transparency = 4
+cull_mode = 2
+roughness = 0.5

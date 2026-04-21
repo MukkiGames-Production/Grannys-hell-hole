@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://ccab4247da1o0"]
+
+[ext_resource type="Texture2D" uid="uid://b5b0g7ernpfa3" path="res://assets/Blender/textures/soup.png" id="1_vuciy"]
+
+[resource]
+resource_name = "Soup"
+cull_mode = 2
+albedo_texture = ExtResource("1_vuciy")
+roughness = 0.5
