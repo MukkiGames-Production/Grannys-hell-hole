@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bbwheeo6s6oxt"]
+
+[ext_resource type="Texture2D" uid="uid://3kojbxx4t0ff" path="res://assets/Blender/textures/G55 Base Color.png" id="1_opqrk"]
+
+[resource]
+resource_name = "O71"
+cull_mode = 2
+albedo_texture = ExtResource("1_opqrk")
+roughness = 0.5

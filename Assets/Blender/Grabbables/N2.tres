@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://c7t5dnxjn3o2a"]
+
+[ext_resource type="Texture2D" uid="uid://diwwpi8jk50go" path="res://assets/Blender/textures/N2 Base Color.png" id="1_lj3mh"]
+
+[resource]
+resource_name = "N2"
+cull_mode = 2
+albedo_texture = ExtResource("1_lj3mh")
+roughness = 0.5

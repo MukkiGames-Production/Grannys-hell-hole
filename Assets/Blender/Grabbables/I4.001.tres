@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://om55c7cjplil"]
+
+[ext_resource type="Texture2D" uid="uid://ddbytrifoe87g" path="res://assets/Blender/textures/I4.001 Base Color.png" id="1_8dmkw"]
+
+[resource]
+resource_name = "I4.001"
+cull_mode = 2
+albedo_texture = ExtResource("1_8dmkw")
+roughness = 0.5

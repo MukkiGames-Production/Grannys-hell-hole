@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://c2ugv5ctxdbfo"]
+
+[ext_resource type="Texture2D" uid="uid://cpwhbjcew2mw" path="res://assets/Blender/textures/B3 Base Color.png" id="1_c11gy"]
+
+[resource]
+resource_name = "B3"
+cull_mode = 2
+albedo_texture = ExtResource("1_c11gy")
+roughness = 0.5

@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://giwxw8jtetjk"]
+
+[ext_resource type="Texture2D" uid="uid://dkbw5p4qc0mqn" path="res://assets/Blender/textures/basketball.png" id="1_cioae"]
+
+[resource]
+resource_name = "basketball.001"
+cull_mode = 2
+albedo_texture = ExtResource("1_cioae")
