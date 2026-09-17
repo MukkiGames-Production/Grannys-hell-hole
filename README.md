@@ -1,12 +1,13 @@
 # Grannys-hell-hole
 MukkiGames Production Coop Game
 
-Prototype for a friend coop game 
-Proper Steam multiplayer using the Godot Steam client
-With custom server logic for peer-to-peer up to 4 players
+- Prototype for a friend coop game 
+- Proper Steam multiplayer using the Godot Steam client
+- With custom server logic for peer-to-peer up to 4 players
+- AI implemented with navmesh for A* navigation
+- Day cycle for different mechanics and AI behavior 
 
 
-* Trello Link: https://trello.com/b/I9vSRzoL/retirement-asylum-mukkigamess-production
 ## Photos:
 <img width="1092" height="630" alt="Screenshot 2026-02-26 004129" src="https://github.com/user-attachments/assets/a6ea657c-f377-4459-ba2f-5d3037d2804a" />
 <img width="1630" height="640" alt="Screenshot 2026-04-05 130633" src="https://github.com/user-attachments/assets/12057734-d6b4-41d5-aa3b-9a6f516431df" />
@@ -54,3 +55,5 @@ Rules and Regulations:
   - feature branches should annotated as netowork, player, or interactables for easy identification
   - Mukki should handle the merge conflicts and merging of feature branches into development
   - if not mukki use GitKraken to see the changes and merge conflicts and resolve them
+
+* Trello Link: https://trello.com/b/I9vSRzoL/retirement-asylum-mukkigamess-production
